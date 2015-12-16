@@ -4,6 +4,8 @@ This README would normally document whatever steps are necessary to get your app
 
 ### What is this repository for? ###
 
+This repository is for Parth Oza, Kevin Shen, Jagan Prem, and Cindy Chen's 2015-2016 IDT Automated Software Testing project - automated package tracking and analysis.
+
 * Quick summary
 * Version
 * [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
