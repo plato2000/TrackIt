@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Simple markers</title>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 80%;
+        /*width:;*/
+      }
+    </style>
+
+    <script type="text/javascript"
+        src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script type="text/javascript">
+        var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+    </script>
+    <script type="text/javascript">
+    //var currentPosition = {lat: -30, lng: 150}
+    var currentPosition;
+    var myLatLng;
+    var polyCoordinates;
+    var poly;
+      function update_map() {
+          $.getJSON($SCRIPT_ROOT + '/updateMap', {}, function(data) {
+            //console.log(data.result);
+            currentPosition = {lat: data.a, lng: data.b};
+            myLatLng = {lat: data.a, lng: data.b};
+      });
+    }
+    /*
+    function get_data() {
+          $.getJSON($SCRIPT_ROOT + '/data', {dt:"startingPoint"}, function(data) {
+            //console.log(data.result);
+            myLatLng = {lat: data.a, lng: data.b};
+            //alert("1"+myLatLng);
+            currentPosition = myLatLng;
+            polyCoordinates = [];
+            console.log(polyCoordinates);
+      });
+    }
+    */
+    function get_data() {
+          $.getJSON($SCRIPT_ROOT + '/data', {dt:"prevPoints"}, function(data) {
+            //console.log(data.result);
+            //alert(data.results);
+            myLatLng = data.results.slice(-1)[0];
+            alert("1"+myLatLng);
+            currentPosition = myLatLng;
+      });
+      return myLatLng;
+    }
+
+    function reset() {
+          $.getJSON($SCRIPT_ROOT + '/reset', {}, function(data) {
+            alert("resetting?")
+            //console.log(data.result);
+            marker.setMap(null);
+            poly.setPath(null);
+      });
+    }
+
+    function get_previous_points() {
+      $.getJSON($SCRIPT_ROOT + '/data', {dt:"prevPoints"}, function(data) {
+            //console.log(data.result);
+            polyCoordinates = data.results;
+            //alert("1"+myLatLng);
+            console.log(polyCoordinates);
+            var path = poly.getPath();
+            // add new point
+            var arrayLength = polyCoordinates.length;
+            for (var i = 0; i < arrayLength; i++) {
+              path.push(new google.maps.LatLng(polyCoordinates[i].lat, polyCoordinates[i].lng));
+              //Do something
+            }
+            poly.setPath(path);
+      });
+    }
+    </script>
+  </head>
+  <body>
+    <div id="map"></div>
+    <input type="button" onclick=reset() value="reset" />
+    <script>
+    var map, marker;
+    get_data();
+    </script>
+    <script defer>
+   
+    //var myLatLng = {lat: -25.363, lng: 131.044};
+    //
+    //var polyCoordinates = [
+    //  {lat: -25.363, lng: 131.044}
+    //];
+    //var poly;
+    //while (!myLatLng) {]
+    //}
+    
+    function initMap() {
+      //alert("2"+myLatLng);
+      myLatLng = get_data();
+
+      if (myLatLng == null) {
+        myLatLng = get_data();
+        alert("u dun gufed")
+      }
+      //alert(myLatLng);
+      map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 4,
+        center: get_data()
+      });
+      console.log(map);
+      marker = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+        title: 'Hello World!'
+      });
+
+      poly = new google.maps.Polyline({
+        path: [],
+        geodesic: true,
+        strokeColor: '#FF0000',
+        strokeOpacity: 1.0,
+        strokeWeight: 2
+      });
+
+      poly.setMap(map);
+      get_previous_points();
+    }
+
+
+    </script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3aTTDwdToxjPh3GLm6vug7vBPHxB2-Fc&signed_in=true&callback=initMap"></script>
+
+
+    <script>
+    //get_data();
+    setInterval(function() {
+      marker.setMap(null);
+      marker = new google.maps.Marker({
+        position: currentPosition,
+        map: map,
+        animation: google.maps.Animation.DROP,
+        title: 'Hello World!'
+      });
+    update_map();
+      // get existing path
+    var path = poly.getPath();
+    // add new point
+    path.push(new google.maps.LatLng(currentPosition.lat, currentPosition.lng));
+    console.log(path);
+    // update the polyline with the updated path
+    poly.setPath(path);
+    }, 5000);
+    </script>
+  </body>
+</html>
