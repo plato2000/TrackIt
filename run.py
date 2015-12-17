@@ -24,7 +24,6 @@ dy = (end[1]-begin[1])/updates
 @app.route('/updateMap')
 def update():
     global dx, dy, visitedPoints
-    """Add two numbers server side, ridiculous but well..."""
     print(abs(cp[0] - end[0]))
     if distance(cp, end) > 1:
         cp[0] = cp[0]+dx
@@ -42,14 +41,14 @@ def reset():
     cp = begin
     return True
 
-@app.route('/tracknewpackage')
+@app.route('/trackNewPackage')
 def track_new_package():
     name = request.args.get('name', "", type=str)
     dest_lat = request.args.get('destinationLat', 0, type=float)
     dest_lng = request.args.get('destinationLon', 0, type=float)
     uuid = request.args.get('uuid', "", type=str)
     print(name, dest_lat, dest_lng, uuid)
-    out = {'ackUUID':'['+uuid+']'}
+    out = {'ackUUID': '['+uuid+']'}
     return str(out)
     # return "success"
 
