@@ -40,6 +40,17 @@ def reset():
     cp = begin
     return True
 
+@app.route('/tracknewpackage')
+def trackNewPackage():
+    name = request.args.get('name',"",type=str)
+    destLat = request.args.get('destinationLat',0,type=float)
+    destLng = request.args.get('destinationLon',0,type=float)
+    uuid = request.args.get('uuid',"",type=str)
+    print(name,destLat,destLng,uuid)
+    out = {'ackUUID':'['+uuid+']'}
+    return str(out)
+    #return "success"
+
 @app.route('/data')
 def send_data():
     global begin
