@@ -22,6 +22,8 @@ To commit your changes, run `git commit -m "message"`, where message is your com
 
 After you commit, run `git push`, which will send everything to the server.
 
+Oh, and you should also probably have `groovy` installed. That's what their server uses.
+
 ### Configuration ###
 
 The code that is on here is serverside. Our server is going to be separate from the IDT server, though it may be on the same machine. 
