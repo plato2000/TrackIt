@@ -14,7 +14,7 @@ end = [-33.8650, 151.2094]      # sydney
 # end = [35.6833, 139.6833]     # tokyo
 
 
-visitedPoints = [{'lat': begin[0], 'lng': begin[1]}]
+visited_points = [{'lat': begin[0], 'lng': begin[1]}]
 
 cp = begin
 updates = 30
@@ -23,16 +23,16 @@ dy = (end[1]-begin[1])/updates
 
 @app.route('/updateMap')
 def update():
-    global dx, dy, visitedPoints
+    global dx, dy, visited_points
     print(abs(cp[0] - end[0]))
     if distance(cp, end) > 1:
         cp[0] = cp[0]+dx
         cp[1] = cp[1]+dy
     x = cp[0]
     y = cp[1]
-    if {'lat': cp[0], 'lng': cp[1]} not in visitedPoints:
-        visitedPoints += [{'lat': cp[0], 'lng': cp[1]}]
-    print(visitedPoints)
+    if {'lat': cp[0], 'lng': cp[1]} not in visited_points:
+        visited_points += [{'lat': cp[0], 'lng': cp[1]}]
+    print(visited_points)
     return jsonify(a=x, b=y)
 
 @app.route('/reset')
@@ -62,7 +62,7 @@ def send_data():
         return jsonify(a=begin[0], b=begin[1])
 
     elif a == 'prevPoints':
-        return jsonify(results=visitedPoints)
+        return jsonify(results=visited_points)
 
 @app.route('/')
 def index():
