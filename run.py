@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, render_template, request
 import random
+from src import packop
 
 
 def distance(l1, l2):
@@ -24,7 +25,7 @@ dy = (end[1]-begin[1])/updates
 @app.route('/updateMap')
 def update():
     global dx, dy, visited_points
-    print(abs(cp[0] - end[0]))
+    # print(abs(cp[0] - end[0]))
     if distance(cp, end) > 1:
         cp[0] = cp[0]+dx
         cp[1] = cp[1]+dy
@@ -32,7 +33,7 @@ def update():
     y = cp[1]
     if {'lat': cp[0], 'lng': cp[1]} not in visited_points:
         visited_points += [{'lat': cp[0], 'lng': cp[1]}]
-    print(visited_points)
+    # print(visited_points)
     return jsonify(a=x, b=y)
 
 @app.route('/reset')
@@ -41,24 +42,37 @@ def reset():
     cp = begin
     return True
 
-@app.route('/trackNewPackage')
+@app.route('/tracknewpackage', methods=['GET'])
 def track_new_package():
     name = request.args.get('name', "", type=str)
     dest_lat = request.args.get('destinationLat', 0, type=float)
     dest_lng = request.args.get('destinationLon', 0, type=float)
     uuid = request.args.get('uuid', "", type=str)
-    print(name, dest_lat, dest_lng, uuid)
+    print("name:", name, "dest_lat:", dest_lat, "dest_lng:", dest_lng, "uuid:", uuid)
     out = {'ackUUID': '['+uuid+']'}
     return str(out)
     # return "success"
+
+@app.route('/packagetrackupdate/<uuid:uuid>', methods=['POST'])
+def get_package_update(uuid):
+    if request.form.get('delivered', "", type=str) == "true":
+        print("uuid:", uuid, "delivered:", request.form.get)
+    else:
+        lat = float(request.form.get('lat', "", type=str))
+        long = float(request.form.get('lon', "", type=str))
+        elevation = float(request.form.get('ele', "", type=str))
+        time = request.form.get('time', "", type=str)
+        print("uuid:", uuid, "lat:", lat, "long:", long, "ele:", elevation, "time:", time)
+    return ''
+
 
 @app.route('/data')
 def send_data():
     global begin
     a = request.args.get('dt', "", type=str)
-    print(a)
+    # print(a)
     if a == 'startingPoint':
-        print(jsonify(a=begin[0], b=begin[1]))
+        # print(jsonify(a=begin[0], b=begin[1]))
         return jsonify(a=begin[0], b=begin[1])
 
     elif a == 'prevPoints':
@@ -69,4 +83,4 @@ def index():
     return render_template('index.html')
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
