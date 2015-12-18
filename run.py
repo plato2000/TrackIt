@@ -58,9 +58,10 @@ def get_package_update(uuid):
     if request.form.get('delivered', "", type=str) == "true":
         print("uuid:", uuid, "delivered:", request.form.get)
     else:
-        lat = float(request.form.get('lat', "", type=str))
-        long = float(request.form.get('lon', "", type=str))
-        elevation = float(request.form.get('ele', "", type=str))
+        print("response:", request.form)
+        lat = request.form.get('lat', 0.0, type=float)
+        long = request.form.get('lon', 0.0, type=float)
+        elevation = request.form.get('ele', 0.0, type=float)
         time = request.form.get('time', "", type=str)
         print("uuid:", uuid, "lat:", lat, "long:", long, "ele:", elevation, "time:", time)
     return ''
