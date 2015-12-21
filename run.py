@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, render_template, request
 import random
-from src import packop
+# from src import packop
 
 
 def distance(l1, l2):

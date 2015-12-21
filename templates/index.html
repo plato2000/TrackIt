@@ -15,19 +15,18 @@
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/ie10-viewport-bug-workaround.css') }}" rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link href="css/jumbotron-narrow.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/jumbotron-narrow.css') }}" rel="stylesheet">
     <!-- Bootstrap Material Design -->
-    <link href="css/bootstrap-material-design.min.css" rel="stylesheet">
-    <link href="css/ripples.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/bootstrap-material-design.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/ripples.min.css') }}" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script type="text/javascript"
-    src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   </head>
   <body>
     <div class="container">
@@ -93,19 +92,19 @@
       </footer>
       </div> <!-- /container -->
       <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-      <script src="js/ie10-viewport-bug-workaround.js"></script>
-      <script src="js/material.js"></script>
-      <script src="js/ripples.js"></script>
+      <script src="{{ url_for('static', filename='js/ie10-viewport-bug-workaround.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/material.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/ripples.js') }}"></script>
       <script>
       $.material.init();
       </script>
-      <script src="js/map.js"></script>
+      <script src="{{ url_for('static', filename='js/map.js') }}"></script>
       <script>
       var map, marker;
       get_data();
       </script>
-      <script src="js/mapdefer.js" defer></script>
-      <!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAD8h_9XCxOg5V6S_rC1gQjFn5zMfT5_Kw&signed_in=true&callback=initMap"></script>-->
+      <script src="{{ url_for('static', filename='js/mapdefer.js') }}" defer></script>
+      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3aTTDwdToxjPh3GLm6vug7vBPHxB2-Fc&signed_in=true&callback=real_init"></script>
       <script>
         //get_data();
         setInterval(function() {
@@ -126,7 +125,7 @@
           poly.setPath(path);
         }, 5000);
       </script>
-      <script src="js/main.js"></script>
-      <script src="js/bootstrap.min.js"></script>
+      <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
     </body>
   </html>
