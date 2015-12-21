@@ -38,7 +38,7 @@ The current dependencies are:
 
 If you add libraries to your Python installation, add them to this list so the rest of us know what to get.
 
-Generally, to install Python libraries, you just run `pip3 install LIBRARYNAME`, where `LIBRARYNAME` is the name of the library. `pip3` may not be in your `PATH`. If this is the case, add your python3 installation to path and run `python -m pip install LIBRARYNAME`.
+Generally, to install Python libraries, you just run `pip2 install LIBRARYNAME`, where `LIBRARYNAME` is the name of the library. `pip` may not be in your `PATH`. If this is the case, add your python2 installation to path and run `python -m pip install LIBRARYNAME`.
 
 
 ### Database configuration ###
