@@ -69,18 +69,26 @@ def get_package_update(uuid):
         print("uuid:", uuid, "lat:", lat, "long:", long, "ele:", elevation, "time:", time)
     return ''
 
+@app.route('/reset')
+def reset():
+    global begin, cp, visitedPoints
+    cp = begin[:]
+    print(cp, begin)
+    visitedPoints = [{'lat':begin[0],'lng':begin[1]}]
+    print('---',cp, visitedPoints,'----')
+    return jsonify(a='true')
 
 @app.route('/data')
 def send_data():
     global begin
-    a = request.args.get('dt', "", type=str)
-    # print(a)
+    a = request.args.get('dt',0,type=str)
+    print(a)
     if a == 'startingPoint':
-        # print(jsonify(a=begin[0], b=begin[1]))
+        print(jsonify(a=begin[0], b=begin[1]))
         return jsonify(a=begin[0], b=begin[1])
 
     elif a == 'prevPoints':
-        return jsonify(results=visited_points)
+        return jsonify(results=visitedPoints)
 
 @app.route('/')
 def index():
