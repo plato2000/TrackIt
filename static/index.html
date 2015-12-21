@@ -31,6 +31,8 @@
   </head>
   <body>
     <div class="container">
+
+      <!-- Navbar -->
       <div class="navbar navbar-default">
         <div class="container">
           <div class="navbar-header">
@@ -46,10 +48,24 @@
           </div>
         </div>
       </div>
+
+      <!-- Map -->
       <div class="jumbotron">
         <div id="map">
         </div>
       </div>
+
+      <!-- Track New Package -->
+      <div class="form-group">
+        <form id="newPackageTrackerForm">
+          <label id="newPackageLabel" for="newPackage">Enter package UUID:</label>
+            <input type-"text" class="form-control" id="newPackage">
+          <a href="javascript:addPackage()" class="btn btn-raised btn-primary">Add</a>
+        </form>
+      </div>
+
+
+      <!-- Package List -->
       <div class="form-group">
         <form id="packageTableForm">
           <table class="table table-striped table-hover" id="packageTable">
@@ -59,7 +75,7 @@
                 <th>UUID</th>
                 <th>Name</th>
                 <th>Location</th>
-                <th>Remove</th>
+                <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
               </tr>
             </thead>
             <tbody>
@@ -86,7 +102,7 @@
       get_data();
       </script>
       <script src="js/mapdefer.js" defer></script>
-      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3aTTDwdToxjPh3GLm6vug7vBPHxB2-Fc&signed_in=true&callback=initMap"></script>
+      <!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAD8h_9XCxOg5V6S_rC1gQjFn5zMfT5_Kw&signed_in=true&callback=initMap"></script>-->
       <script>
         //get_data();
         setInterval(function() {

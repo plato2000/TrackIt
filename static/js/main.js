@@ -1,9 +1,13 @@
-var DEFAULT_TR_CONTENTS = '<tr class="listRow" id="row{UUID}"><td><div class="checkbox"><label><input type="checkbox" name="{UUID}" onchange="changeMapDisplay(this.name, this.checked)"></label></div></td><td class="uuid" id="uuid{UUID}">{UUID}</td><td class="name" id="name{UUID}">{NAME}</td><td class="location" id="location{UUID}">{LOCATION}</td></tr>';
+var DEFAULT_TR_CONTENTS = '<tr class="listRow" id="row{UUID}"><td><div class="checkbox"><label><input type="checkbox" name="{UUID}" onchange="changeMapDisplay(this.name, this.checked)"></label></div></td><td class="uuid" id="uuid{UUID}">{UUID}</td><td class="name" id="name{UUID}">{NAME}</td><td class="location" id="location{UUID}"><p>Starting location: <span id="start{UUID}">{STARTLOCATION}</span></p><p>Current location: <span id="current{UUID}">{CURRENTLOCATION}</span></p><p>Destination: <span id="dest{UUID}">{DESTLOCATION}</span></p></td><td><a href="javascript:removeRow(\'{UUID}\')" class="btn btn-raised btn-danger">Stop Tracking</a></td></tr>';
 var packagesMonitored = [];
 var packagesOnMap = [];
 
+// For testing purposes, remove later
+var isValidUUID = true;
+
 
 function getLocationName(lat, lon) {
+
 	return "Washington, DC";
 }
 
@@ -19,16 +23,21 @@ function populateRow(uuid, name) {
 	var newRow = DEFAULT_TR_CONTENTS;
 	newRow = replaceAll(newRow, '{UUID}', uuid);
 	newRow = replaceAll(newRow, '{NAME}', name);
-	newRow = replaceAll(newRow, '{LOCATION}', "Loading...");
+	newRow = replaceAll(newRow, '{CURRENTLOCATION}', "Loading...");
+	newRow = replaceAll(newRow, '{STARTLOCATION}', "Loading...");
+	newRow = replaceAll(newRow, '{DESTLOCATION}', "Loading...");
 	return newRow;
 }
 
-function addRow(uuid, name, lat, lon) {
+function addRow(uuid, name, start, current, dest) {
 	rowToAdd = populateRow(uuid, name);
 	$('#packageTable > tbody:last-child').append(rowToAdd);
 	$.material.checkbox();
 	packagesMonitored.push(uuid);
-	$("#location" + uuid).text(getLocationName(lat, lon));
+	console.log("uuid: " + uuid);
+	$("#start" + uuid).text(getLocationName(start[0], start[1]));
+	$("#current" + uuid).text(getLocationName(current[0], current[1]));
+	$("#dest" + uuid).text(getLocationName(dest[0], dest[1]));
 }
 
 function changeMapDisplay(id, checked) {
@@ -37,5 +46,22 @@ function changeMapDisplay(id, checked) {
 		packagesOnMap.splice($.inArray(id, packagesOnMap), 1);
 	} else {
 		packagesOnMap.push(id);
+	}
+}
+
+function removeRow(uuid) {
+	packagesMonitored.splice($.inArray(uuid, packagesMonitored), 1);
+	$("#row" + uuid).remove();
+}
+
+function addPackage() {
+	uuid = $("#newPackage").val();
+	console.log(uuid);
+	// TODO: add real condition here for check
+	if(isValidUUID) {
+		$("#newPackage").val("");
+		addRow(uuid, "name", [1, 1], [2, 2], [3, 3])
+	} else {
+		alert("Invalid UUID!");
 	}
 }
