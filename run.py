@@ -15,7 +15,7 @@ end = [-33.8650, 151.2094] # sydney
 
 visitedPoints = [{'lat':begin[0],'lng':begin[1]}]
 
-cp = begin
+cp = begin[:]
 updates = 30
 dx = (end[0]-begin[0])/updates
 dy = (end[1]-begin[1])/updates
@@ -36,9 +36,12 @@ def update():
 
 @app.route('/reset')
 def reset():
-    global begin, cp
-    cp = begin
-    return True
+    global begin, cp, visitedPoints
+    cp = begin[:]
+    print(cp, begin)
+    visitedPoints = [{'lat':begin[0],'lng':begin[1]}]
+    print('---',cp, visitedPoints,'----')
+    return jsonify(a='true')
 
 @app.route('/tracknewpackage')
 def trackNewPackage():

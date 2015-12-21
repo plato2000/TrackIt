@@ -4,14 +4,21 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <title>Simple markers</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <style>
       html, body {
         height: 100%;
         margin: 0;
         padding: 0;
+        text-align:center;
       }
       #map {
-        height: 80%;
+        height: 360px;
+        width: 600px;
+        margin-left: auto;
+        margin-right:auto;
+        margin-top:60px;
         /*width:;*/
       }
     </style>
@@ -27,31 +34,19 @@
     var myLatLng;
     var polyCoordinates;
     var poly;
-      function update_map() {
-          $.getJSON($SCRIPT_ROOT + '/updateMap', {}, function(data) {
-            //console.log(data.result);
-            currentPosition = {lat: data.a, lng: data.b};
-            myLatLng = {lat: data.a, lng: data.b};
+    function update_map() {
+      $.getJSON($SCRIPT_ROOT + '/updateMap', {}, function(data) {
+        currentPosition = {lat: data.a, lng: data.b};
+        myLatLng = {lat: data.a, lng: data.b};
       });
     }
-    /*
-    function get_data() {
-          $.getJSON($SCRIPT_ROOT + '/data', {dt:"startingPoint"}, function(data) {
-            //console.log(data.result);
-            myLatLng = {lat: data.a, lng: data.b};
-            //alert("1"+myLatLng);
-            currentPosition = myLatLng;
-            polyCoordinates = [];
-            console.log(polyCoordinates);
-      });
-    }
-    */
+
     function get_data() {
           $.getJSON($SCRIPT_ROOT + '/data', {dt:"prevPoints"}, function(data) {
             //console.log(data.result);
             //alert(data.results);
             myLatLng = data.results.slice(-1)[0];
-            alert("1"+myLatLng);
+            //alert("getting_data : "+myLatLng);
             currentPosition = myLatLng;
       });
       return myLatLng;
@@ -59,10 +54,13 @@
 
     function reset() {
           $.getJSON($SCRIPT_ROOT + '/reset', {}, function(data) {
-            alert("resetting?")
+            //alert("resetting?")
             //console.log(data.result);
             marker.setMap(null);
-            poly.setPath(null);
+            poly.setPath([]);
+            get_data();
+
+            setTimeout(map.setCenter(myLatLng),100);
       });
     }
 
@@ -82,38 +80,16 @@
             poly.setPath(path);
       });
     }
-    </script>
-  </head>
-  <body>
-    <div id="map"></div>
-    <input type="button" onclick=reset() value="reset" />
-    <script>
-    var map, marker;
-    get_data();
-    </script>
-    <script defer>
-   
-    //var myLatLng = {lat: -25.363, lng: 131.044};
-    //
-    //var polyCoordinates = [
-    //  {lat: -25.363, lng: 131.044}
-    //];
-    //var poly;
-    //while (!myLatLng) {]
-    //}
-    
-    function initMap() {
-      //alert("2"+myLatLng);
-      myLatLng = get_data();
 
-      if (myLatLng == null) {
-        myLatLng = get_data();
-        alert("u dun gufed")
-      }
-      //alert(myLatLng);
+    function real_init() {
+      myLatLng = get_data();
+      setTimeout(initMap,500);
+    }
+
+    function initMap() {
       map = new google.maps.Map(document.getElementById('map'), {
         zoom: 4,
-        center: get_data()
+        center: myLatLng
       });
       console.log(map);
       marker = new google.maps.Marker({
@@ -134,11 +110,61 @@
       get_previous_points();
     }
 
-
+    function center() {
+      map.setCenter(myLatLng);
+    }
     </script>
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3aTTDwdToxjPh3GLm6vug7vBPHxB2-Fc&signed_in=true&callback=initMap"></script>
+  </head>
+  <body>
 
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">TrackIt</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+
+    <div class="container">
+
+    <div class="starter-template">
+
+    <div id="map"></div>
+    <input type="button" onclick=reset() value="reset" />
+    <input type="button" onclick=center() value="center map" />
+    </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <script>
+    var map, marker;
+    myLatLng = get_data();
+    </script>
+    
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3aTTDwdToxjPh3GLm6vug7vBPHxB2-Fc&signed_in=true&callback=real_init"></script>
 
     <script>
     //get_data();
