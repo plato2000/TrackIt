@@ -54,12 +54,15 @@
         <div id="map">
         </div>
       </div>
-
+      <div class="alert alert-danger" id="invalidUUIDAlert" style="display: none">
+        <strong>Oh snap!</strong>
+        This UUID was not found.
+      </div>
       <!-- Track New Package -->
-      <div class="form-group">
+      <div class="form-group well">
         <form id="newPackageTrackerForm">
           <label id="newPackageLabel" for="newPackage">Enter package UUID:</label>
-            <input type-"text" class="form-control" id="newPackage">
+            <input type-"text" class="form-control" id="newPackage" name="newPackage">
           <a href="javascript:addPackage()" class="btn btn-raised btn-primary">Add</a>
         </form>
       </div>
@@ -124,5 +127,6 @@
         }, 5000);
       </script>
       <script src="js/main.js"></script>
+      <script src="js/bootstrap.min.js"></script>
     </body>
   </html>

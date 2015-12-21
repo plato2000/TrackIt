@@ -62,6 +62,9 @@ function addPackage() {
 		$("#newPackage").val("");
 		addRow(uuid, "name", [1, 1], [2, 2], [3, 3])
 	} else {
-		alert("Invalid UUID!");
+		$("#invalidUUIDAlert").show();
+        $("#invalidUUIDAlert").fadeTo(2000, 500).slideUp(500, function(){
+       		$("#invalidUUIDAlert").hide();
+       	});
 	}
 }
