@@ -8,9 +8,39 @@ nominatim = geopy.Nominatim()
 DEFAULT_SPEEDS = (27, 245) #m/s
 RADIUS = 6.371e6 #m
 MAP_WIDTH, MAP_HEIGHT = 10800, 5400
-file = open("map.json")
+file = open("map.json", "r")
 array = json.loads(file.read())
 file.close()
+
+def over_land(pixel: tuple) -> bool:
+    '''Returns whether or not the given pixel is over land.'''
+    return array[pixel[0]][pixel[1]] == 1
+
+def generate_line(pixel1: tuple, pixel2: tuple) -> list:
+    '''Generates a line of pixels from two given endpoints.'''
+    x1, y1 = pixel1
+    x2, y2 = pixel2
+    points = []
+    if abs(y2 - y1) < abs(x2 - x1):
+        if x2 > x1:
+            inc = 1
+        else:
+            inc = -1
+        slope = (y2 - y1) / (x2 - x1)
+        y = lambda x: slope * (x - x1) + y1
+        for x in range(x1, x2 + inc, inc):
+            points.append((x, round(y(x))))
+    else:
+        if y2 > y1:
+            inc = 1
+        else:
+            inc = -1
+        slope = (x2 - x1) / (y2 - y1)
+        x = lambda y: slope * (y - y1) + x1
+        for y in range(y1, y2 + inc, inc):
+            points.append((round(x(y)), y))
+    return points
+    
 
 def to_pixel(coord: tuple) -> tuple:
     '''Converts from latitude/longitude to pixels on a map projection.'''
@@ -28,6 +58,7 @@ def parse_time(timestamp: str) -> float:
     return time.mktime(ts)
 
 def vincenty(coord1: tuple, coord2: tuple) -> float:
+    ''' Returns the Vincenty distance between two coordinates.'''
     while True:
         try:
             return distance.vincenty(coord1, coord2).meters
@@ -35,14 +66,16 @@ def vincenty(coord1: tuple, coord2: tuple) -> float:
             pass
 
 def average(elements: list) -> float:
+    '''Returns the average of a list of numbers.'''
     return sum(elements) / len(elements)
 
 class package():
     '''Class containing the path of a single package.'''
+    
     def __init__(self, coords: list, destination: tuple):
-        '''Initialize the package with a list of past coordinates (including start) and the
+        '''Initializes the package with a list of past coordinates (including start) and the
 destination point. Coordinates are tuples of the format:
-(latitude, longitude, elevation, time)'''
+(latitude, longitude, elevation, time).'''
         self.coords = coords
         self.destination = destination
         self.speeds = list(DEFAULT_SPEEDS)
@@ -53,7 +86,7 @@ destination point. Coordinates are tuples of the format:
         '''Returns the mode of transport of the package at the coordinate, where 0 is for
 car, and 1 is for boat/ship/plane.'''
         x, y = to_pixel(coord[:2])
-        if array[x][y] == 0:
+        if not over_land((x, y)):
             #For now, water defaults to plane
             return 1
         else:
@@ -91,3 +124,17 @@ second.'''
         else:
             vehicle = self.get_vehicle(segment[-1])
             return DEFAULT_SPEEDS[vehicle]
+
+    def etr(self) -> float:
+        '''Returns the estimated time remaining for the package to arrive.'''
+        segment = self.coords[-1]
+        coord = segment[-1][:2]
+        land_speed, water_speed = self.speeds
+        distance = vincenty(coord, self.destination)
+        pixel1, pixel2 = to_pixel(coord), to_pixel(self.destination)
+        line = generate_line(pixel1, pixel2)
+        interval = distance / len(line)
+        surfaces = list(map(over_land, line))
+        land_time = surfaces.count(True) * interval / land_speed
+        water_time = surfaces.count(False) * interval / water_speed
+        return land_time + water_time
