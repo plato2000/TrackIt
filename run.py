@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, render_template, request
 import random
-from src import packop
+# from src import packop
 
 
 def distance(l1, l2):
@@ -38,11 +38,11 @@ def update():
 
 @app.route('/reset')
 def reset():
-    global begin, cp, visitedPoints
+    global begin, cp, visited_points
     cp = begin[:]
     print(cp, begin)
-    visitedPoints = [{'lat':begin[0],'lng':begin[1]}]
-    print('---',cp, visitedPoints,'----')
+    visited_points = [{'lat':begin[0],'lng':begin[1]}]
+    print('---',cp, visited_points,'----')
     return jsonify(a='true')
 
 @app.route('/tracknewpackage', methods=['GET'])
@@ -69,18 +69,9 @@ def get_package_update(uuid):
         print("uuid:", uuid, "lat:", lat, "long:", long, "ele:", elevation, "time:", time)
     return ''
 
-@app.route('/reset')
-def reset():
-    global begin, cp, visitedPoints
-    cp = begin[:]
-    print(cp, begin)
-    visitedPoints = [{'lat':begin[0],'lng':begin[1]}]
-    print('---',cp, visitedPoints,'----')
-    return jsonify(a='true')
-
 @app.route('/data')
 def send_data():
-    global begin
+    global begin, visited_points
     a = request.args.get('dt',0,type=str)
     print(a)
     if a == 'startingPoint':
@@ -88,7 +79,7 @@ def send_data():
         return jsonify(a=begin[0], b=begin[1])
 
     elif a == 'prevPoints':
-        return jsonify(results=visitedPoints)
+        return jsonify(results=visited_points)
 
 @app.route('/')
 def index():
