@@ -52,6 +52,9 @@ function changeMapDisplay(id, checked) {
 function removeRow(uuid) {
 	packagesMonitored.splice($.inArray(uuid, packagesMonitored), 1);
 	$("#row" + uuid).remove();
+	packagesOnMap.splice($.inArray(uuid, packagesOnMap), 1);
+	$.cookie("packagesOnMap", JSON.stringify(packagesOnMap));
+	$.cookie("packagesMonitored", JSON.stringify(packagesMonitored));
 }
 
 function addPackage() {
