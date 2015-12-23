@@ -1,6 +1,13 @@
 var DEFAULT_TR_CONTENTS = '<tr class="listRow" id="row{UUID}"><td><div class="checkbox"><label><input type="checkbox" name="{UUID}" onchange="changeMapDisplay(this.name, this.checked)" id="checkbox{UUID}"></label></div></td><td class="uuid" id="uuid{UUID}">{UUID}</td><td class="name" id="name{UUID}">{NAME}</td><td class="location" id="location{UUID}"><p>Starting location: <span id="start{UUID}">{STARTLOCATION}</span></p><p>Current location: <span id="current{UUID}">{CURRENTLOCATION}</span></p><p>Destination: <span id="dest{UUID}">{DESTLOCATION}</span></p></td><td><a href="javascript:removeRow(\'{UUID}\')" class="btn btn-raised btn-danger">Stop Tracking</a></td></tr>';
+var ADMIN_TR_CONTENTS = '<tr class="listRow" id="row{UUID}"><td><div class="checkbox"><label><input type="checkbox" name="{UUID}" onchange="changeMapDisplay(this.name, this.checked)" id="checkbox{UUID}"></label></div></td><td class="uuid" id="uuid{UUID}">{UUID}</td><td class="name" id="name{UUID}">{NAME}</td><td class="location" id="location{UUID}"><p>Starting location: <span id="start{UUID}">{STARTLOCATION}</span></p><p>Current location: <span id="current{UUID}">{CURRENTLOCATION}</span></p><p>Destination: <span id="dest{UUID}">{DESTLOCATION}</span></p></td><td></td></tr>';
+
 var packagesMonitored = [];
 var packagesOnMap = [];
+
+var adminList = [];
+var adminMapPackages = [];
+
+var adminMode = false;
 
 // For testing purposes, remove later
 var isValidUUID = true;
@@ -29,8 +36,22 @@ function populateRow(uuid, name) {
 	return newRow;
 }
 
+function populateAdminRow(uuid, name) {
+	var newRow = ADMIN_TR_CONTENTS;
+	newRow = replaceAll(newRow, '{UUID}', uuid);
+	newRow = replaceAll(newRow, '{NAME}', name);
+	newRow = replaceAll(newRow, '{CURRENTLOCATION}', "Loading...");
+	newRow = replaceAll(newRow, '{STARTLOCATION}', "Loading...");
+	newRow = replaceAll(newRow, '{DESTLOCATION}', "Loading...");
+	return newRow;
+}
+
 function addRow(uuid, name, start, current, dest) {
-	rowToAdd = populateRow(uuid, name);
+	if(adminMode) {
+		rowToAdd = populateAdminRow(uuid, name);
+	} else {
+		rowToAdd = populateRow(uuid, name);
+	}
 	$('#packageTable > tbody:last-child').append(rowToAdd);
 	$.material.checkbox();
 	console.log("uuid: " + uuid);
@@ -41,12 +62,20 @@ function addRow(uuid, name, start, current, dest) {
 
 function changeMapDisplay(id, checked) {
 	console.log(id);
-	if(!checked) {
-		packagesOnMap.splice($.inArray(id, packagesOnMap), 1);
+	if(!adminMode) {
+		if(!checked) {
+			packagesOnMap.splice($.inArray(id, packagesOnMap), 1);
+		} else {
+			packagesOnMap.push(id);
+		}
+		$.cookie("packagesOnMap", JSON.stringify(packagesOnMap));
 	} else {
-		packagesOnMap.push(id);
+		if(!checked) {
+			adminMapPackages.splice($.inArray(id, adminMapPackages), 1);
+		} else {
+			adminMapPackages.push(id);
+		}
 	}
-	$.cookie("packagesOnMap", JSON.stringify(packagesOnMap));
 }
 
 function removeRow(uuid) {
@@ -74,6 +103,13 @@ function addPackage() {
 	}
 }
 
+function adminLoad() {
+	for(i = 0; i < adminList.length; i++) {
+		addRow(adminList[i], "name", [1, 1], [2, 2], [3, 3]);
+	}
+}
+
+
 function writePackages(packageList, mapList) {
 	packagesMonitored = packageList;
 	packagesOnMap = mapList;
@@ -85,7 +121,22 @@ function writePackages(packageList, mapList) {
 	}
 }
 
-$(document).ready(function() {
+function changeAdminMode() {
+	if(adminMode) {
+		$("#loginButton").html("Log in&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+		adminMode = false;
+		$("#listBody").html("");
+		loadFunction();
+	} else {
+		$("#loginButton").html("Log out&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+		adminMode = true;
+		$("#listBody").html("");
+
+	}
+}
+
+
+function loadFunction() {
 	if (typeof $.cookie('packagesOnMap') == 'undefined') {
 		$.cookie('packagesMonitored', '[]');
  	}
@@ -93,6 +144,10 @@ $(document).ready(function() {
 		$.cookie('packagesOnMap', '[]');
  	}
 	writePackages(JSON.parse($.cookie("packagesMonitored")), JSON.parse($.cookie("packagesOnMap")));
+}
+
+$(document).ready(function() {
+	loadFunction();
 });
 
 
