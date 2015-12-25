@@ -9,11 +9,24 @@ def distance(l1, l2):
 
 app = Flask(__name__)
 
+# TESTING VARS
 begin = [40.7127, -74.0059]     # nyc
 end = [51.5072, 0.1275]         # london
-end = [-33.8650, 151.2094]      # sydney
+# end = [-33.8650, 151.2094]    # sydney
 # end = [35.6833, 139.6833]     # tokyo
+initial_data = {
+    "0000-0000-0000-0000" : {
+        "start_coords" : [40.7127, -74.0059], 
+        "end_coords" : [51.5072, 0.1275],
+        "name": "NYCtoLondon"
+    },
+    "1111-1111-1111-1111" : {
+        "start_coords" : [-33.8650, 151.2094], 
+        "end_coords" : [35.6833, 139.6833],
+        "name": "SydneyToTokyo"
+    }
 
+}
 
 visited_points = [{'lat': begin[0], 'lng': begin[1]}]
 
@@ -60,19 +73,22 @@ def get_package_update(uuid):
     else:
         print("response:", request.form)
         lat = request.form.get('lat', 0.0, type=float)
-        long = request.form.get('lon', 0.0, type=float)
+        lon = request.form.get('lon', 0.0, type=float)
         elevation = request.form.get('ele', 0.0, type=float)
         time = request.form.get('time', "", type=str)
-        print("uuid:", uuid, "lat:", lat, "long:", long, "ele:", elevation, "time:", time)
+        print("uuid:", uuid, "lat:", lat, "long:", lon, "ele:", elevation, "time:", time)
     return ''
 
 
 @app.route('/data')
 def send_data():
-    global begin
+    global begin, initial_data
     a = request.args.get('dt', "", type=str)
     # print(a)
-    if a == 'startingPoint':
+    if a == 'initialData':
+        uuid = request.args.get('uuid', "", type=str)
+        return jsonify(initial_data[uuid])
+    elif a == 'startingPoint':
         # print(jsonify(a=begin[0], b=begin[1]))
         return jsonify(a=begin[0], b=begin[1])
 

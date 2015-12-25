@@ -12,30 +12,36 @@ var adminMode = false;
 // For testing purposes, remove later
 var isValidUUID = true;
 
-
+// Uses reverse geocoding to get human-readable name for coordinates
 function getLocationName(lat, lon) {
-
+	// For now, just returns DC for testing purposes
 	return "Washington, DC";
 }
 
+// Helper function for replaceAll, which uses regex
 function escapeRegExp(str) {
     return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
 }
 
+// Replaces all occurrences of 'find' within string 'str' with 'replace'
 function replaceAll(str, find, replace) {
   return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
 }
 
+
+// Uses DEFAULT_TR_CONTENTS and creates HTML for a new table row which
 function populateRow(uuid, name) {
 	var newRow = DEFAULT_TR_CONTENTS;
 	newRow = replaceAll(newRow, '{UUID}', uuid);
 	newRow = replaceAll(newRow, '{NAME}', name);
+	// Location is updated later, as reverse geocoding is not always instant
 	newRow = replaceAll(newRow, '{CURRENTLOCATION}', "Loading...");
 	newRow = replaceAll(newRow, '{STARTLOCATION}', "Loading...");
 	newRow = replaceAll(newRow, '{DESTLOCATION}', "Loading...");
 	return newRow;
 }
 
+// Like populateRow, but for admin mode which doesn't have a delete button
 function populateAdminRow(uuid, name) {
 	var newRow = ADMIN_TR_CONTENTS;
 	newRow = replaceAll(newRow, '{UUID}', uuid);
@@ -46,20 +52,25 @@ function populateAdminRow(uuid, name) {
 	return newRow;
 }
 
+// Adds a new row to the table in the page
 function addRow(uuid, name, start, current, dest) {
 	if(adminMode) {
 		rowToAdd = populateAdminRow(uuid, name);
 	} else {
 		rowToAdd = populateRow(uuid, name);
 	}
+	// Adds row to table
 	$('#packageTable > tbody:last-child').append(rowToAdd);
+	// Material design JS loads proper styling for checkboxes (has to be loaded every time)
 	$.material.checkbox();
 	console.log("uuid: " + uuid);
+	// Puts locations in after row is already in (later will be asyncronous)
 	$("#start" + uuid).text(getLocationName(start[0], start[1]));
 	$("#current" + uuid).text(getLocationName(current[0], current[1]));
 	$("#dest" + uuid).text(getLocationName(dest[0], dest[1]));
 }
 
+// Changes visibility of package on map (NYI). As of now, keeps track of packages.
 function changeMapDisplay(id, checked) {
 	console.log(id);
 	if(!adminMode) {
@@ -78,6 +89,7 @@ function changeMapDisplay(id, checked) {
 	}
 }
 
+// Removes row from table and monitored packages list
 function removeRow(uuid) {
 	packagesMonitored.splice($.inArray(uuid, packagesMonitored), 1);
 	$("#row" + uuid).remove();
@@ -86,6 +98,7 @@ function removeRow(uuid) {
 	$.cookie("packagesMonitored", JSON.stringify(packagesMonitored));
 }
 
+// Adds package to table, monitored list after it's entered into text entry box
 function addPackage() {
 	uuid = $("#newPackage").val();
 	console.log(uuid);
@@ -103,13 +116,14 @@ function addPackage() {
 	}
 }
 
+// Adds everything on the admin list of UUIDS to the table
 function adminLoad() {
 	for(i = 0; i < adminList.length; i++) {
 		addRow(adminList[i], "name", [1, 1], [2, 2], [3, 3]);
 	}
 }
 
-
+// Adds a list of packages to the table and sets conditions according to arrays passed to it
 function writePackages(packageList, mapList) {
 	packagesMonitored = packageList;
 	packagesOnMap = mapList;
@@ -121,6 +135,7 @@ function writePackages(packageList, mapList) {
 	}
 }
 
+// Toggles mode between admin mode and regular user
 function changeAdminMode() {
 	if(adminMode) {
 		$("#loginButton").html("Log in&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
@@ -135,7 +150,7 @@ function changeAdminMode() {
 	}
 }
 
-
+// For page load and mode toggle - gets data from cookies and adds to list
 function loadFunction() {
 	if (typeof $.cookie('packagesOnMap') == 'undefined') {
 		$.cookie('packagesMonitored', '[]');
