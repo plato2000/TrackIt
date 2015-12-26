@@ -9,9 +9,6 @@ var adminMapPackages = [];
 
 var adminMode = false;
 
-// For testing purposes, remove later
-var isValidUUID = true;
-
 // Uses reverse geocoding to get human-readable name for coordinates
 function getLocationName(lat, lon) {
 	// For now, just returns DC for testing purposes
@@ -100,13 +97,26 @@ function removeRow(uuid) {
 
 // Adds package to table, monitored list after it's entered into text entry box
 function addPackage() {
-	uuid = $("#newPackage").val();
-	console.log(uuid);
+	var uuid = $("#newPackage").val();
+	// console.log(uuid);
 	// TODO: add real condition here for check
+	var isValidUUID;
+	$.ajax({
+	    type: 'GET',
+	    url: $SCRIPT_ROOT + '/data',
+	    dataType: 'json',
+	    success: function(data) {isValidUUID = data.results},
+	    data: {"dt":"isValidUUID", "uuid":uuid},
+	    async: false
+	});
+	console.log(isValidUUID);
 	if(isValidUUID) {
 		$("#newPackage").val("");
 		packagesMonitored.push(uuid);
 		$.cookie("packagesMonitored", JSON.stringify(packagesMonitored));
+		$.getJSON($SCRIPT_ROOT + '/data', {"dt":"initialData", "uuid":uuid}, function(data) {
+	        
+	  	});
 		addRow(uuid, "name", [1, 1], [2, 2], [3, 3])
 	} else {
 		$("#invalidUUIDAlert").show();

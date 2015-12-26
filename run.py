@@ -87,7 +87,9 @@ def send_data():
     global begin, initial_data
     a = request.args.get('dt', "", type=str)
     # print(a)
-    if a == 'initialData':
+    if a == 'isValidUUID':
+        return jsonify(results=(request.args.get('uuid', "", type=str) in initial_data))
+    elif a == 'initialData':
         uuid = request.args.get('uuid', "", type=str)
         return jsonify(initial_data[uuid])
     elif a == 'startingPoint':
