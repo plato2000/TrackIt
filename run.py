@@ -132,6 +132,8 @@ def send_data():
     elif a == 'initialData':
         return jsonify(dict(initial_data[uuid].items() +
                             {"start_coords": package_data[uuid][0]['coords']}
+                            .items() +
+                            {"curr_coords": package_data[uuid][-1]['coords']}
                             .items()))
     elif a == 'startingPoint':
         # print(jsonify(a=begin[0], b=begin[1]))

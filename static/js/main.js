@@ -57,9 +57,9 @@ function addRow(uuid, name, start, current, dest) {
 	$.material.checkbox();
 	console.log("uuid: " + uuid);
 	// Puts locations in after row is already in (later will be asyncronous)
-	getLocationName("#start" + uuid, start[0], start[1]);
-	getLocationName("#current" + uuid, current[0], current[1]);
-	getLocationName("#dest" + uuid, dest[0], dest[1]);
+	setLocationName("#start" + uuid, start[0], start[1]);
+	setLocationName("#current" + uuid, current[0], current[1]);
+	setLocationName("#dest" + uuid, dest[0], dest[1]);
 }
 
 // Changes visibility of package on map (NYI). As of now, keeps track of packages.
@@ -127,7 +127,8 @@ function addPackageWithData(uuid) {
 	    	var name = data.name;
 	    	var start_coords = data.start_coords;
 	    	var end_coords = data.end_coords;
-	    	addRow(uuid, name, start_coords, [2, 2], end_coords)
+	    	var curr_coords = data.curr_coords;
+	    	addRow(uuid, name, start_coords, curr_coords, end_coords)
 	    },
 	    data: {"dt":"initialData", "uuid":uuid},
 	    async: true

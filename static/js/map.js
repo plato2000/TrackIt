@@ -76,7 +76,7 @@ function initMap() {
 
   poly.setMap(map);
   get_previous_points();
-  getLocationName("", 40.714224,-73.961452);
+  setLocationName("", 40.714224,-73.961452);
 }
 
 function center() {
@@ -84,21 +84,22 @@ function center() {
 }
 
 // Uses reverse geocoding to get human-readable name for coordinates
-function getLocationName(id, lat, lng) {
+function setLocationName(id, lat, lng) {
     var latlng = new google.maps.LatLng(lat, lng);
     // This is making the Geocode request
     var geocoder = new google.maps.Geocoder();
     geocoder.geocode({ 'latLng': latlng }, function (results, status) {
         if (status !== google.maps.GeocoderStatus.OK) {
-            alert(status + " " + results);
+            // alert(status + " " + results);
+            $(id).text("No name for location.");
         }
         // This is checking to see if the Geoeode Status is OK before proceeding
         if (status == google.maps.GeocoderStatus.OK) {
             // console.log(results);
             var address = (results[0].formatted_address);
-            console.log("id: " + id);
+            //console.log("id: " + id);
             $(id).text(address);
-            console.log("address: " + address);
+            //console.log("address: " + address);
         }
     });
 }
