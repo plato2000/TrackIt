@@ -28,6 +28,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script>
     var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
     </script>
@@ -45,7 +46,7 @@
           </div>
           <div class="navbar-collapse collapse" id="navbar-main">
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="#">Log in&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+              <li><a href="javascript:changeAdminMode()" id="loginButton">Log in&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
               <li></li>
             </ul>
           </div>
@@ -81,7 +82,7 @@
                 <th><a href="javascript:removeRow(\'{UUID}\')" style="visibility: hidden;" class="btn btn-raised btn-danger">Stop Tracking</a></th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="listBody">
             </tbody>
           </table>
         </form>
