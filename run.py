@@ -68,7 +68,7 @@ def track_new_package():
     dest_lng = request.args.get('destinationLon', 0, type=float)
     uuid = request.args.get('uuid', "", type=str)
     initial_data[uuid] = {"name": name, "end_coords": (dest_lat, dest_lng)}
-    print "name:", name, "dest_lat:", dest_lat, "dest_lng:", dest_lng, "uuid:", uuid 
+    # print "name:", name, "dest_lat:", dest_lat, "dest_lng:", dest_lng, "uuid:", uuid 
     out = {'ackUUID': '['+uuid+']'}
     return str(out)
     # return "success"
@@ -80,17 +80,25 @@ def get_package_update(uuid):
     data = json.loads(request.get_data().replace("[", "{").replace("]", "}"))
     if "delivered" in data:
         delivered_packages.append(uuid)
-        print "uuid:", uuid, "delivered:", data['delivered']
+        # print "uuid:", uuid, "delivered:", data['delivered']
     else:
-        print "response:", data
+        # print "response:", data
         lat = data['lat']
         lon = data['lon']
         elevation = data['ele']
         time = data['time']
         if uuid in package_data:
-            package_data[uuid].append({"coords": (lat, lon), "ele": elevation, "time": parse_time(time)})
+            package_data[uuid].append({
+                "coords": (lat, lon), 
+                "ele": elevation, 
+                "time": parse_time(time)
+                })
         else:
-            package_data[uuid] = [{"coords": (lat, lon), "ele": elevation, "time": parse_time(time)}]
+            package_data[uuid] = [{
+                "coords": (lat, lon), 
+                "ele": elevation, 
+                "time": parse_time(time)
+                }]
         # print "uuid:", uuid, "lat:", lat, "long:", lon, "ele:", elevation, "time:", time
         # print package_data
     return ''
@@ -114,7 +122,8 @@ def send_data():
             and uuid in package_data
         return jsonify(results=isValidUUID)
     elif a == 'initialData':
-        return jsonify(dict(initial_data[uuid].items() + {"start_coords": package_data[uuid][0]['coords']}.items()))
+        return jsonify(dict(initial_data[uuid].items() + \
+            {"start_coords": package_data[uuid][0]['coords']}.items()))
     elif a == 'startingPoint':
         # print(jsonify(a=begin[0], b=begin[1]))
         return jsonify(a=begin[0], b=begin[1])
