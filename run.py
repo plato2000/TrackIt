@@ -95,11 +95,15 @@ def get_package_update(uuid):
 
 @app.route('/testdata')
 def test_data():
+    """ Returns a json version of whatever variable is passed as the value \
+    from the data key"""
     return jsonify(results=eval(request.args.get('data', "", type=str)))
 
 
 @app.route('/data')
 def send_data():
+    """ Sends data to clientside. dt is for what type of output it's expecting, \
+    and uuid is for the package uuid for which data is received."""
     global begin, initial_data, package_data
     a = request.args.get('dt', "", type=str)
     # print(a)
@@ -119,6 +123,7 @@ def send_data():
 
 @app.route('/')
 def index():
+    """ Serves the webpage based on template at /templates/index.html"""
     return render_template('index.html')
 
 if __name__ == '__main__':
