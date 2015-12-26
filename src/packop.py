@@ -128,8 +128,8 @@ class package():
 
     def get_speed(self) -> float:
         '''Returns the average speed of the package during the current segment
-         in meters per second.
-         '''
+        in meters per second.
+        '''
         segment = self.coords[-1]
         if len(segment) > 1:
             coord1 = segment[0][:3]
