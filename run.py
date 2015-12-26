@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, render_template, request
+import json
 import random
 # from src import packop
 
@@ -61,22 +62,23 @@ def track_new_package():
     dest_lat = request.args.get('destinationLat', 0, type=float)
     dest_lng = request.args.get('destinationLon', 0, type=float)
     uuid = request.args.get('uuid', "", type=str)
-    print("name:", name, "dest_lat:", dest_lat, "dest_lng:", dest_lng, "uuid:", uuid)
+    print "name:", name, "dest_lat:", dest_lat, "dest_lng:", dest_lng, "uuid:", uuid 
     out = {'ackUUID': '['+uuid+']'}
     return str(out)
     # return "success"
 
 @app.route('/packagetrackupdate/<uuid:uuid>', methods=['POST'])
 def get_package_update(uuid):
-    if request.form.get('delivered', "", type=str) == "true":
-        print("uuid:", uuid, "delivered:", request.form.get)
+    data = json.loads(request.get_data().replace("[", "{").replace("]", "}"))
+    if "delivered" in data:
+        print "uuid:", uuid, "delivered:", data['delivered']
     else:
-        print("response:", request.form)
-        lat = request.form.get('lat', 0.0, type=float)
-        lon = request.form.get('lon', 0.0, type=float)
-        elevation = request.form.get('ele', 0.0, type=float)
-        time = request.form.get('time', "", type=str)
-        print("uuid:", uuid, "lat:", lat, "long:", lon, "ele:", elevation, "time:", time)
+        print "response:", data
+        lat = data['lat']
+        lon = data['lon']
+        elevation = data['ele']
+        time = data['time']
+        print "uuid:", uuid, "lat:", lat, "long:", lon, "ele:", elevation, "time:", time
     return ''
 
 
