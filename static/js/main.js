@@ -124,18 +124,19 @@ function addPackage() {
 // Generic function to get package data from UUID and add to table
 function addPackageWithData(uuid) {
 	$.cookie("packagesMonitored", JSON.stringify(packagesMonitored));
-	var name;
-	var start_coords;
-	var end_coords;
 	$.ajax({
 	    type: 'GET',
 	    url: $SCRIPT_ROOT + '/data',
 	    dataType: 'json',
-	    success: function(data) {name = data.name; start_coords = data.start_coords; end_coords = data.end_coords;},
+	    success: function(data) {
+	    	var name = data.name;
+	    	var start_coords = data.start_coords;
+	    	var end_coords = data.end_coords;
+	    	addRow(uuid, name, start_coords, [2, 2], end_coords)
+	    },
 	    data: {"dt":"initialData", "uuid":uuid},
-	    async: false
+	    async: true
 	});
-	addRow(uuid, name, start_coords, [2, 2], end_coords)
 }
 
 // Adds everything on the admin list of UUIDS to the table

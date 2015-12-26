@@ -30,11 +30,13 @@ updates = 30
 dx = (end[0]-begin[0])/updates
 dy = (end[1]-begin[1])/updates
 
+
 def parse_time(time_str):
     """Does dateutil.parser.parse on the string, then converts to a \
     timetuple, which is converted to milliseconds since epoch by \
     time.mktime"""
     return int(time.mktime(parse(time_str).timetuple()))
+
 
 @app.route('/updateMap')
 def update():
@@ -50,14 +52,16 @@ def update():
     # print(visited_points)
     return jsonify(a=x, b=y)
 
+
 @app.route('/reset')
 def reset():
     global begin, cp, visited_points
     cp = begin[:]
     print(cp, begin)
-    visited_points = [{'lat':begin[0],'lng':begin[1]}]
-    print('---',cp, visited_points,'----')
+    visited_points = [{'lat': begin[0], 'lng':begin[1]}]
+    print('---', cp, visited_points, '----')
     return jsonify(a='true')
+
 
 @app.route('/tracknewpackage', methods=['GET'])
 def track_new_package():
@@ -68,10 +72,12 @@ def track_new_package():
     dest_lng = request.args.get('destinationLon', 0, type=float)
     uuid = request.args.get('uuid', "", type=str)
     initial_data[uuid] = {"name": name, "end_coords": (dest_lat, dest_lng)}
-    # print "name:", name, "dest_lat:", dest_lat, "dest_lng:", dest_lng, "uuid:", uuid 
+    # print "name:", name, "dest_lat:", dest_lat,
+    #                       "dest_lng:", dest_lng, "uuid:", uuid
     out = {'ackUUID': '['+uuid+']'}
     return str(out)
     # return "success"
+
 
 @app.route('/packagetrackupdate/<uuid>', methods=['POST'])
 def get_package_update(uuid):
@@ -89,19 +95,21 @@ def get_package_update(uuid):
         time = data['time']
         if uuid in package_data:
             package_data[uuid].append({
-                "coords": (lat, lon), 
-                "ele": elevation, 
+                "coords": (lat, lon),
+                "ele": elevation,
                 "time": parse_time(time)
                 })
         else:
             package_data[uuid] = [{
-                "coords": (lat, lon), 
-                "ele": elevation, 
+                "coords": (lat, lon),
+                "ele": elevation,
                 "time": parse_time(time)
                 }]
-        # print "uuid:", uuid, "lat:", lat, "long:", lon, "ele:", elevation, "time:", time
+        # print "uuid:", uuid, "lat:", lat, "long:", lon,
+        #                "ele:", elevation, "time:", time
         # print package_data
     return ''
+
 
 @app.route('/testdata')
 def test_data():
@@ -122,8 +130,9 @@ def send_data():
             and uuid in package_data
         return jsonify(results=isValidUUID)
     elif a == 'initialData':
-        return jsonify(dict(initial_data[uuid].items() + \
-            {"start_coords": package_data[uuid][0]['coords']}.items()))
+        return jsonify(dict(initial_data[uuid].items() +
+                            {"start_coords": package_data[uuid][0]['coords']}
+                            .items()))
     elif a == 'startingPoint':
         # print(jsonify(a=begin[0], b=begin[1]))
         return jsonify(a=begin[0], b=begin[1])
@@ -131,6 +140,7 @@ def send_data():
         return jsonify(results=visited_points)
     elif a == 'isDelivered':
         return jsonify(results=(uuid in delivered_packages))
+
 
 @app.route('/')
 def index():
