@@ -109,15 +109,10 @@ function addPackage() {
 	    data: {"dt":"isValidUUID", "uuid":uuid},
 	    async: false
 	});
-	console.log(isValidUUID);
 	if(isValidUUID) {
 		$("#newPackage").val("");
 		packagesMonitored.push(uuid);
-		$.cookie("packagesMonitored", JSON.stringify(packagesMonitored));
-		$.getJSON($SCRIPT_ROOT + '/data', {"dt":"initialData", "uuid":uuid}, function(data) {
-	        
-	  	});
-		addRow(uuid, "name", [1, 1], [2, 2], [3, 3])
+		addPackageWithData(uuid);
 	} else {
 		$("#invalidUUIDAlert").show();
         $("#invalidUUIDAlert").fadeTo(2000, 500).slideUp(500, function(){
@@ -126,10 +121,27 @@ function addPackage() {
 	}
 }
 
+// Generic function to get package data from UUID and add to table
+function addPackageWithData(uuid) {
+	$.cookie("packagesMonitored", JSON.stringify(packagesMonitored));
+	var name;
+	var start_coords;
+	var end_coords;
+	$.ajax({
+	    type: 'GET',
+	    url: $SCRIPT_ROOT + '/data',
+	    dataType: 'json',
+	    success: function(data) {name = data.name; start_coords = data.start_coords; end_coords = data.end_coords;},
+	    data: {"dt":"initialData", "uuid":uuid},
+	    async: false
+	});
+	addRow(uuid, name, start_coords, [2, 2], end_coords)
+}
+
 // Adds everything on the admin list of UUIDS to the table
 function adminLoad() {
 	for(i = 0; i < adminList.length; i++) {
-		addRow(adminList[i], "name", [1, 1], [2, 2], [3, 3]);
+		addPackageWithData(adminList[i]);
 	}
 }
 
@@ -138,7 +150,7 @@ function writePackages(packageList, mapList) {
 	packagesMonitored = packageList;
 	packagesOnMap = mapList;
 	for(i = 0; i < packageList.length; i++) {
-		addRow(packageList[i], "name", [1, 1], [2, 2], [3, 3]);
+		addPackageWithData(packageList[i]);
 	}
 	for(i = 0; i < mapList.length; i++) {
 		$("#checkbox" + mapList[i]).prop("checked", true);
