@@ -18,14 +18,8 @@ begin = [40.7127, -74.0059]     # nyc
 end = [51.5072, 0.1275]         # london
 # end = [-33.8650, 151.2094]    # sydney
 # end = [35.6833, 139.6833]     # tokyo
-initial_data = {
-
-}
-
-package_data = {
-    
-}
-
+initial_data = {}
+package_data = {}
 delivered_packages = []
 
 
@@ -112,20 +106,20 @@ def send_data():
     and uuid is for the package uuid for which data is received."""
     global begin, initial_data, package_data
     a = request.args.get('dt', "", type=str)
-    # print(a)
+    uuid = request.args.get('uuid', "", type=str)
     if a == 'isValidUUID':
-        isValidUUID = request.args.get('uuid', "", type=str) in initial_data \
-            and request.args.get('uuid', "", type=str) in package_data
+        isValidUUID = uuid in initial_data \
+            and uuid in package_data
         return jsonify(results=isValidUUID)
     elif a == 'initialData':
-        uuid = request.args.get('uuid', "", type=str)
         return jsonify(dict(initial_data[uuid].items() + {"start_coords": package_data[uuid][0]['coords']}.items()))
     elif a == 'startingPoint':
         # print(jsonify(a=begin[0], b=begin[1]))
         return jsonify(a=begin[0], b=begin[1])
-
     elif a == 'prevPoints':
         return jsonify(results=visited_points)
+    elif a == 'isDelivered':
+        return jsonify(results=(uuid in delivered_packages))
 
 @app.route('/')
 def index():
