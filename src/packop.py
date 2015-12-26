@@ -29,7 +29,10 @@ def generate_line(pixel1: tuple, pixel2: tuple) -> list:
         else:
             inc = -1
         slope = (y2 - y1) / (x2 - x1)
-        y = lambda x: slope * (x - x1) + y1
+
+        def y(x):
+            return slope * (x - x1) + y1
+
         for x in range(x1, x2 + inc, inc):
             points.append((x, round(y(x))))
     else:
@@ -38,7 +41,10 @@ def generate_line(pixel1: tuple, pixel2: tuple) -> list:
         else:
             inc = -1
         slope = (x2 - x1) / (y2 - y1)
-        x = lambda y: slope * (y - y1) + x1
+
+        def x(y):
+            return slope * (y - y1) + x1
+
         for y in range(y1, y2 + inc, inc):
             points.append((round(x(y)), y))
     return points
@@ -96,7 +102,7 @@ class package():
         '''
         x, y = to_pixel(coord[:2])
         if not over_land((x, y)):
-            #For now, water defaults to plane
+            # For now, water defaults to plane
             return 1
         else:
             return 0
