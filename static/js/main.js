@@ -9,11 +9,6 @@ var adminMapPackages = [];
 
 var adminMode = false;
 
-// Uses reverse geocoding to get human-readable name for coordinates
-function getLocationName(lat, lon) {
-	// For now, just returns DC for testing purposes
-	return "Washington, DC";
-}
 
 // Helper function for replaceAll, which uses regex
 function escapeRegExp(str) {
@@ -62,9 +57,9 @@ function addRow(uuid, name, start, current, dest) {
 	$.material.checkbox();
 	console.log("uuid: " + uuid);
 	// Puts locations in after row is already in (later will be asyncronous)
-	$("#start" + uuid).text(getLocationName(start[0], start[1]));
-	$("#current" + uuid).text(getLocationName(current[0], current[1]));
-	$("#dest" + uuid).text(getLocationName(dest[0], dest[1]));
+	getLocationName("#start" + uuid, start[0], start[1]);
+	getLocationName("#current" + uuid, current[0], current[1]);
+	getLocationName("#dest" + uuid, dest[0], dest[1]);
 }
 
 // Changes visibility of package on map (NYI). As of now, keeps track of packages.

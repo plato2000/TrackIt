@@ -37,7 +37,7 @@ function get_previous_points() {
         //console.log(data.result);
         polyCoordinates = data.results;
         //alert("1"+myLatLng);
-        console.log(polyCoordinates);
+        // console.log(polyCoordinates);
         var path = poly.getPath();
         // add new point
         var arrayLength = polyCoordinates.length;
@@ -59,7 +59,7 @@ function initMap() {
     zoom: 4,
     center: myLatLng
   });
-  console.log(map);
+  // console.log(map);
   marker = new google.maps.Marker({
     position: myLatLng,
     map: map,
@@ -76,14 +76,15 @@ function initMap() {
 
   poly.setMap(map);
   get_previous_points();
-  getReverseGeocodingData(40.714224,-73.961452);
+  getLocationName("", 40.714224,-73.961452);
 }
 
 function center() {
   map.setCenter(myLatLng);
 }
 
-function getReverseGeocodingData(lat, lng) {
+// Uses reverse geocoding to get human-readable name for coordinates
+function getLocationName(id, lat, lng) {
     var latlng = new google.maps.LatLng(lat, lng);
     // This is making the Geocode request
     var geocoder = new google.maps.Geocoder();
@@ -93,8 +94,11 @@ function getReverseGeocodingData(lat, lng) {
         }
         // This is checking to see if the Geoeode Status is OK before proceeding
         if (status == google.maps.GeocoderStatus.OK) {
-            console.log(results);
+            // console.log(results);
             var address = (results[0].formatted_address);
+            console.log("id: " + id);
+            $(id).text(address);
+            console.log("address: " + address);
         }
     });
 }
