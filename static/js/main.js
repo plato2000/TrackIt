@@ -7,6 +7,9 @@ var packagesOnMap = [];
 var adminList = [];
 var adminMapPackages = [];
 
+var packagePositions = {};
+var adminPackagePositions = {};
+
 var adminMode = false;
 
 
@@ -93,27 +96,26 @@ function removeRow(uuid) {
 // Adds package to table, monitored list after it's entered into text entry box
 function addPackage() {
 	var uuid = $("#newPackage").val();
-	// console.log(uuid);
-	// TODO: add real condition here for check
-	var isValidUUID;
 	$.ajax({
 	    type: 'GET',
 	    url: $SCRIPT_ROOT + '/data',
 	    dataType: 'json',
-	    success: function(data) {isValidUUID = data.results},
+	    success: function(data) {
+	    	var isValidUUID = data.results;
+	    	if(isValidUUID) {
+				$("#newPackage").val("");
+				packagesMonitored.push(uuid);
+				addPackageWithData(uuid);
+			} else {
+				$("#invalidUUIDAlert").show();
+		        $("#invalidUUIDAlert").fadeTo(2000, 500).slideUp(500, function(){
+		       		$("#invalidUUIDAlert").hide();
+		       	});
+			}
+	    },
 	    data: {"dt":"isValidUUID", "uuid":uuid},
-	    async: false
+	    async: true
 	});
-	if(isValidUUID) {
-		$("#newPackage").val("");
-		packagesMonitored.push(uuid);
-		addPackageWithData(uuid);
-	} else {
-		$("#invalidUUIDAlert").show();
-        $("#invalidUUIDAlert").fadeTo(2000, 500).slideUp(500, function(){
-       		$("#invalidUUIDAlert").hide();
-       	});
-	}
 }
 
 // Generic function to get package data from UUID and add to table
@@ -135,11 +137,65 @@ function addPackageWithData(uuid) {
 	});
 }
 
+function updateCallback(index, concat, admin) {
+	return function(data) {
+		if(admin) {
+			if(concat) {
+				adminPackagePositions[adminList[index]].concat(data.results);
+			} else {
+				adminPackagePositions[adminList[index]] = data.results;
+			}
+			// console.log("i: " + index);
+			// console.log("adminList[i]: " + adminList[index]);
+			// console.log("adminPackagePositions[^]: " + adminPackagePositions[adminList[index]]);
+			setLocationName("#current" + adminList[index], adminPackagePositions[adminList[index]].slice(-1)[0]['lat'], adminPackagePositions[adminList[index]].slice(-1)[0]['lon']);
+		} else {
+			if(concat) {
+				packagePositions[packagesMonitored[index]].concat(data.results);
+			} else {
+				packagePositions[packagesMonitored[index]] = data.results;
+			}
+			// console.log("i: " + index);
+			// console.log("packagesMonitored[i]: " + packagesMonitored[index]);
+			// console.log("packagePositions[^]: " + packagePositions[packagesMonitored[index]]);
+			setLocationName("#current" + packagesMonitored[index], packagePositions[packagesMonitored[index]].slice(-1)[0]['lat'], packagePositions[packagesMonitored[index]].slice(-1)[0]['lon']);
+
+		}
+	};
+}
+
+function updateData() {
+	if(!adminMode) {
+		for(var i = 0; i < packagesMonitored.length; i++) {
+			if(packagesMonitored[i] in packagePositions) {
+				$.getJSON($SCRIPT_ROOT + '/data', {"dt": "getNewPoints", "uuid": packagesMonitored[i], "time": packagePositions[packagesMonitored[i]].slice(-1)[0]['time']}, updateCallback(i, true, false));
+			} else {
+				// TODO: Create array there
+				$.getJSON($SCRIPT_ROOT + '/data', {"dt": "getNewPoints", "uuid": packagesMonitored[i], "time": 0}, updateCallback(i, false, false));
+			}
+		}
+	} else {
+		for(var i = 0; i < adminList.length; i++) {
+			if(adminList[i] in adminPackagePositions) {
+				console.log("adminList[i] in adminPackagePositions. adminList[i]: " + adminList[i]);
+				$.getJSON($SCRIPT_ROOT + '/data', {"dt": "getNewPoints", "uuid": adminList[i], "time": adminPackagePositions[adminList[i]].slice(-1)[0]['time']}, updateCallback(i, true, true));
+			} else {
+				console.log("adminList[i] not in adminPackagePositions. adminList[i]: " + adminList[i]);
+				$.getJSON($SCRIPT_ROOT + '/data', {"dt": "getNewPoints", "uuid": adminList[i], "time": 0}, updateCallback(i, false, true));
+			}
+		}
+	}
+}
+
+
 // Adds everything on the admin list of UUIDS to the table
 function adminLoad() {
-	for(i = 0; i < adminList.length; i++) {
-		addPackageWithData(adminList[i]);
-	}
+	$.getJSON($SCRIPT_ROOT + '/data', {"dt": "adminUUIDList"}, function(data) {
+		adminList = data.results;
+		for(i = 0; i < adminList.length; i++) {
+			addPackageWithData(adminList[i]);
+		}
+	});
 }
 
 // Adds a list of packages to the table and sets conditions according to arrays passed to it
@@ -165,6 +221,7 @@ function changeAdminMode() {
 		$("#loginButton").html("Log out&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
 		adminMode = true;
 		$("#listBody").html("");
+		adminLoad();
 
 	}
 }
@@ -182,6 +239,7 @@ function loadFunction() {
 
 $(document).ready(function() {
 	loadFunction();
+	setInterval(updateData, 10000);
 });
 
 

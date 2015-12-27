@@ -63,7 +63,7 @@
       </div>
       <!-- Track New Package -->
       <div class="form-group well">
-        <form id="newPackageTrackerForm">
+        <form id="newPackageTrackerForm" onsubmit="addPackage()">
           <label id="newPackageLabel" for="newPackage">Enter package UUID:</label>
           <input type-"text" class="form-control" id="newPackage" name="newPackage">
           <a href="javascript:addPackage()" class="btn btn-raised btn-primary">Add</a>

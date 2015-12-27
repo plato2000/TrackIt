@@ -83,24 +83,38 @@ function center() {
   map.setCenter(myLatLng);
 }
 
+function locationCallback(id, lat, lng) {
+  return function(results, status) {
+    if (status !== google.maps.GeocoderStatus.OK) {
+        if(status == "OVER_QUERY_LIMIT") {
+          // console.log(status);
+          setTimeout(function() {
+            setLocationName(id, lat, lng);
+          }, 300);
+          return;
+        }
+        // alert(status + " " + results);
+        if($(id).text() == "Loading...") {
+          $(id).text("No name for location.");
+        }
+      }
+      // This is checking to see if the Geoeode Status is OK before proceeding
+      if (status == google.maps.GeocoderStatus.OK) {
+          // console.log(results);
+          var address = (results[0].formatted_address);
+          //console.log("id: " + id);
+          $(id).text(address);
+          //console.log("address: " + address);
+      }
+  };
+}
+
+
 // Uses reverse geocoding to get human-readable name for coordinates
 function setLocationName(id, lat, lng) {
     var latlng = new google.maps.LatLng(lat, lng);
     // This is making the Geocode request
     var geocoder = new google.maps.Geocoder();
-    geocoder.geocode({ 'latLng': latlng }, function (results, status) {
-        if (status !== google.maps.GeocoderStatus.OK) {
-            // alert(status + " " + results);
-            $(id).text("No name for location.");
-        }
-        // This is checking to see if the Geoeode Status is OK before proceeding
-        if (status == google.maps.GeocoderStatus.OK) {
-            // console.log(results);
-            var address = (results[0].formatted_address);
-            //console.log("id: " + id);
-            $(id).text(address);
-            //console.log("address: " + address);
-        }
-    });
+    geocoder.geocode({ 'latLng': latlng }, locationCallback(id, lat, lng));
 }
 
