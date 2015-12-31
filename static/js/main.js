@@ -12,6 +12,9 @@ var adminPackagePositions = {};
 
 var adminMode = false;
 
+var mapLines = {};
+var mapMarkers = {};
+
 
 // Helper function for replaceAll, which uses regex
 function escapeRegExp(str) {
@@ -164,6 +167,7 @@ function updateCallback(index, concat, admin) {
     };
 }
 
+// Gets new points
 function updateData() {
     if(!adminMode) {
         for(var i = 0; i < packagesMonitored.length; i++) {
@@ -183,6 +187,25 @@ function updateData() {
                 console.log("adminList[i] not in adminPackagePositions. adminList[i]: " + adminList[i]);
                 $.getJSON($SCRIPT_ROOT + '/data', {"dt": "getNewPoints", "uuid": adminList[i], "time": 0}, updateCallback(i, false, true));
             }
+        }
+    }
+    updateMap();
+}
+
+// Updates the map view
+function updateMap() {
+    if (!adminMode) {
+        for (var i = 0; i < packagesOnMap.length; i++) {
+            if (!(packagesOnMap[i] in mapLines)) {
+                mapLines[packagesOnMap[i]] = new google.maps.Polyline({
+                    path: [],
+                    geodesic: true,
+                    strokeColor: '#FF0000',
+                    strokeOpacity: 1.0,
+                    strokeWeight: 2
+                });
+            }
+            mapLines[packagesOnMap[i]].get
         }
     }
 }
@@ -236,6 +259,14 @@ function loadFunction() {
     }
     writePackages(JSON.parse($.cookie("packagesMonitored")), JSON.parse($.cookie("packagesOnMap")));
 }
+
+function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 4,
+        center: {lat: 0, lng: 0}
+    });
+}
+
 
 $(document).ready(function() {
     loadFunction();

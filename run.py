@@ -1,9 +1,10 @@
-from flask import Flask, jsonify, render_template, request
 import json
-import random
-from dateutil.parser import *
-import datetime
 import time
+
+from dateutil.parser import *
+from flask import Flask, jsonify, render_template, request
+
+
 # from src import packop
 
 
@@ -126,9 +127,9 @@ def send_data():
     a = request.args.get('dt', "", type=str)
     uuid = request.args.get('uuid', "", type=str)
     if a == 'isValidUUID':
-        isValidUUID = uuid in initial_data \
-            and uuid in package_data
-        return jsonify(results=isValidUUID)
+        is_valid_uuid = uuid in initial_data \
+                        and uuid in package_data
+        return jsonify(results=is_valid_uuid)
     elif a == 'initialData':
         return jsonify(dict(initial_data[uuid].items() +
                             {"start_coords": package_data[uuid][0]['coords']}
@@ -143,16 +144,16 @@ def send_data():
     elif a == 'isDelivered':
         return jsonify(results=(uuid in delivered_packages))
     elif a == 'getNewPoints':
-        prevTime = request.args.get('time', 0, type=int)
+        prev_time = request.args.get('time', 0, type=int)
         count = 0
-        while package_data[uuid][count]['time'] <= prevTime:
+        while package_data[uuid][count]['time'] <= prev_time:
             count += 1
             if count >= len(package_data[uuid]):
                 return jsonify(results=[])
         return jsonify(results=package_data[uuid][count:])
     elif a == 'adminUUIDList':
         return jsonify(results=package_data.keys())
-    return jsonify(results=dt)
+    return jsonify(results="")
 
 
 @app.route('/')
