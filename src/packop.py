@@ -13,13 +13,15 @@ array = json.loads(file.read())
 file.close()
 
 
-def over_land(pixel: tuple) -> bool:
-    '''Returns whether or not the given pixel is over land.'''
+def over_land(pixel):
+    '''(pixel: tuple) -> bool
+    Returns whether or not the given pixel is over land.'''
     return array[pixel[0]][pixel[1]] == 1
 
 
-def generate_line(pixel1: tuple, pixel2: tuple) -> list:
-    '''Generates a line of pixels from two given endpoints.'''
+def generate_line(pixel1, pixel2):
+    '''(pixel1: tuple, pixel2: tuple) -> list
+    Generates a line of pixels from two given endpoints.'''
     x1, y1 = pixel1
     x2, y2 = pixel2
     points = []
@@ -33,7 +35,7 @@ def generate_line(pixel1: tuple, pixel2: tuple) -> list:
         def y(x):
             return slope * (x - x1) + y1
 
-        for x in range(x1, x2 + inc, inc):
+        for x in xrange(x1, x2 + inc, inc):
             points.append((x, round(y(x))))
     else:
         if y2 > y1:
@@ -45,31 +47,35 @@ def generate_line(pixel1: tuple, pixel2: tuple) -> list:
         def x(y):
             return slope * (y - y1) + x1
 
-        for y in range(y1, y2 + inc, inc):
+        for y in xrange(y1, y2 + inc, inc):
             points.append((round(x(y)), y))
     return points
 
 
-def to_pixel(coord: tuple) -> tuple:
-    '''Converts from latitude/longitude to pixels on a map projection.'''
+def to_pixel(coord):
+    '''(coord: tuple) -> tuple
+    Converts from latitude/longitude to pixels on a map projection.'''
     x = MAP_WIDTH / 360 * coord[1] + MAP_WIDTH / 2
     y = -MAP_HEIGHT / 180 * coord[0] + MAP_HEIGHT / 2
     return (round(x), round(y))
 
 
-def get_address(coord: tuple) -> str:
-    '''Returns the address of a coordinate.'''
+def get_address(coord):
+    '''(coord: tuple) -> str
+    Returns the address of a coordinate.'''
     return nominatim.reverse(coord).address
 
 
-def parse_time(timestamp: str) -> float:
-    '''Converts an ISO 8601 timestamp to seconds from epoch.'''
+def parse_time(timestamp):
+    '''(timestamp: str) -> float
+    Converts an ISO 8601 timestamp to seconds from epoch.'''
     ts = time.strptime(timestamp, "%Y-%m-%dT%H:%M:%SZ")
     return time.mktime(ts)
 
 
-def vincenty(coord1: tuple, coord2: tuple) -> float:
-    ''' Returns the Vincenty distance between two coordinates.'''
+def vincenty(coord1, coord2):
+    '''(coord1: tuple, coord2: tuple) -> float
+    Returns the Vincenty distance between two coordinates.'''
     while True:
         try:
             return distance.vincenty(coord1, coord2).meters
@@ -77,15 +83,17 @@ def vincenty(coord1: tuple, coord2: tuple) -> float:
             pass
 
 
-def average(elements: list) -> float:
-    '''Returns the average of a list of numbers.'''
+def average(elements):
+    '''(elements: list) -> float
+    Returns the average of a list of numbers.'''
     return sum(elements) / len(elements)
 
 
 class package():
     '''Class containing the path of a single package.'''
-    def __init__(self, coords: list, destination: tuple):
-        '''Initializes the package with a list of past coordinates
+    def __init__(self, coords, destination):
+        '''(self, coords: list, destination: tuple)
+        Initializes the package with a list of past coordinates
         (including start) and the destination point.
         Coordinates are tuples of the format:
         (latitude, longitude, elevation, time).
@@ -95,9 +103,17 @@ class package():
         self.speeds = list(DEFAULT_SPEEDS)
         self.land_speeds = [DEFAULT_SPEEDS[0]]
         self.water_speeds = [DEFAULT_SPEEDS[1]]
+        vehicle = self.get_vehicle(coords[-1][-1])
+        if vehicle == 0:
+            self.seen_land = True
+            self.seen_water = False
+        else:
+            self.seen_water = True
+            self.seen_land = False
 
-    def get_vehicle(self, coord: tuple) -> int:
-        '''Returns the mode of transport of the package at the coordinate,
+    def get_vehicle(self, coord):
+        '''(self, coord: tuple) -> int
+        Returns the mode of transport of the package at the coordinate,
         where 0 is for car, and 1 is for boat/ship/plane.
         '''
         x, y = to_pixel(coord[:2])
@@ -107,8 +123,9 @@ class package():
         else:
             return 0
 
-    def add_point(self, coord: tuple):
-        '''Adds a point to the current path,
+    def add_point(self, coord):
+        '''(self, coord: tuple)
+        Adds a point to the current path,
         and creates a new segment if needed.
         '''
         segment = self.coords[-1]
@@ -116,9 +133,15 @@ class package():
         if vehicle != self.get_vehicle(segment[-1]):
             self.coords.append([])
             if vehicle == 0:
-                self.land_speeds.append(0)
+                if self.seen_land:
+                    self.land_speeds.append(0)
+                else:
+                    self.seen_land = True
             else:
-                self.water_speeds.append(0)
+                if self.seen_water:
+                    self.water_speeds.append(0)
+                else:
+                    self.seen_water = True
         self.coords[-1].append(coord)
         if vehicle == 0:
             self.land_speeds[-1] = self.get_speed()
@@ -126,8 +149,9 @@ class package():
             self.water_speeds[-1] = self.get_speed()
         self.speeds = [average(self.land_speeds), average(self.water_speeds)]
 
-    def get_speed(self) -> float:
-        '''Returns the average speed of the package during the current segment
+    def get_speed(self):
+        '''(self) -> float
+        Returns the average speed of the package during the current segment
         in meters per second.
         '''
         segment = self.coords[-1]
@@ -143,8 +167,9 @@ class package():
             vehicle = self.get_vehicle(segment[-1])
             return DEFAULT_SPEEDS[vehicle]
 
-    def etr(self) -> float:
-        '''Returns the estimated time remaining for the package to arrive.'''
+    def etr(self):
+        '''(self) -> float
+        Returns the estimated time remaining for the package to arrive.'''
         segment = self.coords[-1]
         coord = segment[-1][:2]
         land_speed, water_speed = self.speeds
