@@ -30,7 +30,11 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
         <script>
-            var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+            var $SCRIPT_ROOT = {
+            {
+                request.script_root | tojson | safe
+            };
+            }
         </script>
     </head>
      <body>
@@ -100,14 +104,14 @@
         <script>
             $.material.init();
         </script>
-        <script src="{{ url_for('static', filename='js/map.js') }}"></script>
+        <!--<script src="{{ url_for('static', filename='js/map.js') }}"></script>
         <script>
             var map, marker;
             get_data();
-        </script>
+        </script>-->
         <script async defer
-          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAD8h_9XCxOg5V6S_rC1gQjFn5zMfT5_Kw&signed_in=true&callback=real_init"></script>
-        <script>
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAD8h_9XCxOg5V6S_rC1gQjFn5zMfT5_Kw&signed_in=true&callback=initMap"></script>
+        <!--<script>
             //get_data();
             setInterval(function() {
                 marker.setMap(null);
@@ -126,7 +130,7 @@
                 // update the polyline with the updated path
                 poly.setPath(path);
             }, 5000);
-        </script>
+        </script>-->
         <script src="{{ url_for('static', filename='js/main.js') }}"></script>
         <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
     </body>

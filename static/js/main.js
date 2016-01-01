@@ -10,6 +10,10 @@ var adminMapPackages = [];
 var packagePositions = {};
 var adminPackagePositions = {};
 
+var destinations = {};
+
+var colors = {};
+
 var adminMode = false;
 
 var mapLines = {};
@@ -26,6 +30,22 @@ function replaceAll(str, find, replace) {
     return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
 }
 
+// Gets a random hex color
+function getRandomColor() {
+    return '#' + ('00000' + (Math.random() * (1 << 24) | 0).toString(16)).slice(-6);
+}
+
+// Creates a path for the map pin of a given hex color
+function pinSymbol(color) {
+    return {
+        path: 'M 0,0 C -2,-20 -10,-22 -10,-30 A 10,10 0 1,1 10,-30 C 10,-22 2,-20 0,0 z M -2,-30 a 2,2 0 1,1 4,0 2,2 0 1,1 -4,0',
+        fillColor: color,
+        fillOpacity: 1,
+        strokeColor: '#000',
+        strokeWeight: 2,
+        scale: 1
+    };
+}
 
 // Uses DEFAULT_TR_CONTENTS and creates HTML for a new table row which
 function populateRow(uuid, name) {
@@ -70,10 +90,12 @@ function addRow(uuid, name, start, current, dest) {
 
 // Changes visibility of package on map (NYI). As of now, keeps track of packages.
 function changeMapDisplay(id, checked) {
-    console.log(id);
+    // console.log(id);
     if(!adminMode) {
         if(!checked) {
             packagesOnMap.splice($.inArray(id, packagesOnMap), 1);
+            mapLines[id].setMap(null);
+            mapMarkers[id].setMap(null);
         } else {
             packagesOnMap.push(id);
         }
@@ -81,10 +103,13 @@ function changeMapDisplay(id, checked) {
     } else {
         if(!checked) {
             adminMapPackages.splice($.inArray(id, adminMapPackages), 1);
+            mapLines[id].setMap(null);
+            mapMarkers[id].setMap(null);
         } else {
             adminMapPackages.push(id);
         }
     }
+    updateData();
 }
 
 // Removes row from table and monitored packages list
@@ -133,6 +158,8 @@ function addPackageWithData(uuid) {
             var start_coords = data.start_coords;
             var end_coords = data.end_coords;
             var curr_coords = data.curr_coords;
+            destinations[uuid] = end_coords;
+            colors[uuid] = getRandomColor();
             addRow(uuid, name, start_coords, curr_coords, end_coords)
         },
         data: {"dt":"initialData", "uuid":uuid},
@@ -181,10 +208,10 @@ function updateData() {
     } else {
         for(var i = 0; i < adminList.length; i++) {
             if(adminList[i] in adminPackagePositions) {
-                console.log("adminList[i] in adminPackagePositions. adminList[i]: " + adminList[i]);
+                // console.log("adminList[i] in adminPackagePositions. adminList[i]: " + adminList[i]);
                 $.getJSON($SCRIPT_ROOT + '/data', {"dt": "getNewPoints", "uuid": adminList[i], "time": adminPackagePositions[adminList[i]].slice(-1)[0]['time']}, updateCallback(i, true, true));
             } else {
-                console.log("adminList[i] not in adminPackagePositions. adminList[i]: " + adminList[i]);
+                // console.log("adminList[i] not in adminPackagePositions. adminList[i]: " + adminList[i]);
                 $.getJSON($SCRIPT_ROOT + '/data', {"dt": "getNewPoints", "uuid": adminList[i], "time": 0}, updateCallback(i, false, true));
             }
         }
@@ -200,12 +227,57 @@ function updateMap() {
                 mapLines[packagesOnMap[i]] = new google.maps.Polyline({
                     path: [],
                     geodesic: true,
-                    strokeColor: '#FF0000',
+                    strokeColor: colors[packagesOnMap[i]],
                     strokeOpacity: 1.0,
-                    strokeWeight: 2
+                    strokeWeight: 3,
+                    map: map
                 });
             }
-            mapLines[packagesOnMap[i]].get
+            if (!(packagesOnMap[i] in mapMarkers)) {
+                mapMarkers[packagesOnMap[i]] = new google.maps.Marker({
+                    position: new google.maps.LatLng(destinations[packagesOnMap[i]][0], destinations[packagesOnMap[i]][1]),
+                    map: map,
+                    animation: null,
+                    title: packagesOnMap[i] + "'s Marker",
+                    icon: pinSymbol(colors[packagesOnMap[i]])
+                });
+            }
+            var currentPath = mapLines[packagesOnMap[i]].getPath();
+            for (var j = currentPath.length - 1; j < packagePositions[packagesOnMap[i]].length; j++) {
+                currentPath.push(new google.maps.LatLng(packagePositions[packagesOnMap[i]][j].coords[0], packagePositions[packagesOnMap[i]][j].coords[1]));
+            }
+            mapLines[packagesOnMap[i]].setPath(currentPath);
+        }
+    } else {
+        for (var i = 0; i < adminMapPackages.length; i++) {
+            // console.log(adminMapPackages[i] in mapLines);
+            if (!(adminMapPackages[i] in mapLines)) {
+                // console.log(adminMapPackages[i] in mapLines);
+                mapLines[adminMapPackages[i]] = new google.maps.Polyline({
+                    path: [],
+                    geodesic: true,
+                    strokeColor: colors[adminMapPackages[i]],
+                    strokeOpacity: 1.0,
+                    strokeWeight: 3,
+                });
+            }
+            mapLines[adminMapPackages[i]].setMap(map);
+            if (!(adminMapPackages[i] in mapMarkers)) {
+                mapMarkers[adminMapPackages[i]] = new google.maps.Marker({
+                    position: new google.maps.LatLng(destinations[adminMapPackages[i]][0], destinations[adminMapPackages[i]][1]),
+                    map: map,
+                    animation: null,
+                    title: adminMapPackages[i] + "'s Marker",
+                    icon: pinSymbol(colors[adminMapPackages[i]])
+                });
+            }
+            var currentPath = mapLines[adminMapPackages[i]].getPath();
+            for (var j = currentPath.length; j < adminPackagePositions[adminMapPackages[i]].length; j++) {
+                // console.log("i: " + i + " j: " + j);
+                // console.log("adminPackagePositions[adminMapPackages[i]]: " + adminPackagePositions[adminMapPackages[i]]);
+                currentPath.push(new google.maps.LatLng(adminPackagePositions[adminMapPackages[i]][j].coords[0], adminPackagePositions[adminMapPackages[i]][j].coords[1]));
+            }
+            mapLines[adminMapPackages[i]].setPath(currentPath);
         }
     }
 }
@@ -215,7 +287,7 @@ function updateMap() {
 function adminLoad() {
     $.getJSON($SCRIPT_ROOT + '/data', {"dt": "adminUUIDList"}, function(data) {
         adminList = data.results;
-        for(i = 0; i < adminList.length; i++) {
+        for (var i = 0; i < adminList.length; i++) {
             addPackageWithData(adminList[i]);
         }
     });
@@ -225,7 +297,7 @@ function adminLoad() {
 function writePackages(packageList, mapList) {
     packagesMonitored = packageList;
     packagesOnMap = mapList;
-    for(i = 0; i < packageList.length; i++) {
+    for (var i = 0; i < packageList.length; i++) {
         addPackageWithData(packageList[i]);
     }
     for(i = 0; i < mapList.length; i++) {
@@ -262,9 +334,44 @@ function loadFunction() {
 
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 4,
+        zoom: 1,
         center: {lat: 0, lng: 0}
     });
+}
+
+function locationCallback(id, lat, lng) {
+    return function (results, status) {
+        if (status !== google.maps.GeocoderStatus.OK) {
+            if (status == "OVER_QUERY_LIMIT") {
+                // console.log(status);
+                setTimeout(function () {
+                    setLocationName(id, lat, lng);
+                }, 300);
+                return;
+            }
+            // alert(status + " " + results);
+            if ($(id).text() == "Loading...") {
+                $(id).text("No name for location.");
+            }
+        }
+        // This is checking to see if the Geoeode Status is OK before proceeding
+        if (status == google.maps.GeocoderStatus.OK) {
+            // console.log(results);
+            var address = (results[0].formatted_address);
+            //console.log("id: " + id);
+            $(id).text(address);
+            //console.log("address: " + address);
+        }
+    };
+}
+
+
+// Uses reverse geocoding to get human-readable name for coordinates
+function setLocationName(id, lat, lng) {
+    var latlng = new google.maps.LatLng(lat, lng);
+    // This is making the Geocode request
+    var geocoder = new google.maps.Geocoder();
+    geocoder.geocode({'latLng': latlng}, locationCallback(id, lat, lng));
 }
 
 
