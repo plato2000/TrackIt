@@ -104,33 +104,8 @@
         <script>
             $.material.init();
         </script>
-        <!--<script src="{{ url_for('static', filename='js/map.js') }}"></script>
-        <script>
-            var map, marker;
-            get_data();
-        </script>-->
         <script async defer
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAD8h_9XCxOg5V6S_rC1gQjFn5zMfT5_Kw&signed_in=true&callback=initMap"></script>
-        <!--<script>
-            //get_data();
-            setInterval(function() {
-                marker.setMap(null);
-                marker = new google.maps.Marker({
-                    position: currentPosition,
-                    map: map,
-                    animation: null,
-                    title: 'Hello World!'
-                });
-                update_map();
-                // get existing path
-                var path = poly.getPath();
-                // add new point
-                path.push(new google.maps.LatLng(currentPosition.lat, currentPosition.lng));
-                //console.log(path);
-                // update the polyline with the updated path
-                poly.setPath(path);
-            }, 5000);
-        </script>-->
         <script src="{{ url_for('static', filename='js/main.js') }}"></script>
         <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
     </body>
