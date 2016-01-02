@@ -17,7 +17,8 @@ var colors = {};
 var adminMode = false;
 
 var mapLines = {};
-var mapMarkers = {};
+var originMapMarkers = {};
+var destinationMapMarkers = {};
 
 
 // Helper function for replaceAll, which uses regex
@@ -33,18 +34,6 @@ function replaceAll(str, find, replace) {
 // Gets a random hex color
 function getRandomColor() {
     return '#' + ('00000' + (Math.random() * (1 << 24) | 0).toString(16)).slice(-6);
-}
-
-// Creates a path for the map pin of a given hex color
-function pinSymbol(color) {
-    return {
-        path: 'M 0,0 C -2,-20 -10,-22 -10,-30 A 10,10 0 1,1 10,-30 C 10,-22 2,-20 0,0 z M -2,-30 a 2,2 0 1,1 4,0 2,2 0 1,1 -4,0',
-        fillColor: color,
-        fillOpacity: 1,
-        strokeColor: '#000',
-        strokeWeight: 2,
-        scale: 1
-    };
 }
 
 // Uses DEFAULT_TR_CONTENTS and creates HTML for a new table row which
@@ -85,14 +74,14 @@ function addRow(uuid, name, start, current, dest) {
     $.material.checkbox();
 
     // Loads color picker
-    $("input#color" + uuid).minicolors({
+    $("#color" + uuid).minicolors({
         theme: 'bootstrap',
         changedelay: 100,
         change: function(value, opacity) {
             console.log("value: " + value);
             colors[uuid] = value;
-            if(uuid in mapMarkers) {
-                mapMarkers[uuid].setIcon(pinSymbol(value));
+            if(uuid in destinationMapMarkers) {
+                destinationMapMarkers[uuid].setIcon(pinSymbol(value));
             }
             if(uuid in mapLines) {
                 mapLines[uuid].setOptions({strokeColor: value});
@@ -104,37 +93,9 @@ function addRow(uuid, name, start, current, dest) {
 
     console.log("uuid: " + uuid);
     // Puts locations in after row is already in (asynchronous)
-    setLocationName("#start" + uuid, start[0], start[1]);
-    setLocationName("#current" + uuid, current[0], current[1]);
-    setLocationName("#dest" + uuid, dest[0], dest[1]);
-}
-
-// Changes visibility of package on map.
-function changeMapDisplay(id, checked) {
-    // console.log(id);
-    if(!adminMode) {
-        if(!checked) {
-            packagesOnMap.splice($.inArray(id, packagesOnMap), 1);
-            mapLines[id].setMap(null);
-            mapMarkers[id].setMap(null);
-            delete mapLines[id];
-            delete mapMarkers[id];
-        } else {
-            packagesOnMap.push(id);
-        }
-        $.cookie("packagesOnMap", JSON.stringify(packagesOnMap));
-    } else {
-        if(!checked) {
-            adminMapPackages.splice($.inArray(id, adminMapPackages), 1);
-            mapLines[id].setMap(null);
-            mapMarkers[id].setMap(null);
-            delete mapLines[id];
-            delete mapMarkers[id];
-        } else {
-            adminMapPackages.push(id);
-        }
-    }
-    updateData();
+    setLocationName("#start" + uuid, start);
+    setLocationName("#current" + uuid, current);
+    setLocationName("#dest" + uuid, dest);
 }
 
 // Removes row from table and monitored packages list
@@ -146,8 +107,9 @@ function removeRow(uuid) {
     $.cookie("packagesMonitored", JSON.stringify(packagesMonitored));
 }
 
+
 // Adds package to table, monitored list after it's entered into text entry box
-function addPackage() {
+function addPackageFromTextInput() {
     var uuid = $("#newPackage").val();
     $.ajax({
         type: 'GET',
@@ -158,7 +120,7 @@ function addPackage() {
             if(isValidUUID) {
                 $("#newPackage").val("");
                 packagesMonitored.push(uuid);
-                addPackageWithData(uuid);
+                addPackage(uuid);
             } else {
                 $("#invalidUUIDAlert").show();
                 $("#invalidUUIDAlert").fadeTo(2000, 500).slideUp(500, function(){
@@ -172,7 +134,7 @@ function addPackage() {
 }
 
 // Generic function to get package data from UUID and add to table
-function addPackageWithData(uuid) {
+function addPackage(uuid) {
     $.cookie("packagesMonitored", JSON.stringify(packagesMonitored));
     $.ajax({
         type: 'GET',
@@ -181,9 +143,9 @@ function addPackageWithData(uuid) {
         success: function(data) {
             var name = data.name;
             // TODO: Convert coords to google maps LatLng
-            var start_coords = data.start_coords;
-            var end_coords = data.end_coords;
-            var curr_coords = data.curr_coords;
+            var start_coords = new google.maps.LatLng(data.start_coords[0], data.start_coords[1]);
+            var end_coords = new google.maps.LatLng(data.end_coords[0], data.end_coords[1]);
+            var curr_coords = new google.maps.LatLng(data.curr_coords[0], data.curr_coords[1]);
             destinations[uuid] = end_coords;
             colors[uuid] = getRandomColor();
             addRow(uuid, name, start_coords, curr_coords, end_coords)
@@ -194,34 +156,52 @@ function addPackageWithData(uuid) {
     });
 }
 
+function convertUpdateResults(results) {
+    //console.log(results);
+    var newResults = [];
+    for(var i = 0; i < results.length; i++) {
+        newResults.push(
+            {
+                "coords": new google.maps.LatLng(results[i]['coords'][0], results[i]['coords'][1]),
+                "ele": results[i]['ele'],
+                "time": results[i]['time']
+            }
+        );
+        // console.log("results[i]['coords']: " + results[i]['coords']);
+    }
+    return newResults;
+}
+
+// Used to reset scope because this is called from an asynchronous function. Without this, it would always use the
+// last versions of index, concat, and admin because they change in a loop
 function updateCallback(index, concat, admin) {
     return function(data) {
         if(admin) {
             if(concat) {
-                adminPackagePositions[adminList[index]].concat(data.results);
+                adminPackagePositions[adminList[index]].concat(convertUpdateResults(data.results));
             } else {
-                adminPackagePositions[adminList[index]] = data.results;
+                adminPackagePositions[adminList[index]] = convertUpdateResults(data.results);
             }
             // console.log("i: " + index);
             // console.log("adminList[i]: " + adminList[index]);
             // console.log("adminPackagePositions[^]: " + adminPackagePositions[adminList[index]]);
-            setLocationName("#current" + adminList[index], adminPackagePositions[adminList[index]].slice(-1)[0]['lat'], adminPackagePositions[adminList[index]].slice(-1)[0]['lon']);
+            setLocationName("#current" + adminList[index], adminPackagePositions[adminList[index]].slice(-1)[0]['coords']);
         } else {
             if(concat) {
-                packagePositions[packagesMonitored[index]].concat(data.results);
+                packagePositions[packagesMonitored[index]].concat(convertUpdateResults(data.results));
             } else {
-                packagePositions[packagesMonitored[index]] = data.results;
+                packagePositions[packagesMonitored[index]] = convertUpdateResults(data.results);
             }
             // console.log("i: " + index);
             // console.log("packagesMonitored[i]: " + packagesMonitored[index]);
             // console.log("packagePositions[^]: " + packagePositions[packagesMonitored[index]]);
-            setLocationName("#current" + packagesMonitored[index], packagePositions[packagesMonitored[index]].slice(-1)[0]['lat'], packagePositions[packagesMonitored[index]].slice(-1)[0]['lon']);
+            setLocationName("#current" + packagesMonitored[index], packagePositions[packagesMonitored[index]].slice(-1)[0]['coords']);
 
         }
     };
 }
 
-// Gets new points
+// Gets new points from server
 function updateData() {
     if(!adminMode) {
         for(var i = 0; i < packagesMonitored.length; i++) {
@@ -245,87 +225,12 @@ function updateData() {
     updateMap();
 }
 
-// Updates the map view with new coordinates for the line and markers
-// TODO: Read as google maps LatLng after change above
-function updateMap() {
-    if (!adminMode) {
-        for (var i = 0; i < packagesOnMap.length; i++) {
-            if (!(packagesOnMap[i] in mapLines)) {
-                mapLines[packagesOnMap[i]] = new google.maps.Polyline({
-                    path: [],
-                    geodesic: true,
-                    strokeColor: colors[packagesOnMap[i]],
-                    strokeOpacity: 1.0,
-                    strokeWeight: 3,
-                    map: map
-                });
-            }
-            if (!(packagesOnMap[i] in mapMarkers)) {
-                mapMarkers[packagesOnMap[i]] = new google.maps.Marker({
-                    position: new google.maps.LatLng(destinations[packagesOnMap[i]][0], destinations[packagesOnMap[i]][1]),
-                    map: map,
-                    animation: null,
-                    title: packagesOnMap[i] + "'s Marker",
-                    icon: pinSymbol(colors[packagesOnMap[i]])
-                });
-            }
-            var currentPath = mapLines[packagesOnMap[i]].getPath();
-            for (var j = currentPath.length - 1; j < packagePositions[packagesOnMap[i]].length; j++) {
-                currentPath.push(new google.maps.LatLng(packagePositions[packagesOnMap[i]][j].coords[0], packagePositions[packagesOnMap[i]][j].coords[1]));
-            }
-            mapLines[packagesOnMap[i]].setPath(currentPath);
-        }
-    } else {
-        for (var i = 0; i < adminMapPackages.length; i++) {
-            // console.log(adminMapPackages[i] in mapLines);
-            if (!(adminMapPackages[i] in mapLines)) {
-                // console.log(adminMapPackages[i] in mapLines);
-                mapLines[adminMapPackages[i]] = new google.maps.Polyline({
-                    path: [],
-                    geodesic: true,
-                    strokeColor: colors[adminMapPackages[i]],
-                    strokeOpacity: 1.0,
-                    strokeWeight: 3,
-                });
-            }
-            mapLines[adminMapPackages[i]].setMap(map);
-            if (!(adminMapPackages[i] in mapMarkers)) {
-                mapMarkers[adminMapPackages[i]] = new google.maps.Marker({
-                    position: new google.maps.LatLng(destinations[adminMapPackages[i]][0], destinations[adminMapPackages[i]][1]),
-                    map: map,
-                    animation: null,
-                    title: adminMapPackages[i] + "'s Marker",
-                    icon: pinSymbol(colors[adminMapPackages[i]])
-                });
-            }
-            var currentPath = mapLines[adminMapPackages[i]].getPath();
-            for (var j = currentPath.length; j < adminPackagePositions[adminMapPackages[i]].length; j++) {
-                // console.log("i: " + i + " j: " + j);
-                // console.log("adminPackagePositions[adminMapPackages[i]]: " + adminPackagePositions[adminMapPackages[i]]);
-                currentPath.push(new google.maps.LatLng(adminPackagePositions[adminMapPackages[i]][j].coords[0], adminPackagePositions[adminMapPackages[i]][j].coords[1]));
-            }
-            mapLines[adminMapPackages[i]].setPath(currentPath);
-        }
-    }
-}
-
-
-// Adds everything on the admin list of UUIDS to the table
-function adminLoad() {
-    $.getJSON($SCRIPT_ROOT + '/data', {"dt": "adminUUIDList"}, function(data) {
-        adminList = data.results;
-        for (var i = 0; i < adminList.length; i++) {
-            addPackageWithData(adminList[i]);
-        }
-    });
-}
-
 // Adds a list of packages to the table and sets conditions according to arrays passed to it
 function writePackages(packageList, mapList) {
     packagesMonitored = packageList;
     packagesOnMap = mapList;
     for (var i = 0; i < packageList.length; i++) {
-        addPackageWithData(packageList[i]);
+        addPackage(packageList[i]);
     }
     for(i = 0; i < mapList.length; i++) {
         $("#checkbox" + mapList[i]).prop("checked", true);
@@ -348,17 +253,7 @@ function changeAdminMode() {
     }
 }
 
-// For page load and mode toggle - gets data from cookies and adds to list
-function loadFunction() {
-    if (typeof $.cookie('packagesOnMap') == 'undefined') {
-        $.cookie('packagesMonitored', '[]');
-    }
-    if (typeof $.cookie('packagesOnMap') == 'undefined') {
-        $.cookie('packagesOnMap', '[]');
-    }
-    writePackages(JSON.parse($.cookie("packagesMonitored")), JSON.parse($.cookie("packagesOnMap")));
-}
-
+// Creates the map in the "map" div after google maps api loads
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 2,
@@ -367,13 +262,148 @@ function initMap() {
     });
 }
 
-function locationCallback(id, lat, lng) {
+// Creates a path for the map pin of a given hex color
+function pinSymbol(color) {
+    return {
+        //path: 'M 0,0 C -2,-20 -10,-22 -10,-30 A 10,10 0 1,1 10,-30 C 10,-22 2,-20 0,0 z M -2,-30 a 2,2 0 1,1 4,0 2,2 0 1,1 -4,0',
+        path: 'M 0,0 C -2,-20 -10,-22 -10,-30 A 10,10 0 1,1 10,-30 C 10,-22 2,-20 0,0',
+        fillColor: color,
+        fillOpacity: 1,
+        strokeColor: '#000',
+        strokeWeight: 2,
+        scale: 1,
+        labelOrigin: new google.maps.Point(0, -30)
+    };
+}
+
+// Changes visibility of package on map.
+function changeMapDisplay(id, checked) {
+    // console.log(id);
+    if(!adminMode) {
+        if(!checked) {
+            packagesOnMap.splice($.inArray(id, packagesOnMap), 1);
+            mapLines[id].setMap(null);
+            destinationMapMarkers[id].setMap(null);
+            originMapMarkers[id].setMap(null);
+        } else {
+            packagesOnMap.push(id);
+        }
+        $.cookie("packagesOnMap", JSON.stringify(packagesOnMap));
+    } else {
+        if(!checked) {
+            adminMapPackages.splice($.inArray(id, adminMapPackages), 1);
+            mapLines[id].setMap(null);
+            destinationMapMarkers[id].setMap(null);
+            originMapMarkers[id].setMap(null);
+        } else {
+            adminMapPackages.push(id);
+        }
+    }
+    updateData();
+}
+
+// Updates the map view with new coordinates for the line and markers
+// TODO: Read as google maps LatLng after change above
+function updateMap() {
+    if (!adminMode) {
+        for (var i = 0; i < packagesOnMap.length; i++) {
+            if (!(packagesOnMap[i] in mapLines)) {
+                mapLines[packagesOnMap[i]] = new google.maps.Polyline({
+                    path: [],
+                    geodesic: true,
+                    strokeColor: colors[packagesOnMap[i]],
+                    strokeOpacity: 1.0,
+                    strokeWeight: 3
+                });
+            }
+            mapLines[packagesOnMap[i]].setMap(map);
+            if (!(packagesOnMap[i] in destinationMapMarkers)) {
+                destinationMapMarkers[packagesOnMap[i]] = new google.maps.Marker({
+                    position: destinations[packagesOnMap[i]],
+                    map: map,
+                    animation: null,
+                    title: packagesOnMap[i] + "'s Destination Marker",
+                    icon: pinSymbol(colors[packagesOnMap[i]]),
+                    label: {
+                        text: 'B'
+                    }
+                });
+            }
+            if (packagePositions[packagesOnMap[i]] != undefined && !(packagesOnMap[i] in originMapMarkers)) {
+                originMapMarkers[packagesOnMap[i]] = new google.maps.Marker({
+                    position: packagePositions[packagesOnMap[i]][0]['coords'],
+                    map: map,
+                    animation: null,
+                    title: packagesOnMap[i] + "'s Origin Marker",
+                    icon: pinSymbol(colors[packagesOnMap[i]]),
+                    label: {
+                        text: 'A'
+                    }
+                });
+            }
+            var currentPath = mapLines[packagesOnMap[i]].getPath();
+            for (var j = currentPath.length; j < packagePositions[packagesOnMap[i]].length; j++) {
+                currentPath.push(packagePositions[packagesOnMap[i]][j]['coords']);
+            }
+            mapLines[packagesOnMap[i]].setPath(currentPath);
+        }
+    } else {
+        for (var i = 0; i < adminMapPackages.length; i++) {
+            // console.log(adminMapPackages[i] in mapLines);
+            if (!(adminMapPackages[i] in mapLines)) {
+                // console.log(adminMapPackages[i] in mapLines);
+                mapLines[adminMapPackages[i]] = new google.maps.Polyline({
+                    path: [],
+                    geodesic: true,
+                    strokeColor: colors[adminMapPackages[i]],
+                    strokeOpacity: 1.0,
+                    strokeWeight: 3
+                });
+            }
+            mapLines[adminMapPackages[i]].setMap(map);
+            if (!(adminMapPackages[i] in destinationMapMarkers)) {
+                destinationMapMarkers[adminMapPackages[i]] = new google.maps.Marker({
+                    position: destinations[adminMapPackages[i]],
+                    map: map,
+                    animation: null,
+                    title: adminMapPackages[i] + "'s Marker",
+                    icon: pinSymbol(colors[adminMapPackages[i]]),
+                    label: {
+                        text: 'B'
+                    }
+                });
+            }
+            if (adminPackagePositions[adminMapPackages[i]] != undefined && !(adminMapPackages[i] in originMapMarkers)) {
+                originMapMarkers[adminMapPackages[i]] = new google.maps.Marker({
+                    position: adminPackagePositions[adminMapPackages[i]][0]['coords'],
+                    map: map,
+                    animation: null,
+                    title: packagesOnMap[i] + "'s Origin Marker",
+                    icon: pinSymbol(colors[adminMapPackages[i]]),
+                    label: {
+                        text: 'A'
+                    }
+                });
+            }
+            var currentPath = mapLines[adminMapPackages[i]].getPath();
+            for (var j = currentPath.length; j < adminPackagePositions[adminMapPackages[i]].length; j++) {
+                // console.log("i: " + i + " j: " + j);
+                // console.log("adminPackagePositions[adminMapPackages[i]]: " + adminPackagePositions[adminMapPackages[i]]);
+                currentPath.push(adminPackagePositions[adminMapPackages[i]][j]['coords']);
+            }
+            mapLines[adminMapPackages[i]].setPath(currentPath);
+        }
+    }
+}
+
+// Callback function for setLocationName
+function locationCallback(id, latlng) {
     return function (results, status) {
         if (status !== google.maps.GeocoderStatus.OK) {
             if (status == "OVER_QUERY_LIMIT") {
                 // console.log(status);
                 setTimeout(function () {
-                    setLocationName(id, lat, lng);
+                    setLocationName(id, latlng);
                 }, 300);
                 return;
             }
@@ -393,16 +423,36 @@ function locationCallback(id, lat, lng) {
     };
 }
 
-
 // Uses reverse geocoding to get human-readable name for coordinates
-function setLocationName(id, lat, lng) {
-    var latlng = new google.maps.LatLng(lat, lng);
+function setLocationName(id, latlng) {
+    // console.log("lat: " + latlng.lat() + " lng: " + latlng.lng());
     // This is making the Geocode request
     var geocoder = new google.maps.Geocoder();
-    geocoder.geocode({'latLng': latlng}, locationCallback(id, lat, lng));
+    geocoder.geocode({'latLng': latlng}, locationCallback(id, latlng));
 }
 
+// Adds everything on the admin list of UUIDS to the table
+function adminLoad() {
+    $.getJSON($SCRIPT_ROOT + '/data', {"dt": "adminUUIDList"}, function(data) {
+        adminList = data.results;
+        for (var i = 0; i < adminList.length; i++) {
+            addPackage(adminList[i]);
+        }
+    });
+}
 
+// For page load and mode toggle - gets data from cookies and adds to list
+function loadFunction() {
+    if (typeof $.cookie('packagesOnMap') == 'undefined') {
+        $.cookie('packagesMonitored', '[]');
+    }
+    if (typeof $.cookie('packagesOnMap') == 'undefined') {
+        $.cookie('packagesOnMap', '[]');
+    }
+    writePackages(JSON.parse($.cookie("packagesMonitored")), JSON.parse($.cookie("packagesOnMap")));
+}
+
+// Starts everything after page is fully loaded
 $(document).ready(function() {
     loadFunction();
     setInterval(updateData, 10000);
