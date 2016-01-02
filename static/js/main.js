@@ -78,10 +78,13 @@ function addRow(uuid, name, start, current, dest) {
         theme: 'bootstrap',
         changedelay: 100,
         change: function(value, opacity) {
-            console.log("value: " + value);
+            // console.log("value: " + value);
             colors[uuid] = value;
             if(uuid in destinationMapMarkers) {
                 destinationMapMarkers[uuid].setIcon(pinSymbol(value));
+            }
+            if(uuid in originMapMarkers) {
+                originMapMarkers[uuid].setIcon(pinSymbol(value));
             }
             if(uuid in mapLines) {
                 mapLines[uuid].setOptions({strokeColor: value});
@@ -185,7 +188,10 @@ function updateCallback(index, concat, admin) {
             // console.log("i: " + index);
             // console.log("adminList[i]: " + adminList[index]);
             // console.log("adminPackagePositions[^]: " + adminPackagePositions[adminList[index]]);
-            setLocationName("#current" + adminList[index], adminPackagePositions[adminList[index]].slice(-1)[0]['coords']);
+            console.log('data.results.length: ' + data.results.length);
+            if(data.results.length > 0) {
+                setLocationName("#current" + adminList[index], adminPackagePositions[adminList[index]].slice(-1)[0]['coords']);
+            }
         } else {
             if(concat) {
                 packagePositions[packagesMonitored[index]].concat(convertUpdateResults(data.results));
@@ -195,8 +201,9 @@ function updateCallback(index, concat, admin) {
             // console.log("i: " + index);
             // console.log("packagesMonitored[i]: " + packagesMonitored[index]);
             // console.log("packagePositions[^]: " + packagePositions[packagesMonitored[index]]);
-            setLocationName("#current" + packagesMonitored[index], packagePositions[packagesMonitored[index]].slice(-1)[0]['coords']);
-
+            if(data.results.length > 0) {
+                setLocationName("#current" + packagesMonitored[index], packagePositions[packagesMonitored[index]].slice(-1)[0]['coords']);
+            }
         }
     };
 }
@@ -400,19 +407,19 @@ function updateMap() {
 function locationCallback(id, latlng) {
     return function (results, status) {
         if (status !== google.maps.GeocoderStatus.OK) {
+            // console.log("status: " + status + " id: " + id);
             if (status == "OVER_QUERY_LIMIT") {
                 // console.log(status);
                 setTimeout(function () {
                     setLocationName(id, latlng);
-                }, 300);
+                }, 5000);
                 return;
             }
-            // alert(status + " " + results);
             if ($(id).text() == "Loading...") {
                 $(id).text("No name for location.");
             }
         }
-        // This is checking to see if the Geoeode Status is OK before proceeding
+        // This is checking to see if the Geocoder Status is OK before proceeding
         if (status == google.maps.GeocoderStatus.OK) {
             // console.log(results);
             var address = (results[0].formatted_address);

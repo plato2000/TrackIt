@@ -146,8 +146,10 @@ def send_data():
     elif a == 'getNewPoints':
         prev_time = request.args.get('time', 0, type=int)
         count = 0
-        while package_data[uuid][count]['time'] <= prev_time and count < len(package_data[uuid]) - 1:
+        while package_data[uuid][count]['time'] <= prev_time:
             count += 1
+            if count >= len(package_data[uuid]):
+                return jsonify(results=[])
         return jsonify(results=package_data[uuid][count:])
     elif a == 'adminUUIDList':
         return jsonify(results=package_data.keys())
