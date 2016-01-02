@@ -1,5 +1,5 @@
-var DEFAULT_TR_CONTENTS = '<tr class="listRow" id="row{UUID}"><td><div class="checkbox"><label><input type="checkbox" name="{UUID}" onchange="changeMapDisplay(this.name, this.checked)" id="checkbox{UUID}"></label></div></td><td class="uuid" id="uuid{UUID}">{UUID}</td><td class="name" id="name{UUID}">{NAME}</td><td class="location" id="location{UUID}"><p>Starting location: <span id="start{UUID}">{STARTLOCATION}</span></p><p>Current location: <span id="current{UUID}">{CURRENTLOCATION}</span></p><p>Destination: <span id="dest{UUID}">{DESTLOCATION}</span></p></td><td><a href="javascript:removeRow(\'{UUID}\')" class="btn btn-raised btn-danger">Stop Tracking</a></td></tr>';
-var ADMIN_TR_CONTENTS = '<tr class="listRow" id="row{UUID}"><td><div class="checkbox"><label><input type="checkbox" name="{UUID}" onchange="changeMapDisplay(this.name, this.checked)" id="checkbox{UUID}"></label></div></td><td class="uuid" id="uuid{UUID}">{UUID}</td><td class="name" id="name{UUID}">{NAME}</td><td class="location" id="location{UUID}"><p>Starting location: <span id="start{UUID}">{STARTLOCATION}</span></p><p>Current location: <span id="current{UUID}">{CURRENTLOCATION}</span></p><p>Destination: <span id="dest{UUID}">{DESTLOCATION}</span></p></td><td></td></tr>';
+var DEFAULT_TR_CONTENTS =   '<tr class="listRow" id="row{UUID}"><td><div class="checkbox"><label><input type="checkbox" name="{UUID}" onchange="changeMapDisplay(this.name, this.checked)" id="checkbox{UUID}"></label></div><br /><div class="color-container"><input type="hidden" id="color{UUID}" value="{COLOR}"></div></td><td class="uuid" id="uuid{UUID}">{UUID}</td><td class="name" id="name{UUID}">{NAME}</td><td class="location" id="location{UUID}"><p>Starting location: <span id="start{UUID}">{STARTLOCATION}</span></p><p>Current location: <span id="current{UUID}">{CURRENTLOCATION}</span></p><p>Destination: <span id="dest{UUID}">{DESTLOCATION}</span></p></td><td><a href="javascript:removeRow(\'{UUID}\')" class="btn btn-raised btn-danger">Stop Tracking</a></td></tr>';
+var ADMIN_TR_CONTENTS =     '<tr class="listRow" id="row{UUID}"><td><div class="checkbox"><label><input type="checkbox" name="{UUID}" onchange="changeMapDisplay(this.name, this.checked)" id="checkbox{UUID}"></label></div><br /><div class="color-container"><input type="hidden" id="color{UUID}" value="{COLOR}"></div></td><td class="uuid" id="uuid{UUID}">{UUID}</td><td class="name" id="name{UUID}">{NAME}</td><td class="location" id="location{UUID}"><p>Starting location: <span id="start{UUID}">{STARTLOCATION}</span></p><p>Current location: <span id="current{UUID}">{CURRENTLOCATION}</span></p><p>Destination: <span id="dest{UUID}">{DESTLOCATION}</span></p></td><td></td></tr>';
 
 var packagesMonitored = [];
 var packagesOnMap = [];
@@ -56,6 +56,7 @@ function populateRow(uuid, name) {
     newRow = replaceAll(newRow, '{CURRENTLOCATION}', "Loading...");
     newRow = replaceAll(newRow, '{STARTLOCATION}', "Loading...");
     newRow = replaceAll(newRow, '{DESTLOCATION}', "Loading...");
+    newRow = replaceAll(newRow, '{COLOR}', colors[uuid]);
     return newRow;
 }
 
@@ -67,6 +68,7 @@ function populateAdminRow(uuid, name) {
     newRow = replaceAll(newRow, '{CURRENTLOCATION}', "Loading...");
     newRow = replaceAll(newRow, '{STARTLOCATION}', "Loading...");
     newRow = replaceAll(newRow, '{DESTLOCATION}', "Loading...");
+    newRow = replaceAll(newRow, '{COLOR}', colors[uuid]);
     return newRow;
 }
 
@@ -81,14 +83,33 @@ function addRow(uuid, name, start, current, dest) {
     $('#packageTable > tbody:last-child').append(rowToAdd);
     // Material design JS loads proper styling for checkboxes (has to be loaded every time)
     $.material.checkbox();
+
+    // Loads color picker
+    $("input#color" + uuid).minicolors({
+        theme: 'bootstrap',
+        changedelay: 100,
+        change: function(value, opacity) {
+            console.log("value: " + value);
+            colors[uuid] = value;
+            if(uuid in mapMarkers) {
+                mapMarkers[uuid].setIcon(pinSymbol(value));
+            }
+            if(uuid in mapLines) {
+                mapLines[uuid].setOptions({strokeColor: value});
+            }
+            map.setZoom(map.getZoom());
+        }
+
+    });
+
     console.log("uuid: " + uuid);
-    // Puts locations in after row is already in (later will be asyncronous)
+    // Puts locations in after row is already in (asynchronous)
     setLocationName("#start" + uuid, start[0], start[1]);
     setLocationName("#current" + uuid, current[0], current[1]);
     setLocationName("#dest" + uuid, dest[0], dest[1]);
 }
 
-// Changes visibility of package on map (NYI). As of now, keeps track of packages.
+// Changes visibility of package on map.
 function changeMapDisplay(id, checked) {
     // console.log(id);
     if(!adminMode) {
@@ -96,6 +117,8 @@ function changeMapDisplay(id, checked) {
             packagesOnMap.splice($.inArray(id, packagesOnMap), 1);
             mapLines[id].setMap(null);
             mapMarkers[id].setMap(null);
+            delete mapLines[id];
+            delete mapMarkers[id];
         } else {
             packagesOnMap.push(id);
         }
@@ -105,6 +128,8 @@ function changeMapDisplay(id, checked) {
             adminMapPackages.splice($.inArray(id, adminMapPackages), 1);
             mapLines[id].setMap(null);
             mapMarkers[id].setMap(null);
+            delete mapLines[id];
+            delete mapMarkers[id];
         } else {
             adminMapPackages.push(id);
         }
@@ -155,12 +180,14 @@ function addPackageWithData(uuid) {
         dataType: 'json',
         success: function(data) {
             var name = data.name;
+            // TODO: Convert coords to google maps LatLng
             var start_coords = data.start_coords;
             var end_coords = data.end_coords;
             var curr_coords = data.curr_coords;
             destinations[uuid] = end_coords;
             colors[uuid] = getRandomColor();
             addRow(uuid, name, start_coords, curr_coords, end_coords)
+            updateData();
         },
         data: {"dt":"initialData", "uuid":uuid},
         async: true
@@ -201,7 +228,6 @@ function updateData() {
             if(packagesMonitored[i] in packagePositions) {
                 $.getJSON($SCRIPT_ROOT + '/data', {"dt": "getNewPoints", "uuid": packagesMonitored[i], "time": packagePositions[packagesMonitored[i]].slice(-1)[0]['time']}, updateCallback(i, true, false));
             } else {
-                // TODO: Create array there
                 $.getJSON($SCRIPT_ROOT + '/data', {"dt": "getNewPoints", "uuid": packagesMonitored[i], "time": 0}, updateCallback(i, false, false));
             }
         }
@@ -219,7 +245,8 @@ function updateData() {
     updateMap();
 }
 
-// Updates the map view
+// Updates the map view with new coordinates for the line and markers
+// TODO: Read as google maps LatLng after change above
 function updateMap() {
     if (!adminMode) {
         for (var i = 0; i < packagesOnMap.length; i++) {
@@ -334,8 +361,9 @@ function loadFunction() {
 
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 1,
-        center: {lat: 0, lng: 0}
+        zoom: 2,
+        center: {lat: 0, lng: 0},
+        minZoom: 2
     });
 }
 

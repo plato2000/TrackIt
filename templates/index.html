@@ -29,6 +29,10 @@
         <link href="{{ url_for('static', filename='css/bootstrap-material-design.min.css') }}" rel="stylesheet">
         <link href="{{ url_for('static', filename='css/ripples.min.css') }}" rel="stylesheet">
 
+        <!-- Color picker -->
+        <link href="{{ url_for('static', filename='css/jquery.minicolors.css') }}" rel="stylesheet">
+
+
         <!-- CSS specific to this website -->
         <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -39,14 +43,10 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
         <script>
-            var $SCRIPT_ROOT = {
-            {
-                request.script_root | tojson | safe
-            };
-            }
+            var $SCRIPT_ROOT = {{ request.script_root | tojson | safe }};
         </script>
     </head>
-     <body>
+    <body>
         <div class="container">
             <!-- Navbar -->
             <nav class="navbar navbar-default">
@@ -113,9 +113,9 @@
         <script>
             $.material.init();
         </script>
-        <script async defer
-                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAD8h_9XCxOg5V6S_rC1gQjFn5zMfT5_Kw&signed_in=true&callback=initMap"></script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAD8h_9XCxOg5V6S_rC1gQjFn5zMfT5_Kw&signed_in=true&callback=initMap"></script>
         <script src="{{ url_for('static', filename='js/main.js') }}"></script>
         <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/jquery.minicolors.min.js') }}"></script>
     </body>
  </html>

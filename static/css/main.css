@@ -6,3 +6,8 @@
 .jumbotron {
 	height: 400px;
 }
+
+.color-container {
+	height: 20px;
+	width: 20px;
+}
