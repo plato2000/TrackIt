@@ -1,8 +1,8 @@
-import math
+import json
 import time
+
 import geopy
 from geopy import distance
-import json
 
 nominatim = geopy.Nominatim()
 DEFAULT_SPEEDS = (27, 245)  # m/s
@@ -12,6 +12,9 @@ file = open("map.json", "r")
 array = json.loads(file.read())
 file.close()
 
+
+def roundf(thing):
+    return int(round(thing))
 
 def over_land(pixel):
     '''(pixel: tuple) -> bool
@@ -36,7 +39,7 @@ def generate_line(pixel1, pixel2):
             return slope * (x - x1) + y1
 
         for x in xrange(x1, x2 + inc, inc):
-            points.append((x, round(y(x))))
+            points.append((x, roundf(y(x))))
     else:
         if y2 > y1:
             inc = 1
@@ -48,7 +51,7 @@ def generate_line(pixel1, pixel2):
             return slope * (y - y1) + x1
 
         for y in xrange(y1, y2 + inc, inc):
-            points.append((round(x(y)), y))
+            points.append((roundf(x(y)), y))
     return points
 
 
@@ -57,7 +60,7 @@ def to_pixel(coord):
     Converts from latitude/longitude to pixels on a map projection.'''
     x = MAP_WIDTH / 360 * coord[1] + MAP_WIDTH / 2
     y = -MAP_HEIGHT / 180 * coord[0] + MAP_HEIGHT / 2
-    return (round(x), round(y))
+    return (roundf(x), roundf(y))
 
 
 def get_address(coord):
