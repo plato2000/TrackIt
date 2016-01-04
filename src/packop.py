@@ -4,11 +4,14 @@ import time
 import geopy
 from geopy import distance
 
+
+PATH_TO_MAP = "src/map.json"
+
 nominatim = geopy.Nominatim()
 DEFAULT_SPEEDS = (27, 245)  # m/s
 RADIUS = 6.371e6            # m
 MAP_WIDTH, MAP_HEIGHT = 10800, 5400
-file = open("map.json", "r")
+file = open(PATH_TO_MAP, "r")
 array = json.loads(file.read())
 file.close()
 

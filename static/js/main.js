@@ -209,7 +209,7 @@ function updateCallback(index, concat, admin) {
 }
 
 // Gets new points from server
-function updateData() {
+function updateData(uuid) {
     if(!adminMode) {
         for(var i = 0; i < packagesMonitored.length; i++) {
             if(packagesMonitored[i] in packagePositions) {
