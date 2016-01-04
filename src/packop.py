@@ -94,19 +94,19 @@ def average(elements):
 
 class package():
     '''Class containing the path of a single package.'''
-    def __init__(self, coords, destination):
+    def __init__(self, coord, destination):
         '''(self, coords: list, destination: tuple)
-        Initializes the package with a list of past coordinates
-        (including start) and the destination point.
+        Initializes the package with the first coordinate
+        and the destination point.
         Coordinates are tuples of the format:
         (latitude, longitude, elevation, time).
         '''
-        self.coords = coords
+        self.coords = [[coord]]
         self.destination = destination
         self.speeds = list(DEFAULT_SPEEDS)
         self.land_speeds = [DEFAULT_SPEEDS[0]]
         self.water_speeds = [DEFAULT_SPEEDS[1]]
-        vehicle = self.get_vehicle(coords[-1][-1])
+        vehicle = self.get_vehicle(coord)
         if vehicle == 0:
             self.seen_land = True
             self.seen_water = False

@@ -1,15 +1,12 @@
 import json
 import time
+from src import packop
 
 from dateutil.parser import *
 from flask import Flask, jsonify, render_template, request
 
 
 # from src import packop
-
-
-def distance(l1, l2):
-    return ((l1[0]-l2[0])**2+(l1[1]-l2[1])**2)**.5
 
 
 app = Flask(__name__)
@@ -22,7 +19,7 @@ end = [51.5072, 0.1275]         # london
 initial_data = {}
 package_data = {}
 delivered_packages = []
-
+packages = {}
 
 def parse_time(time_str):
     """Does dateutil.parser.parse on the string, then converts to a \
@@ -53,6 +50,7 @@ def track_new_package():
     # print "name:", name, "dest_lat:", dest_lat,
     #                       "dest_lng:", dest_lng, "uuid:", uuid
     out = {'ackUUID': '['+uuid+']'}
+    packages[uuid] = None
     return str(out)
     # return "success"
 
@@ -86,6 +84,12 @@ def get_package_update(uuid):
         # print "uuid:", uuid, "lat:", lat, "long:", lon,
         #                "ele:", elevation, "time:", time
         # print package_data
+        coord = (lat, lon, elevation, parse_time(time))
+        if packages[uuid] == None:
+            packages[uuid] = packop.packages(
+                coord, initial_data[uuid]["end_coords"])
+        else:
+            packages[uuid].add_point(coord)
     return ''
 
 
@@ -128,6 +132,8 @@ def send_data():
         return jsonify(results=package_data[uuid][count:])
     elif a == 'adminUUIDList':
         return jsonify(results=package_data.keys())
+    elif a == 'getETR':
+        return jsonify(results=packages[uuid].etr())
     return jsonify(results="")
 
 
