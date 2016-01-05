@@ -1,11 +1,12 @@
-#Managing database
+# Managing database
 import MySQLdb
 
-#Opens database connection - Host and password may change later
-db = MySQLdb.connect("localhost","admin","password1","IDT")
+# Opens database connection - Host and password may change later
+db = MySQLdb.connect("localhost", "admin", "password1", "IDT")
 
-#Opens database connection
+# Opens database connection
 cursor = db.cursor()
+
 
 def insert_location(uuid, pkg_name, latitude, longitude,
                     start_lat, start_long, end_lat, end_long):
@@ -13,8 +14,8 @@ def insert_location(uuid, pkg_name, latitude, longitude,
     command = "INSERT INTO location(UUID, pkgName, latitude, longitude, \
                StartLat, StartLong, EndLat, EndLong) \
                VALUES ('%s', '%s', '%d', '%d', '%d', '%d', '%d', '%d')" % \
-               (uuid, pkg_name, latitude, longitude,
-                start_lat, start_long, end_lat, end_long)
+              (uuid, pkg_name, latitude, longitude,
+               start_lat, start_long, end_lat, end_long)
     try:
         cursor.execute(command)
         db.commit()
@@ -25,12 +26,12 @@ def insert_location(uuid, pkg_name, latitude, longitude,
 def get_location(pkg_name):
     '''Gets a package's raw data from database.'''
     command = "SELECT * FROM location WHERE pkgName = 'Apkg'"
-    try:    
+    try:
         cursor.execute(command)
-        #Gets all previous locations of (pkg_name)
+        # Gets all previous locations of (pkg_name)
         results = cursor.fetchall()
-        #Gets most recent location of (pkg_name)
-        current = results[len(results)-1]
+        # Gets most recent location of (pkg_name)
+        current = results[len(results) - 1]
         print(current)
         coordinates = (current[2], current[3])
         start_location = (current[4], current[5])
@@ -40,5 +41,6 @@ def get_location(pkg_name):
     except:
         db.rollback()
 
-#Close database connection
+
+# Close database connection
 db.close()
