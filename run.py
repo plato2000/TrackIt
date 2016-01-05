@@ -6,9 +6,6 @@ from dateutil.parser import *
 from flask import Flask, jsonify, render_template, request
 
 
-# from src import packop
-
-
 app = Flask(__name__)
 
 # TESTING VARS
