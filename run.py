@@ -84,7 +84,7 @@ def get_package_update(uuid):
         # print "uuid:", uuid, "lat:", lat, "long:", lon,
         #                "ele:", elevation, "time:", time
         # print package_data
-        coord = (lat, lon, elevation, parse_time(time))
+        coord = (float(lat), float(lon), float(elevation), parse_time(time))
         if packages[uuid] == None:
             packages[uuid] = packop.package(
                 coord, initial_data[uuid]["end_coords"])
