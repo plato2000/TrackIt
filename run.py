@@ -53,6 +53,7 @@ def get_package_update(uuid):
     """Receives POST data about package's current info, and adds it to the \
     dictionary of positions."""
     data = json.loads(request.get_data().replace("[", "{").replace("]", "}"))
+    # print data
     if "delivered" in data:
         delivered_packages.append(uuid)
         # print "uuid:", uuid, "delivered:", data['delivered']
