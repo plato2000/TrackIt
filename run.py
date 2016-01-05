@@ -12,10 +12,6 @@ from flask import Flask, jsonify, render_template, request
 app = Flask(__name__)
 
 # TESTING VARS
-begin = [40.7127, -74.0059]     # nyc
-end = [51.5072, 0.1275]         # london
-# end = [-33.8650, 151.2094]    # sydney
-# end = [35.6833, 139.6833]     # tokyo
 initial_data = {}
 package_data = {}
 delivered_packages = []
