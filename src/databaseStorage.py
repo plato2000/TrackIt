@@ -1,12 +1,12 @@
-#Managing database
+# Managing database
 import MySQLdb
 import time
 from datetime import datetime
 
-#Opens database connection - Host and password may change later
+# Opens database connection - Host and password may change later
 db = MySQLdb.connect("localhost","admin","password1","IDT")
 
-#Opens database connection
+# Opens database connection
 cursor = db.cursor()
 
 def create_table(uuid):
@@ -41,21 +41,17 @@ def insert_location(uuid, latitude, longitude, elevation, time):
         db.rollback()
 
 
-def get_location(uuid):
+def get_locations(uuid):
     '''Gets a package's raw data from database.'''
     command = "SELECT * FROM " + uuid
     try:    
         cursor.execute(command)
-        #Gets all previous locations of (pkg_name)
+        # Gets all previous locations of (pkg_name)
         results = cursor.fetchall()
-        #Gets most recent location of (pkg_name)
-        current = results[len(results)-1]
-        latitude = current[0]
-        longitude = current[1]
-        elevation = current[2]
-        time = current[3]
+        return results
     except:
         db.rollback()
 
-#Close database connection
-db.close()
+def close_database():
+    # Close database connection
+    db.close()
