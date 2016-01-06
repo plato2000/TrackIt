@@ -1,21 +1,39 @@
-# Managing database
+#Managing database
 import MySQLdb
+import time
+from datetime import datetime
 
-# Opens database connection - Host and password may change later
-db = MySQLdb.connect("localhost", "admin", "password1", "IDT")
+#Opens database connection - Host and password may change later
+db = MySQLdb.connect("localhost","admin","password1","IDT")
 
-# Opens database connection
+#Opens database connection
 cursor = db.cursor()
 
+def create_table(uuid):
+    '''Creates a new table for a new package.'''
+    command = "CREATE TABLE " + uuid + " (Latitude double(7,4), \
+                                         Longitude double(7,4), \
+                                         Elevation INT(6), \
+                                         Time INT(10) PRIMARY KEY)"
+    try:
+        cursor.execute(command)
+        db.commit()
+        print("ok")
+    except:
+        db.rollback()
 
-def insert_location(uuid, pkg_name, latitude, longitude,
-                    start_lat, start_long, end_lat, end_long):
-    '''Inserts a package's data into database - happens every 10 seconds.'''
-    command = "INSERT INTO location(UUID, pkgName, latitude, longitude, \
-               StartLat, StartLong, EndLat, EndLong) \
-               VALUES ('%s', '%s', '%d', '%d', '%d', '%d', '%d', '%d')" % \
-              (uuid, pkg_name, latitude, longitude,
-               start_lat, start_long, end_lat, end_long)
+
+
+def insert_location(uuid, latitude, longitude, elevation, time):
+    '''Inserts a package's data into database - happens every 10 seconds.
+       Not finished.'''
+    now = datetime.now()
+    now_tuple = now.timetuple()
+    #Converts datetime into seconds
+    seconds = int(time.mktime(now_tuple))
+    command = "INSERT INTO " + uuid + " (Latitude, Longitude, Elevation, Time \
+               VALUES ('%d', '%d', '%d', '%d')" % \
+               (latitude, longitude, elevation, seconds)
     try:
         cursor.execute(command)
         db.commit()
@@ -23,24 +41,21 @@ def insert_location(uuid, pkg_name, latitude, longitude,
         db.rollback()
 
 
-def get_location(pkg_name):
+def get_location(uuid):
     '''Gets a package's raw data from database.'''
-    command = "SELECT * FROM location WHERE pkgName = 'Apkg'"
-    try:
+    command = "SELECT * FROM " + uuid
+    try:    
         cursor.execute(command)
-        # Gets all previous locations of (pkg_name)
+        #Gets all previous locations of (pkg_name)
         results = cursor.fetchall()
-        # Gets most recent location of (pkg_name)
-        current = results[len(results) - 1]
-        print(current)
-        coordinates = (current[2], current[3])
-        start_location = (current[4], current[5])
-        end_location = (current[6], current[7])
-        uuid = current[0]
-        pkgName = current[1]
+        #Gets most recent location of (pkg_name)
+        current = results[len(results)-1]
+        latitude = current[0]
+        longitude = current[1]
+        elevation = current[2]
+        time = current[3]
     except:
         db.rollback()
 
-
-# Close database connection
+#Close database connection
 db.close()
