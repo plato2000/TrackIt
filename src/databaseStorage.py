@@ -9,8 +9,9 @@ db = MySQLdb.connect("localhost","admin","password1","IDT")
 # Opens database connection
 cursor = db.cursor()
 
+
 def create_table(uuid):
-    '''Creates a new table for a new package.'''
+    """Creates a new table for a new package."""
     command = "CREATE TABLE " + uuid + " (Latitude double(7,4), \
                                          Longitude double(7,4), \
                                          Elevation INT(6), \
@@ -23,10 +24,9 @@ def create_table(uuid):
         db.rollback()
 
 
-
 def insert_location(uuid, latitude, longitude, elevation, time):
-    '''Inserts a package's data into database - happens every 10 seconds.
-       Not finished.'''
+    """Inserts a package's data into database - happens every 10 seconds.
+       Not finished."""
     now = datetime.now()
     now_tuple = now.timetuple()
     #Converts datetime into seconds
@@ -42,7 +42,7 @@ def insert_location(uuid, latitude, longitude, elevation, time):
 
 
 def get_locations(uuid):
-    '''Gets a package's raw data from database.'''
+    """Gets a package's raw data from database."""
     command = "SELECT * FROM " + uuid
     try:    
         cursor.execute(command)
@@ -51,6 +51,7 @@ def get_locations(uuid):
         return results
     except:
         db.rollback()
+
 
 def close_database():
     # Close database connection
