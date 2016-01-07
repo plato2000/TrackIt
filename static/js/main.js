@@ -4,9 +4,6 @@ var ADMIN_TR_CONTENTS =     '<tr class="listRow" id="row{UUID}"><td><div class="
 var packagesMonitored = [];
 var packagesOnMap = [];
 
-var adminList = [];
-var adminMapPackages = [];
-
 var delivered = [];
 
 var packagePositions = {};
@@ -75,6 +72,11 @@ function addRow(uuid, name, start, current, dest) {
     // Material design JS loads proper styling for checkboxes (has to be loaded every time)
     $.material.checkbox();
 
+    if(packagesOnMap.indexOf(uuid) > -1) {
+        $("#checkbox" + uuid).prop("checked", true);
+        console.log("Status of " + "#checkbox" + uuid + ": " + $("#checkbox" + uuid).prop("checked"));
+    }
+
     // Loads color picker
     $("#color" + uuid).minicolors({
         theme: 'bootstrap',
@@ -107,9 +109,15 @@ function addRow(uuid, name, start, current, dest) {
 function removeRow(uuid) {
     packagesMonitored.splice($.inArray(uuid, packagesMonitored), 1);
     $("#row" + uuid).remove();
+    if(packagesOnMap.indexOf(uuid) > -1) {
+        console.log("changing display of " + uuid);
+        changeMapDisplay(uuid, false);
+    }
     packagesOnMap.splice($.inArray(uuid, packagesOnMap), 1);
-    $.cookie("packagesOnMap", JSON.stringify(packagesOnMap));
-    $.cookie("packagesMonitored", JSON.stringify(packagesMonitored));
+    if(!adminMode) {
+        $.cookie("packagesOnMap", JSON.stringify(packagesOnMap));
+        $.cookie("packagesMonitored", JSON.stringify(packagesMonitored));
+    }
 }
 
 
@@ -140,36 +148,24 @@ function addPackageFromTextInput() {
 
 // Generic function to get package data from UUID and add to table
 function addPackage(uuid) {
-    $.cookie("packagesMonitored", JSON.stringify(packagesMonitored));
+    if(!adminMode) {
+        $.cookie("packagesMonitored", JSON.stringify(packagesMonitored));
+    }
     $.ajax({
         type: 'GET',
         url: $SCRIPT_ROOT + '/data',
         dataType: 'json',
         success: function(data) {
-            if(data.results) {
-                delivered.push(uuid);
-            } else {
-                $.ajax({
-                    type: 'GET',
-                    url: $SCRIPT_ROOT + '/data',
-                    dataType: 'json',
-                    success: function(data) {
-                        var name = data.name;
-                        // TODO: Convert coords to google maps LatLng
-                        var start_coords = new google.maps.LatLng(data.start_coords[0], data.start_coords[1]);
-                        var end_coords = new google.maps.LatLng(data.end_coords[0], data.end_coords[1]);
-                        var curr_coords = new google.maps.LatLng(data.curr_coords[0], data.curr_coords[1]);
-                        destinations[uuid] = end_coords;
-                        colors[uuid] = getRandomColor();
-                        addRow(uuid, name, start_coords, curr_coords, end_coords)
-                        updateData();
-                    },
-                    data: {"dt":"initialData", "uuid":uuid},
-                    async: true
-                });
-            }
+            var name = data.name;
+            var start_coords = new google.maps.LatLng(data.start_coords[0], data.start_coords[1]);
+            var end_coords = new google.maps.LatLng(data.end_coords[0], data.end_coords[1]);
+            var curr_coords = new google.maps.LatLng(data.curr_coords[0], data.curr_coords[1]);
+            destinations[uuid] = end_coords;
+            colors[uuid] = getRandomColor();
+            addRow(uuid, name, start_coords, curr_coords, end_coords)
+            updateData();
         },
-        data: {"dt":"isDelivered", "uuid":uuid},
+        data: {"dt":"initialData", "uuid":uuid},
         async: true
     });
 }
@@ -191,76 +187,55 @@ function convertUpdateResults(results) {
 }
 
 // Used to reset scope because this is called from an asynchronous function. Without this, it would always use the
-// last versions of index, concat, and admin because they change in a loop
-function updateCallback(index, concat, admin) {
+// last versions of index, concat because they change in a loop
+function updateCallback(index, concat) {
     return function(data) {
-        if(admin) {
-            if(concat) {
-                adminPackagePositions[adminList[index]] = adminPackagePositions[adminList[index]].concat(convertUpdateResults(data.results));
-            } else {
-                adminPackagePositions[adminList[index]] = convertUpdateResults(data.results);
-            }
-            // console.log("i: " + index);
-            // console.log("adminList[i]: " + adminList[index]);
-            // console.log("adminPackagePositions[^]: " + adminPackagePositions[adminList[index]]);
-            // console.log('data.results.length: ' + data.results.length);
-            if(data.results.length > 0) {
-                setLocationName("#current" + adminList[index], adminPackagePositions[adminList[index]].slice(-1)[0]['coords']);
-            }
+        if(concat) {
+            packagePositions[packagesMonitored[index]] = packagePositions[packagesMonitored[index]].concat(convertUpdateResults(data.results));
         } else {
-            if(concat) {
-                packagePositions[packagesMonitored[index]] = packagePositions[packagesMonitored[index]].concat(convertUpdateResults(data.results));
-            } else {
-                packagePositions[packagesMonitored[index]] = convertUpdateResults(data.results);
-            }
-            // console.log("i: " + index);
-            // console.log("packagesMonitored[i]: " + packagesMonitored[index]);
-            // console.log("packagePositions[^]: " + packagePositions[packagesMonitored[index]]);
-            if(data.results.length > 0) {
-                setLocationName("#current" + packagesMonitored[index], packagePositions[packagesMonitored[index]].slice(-1)[0]['coords']);
-            }
+            packagePositions[packagesMonitored[index]] = convertUpdateResults(data.results);
         }
+        // console.log("i: " + index);
+        // console.log("packagesMonitored[i]: " + packagesMonitored[index]);
+        // console.log("packagePositions[^]: " + packagePositions[packagesMonitored[index]]);
+        if(data.results.length > 0) {
+            setLocationName("#current" + packagesMonitored[index], packagePositions[packagesMonitored[index]].slice(-1)[0]['coords']);
+        }
+    };
+}
+
+function deliveryCheckCallback(index, concat) {
+    return function(data){
+        if(data.results) {
+            delivered.push(packagesMonitored[index]);
+        }
+        $.getJSON($SCRIPT_ROOT + '/data', {
+            "dt": "getNewPoints",
+            "uuid": packagesMonitored[index],
+            "time": packagePositions[packagesMonitored[index]].slice(-1)[0]['time']
+        }, updateCallback(index, concat));
     };
 }
 
 // Gets new points from server
 function updateData(uuid) {
-    if(!adminMode) {
-        for(var i = 0; i < packagesMonitored.length; i++) {
-            if(!(packagesMonitored[i] in delivered)) {
-                if (packagesMonitored[i] in packagePositions && !(packagesMonitored[i] in delivered)) {
-                    $.getJSON($SCRIPT_ROOT + '/data', {
-                        "dt": "getNewPoints",
-                        "uuid": packagesMonitored[i],
-                        "time": packagePositions[packagesMonitored[i]].slice(-1)[0]['time']
-                    }, updateCallback(i, true, false));
-                } else {
-                    $.getJSON($SCRIPT_ROOT + '/data', {
-                        "dt": "getNewPoints",
-                        "uuid": packagesMonitored[i],
-                        "time": 0
-                    }, updateCallback(i, false, false));
-                }
-            }
-        }
-    } else {
-        for(var i = 0; i < adminList.length; i++) {
-            if(!(adminList[i] in delivered)) {
-                if (adminList[i] in adminPackagePositions) {
-                    // console.log("adminList[i] in adminPackagePositions. adminList[i]: " + adminList[i]);
-                    $.getJSON($SCRIPT_ROOT + '/data', {
-                        "dt": "getNewPoints",
-                        "uuid": adminList[i],
-                        "time": adminPackagePositions[adminList[i]].slice(-1)[0]['time']
-                    }, updateCallback(i, true, true));
-                } else {
-                    // console.log("adminList[i] not in adminPackagePositions. adminList[i]: " + adminList[i]);
-                    $.getJSON($SCRIPT_ROOT + '/data', {
-                        "dt": "getNewPoints",
-                        "uuid": adminList[i],
-                        "time": 0
-                    }, updateCallback(i, false, true));
-                }
+    for(var i = 0; i < packagesMonitored.length; i++) {
+        if(!(delivered.indexOf(packagesMonitored[i]) > -1)) {
+            if (packagesMonitored[i] in packagePositions) {
+                $.ajax({
+                    type: 'GET',
+                    url: $SCRIPT_ROOT + '/data',
+                    dataType: 'json',
+                    success: deliveryCheckCallback(i, true),
+                    data: {"dt":"isDelivered", "uuid":packagesMonitored[i]},
+                    async: true
+                });
+            } else {
+                $.getJSON($SCRIPT_ROOT + '/data', {
+                    "dt": "getNewPoints",
+                    "uuid": packagesMonitored[i],
+                    "time": 0
+                }, updateCallback(i, false));
             }
         }
     }
@@ -271,37 +246,29 @@ function updateData(uuid) {
 function writePackages(packageList, mapList) {
     packagesMonitored = packageList;
     packagesOnMap = mapList;
+    console.log("mapList: " + packagesOnMap);
     for (var i = 0; i < packageList.length; i++) {
+        // console.log("adding package " + packageList[i]);
         addPackage(packageList[i]);
-    }
-    for(i = 0; i < mapList.length; i++) {
-        $("#checkbox" + mapList[i]).prop("checked", true);
     }
 }
 
 // Toggles mode between admin mode and regular user
 function changeAdminMode() {
-    if(adminMode) {
+    adminMode = !adminMode;
+    for(var i = 0; i < packagesOnMap.length; i++) {
+        console.log("removing row " + packagesOnMap[i]);
+        removeRow(packagesOnMap[i]);
+    }
+    if(!adminMode) {
         $("#loginButton").html("Log in&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
-        adminMode = false;
         $("#listBody").html("");
         loadFunction();
     } else {
         $("#loginButton").html("Log out&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
-        adminMode = true;
         $("#listBody").html("");
         adminLoad();
-
     }
-}
-
-// Creates the map in the "map" div after google maps api loads
-function initMap() {
-    map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 2,
-        center: {lat: 0, lng: 0},
-        minZoom: 2
-    });
 }
 
 // Creates a path for the map pin of a given hex color
@@ -321,57 +288,45 @@ function pinSymbol(color) {
 // Changes visibility of package on map.
 function changeMapDisplay(id, checked) {
     // console.log(id);
-    if(!adminMode) {
-        if(!checked) {
-            packagesOnMap.splice($.inArray(id, packagesOnMap), 1);
-            mapLines[id].setMap(null);
-            destinationMapMarkers[id].setMap(null);
-            originMapMarkers[id].setMap(null);
-        } else {
-            packagesOnMap.push(id);
-        }
-        $.cookie("packagesOnMap", JSON.stringify(packagesOnMap));
+    if(!checked) {
+        packagesOnMap.splice($.inArray(id, packagesOnMap), 1);
+        mapLines[id].setMap(null);
+        destinationMapMarkers[id].setMap(null);
+        originMapMarkers[id].setMap(null);
     } else {
-        if(!checked) {
-            adminMapPackages.splice($.inArray(id, adminMapPackages), 1);
-            mapLines[id].setMap(null);
-            destinationMapMarkers[id].setMap(null);
-            originMapMarkers[id].setMap(null);
-        } else {
-            adminMapPackages.push(id);
-        }
+        packagesOnMap.push(id);
     }
+    $.cookie("packagesOnMap", JSON.stringify(packagesOnMap));
     updateData();
 }
 
 // Updates the map view with new coordinates for the line and markers
-// TODO: Read as google maps LatLng after change above
 function updateMap() {
-    if (!adminMode) {
-        for (var i = 0; i < packagesOnMap.length; i++) {
-            if (!(packagesOnMap[i] in mapLines)) {
-                mapLines[packagesOnMap[i]] = new google.maps.Polyline({
-                    path: [],
-                    geodesic: true,
-                    strokeColor: colors[packagesOnMap[i]],
-                    strokeOpacity: 1.0,
-                    strokeWeight: 3
-                });
-            }
-            mapLines[packagesOnMap[i]].setMap(map);
-            if (!(packagesOnMap[i] in destinationMapMarkers)) {
-                destinationMapMarkers[packagesOnMap[i]] = new google.maps.Marker({
-                    position: destinations[packagesOnMap[i]],
-                    animation: null,
-                    title: packagesOnMap[i] + "'s Destination Marker",
-                    icon: pinSymbol(colors[packagesOnMap[i]]),
-                    label: {
-                        text: 'B'
-                    }
-                });
-            }
-            destinationMapMarkers[packagesOnMap[i]].setMap(map);
-            if (packagePositions[packagesOnMap[i]] != undefined && !(packagesOnMap[i] in originMapMarkers)) {
+    for (var i = 0; i < packagesOnMap.length; i++) {
+        if (!(packagesOnMap[i] in mapLines)) {
+            mapLines[packagesOnMap[i]] = new google.maps.Polyline({
+                path: [],
+                geodesic: true,
+                strokeColor: colors[packagesOnMap[i]],
+                strokeOpacity: 1.0,
+                strokeWeight: 3
+            });
+        }
+        mapLines[packagesOnMap[i]].setMap(map);
+        if (!(packagesOnMap[i] in destinationMapMarkers)) {
+            destinationMapMarkers[packagesOnMap[i]] = new google.maps.Marker({
+                position: destinations[packagesOnMap[i]],
+                animation: null,
+                title: packagesOnMap[i] + "'s Destination Marker",
+                icon: pinSymbol(colors[packagesOnMap[i]]),
+                label: {
+                    text: 'B'
+                }
+            });
+        }
+        destinationMapMarkers[packagesOnMap[i]].setMap(map);
+        if (packagePositions[packagesOnMap[i]] != undefined) {
+            if(!(packagesOnMap[i] in originMapMarkers)) {
                 originMapMarkers[packagesOnMap[i]] = new google.maps.Marker({
                     position: packagePositions[packagesOnMap[i]][0]['coords'],
                     animation: null,
@@ -388,52 +343,6 @@ function updateMap() {
                 currentPath.push(packagePositions[packagesOnMap[i]][j]['coords']);
             }
             mapLines[packagesOnMap[i]].setPath(currentPath);
-        }
-    } else {
-        for (var i = 0; i < adminMapPackages.length; i++) {
-            // console.log(adminMapPackages[i] in mapLines);
-            if (!(adminMapPackages[i] in mapLines)) {
-                // console.log(adminMapPackages[i] in mapLines);
-                mapLines[adminMapPackages[i]] = new google.maps.Polyline({
-                    path: [],
-                    geodesic: true,
-                    strokeColor: colors[adminMapPackages[i]],
-                    strokeOpacity: 1.0,
-                    strokeWeight: 3
-                });
-            }
-            mapLines[adminMapPackages[i]].setMap(map);
-            if (!(adminMapPackages[i] in destinationMapMarkers)) {
-                destinationMapMarkers[adminMapPackages[i]] = new google.maps.Marker({
-                    position: destinations[adminMapPackages[i]],
-                    animation: null,
-                    title: adminMapPackages[i] + "'s Marker",
-                    icon: pinSymbol(colors[adminMapPackages[i]]),
-                    label: {
-                        text: 'B'
-                    }
-                });
-            }
-            destinationMapMarkers[adminMapPackages[i]].setMap(map);
-            if (adminPackagePositions[adminMapPackages[i]] != undefined && !(adminMapPackages[i] in originMapMarkers)) {
-                originMapMarkers[adminMapPackages[i]] = new google.maps.Marker({
-                    position: adminPackagePositions[adminMapPackages[i]][0]['coords'],
-                    animation: null,
-                    title: packagesOnMap[i] + "'s Origin Marker",
-                    icon: pinSymbol(colors[adminMapPackages[i]]),
-                    label: {
-                        text: 'A'
-                    }
-                });
-            }
-            originMapMarkers[adminMapPackages[i]].setMap(map);
-            var currentPath = mapLines[adminMapPackages[i]].getPath();
-            for (var j = currentPath.length; j < adminPackagePositions[adminMapPackages[i]].length; j++) {
-                // console.log("i: " + i + " j: " + j);
-                // console.log("adminPackagePositions[adminMapPackages[i]]: " + adminPackagePositions[adminMapPackages[i]]);
-                currentPath.push(adminPackagePositions[adminMapPackages[i]][j]['coords']);
-            }
-            mapLines[adminMapPackages[i]].setPath(currentPath);
         }
     }
 }
@@ -476,10 +385,10 @@ function setLocationName(id, latlng) {
 // Adds everything on the admin list of UUIDS to the table
 function adminLoad() {
     $.getJSON($SCRIPT_ROOT + '/data', {"dt": "adminUUIDList"}, function(data) {
-        adminList = data.results;
-        for (var i = 0; i < adminList.length; i++) {
-            addPackage(adminList[i]);
-        }
+        // console.log(data.results);
+        packagesMonitored = data.results;
+        // console.log(packagesMonitored);
+        writePackages(packagesMonitored, []);
     });
 }
 
@@ -494,11 +403,16 @@ function loadFunction() {
     writePackages(JSON.parse($.cookie("packagesMonitored")), JSON.parse($.cookie("packagesOnMap")));
 }
 
-// Starts everything after page is fully loaded
-$(document).ready(function() {
+// Creates the map in the "map" div after google maps api loads and does other onload things
+function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 2,
+        center: {lat: 0, lng: 0},
+        minZoom: 2
+    });
     loadFunction();
     setInterval(updateData, 10000);
-});
+}
 
 
 
