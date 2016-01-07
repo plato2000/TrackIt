@@ -20,6 +20,25 @@ var originMapMarkers = {};
 var destinationMapMarkers = {};
 
 
+var contentString1 = '<div id="content">'+
+     '<div id="siteNotice">'+
+     '</div>'+
+     '<h1 id="firstHeading" class="firstHeading">';
+var contentString2 = '</h1>'+
+     '<div id="bodyContent"><p>'+
+     'Location:';
+var contentString3 = '<br>Here since: ';
+var contentString4 = '<br>Elevation: ';
+var contentString5 = '<br>ETR: ';
+var contentString6 = '</p>'+
+     '</div>'+
+     '</div>';
+
+
+var infowindow = new google.maps.InfoWindow({
+    content: "hello"
+});
+
 // Helper function for replaceAll, which uses regex
 function escapeRegExp(str) {
     return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
@@ -323,6 +342,11 @@ function updateMap() {
                     text: 'B'
                 }
             });
+
+            destinationMapMarkers[packagesOnMap[i]].addListener('click', function() {
+                infowindow.setContentHTML('<div id="content"><h1>'+packagesOnMap[i]+'</h1></div>');
+                infowindow.open(map, destinationMapMarkers[packagesOnMap[i]]);
+            });
         }
         destinationMapMarkers[packagesOnMap[i]].setMap(map);
         if (packagePositions[packagesOnMap[i]] != undefined) {
@@ -336,6 +360,12 @@ function updateMap() {
                         text: 'A'
                     }
                 });
+
+                destinationMapMarkers[packagesOnMap[i]].addListener('click', function() {
+                infowindow.setContentHTML('<div id="content"><h1>'+packagesOnMap[i]+'</h1></div>');
+                infowindow.open(map, destinationMapMarkers[packagesOnMap[i]]);
+            });
+                
             }
             originMapMarkers[packagesOnMap[i]].setMap(map);
             var currentPath = mapLines[packagesOnMap[i]].getPath();
