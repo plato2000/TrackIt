@@ -35,9 +35,7 @@ var contentString6 = '</p>'+
      '</div>';
 
 
-var infowindow = new google.maps.InfoWindow({
-    content: "hello"
-});
+var infowindow;
 
 // Helper function for replaceAll, which uses regex
 function escapeRegExp(str) {
@@ -82,7 +80,7 @@ function addRow(uuid, name, start, current, dest) {
 
     if(packagesOnMap.indexOf(uuid) > -1) {
         $("#checkbox" + uuid).prop("checked", true);
-        console.log("Status of " + "#checkbox" + uuid + ": " + $("#checkbox" + uuid).prop("checked"));
+        //console.log("Status of " + "#checkbox" + uuid + ": " + $("#checkbox" + uuid).prop("checked"));
     }
 
     // Loads color picker
@@ -118,7 +116,7 @@ function removeRow(uuid) {
     packagesMonitored.splice($.inArray(uuid, packagesMonitored), 1);
     $("#row" + uuid).remove();
     if(packagesOnMap.indexOf(uuid) > -1) {
-        console.log("changing display of " + uuid);
+        // console.log("changing display of " + uuid);
         changeMapDisplay(uuid, false);
     }
     packagesOnMap.splice($.inArray(uuid, packagesOnMap), 1);
@@ -348,7 +346,7 @@ function updateMap() {
             });
 
             destinationMapMarkers[packagesOnMap[i]].addListener('click', function() {
-                infowindow.setContentHTML('<div id="content"><h1>'+packagesOnMap[i]+'</h1></div>');
+                infowindow.setContent('<div id="content"><h1>'+packagesOnMap[i]+'</h1></div>');
                 infowindow.open(map, destinationMapMarkers[packagesOnMap[i]]);
             });
         }
@@ -366,7 +364,7 @@ function updateMap() {
                 });
 
                 destinationMapMarkers[packagesOnMap[i]].addListener('click', function() {
-                infowindow.setContentHTML('<div id="content"><h1>'+packagesOnMap[i]+'</h1></div>');
+                infowindow.setContent('<div id="content"><h1>'+packagesOnMap[i]+'</h1></div>');
                 infowindow.open(map, destinationMapMarkers[packagesOnMap[i]]);
             });
                 
@@ -450,6 +448,9 @@ function initMap() {
         zoom: 2,
         center: {lat: 0, lng: 0},
         minZoom: 2
+    });
+    infowindow = new google.maps.InfoWindow({
+        content: "hello"
     });
     loadFunction();
     setInterval(updateData, 10000);
