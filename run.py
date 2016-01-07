@@ -128,7 +128,10 @@ def send_data():
     elif a == 'adminUUIDList':
         return jsonify(results=package_data.keys())
     elif a == 'getETR':
-        return jsonify(results=packages[uuid].etr())
+        try:
+            return jsonify(results=packages[uuid].etr())
+        except:
+            return jsonify(0)
     return jsonify(results="")
 
 
