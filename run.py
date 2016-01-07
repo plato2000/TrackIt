@@ -131,7 +131,7 @@ def send_data():
         try:
             return jsonify(results=packages[uuid].etr())
         except:
-            return jsonify(0)
+            return jsonify(results=0)
     return jsonify(results="")
 
 
