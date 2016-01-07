@@ -56,6 +56,7 @@ def get_package_update(uuid):
     # print data
     if "delivered" in data:
         delivered_packages.append(uuid)
+        del packages[uuid]
         # print "uuid:", uuid, "delivered:", data['delivered']
     else:
         # print "response:", data
