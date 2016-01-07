@@ -1,5 +1,5 @@
-var DEFAULT_TR_CONTENTS =   '<tr class="listRow" id="row{UUID}"><td><div class="checkbox"><label><input type="checkbox" name="{UUID}" onchange="changeMapDisplay(this.name, this.checked)" id="checkbox{UUID}"></label></div><br /><div class="color-container"><input type="hidden" id="color{UUID}" value="{COLOR}"></div></td><td class="uuid" id="uuid{UUID}">{UUID}</td><td class="name" id="name{UUID}">{NAME}</td><td class="location" id="location{UUID}"><p>Starting location: <span id="start{UUID}">{STARTLOCATION}</span></p><p>Current location: <span id="current{UUID}">{CURRENTLOCATION}</span></p><p>Destination: <span id="dest{UUID}">{DESTLOCATION}</span></p></td><td><a href="javascript:removeRow(\'{UUID}\')" class="btn btn-raised btn-danger">Stop Tracking</a></td></tr>';
-var ADMIN_TR_CONTENTS =     '<tr class="listRow" id="row{UUID}"><td><div class="checkbox"><label><input type="checkbox" name="{UUID}" onchange="changeMapDisplay(this.name, this.checked)" id="checkbox{UUID}"></label></div><br /><div class="color-container"><input type="hidden" id="color{UUID}" value="{COLOR}"></div></td><td class="uuid" id="uuid{UUID}">{UUID}</td><td class="name" id="name{UUID}">{NAME}</td><td class="location" id="location{UUID}"><p>Starting location: <span id="start{UUID}">{STARTLOCATION}</span></p><p>Current location: <span id="current{UUID}">{CURRENTLOCATION}</span></p><p>Destination: <span id="dest{UUID}">{DESTLOCATION}</span></p></td><td></td></tr>';
+var DEFAULT_TR_CONTENTS =   '<tr class="listRow" id="row{UUID}"><td><div class="checkbox"><label><input type="checkbox" name="{UUID}" onchange="changeMapDisplay(this.name, this.checked)" id="checkbox{UUID}"></label></div><br /><div class="color-container"><input type="hidden" id="color{UUID}" value="{COLOR}"></div></td><td class="uuid" id="uuid{UUID}">{UUID}</td><td class="name" id="name{UUID}">{NAME}</td><td class="location" id="location{UUID}"><p>Starting location: <span id="start{UUID}">{STARTLOCATION}</span></p><p>Current location: <span id="current{UUID}">{CURRENTLOCATION}</span></p><p>Destination: <span id="dest{UUID}">{DESTLOCATION}</span></p></td><td id="etr{UUID}">{ETR}</td><td><a href="javascript:removeRow(\'{UUID}\')" class="btn btn-raised btn-danger">Stop Tracking</a></td></tr>';
+var ADMIN_TR_CONTENTS =     '<tr class="listRow" id="row{UUID}"><td><div class="checkbox"><label><input type="checkbox" name="{UUID}" onchange="changeMapDisplay(this.name, this.checked)" id="checkbox{UUID}"></label></div><br /><div class="color-container"><input type="hidden" id="color{UUID}" value="{COLOR}"></div></td><td class="uuid" id="uuid{UUID}">{UUID}</td><td class="name" id="name{UUID}">{NAME}</td><td class="location" id="location{UUID}"><p>Starting location: <span id="start{UUID}">{STARTLOCATION}</span></p><p>Current location: <span id="current{UUID}">{CURRENTLOCATION}</span></p><p>Destination: <span id="dest{UUID}">{DESTLOCATION}</span></p></td><td id="etr{UUID}">{ETR}</td><td></td></tr>';
 
 var packagesMonitored = [];
 var packagesOnMap = [];
@@ -56,7 +56,11 @@ function getRandomColor() {
 
 // Uses DEFAULT_TR_CONTENTS and creates HTML for a new table row which
 function populateRow(uuid, name) {
-    var newRow = DEFAULT_TR_CONTENTS;
+    if(!adminMode) {
+        var newRow = DEFAULT_TR_CONTENTS;
+    } else {
+        var newRow = ADMIN_TR_CONTENTS;
+    }
     newRow = replaceAll(newRow, '{UUID}', uuid);
     newRow = replaceAll(newRow, '{NAME}', name);
     // Location is updated later, as reverse geocoding is not always instant
@@ -64,28 +68,13 @@ function populateRow(uuid, name) {
     newRow = replaceAll(newRow, '{STARTLOCATION}', "Loading...");
     newRow = replaceAll(newRow, '{DESTLOCATION}', "Loading...");
     newRow = replaceAll(newRow, '{COLOR}', colors[uuid]);
-    return newRow;
-}
-
-// Like populateRow, but for admin mode which doesn't have a delete button
-function populateAdminRow(uuid, name) {
-    var newRow = ADMIN_TR_CONTENTS;
-    newRow = replaceAll(newRow, '{UUID}', uuid);
-    newRow = replaceAll(newRow, '{NAME}', name);
-    newRow = replaceAll(newRow, '{CURRENTLOCATION}', "Loading...");
-    newRow = replaceAll(newRow, '{STARTLOCATION}', "Loading...");
-    newRow = replaceAll(newRow, '{DESTLOCATION}', "Loading...");
-    newRow = replaceAll(newRow, '{COLOR}', colors[uuid]);
+    newRow = replaceAll(newRow, '{ETR}', "Loading...");
     return newRow;
 }
 
 // Adds a new row to the table in the page
 function addRow(uuid, name, start, current, dest) {
-    if(adminMode) {
-        rowToAdd = populateAdminRow(uuid, name);
-    } else {
-        rowToAdd = populateRow(uuid, name);
-    }
+    rowToAdd = populateRow(uuid, name);
     // Adds row to table
     $('#packageTable > tbody:last-child').append(rowToAdd);
     // Material design JS loads proper styling for checkboxes (has to be loaded every time)
@@ -236,8 +225,15 @@ function deliveryCheckCallback(index, concat) {
     };
 }
 
+function etrCallback(index) {
+    return function(data) {
+        $("#etr" + packagesMonitored[index]).text(moment().second(data.results).fromNow(true));
+    }
+}
+
 // Gets new points from server
-function updateData(uuid) {
+// TODO: get this to work for only one uuid at a time with optional arg
+function updateData() {
     for(var i = 0; i < packagesMonitored.length; i++) {
         if(!(delivered.indexOf(packagesMonitored[i]) > -1)) {
             if (packagesMonitored[i] in packagePositions) {
@@ -256,6 +252,14 @@ function updateData(uuid) {
                     "time": 0
                 }, updateCallback(i, false));
             }
+            console.log("getting etr for " + packagesMonitored[i]);
+            $.getJSON($SCRIPT_ROOT + '/data', {
+                "dt": "getETR",
+                "uuid": packagesMonitored[i]
+                }, etrCallback(i));
+        } else {
+            console.log(packagesMonitored[i] + " is delivered");
+            $("#etr" + packagesMonitored[i]).text("Delivered");
         }
     }
     updateMap();
@@ -432,6 +436,13 @@ function loadFunction() {
     }
     writePackages(JSON.parse($.cookie("packagesMonitored")), JSON.parse($.cookie("packagesOnMap")));
 }
+
+// for testing purposes
+function clearCookies() {
+    $.cookie('packagesOnMap', '[]');
+    $.cookie('packagesMonitored', '[]');
+}
+
 
 // Creates the map in the "map" div after google maps api loads and does other onload things
 function initMap() {

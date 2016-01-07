@@ -56,6 +56,7 @@ def get_package_update(uuid):
     # print data
     if "delivered" in data:
         delivered_packages.append(uuid)
+        del packages[uuid]
         # print "uuid:", uuid, "delivered:", data['delivered']
     else:
         # print "response:", data
@@ -127,7 +128,10 @@ def send_data():
     elif a == 'adminUUIDList':
         return jsonify(results=package_data.keys())
     elif a == 'getETR':
-        return jsonify(results=packages[uuid].etr())
+        try:
+            return jsonify(results=packages[uuid].etr())
+        except:
+            return jsonify(0)
     return jsonify(results="")
 
 
