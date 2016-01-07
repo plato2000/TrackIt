@@ -250,13 +250,13 @@ function updateData() {
                     "time": 0
                 }, updateCallback(i, false));
             }
-            console.log("getting etr for " + packagesMonitored[i]);
+            // console.log("getting etr for " + packagesMonitored[i]);
             $.getJSON($SCRIPT_ROOT + '/data', {
                 "dt": "getETR",
                 "uuid": packagesMonitored[i]
                 }, etrCallback(i));
         } else {
-            console.log(packagesMonitored[i] + " is delivered");
+            // console.log(packagesMonitored[i] + " is delivered");
             $("#etr" + packagesMonitored[i]).text("Delivered");
         }
     }
@@ -267,7 +267,7 @@ function updateData() {
 function writePackages(packageList, mapList) {
     packagesMonitored = packageList;
     packagesOnMap = mapList;
-    console.log("mapList: " + packagesOnMap);
+    // console.log("mapList: " + packagesOnMap);
     for (var i = 0; i < packageList.length; i++) {
         // console.log("adding package " + packageList[i]);
         addPackage(packageList[i]);
@@ -278,7 +278,7 @@ function writePackages(packageList, mapList) {
 function changeAdminMode() {
     adminMode = !adminMode;
     for(var i = 0; i < packagesOnMap.length; i++) {
-        console.log("removing row " + packagesOnMap[i]);
+        // console.log("removing row " + packagesOnMap[i]);
         removeRow(packagesOnMap[i]);
     }
     if(!adminMode) {
@@ -317,7 +317,9 @@ function changeMapDisplay(id, checked) {
     } else {
         packagesOnMap.push(id);
     }
-    $.cookie("packagesOnMap", JSON.stringify(packagesOnMap));
+    if(!adminMode) {
+        $.cookie("packagesOnMap", JSON.stringify(packagesOnMap));
+    }
     updateData();
 }
 
