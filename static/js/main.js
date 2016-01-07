@@ -323,6 +323,18 @@ function changeMapDisplay(id, checked) {
     updateData();
 }
 
+function infoWindowCallback(destination, index) {
+    return function() {
+        if(!destination) {
+            infowindow.setContent('<div id="content"><p>' + packagesOnMap[index] + '</p></div>');
+            infowindow.open(map, originMapMarkers[packagesOnMap[index]]);
+        } else {
+            infowindow.setContent('<div id="content"><p>'+packagesOnMap[index]+'</p></div>');
+            infowindow.open(map, destinationMapMarkers[packagesOnMap[index]]);
+        }
+    };
+}
+
 // Updates the map view with new coordinates for the line and markers
 function updateMap() {
     for (var i = 0; i < packagesOnMap.length; i++) {
@@ -347,10 +359,7 @@ function updateMap() {
                 }
             });
 
-            destinationMapMarkers[packagesOnMap[i]].addListener('click', function() {
-                infowindow.setContent('<div id="content"><h1>'+packagesOnMap[i]+'</h1></div>');
-                infowindow.open(map, destinationMapMarkers[packagesOnMap[i]]);
-            });
+            destinationMapMarkers[packagesOnMap[i]].addListener('click', infoWindowCallback(true, i));
         }
         destinationMapMarkers[packagesOnMap[i]].setMap(map);
         if (packagePositions[packagesOnMap[i]] != undefined) {
@@ -365,10 +374,7 @@ function updateMap() {
                     }
                 });
 
-                destinationMapMarkers[packagesOnMap[i]].addListener('click', function() {
-                infowindow.setContent('<div id="content"><h1>'+packagesOnMap[i]+'</h1></div>');
-                infowindow.open(map, destinationMapMarkers[packagesOnMap[i]]);
-            });
+                originMapMarkers[packagesOnMap[i]].addListener('click', infoWindowCallback(false, i));
                 
             }
             originMapMarkers[packagesOnMap[i]].setMap(map);
