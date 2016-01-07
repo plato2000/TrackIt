@@ -348,7 +348,7 @@ function updateMap() {
             });
 
             destinationMapMarkers[packagesOnMap[i]].addListener('click', function() {
-                infowindow.setContentHTML('<div id="content"><h1>'+packagesOnMap[i]+'</h1></div>');
+                infowindow.setContent('<div id="content"><h1>'+packagesOnMap[i]+'</h1></div>');
                 infowindow.open(map, destinationMapMarkers[packagesOnMap[i]]);
             });
         }
@@ -366,7 +366,7 @@ function updateMap() {
                 });
 
                 destinationMapMarkers[packagesOnMap[i]].addListener('click', function() {
-                infowindow.setContentHTML('<div id="content"><h1>'+packagesOnMap[i]+'</h1></div>');
+                infowindow.setContent('<div id="content"><h1>'+packagesOnMap[i]+'</h1></div>');
                 infowindow.open(map, destinationMapMarkers[packagesOnMap[i]]);
             });
                 
