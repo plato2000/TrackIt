@@ -30,6 +30,8 @@ def generate_line(pixel1, pixel2):
     Generates a line of pixels from two given endpoints.'''
     x1, y1 = pixel1
     x2, y2 = pixel2
+    if pixel1 == pixel2:
+        return [pixel1]
     points = []
     if abs(y2 - y1) < abs(x2 - x1):
         if x2 > x1:
