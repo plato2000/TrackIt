@@ -1,5 +1,5 @@
-var DEFAULT_TR_CONTENTS =   '<tr class="listRow" id="row{UUID}"><td><div class="checkbox"><label><input type="checkbox" name="{UUID}" onchange="changeMapDisplay(this.name, this.checked)" id="checkbox{UUID}"></label></div><br /><div class="color-container"><input type="hidden" id="color{UUID}" value="{COLOR}"></div></td><td class="uuid" id="uuid{UUID}">{UUID}</td><td class="name" id="name{UUID}">{NAME}</td><td class="location" id="location{UUID}"><p>Starting location: <span id="start{UUID}">{STARTLOCATION}</span></p><p>Current location: <span id="current{UUID}">{CURRENTLOCATION}</span></p><p>Destination: <span id="dest{UUID}">{DESTLOCATION}</span></p></td><td id="etr{UUID}">{ETR}</td><td><a href="javascript:removeRow(\'{UUID}\')" class="btn btn-raised btn-danger">Stop Tracking</a></td></tr>';
-var ADMIN_TR_CONTENTS =     '<tr class="listRow" id="row{UUID}"><td><div class="checkbox"><label><input type="checkbox" name="{UUID}" onchange="changeMapDisplay(this.name, this.checked)" id="checkbox{UUID}"></label></div><br /><div class="color-container"><input type="hidden" id="color{UUID}" value="{COLOR}"></div></td><td class="uuid" id="uuid{UUID}">{UUID}</td><td class="name" id="name{UUID}">{NAME}</td><td class="location" id="location{UUID}"><p>Starting location: <span id="start{UUID}">{STARTLOCATION}</span></p><p>Current location: <span id="current{UUID}">{CURRENTLOCATION}</span></p><p>Destination: <span id="dest{UUID}">{DESTLOCATION}</span></p></td><td id="etr{UUID}">{ETR}</td><td></td></tr>';
+var DEFAULT_TR_CONTENTS =   '<tr class="listRow" id="row{UUID}"><td><div class="checkbox"><label><input type="checkbox" name="{UUID}" onchange="changeMapDisplay(this.name, this.checked)" id="checkbox{UUID}"></label></div><br /><div class="color-container"><input type="hidden" id="color{UUID}" value="{COLOR}"></div></td><td class="uuid" id="uuid{UUID}">{UUID}</td><td class="name" id="name{UUID}">{NAME}</td><td class="location" id="location{UUID}"><p>Starting location: <span id="start{UUID}">{STARTLOCATION}</span></p><p>Current location: <span id="current{UUID}">{CURRENTLOCATION}</span></p><p>Destination: <span id="dest{UUID}">{DESTLOCATION}</span></p></td><td id="etr{UUID}">{ETA}</td><td><a href="javascript:removeRow(\'{UUID}\')" class="btn btn-raised btn-danger">Stop Tracking</a></td></tr>';
+var ADMIN_TR_CONTENTS =     '<tr class="listRow" id="row{UUID}"><td><div class="checkbox"><label><input type="checkbox" name="{UUID}" onchange="changeMapDisplay(this.name, this.checked)" id="checkbox{UUID}"></label></div><br /><div class="color-container"><input type="hidden" id="color{UUID}" value="{COLOR}"></div></td><td class="uuid" id="uuid{UUID}">{UUID}</td><td class="name" id="name{UUID}">{NAME}</td><td class="location" id="location{UUID}"><p>Starting location: <span id="start{UUID}">{STARTLOCATION}</span></p><p>Current location: <span id="current{UUID}">{CURRENTLOCATION}</span></p><p>Destination: <span id="dest{UUID}">{DESTLOCATION}</span></p></td><td id="etr{UUID}">{ETA}</td><td></td></tr>';
 
 var packagesMonitored = [];
 var packagesOnMap = [];
@@ -66,7 +66,7 @@ function populateRow(uuid, name) {
     newRow = replaceAll(newRow, '{STARTLOCATION}', "Loading...");
     newRow = replaceAll(newRow, '{DESTLOCATION}', "Loading...");
     newRow = replaceAll(newRow, '{COLOR}', colors[uuid]);
-    newRow = replaceAll(newRow, '{ETR}', "Loading...");
+    newRow = replaceAll(newRow, '{ETA}', "Loading...");
     return newRow;
 }
 
@@ -225,7 +225,7 @@ function deliveryCheckCallback(index, concat) {
 
 function etrCallback(index) {
     return function(data) {
-        $("#etr" + packagesMonitored[index]).text(moment().second(data.results).fromNow(true));
+        $("#etr" + packagesMonitored[index]).text(moment().add(data.results, 'seconds').calendar());
     }
 }
 
@@ -276,11 +276,11 @@ function writePackages(packageList, mapList) {
 
 // Toggles mode between admin mode and regular user
 function changeAdminMode() {
-    adminMode = !adminMode;
     for(var i = 0; i < packagesOnMap.length; i++) {
         // console.log("removing row " + packagesOnMap[i]);
         removeRow(packagesOnMap[i]);
     }
+    adminMode = !adminMode;
     if(!adminMode) {
         $("#loginButton").html("Log in&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
         $("#listBody").html("");
@@ -440,6 +440,7 @@ function loadFunction() {
     if (typeof $.cookie('packagesOnMap') == 'undefined') {
         $.cookie('packagesOnMap', '[]');
     }
+    console.log("packagesMonitored: " +$.cookie("packagesMonitored") );
     writePackages(JSON.parse($.cookie("packagesMonitored")), JSON.parse($.cookie("packagesOnMap")));
 }
 

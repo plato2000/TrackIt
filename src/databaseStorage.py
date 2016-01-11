@@ -41,9 +41,9 @@ def insert_location(uuid, latitude, longitude, elevation, time):
         db.rollback()
 
 
-def get_locations(uuid):
+def get_locations(uuid, time):
     """Gets a package's raw data from database."""
-    command = "SELECT * FROM " + uuid
+    command = "SELECT * FROM " + uuid + " WHERE Time > " + time
     try:    
         cursor.execute(command)
         # Gets all previous locations of (pkg_name)

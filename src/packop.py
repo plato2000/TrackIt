@@ -118,6 +118,7 @@ class package():
         else:
             self.seen_water = True
             self.seen_land = False
+        self.poi = [[coord, vehicle]]
 
     def get_vehicle(self, coord):
         '''(self, coord: tuple) -> int
@@ -150,6 +151,7 @@ class package():
                     self.water_speeds.append(0)
                 else:
                     self.seen_water = True
+            self.poi.append([coord, vehicle])
         self.coords[-1].append(coord)
         if vehicle == 0:
             self.land_speeds[-1] = self.get_speed()
