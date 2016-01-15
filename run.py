@@ -131,7 +131,7 @@ def send_data():
         try:
             return jsonify(results=packages[uuid].etr())
         except KeyError:
-            return jsonify(results=0)
+            return jsonify(results=package_data[uuid][-1]['time'] - time.time())
     elif a == 'getPOI':
         try:
             return jsonify(results=packages[uuid].poi)
