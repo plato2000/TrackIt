@@ -137,6 +137,11 @@ def send_data():
             return jsonify(results=packages[uuid].poi)
         except KeyError:
             return jsonify(results=[])
+    elif a == 'getDistance':
+        try:
+            return jsonify(results=packages[uuid].dist)
+        except KeyError:
+            return jsonify(results=[])
     return jsonify(results="")
 
 
