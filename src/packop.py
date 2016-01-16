@@ -16,8 +16,8 @@ array = json.loads(file.read())
 file.close()
 
 
-def roundf(thing):
-    return int(round(thing))
+def roundf(num):
+    return int(round(num))
 
 def over_land(pixel):
     '''(pixel: tuple) -> bool
@@ -179,10 +179,9 @@ class package():
         segment = self.coords[-1]
         coord = segment[-1][:2]
         land_speed, water_speed = self.speeds
-        distance = vincenty(coord, self.destination)
         pixel1, pixel2 = to_pixel(coord), to_pixel(self.destination)
         line = generate_line(pixel1, pixel2)
-        interval = distance / len(line)
+        interval = self.dist / len(line)
         surfaces = list(map(over_land, line))
         land_time = surfaces.count(True) * interval / land_speed
         water_time = surfaces.count(False) * interval / water_speed
