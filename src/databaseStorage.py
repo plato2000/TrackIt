@@ -27,13 +27,13 @@ def create_table(uuid):
 def insert_location(uuid, latitude, longitude, elevation, time):
     """Inserts a package's data into database - happens every 10 seconds.
        Not finished."""
-    now = datetime.now()
-    now_tuple = now.timetuple()
-    #Converts datetime into seconds
-    seconds = int(time.mktime(now_tuple))
+    # now = datetime.now()
+    # now_tuple = now.timetuple()
+    # Converts datetime into seconds
+    # seconds = int(time.mktime(now_tuple))
     command = "INSERT INTO " + uuid + " (Latitude, Longitude, Elevation, Time \
                VALUES ('%d', '%d', '%d', '%d')" % \
-               (latitude, longitude, elevation, seconds)
+               (latitude, longitude, elevation, time)
     try:
         cursor.execute(command)
         db.commit()

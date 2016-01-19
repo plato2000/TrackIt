@@ -1,6 +1,9 @@
 var DEFAULT_TR_CONTENTS =   '<tr class="listRow" id="row{UUID}"><td><div class="checkbox"><label><input type="checkbox" name="{UUID}" onchange="changeMapDisplay(this.name, this.checked)" id="checkbox{UUID}"></label></div><br /><div class="color-container"><input type="hidden" id="color{UUID}" value="{COLOR}"></div></td><td class="uuid" id="uuid{UUID}">{UUID}</td><td class="name" id="name{UUID}">{NAME}</td><td class="location" id="location{UUID}"><p><b>Starting location: </b><span id="start{UUID}">{STARTLOCATION}</span></p><p><b>Current location: </b><span id="current{UUID}">{CURRENTLOCATION}</span></p><p><b>Destination: </b><span id="dest{UUID}">{DESTLOCATION}</span></p></td><td id="etr{UUID}">{ETA}</td><td><a href="javascript:removeRow(\'{UUID}\')" class="btn btn-raised btn-danger">Stop Tracking</a></td></tr>';
 var ADMIN_TR_CONTENTS =     '<tr class="listRow" id="row{UUID}"><td><div class="checkbox"><label><input type="checkbox" name="{UUID}" onchange="changeMapDisplay(this.name, this.checked)" id="checkbox{UUID}"></label></div><br /><div class="color-container"><input type="hidden" id="color{UUID}" value="{COLOR}"></div></td><td class="uuid" id="uuid{UUID}">{UUID}</td><td class="name" id="name{UUID}">{NAME}</td><td class="location" id="location{UUID}"><p><b>Starting location: </b><span id="start{UUID}">{STARTLOCATION}</span></p><p><b>Current location: </b><span id="current{UUID}">{CURRENTLOCATION}</span></p><p><b>Destination: </b><span id="dest{UUID}">{DESTLOCATION}</span></p></td><td id="etr{UUID}">{ETA}</td><td></td></tr>';
 
+var MODAL_CONTENTS = ''
+
+
 var packagesMonitored = [];
 var packagesOnMap = [];
 
@@ -70,11 +73,18 @@ function populateRow(uuid, name) {
     return newRow;
 }
 
+function populateModal(uuid, name) {
+    var newModal = MODAL_CONTENTS;
+    newModal = replaceAll(newModal, '{UUID}', uuid);
+    newModal = replaceAll(newModal, '{NAME}', name);
+    return newModal;
+}
+
 // Adds a new row to the table in the page
 function addRow(uuid, name, start, current, dest) {
     rowToAdd = populateRow(uuid, name);
     // Adds row to table
-    $('#packageTable > tbody:last-child').append(rowToAdd);
+    $('#packageTable > tbody:last-child').append(rowToAdd + "\n" + populateModal(uuid, name));
     // Material design JS loads proper styling for checkboxes (has to be loaded every time)
     $.material.checkbox();
 
@@ -463,6 +473,7 @@ function initMap() {
     });
     loadFunction();
     setInterval(updateData, 10000);
+    $.fn.modal.Constructor.DEFAULTS.keyboard = false;
 }
 
 
