@@ -44,7 +44,14 @@ Generally, to install Python libraries, you just run `pip2 install LIBRARYNAME`,
 
 ### Database configuration ###
 
-Cindy, add stuff here if you want
+Install MySQL Installer at 
+[https://dev.mysql.com/downloads/installer/](Link URL) (mysql-installer-web-community-5.7.10.0.msi - this is the first option)
+
+Follow the instructions on this link to successfully install MySQL: 
+[http://corlewsolutions.com/articles/article-21-how-to-install-mysql-server-5-6-on-windows-7-development-machine](Link URL)
+
+After installation, follow the Post-installation Steps on this page to set a root password: [http://www.tutorialspoint.com/mysql/mysql-installation.htm](Link URL)
+
 
 ### How to run tests ###
 
