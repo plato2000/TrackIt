@@ -4,7 +4,7 @@ import time
 from datetime import datetime
 
 # Opens database connection - Host and password may change later
-db = MySQLdb.connect("localhost","admin","password1","IDT")
+db = MySQLdb.connect("localhost", "admin", "password1", "IDT")
 
 # Opens database connection
 cursor = db.cursor()
