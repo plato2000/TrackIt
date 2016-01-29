@@ -552,7 +552,19 @@ function initMap() {
     $.fn.modal.Constructor.DEFAULTS.keyboard = false;
 }
 
+$(document).ready(function() {
+   if($(window).width() > 765) {
+        $("#selectButtons").addClass("btn-group-justified");
+   }
+});
 
+$(window).on('resize', function() {
+    if($(window).width() > 765) {
+        $('#selectButtons').addClass('btn-group-justified');
+    } else {
+        $('#selectButtons').removeClass('btn-group-justified');
+    }
+})
 
 
 
