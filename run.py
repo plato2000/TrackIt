@@ -128,8 +128,10 @@ def send_data():
         #         return jsonify(results=[])
         # return jsonify(results=package_data[uuid][count:])
         return jsonify(results=databaseStorage.get_locations(uuid, prev_time))
-    elif a == 'adminUUIDList':
-        return jsonify(results=databaseStorage.get_all_uuids())
+    elif a == 'undeliveredPackages':
+        return jsonify(results=databaseStorage.get_undelivered_packages())
+    elif a == 'deliveredPackages':
+        return jsonify(results=databaseStorage.get_delivered_packages())
     elif a == 'getETR':
         try:
             return jsonify(results=packages[uuid].etr())

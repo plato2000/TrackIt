@@ -1,5 +1,5 @@
 var DEFAULT_TR_CONTENTS =   '<tr class="listRow" id="row{UUID}"><td><div class="checkbox"><label><input type="checkbox" name="{UUID}" onchange="changeMapDisplay(this.name, this.checked)" id="checkbox{UUID}"></label></div><br /><div class="color-container"><input type="hidden" id="color{UUID}" value="{COLOR}"></div></td><td class="uuid" id="uuid{UUID}">{UUID}</td><td class="name" id="name{UUID}">{NAME}</td><td class="location" id="location{UUID}"><p><b>Starting location: </b><span id="start{UUID}">{STARTLOCATION}</span></p><p><b>Current location: </b><span id="current{UUID}">{CURRENTLOCATION}</span></p><p><b>Destination: </b><span id="dest{UUID}">{DESTLOCATION}</span></p></td><td id="etr{UUID}">{ETA}</td><td><a href="javascript:removeRow(\'{UUID}\')" class="btn btn-raised btn-danger">Stop Tracking</a></td></tr>';
-var ADMIN_TR_CONTENTS =     '<tr class="listRow" id="row{UUID}"><td><div class="checkbox"><label><input type="checkbox" name="{UUID}" onchange="changeMapDisplay(this.name, this.checked)" id="checkbox{UUID}"></label></div><br /><div class="color-container"><input type="hidden" id="color{UUID}" value="{COLOR}"></div></td><td class="uuid" id="uuid{UUID}">{UUID}</td><td class="name" id="name{UUID}">{NAME}</td><td class="location" id="location{UUID}"><p><b>Starting location: </b><span id="start{UUID}">{STARTLOCATION}</span></p><p><b>Current location: </b><span id="current{UUID}">{CURRENTLOCATION}</span></p><p><b>Destination: </b><span id="dest{UUID}">{DESTLOCATION}</span></p></td><td id="etr{UUID}">{ETA}</td><td></td></tr>';
+//var ADMIN_TR_CONTENTS =     '<tr class="listRow" id="row{UUID}"><td><div class="checkbox"><label><input type="checkbox" name="{UUID}" onchange="changeMapDisplay(this.name, this.checked)" id="checkbox{UUID}"></label></div><br /><div class="color-container"><input type="hidden" id="color{UUID}" value="{COLOR}"></div></td><td class="uuid" id="uuid{UUID}">{UUID}</td><td class="name" id="name{UUID}">{NAME}</td><td class="location" id="location{UUID}"><p><b>Starting location: </b><span id="start{UUID}">{STARTLOCATION}</span></p><p><b>Current location: </b><span id="current{UUID}">{CURRENTLOCATION}</span></p><p><b>Destination: </b><span id="dest{UUID}">{DESTLOCATION}</span></p></td><td id="etr{UUID}">{ETA}</td><td></td></tr>';
 
 var MODAL_CONTENTS = ''
 
@@ -10,7 +10,6 @@ var packagesOnMap = [];
 var delivered = [];
 
 var packagePositions = {};
-var adminPackagePositions = {};
 
 var destinations = {};
 
@@ -60,7 +59,8 @@ function populateRow(uuid, name) {
     if(!adminMode) {
         var newRow = DEFAULT_TR_CONTENTS;
     } else {
-        var newRow = ADMIN_TR_CONTENTS;
+        //var newRow = ADMIN_TR_CONTENTS;
+        var newRow = DEFAULT_TR_CONTENTS;
     }
     newRow = replaceAll(newRow, '{UUID}', uuid);
     newRow = replaceAll(newRow, '{NAME}', name);
@@ -95,7 +95,7 @@ function addRow(uuid, name, start, current, dest) {
 
     // Loads color picker
     $("#color" + uuid).minicolors({
-        theme: 'bootstrap',
+        theme: 'default',
         changedelay: 100,
         change: function(value, opacity) {
             // console.log("value: " + value);
@@ -293,12 +293,16 @@ function changeAdminMode() {
     adminMode = !adminMode;
     if(!adminMode) {
         $("#loginButton").html("Log in&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+        $("#deliveredPackagesButton").html("");
+        $("#undeliveredPackagesButton").html("");
         $("#listBody").html("");
         loadFunction();
     } else {
         $("#loginButton").html("Log out&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+        $("#deliveredPackagesButton").html("<a href='javascript:addDeliveredPackages()'>Track delivered packages</a>");
+        $("#undeliveredPackagesButton").html("<a href='javascript:addUndeliveredPackages()'>Track undelivered packages</a>");
         $("#listBody").html("");
-        adminLoad();
+        //adminLoad();
     }
 }
 
@@ -432,13 +436,39 @@ function setLocationName(id, latlng) {
     geocoder.geocode({'latLng': latlng}, locationCallback(id, latlng));
 }
 
-// Adds everything on the admin list of UUIDS to the table
-function adminLoad() {
-    $.getJSON($SCRIPT_ROOT + '/data', {"dt": "adminUUIDList"}, function(data) {
+//// Adds everything on the admin list of UUIDS to the table
+//function adminLoad() {
+//    $.getJSON($SCRIPT_ROOT + '/data', {"dt": "adminUUIDList"}, function(data) {
+//        // console.log(data.results);
+//        packagesMonitored = data.results;
+//        // console.log(packagesMonitored);
+//        writePackages(packagesMonitored, []);
+//    });
+//}
+
+// Adds undelivered packages to packages monitored list if they aren't already there
+function addUndeliveredPackages() {
+    $.getJSON($SCRIPT_ROOT + '/data', {"dt": "undeliveredPackages"}, function(data) {
         // console.log(data.results);
-        packagesMonitored = data.results;
-        // console.log(packagesMonitored);
-        writePackages(packagesMonitored, []);
+        for(var i = 0; i < data.results.length; i++) {
+            if(packagesMonitored.indexOf(data.results[i]) < 0) {
+                packagesMonitored.push(data.results[i]);
+                addPackage(data.results[i]);
+            }
+        }
+    });
+}
+
+// Adds delivered packages to packages monitored list if they aren't already there
+function addDeliveredPackages() {
+    $.getJSON($SCRIPT_ROOT + '/data', {"dt": "deliveredPackages"}, function(data) {
+        // console.log(data.results);
+        for(var i = 0; i < data.results.length; i++) {
+            if(packagesMonitored.indexOf(data.results[i]) < 0) {
+                packagesMonitored.push(data.results[i]);
+                addPackage(data.results[i]);
+            }
+        }
     });
 }
 

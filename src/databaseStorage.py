@@ -162,6 +162,32 @@ def get_all_uuids(get_delivered=False):
         return [i[0] for i in results]
 
 
+def get_delivered_packages():
+    """
+    Gets all packages marked as delivered.
+
+    Returns:
+        list of UUIDs
+    """
+    command = "SELECT uuid FROM uuids WHERE delivered='Y'"
+    results = execute_command(command, results=True)
+    if results != False:
+        return [i[0] for i in results]
+
+
+def get_undelivered_packages():
+    """
+    Gets all packages not marked as delivered (currently being processed)
+
+    Returns:
+        list of UUIDs
+    """
+    command = "SELECT uuid FROM uuids WHERE delivered='N'"
+    results = execute_command(command, results=True)
+    if results != False:
+        return [i[0] for i in results]
+
+
 def is_valid_uuid(uuid):
     """
     Checks if uuid is in database of uuids.
@@ -190,18 +216,6 @@ def is_delivered(uuid):
     print "delivery_status:", results
     return results[0] == 'Y'
 
-def get_delivered_packages():
-    """
-    Gets all packages marked as delivered.
-
-    Returns:
-        list of UUIDs
-    """
-    command = "SELECT * FROM uuids WHERE delivered='Y'"
-    results = execute_command(command, results=True)
-    if results != False:
-        return results
-
 
 def close_database():
     # Close database connection
@@ -213,6 +227,7 @@ def clear_database_and_create_new():
     command1 = "CREATE TABLE uuids (uuid CHAR(36) PRIMARY KEY, nameString TINYBLOB, delivered ENUM('Y', 'N'), destLat DOUBLE(7, 4), destLon DOUBLE(7,4));"
     # execute_command(command)
     execute_command(command1)
+    # execute_command("USE idt")
 
 
 def execute_command(command, results=False):
@@ -239,7 +254,7 @@ def execute_command(command, results=False):
 
 
 # Opens database connection - Host and password may change later
-db = MySQLdb.connect("localhost", "admin", "password1", "IDT")
+db = MySQLdb.connect(host="localhost", user="admin", passwd="password1", db="idt")
 
 # Opens database connection
 cursor = db.cursor()
