@@ -464,12 +464,58 @@ function addDeliveredPackages() {
     $.getJSON($SCRIPT_ROOT + '/data', {"dt": "deliveredPackages"}, function(data) {
         // console.log(data.results);
         for(var i = 0; i < data.results.length; i++) {
+            if(delivered.indexOf(data.results[i]) < 0) {
+                delivered.push(data.results[i]);
+            }
             if(packagesMonitored.indexOf(data.results[i]) < 0) {
                 packagesMonitored.push(data.results[i]);
                 addPackage(data.results[i]);
             }
         }
     });
+}
+
+// Selects all for display on map
+function selectAll() {
+    for(var i = 0; i < packagesMonitored.length; i++) {
+        if(packagesOnMap.indexOf(packagesMonitored[i]) < 0) {
+            //packagesOnMap.push(packagesMonitored[i]);
+            $("#checkbox" + packagesMonitored[i]).prop("checked", true);
+            changeMapDisplay(packagesMonitored[i], true);
+        }
+    }
+}
+
+// Unselects all packages for display on map
+function selectNone() {
+    for(var i = 0; i < packagesMonitored.length; i++) {
+        if(packagesOnMap.indexOf(packagesMonitored[i]) > -1) {
+            $("#checkbox" + packagesMonitored[i]).prop("checked", false);
+            changeMapDisplay(packagesMonitored[i], false);
+        }
+    }
+    //packagesOnMap = [];
+}
+
+// Selects all delivered packages for display on map
+function selectDelivered() {
+    for(var i = 0; i < delivered.length; i++) {
+        if(packagesOnMap.indexOf(delivered[i]) < 0) {
+            $("#checkbox" + delivered[i]).prop("checked", true);
+            changeMapDisplay(delivered[i], true);
+        }
+    }
+}
+
+// Selects all undelivered packages for display on map
+function selectUndelivered() {
+    for(var i = 0; i < packagesMonitored.length; i++) {
+        if(packagesOnMap.indexOf(packagesMonitored[i]) < 0 && delivered.indexOf(packagesMonitored[i]) < 0) {
+            //packagesOnMap.push(packagesMonitored[i]);
+            $("#checkbox" + packagesMonitored[i]).prop("checked", true);
+            changeMapDisplay(packagesMonitored[i], true);
+        }
+    }
 }
 
 // For page load and mode toggle - gets data from cookies and adds to list
