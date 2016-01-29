@@ -112,7 +112,7 @@ class package():
         self.land_speeds = [DEFAULT_SPEEDS[0]]
         self.water_speeds = [DEFAULT_SPEEDS[1]]
         vehicle = self.get_vehicle(coord)
-        self.dist = vincenty(coord, self.destination)
+        self.dist = vincenty(coord[:2], self.destination)
         if vehicle == 0:
             self.seen_land = True
             self.seen_water = False
@@ -159,7 +159,7 @@ class package():
         else:
             self.water_speeds[-1] = self.get_speed()
         self.speeds = [average(self.land_speeds), average(self.water_speeds)]
-        self.dist = vincenty(coord, self.destination)
+        self.dist = vincenty(coord[:2], self.destination)
 
     def get_speed(self):
         '''(self) -> float
