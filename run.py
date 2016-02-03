@@ -9,16 +9,16 @@ from flask import Flask, jsonify, render_template, request
 
 app = Flask(__name__)
 
-# TESTING VARS
+## TESTING VARS
 initial_data = {}
 package_data = {}
 delivered_packages = []
 packages = {}
 
 def parse_time(time_str):
-    """Does dateutil.parser.parse on the string, then converts to a \
-    timetuple, which is converted to milliseconds since epoch by \
-    time.mktime"""
+    ## Does dateutil.parser.parse on the string, then converts to a \
+    #  timetuple, which is converted to milliseconds since epoch by \
+    #  time.mktime
     return int(time.mktime(parse(time_str).timetuple()))
 
 
@@ -34,7 +34,7 @@ def reset():
 
 @app.route('/tracknewpackage', methods=['GET'])
 def track_new_package():
-    """Gets new package data, with name, destination, and UUID."""
+    ## Gets new package data, with name, destination, and UUID.
     global initial_data
     name = request.args.get('name', "", type=str)
     dest_lat = request.args.get('destinationLat', 0, type=float)
@@ -53,8 +53,8 @@ def track_new_package():
 
 @app.route('/packagetrackupdate/<uuid>', methods=['POST'])
 def get_package_update(uuid):
-    """Receives POST data about package's current info, and adds it to the \
-    dictionary of positions."""
+    ## Receives POST data about package's current info, and adds it to the \
+    #  dictionary of positions.
     print "Trying to get package update..."
     data = json.loads(request.get_data().replace("[", "{").replace("]", "}"))
     # print data
@@ -97,15 +97,15 @@ def get_package_update(uuid):
 
 @app.route('/testdata')
 def test_data():
-    """Returns a json version of whatever variable is passed as the value \
-    from the data key"""
+    ## Returns a json version of whatever variable is passed as the value \
+    #  from the data key
     return jsonify(results=eval(request.args.get('data', "", type=str)))
 
 
 @app.route('/data')
 def send_data():
-    """Sends data to clientside. dt is for what type of output it's expecting, \
-    and uuid is for the package uuid for which data is received."""
+    ## Sends data to clientside. dt is for what type of output it's expecting, \
+    #  and uuid is for the package uuid for which data is received.
     print "Sending data"
     global begin, initial_data, package_data
     a = request.args.get('dt', "", type=str)
@@ -152,8 +152,8 @@ def send_data():
 
 @app.route('/')
 def index():
-    """Serves the webpage based on template at /templates/index.html"""
-    # print "Serving index..."
+    ## Serves the webpage based on template at /templates/index.html
+    #  print "Serving index..."
     return render_template('index.html')
 
 if __name__ == '__main__':
