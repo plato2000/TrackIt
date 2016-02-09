@@ -109,7 +109,7 @@ def get_current_data(uuid):
 ## Gets the destination of package.
 #
 #  Args:
-       uuid: the uuid for which to get a destination
+#       uuid: the uuid for which to get a destination
 #  Returns:
 #      a tuple (lat, lon)
 def get_destination_of_package(uuid):
