@@ -156,6 +156,7 @@ def index():
     #  print "Serving index..."
     return render_template('index.html')
 
+## Recovers undelivered packages from the database on startup.
 def recover():
     global packages
     undelivered = databaseStorage.get_undelivered_packages()
@@ -165,7 +166,8 @@ def recover():
         packages[uuid] = package(start, dest)
         coords = databaseStorage.get_locations(uuid, start[-1])
         for coord in coords:
-            packages[uuid].add_point(coord)
+            c = coord["coords"] + tuple(coord["ele"], coord["time"])
+            packages[uuid].add_point(c)
 
 if __name__ == '__main__':
     recover()
