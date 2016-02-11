@@ -1,7 +1,6 @@
-var DEFAULT_TR_CONTENTS =   '<tr class="listRow" id="row{UUID}"><td><div class="checkbox"><label><input type="checkbox" name="{UUID}" onchange="changeMapDisplay(this.name, this.checked)" id="checkbox{UUID}"></label></div><br /><div class="color-container"><input type="hidden" id="color{UUID}" value="{COLOR}"></div></td><td class="uuid" id="uuid{UUID}">{UUID}</td><td class="name" id="name{UUID}">{NAME}</td><td class="location" id="location{UUID}"><p><b>Starting location: </b><span id="start{UUID}">{STARTLOCATION}</span></p><p><b>Current location: </b><span id="current{UUID}">{CURRENTLOCATION}</span></p><p><b>Destination: </b><span id="dest{UUID}">{DESTLOCATION}</span></p></td><td id="etr{UUID}">{ETA}</td><td><a href="javascript:removeRow(\'{UUID}\')" class="btn btn-raised btn-danger">Stop Tracking</a></td></tr>';
+var DEFAULT_TR_CONTENTS = '<tr class="listRow" id="row{UUID}"><td><span class="glyphicon glyphicon-plus" aria-label="Expand"></span></td><td><div class="checkbox"><label><input type="checkbox" name="{UUID}" onchange="changeMapDisplay(this.name, this.checked)" id="checkbox{UUID}"></label></div><br /><div class="color-container"><input type="hidden" id="color{UUID}" value="{COLOR}"></div></td><td class="uuid" id="uuid{UUID}">{UUID}</td><td class="name" id="name{UUID}">{NAME}</td><td class="location" id="location{UUID}"><p><b>Current location: </b><span id="current{UUID}">{CURRENTLOCATION}</span></p></td><td id="etr{UUID}">{ETA}</td><td><a href="javascript:removeRow(\'{UUID}\')" class="btn btn-raised btn-danger">Stop Tracking</a></td></tr>';
 //var ADMIN_TR_CONTENTS =     '<tr class="listRow" id="row{UUID}"><td><div class="checkbox"><label><input type="checkbox" name="{UUID}" onchange="changeMapDisplay(this.name, this.checked)" id="checkbox{UUID}"></label></div><br /><div class="color-container"><input type="hidden" id="color{UUID}" value="{COLOR}"></div></td><td class="uuid" id="uuid{UUID}">{UUID}</td><td class="name" id="name{UUID}">{NAME}</td><td class="location" id="location{UUID}"><p><b>Starting location: </b><span id="start{UUID}">{STARTLOCATION}</span></p><p><b>Current location: </b><span id="current{UUID}">{CURRENTLOCATION}</span></p><p><b>Destination: </b><span id="dest{UUID}">{DESTLOCATION}</span></p></td><td id="etr{UUID}">{ETA}</td><td></td></tr>';
-
-var MODAL_CONTENTS = ''
+var DEFAULT_DROPDOWN_CONTENTS = '<tr class="dropdown-row"><td colspan="7" id="dropdown{UUID}"><p><b>Starting location: </b><span id="start{UUID}">{STARTLOCATION}</span></p><p><b>Distance: </b><span id="dist{UUID}">{DISTANCE}</span></p><p><b>Destination: </b><span id="dest{UUID}">{DESTLOCATION}</span></p></td></tr>';
 
 
 var packagesMonitored = [];
@@ -66,25 +65,26 @@ function populateRow(uuid, name) {
     newRow = replaceAll(newRow, '{NAME}', name);
     // Location is updated later, as reverse geocoding is not always instant
     newRow = replaceAll(newRow, '{CURRENTLOCATION}', "Loading...");
-    newRow = replaceAll(newRow, '{STARTLOCATION}', "Loading...");
-    newRow = replaceAll(newRow, '{DESTLOCATION}', "Loading...");
     newRow = replaceAll(newRow, '{COLOR}', colors[uuid]);
     newRow = replaceAll(newRow, '{ETA}', "Loading...");
     return newRow;
 }
 
-function populateModal(uuid, name) {
-    var newModal = MODAL_CONTENTS;
-    newModal = replaceAll(newModal, '{UUID}', uuid);
-    newModal = replaceAll(newModal, '{NAME}', name);
-    return newModal;
+function populateDropdown(uuid) {
+    var newDrop = DEFAULT_DROPDOWN_CONTENTS;
+    newDrop = replaceAll(newDrop, '{UUID}', uuid);
+    newDrop = replaceAll(newDrop, '{STARTLOCATION}', "Loading...");
+    newDrop = replaceAll(newDrop, '{DESTLOCATION}', "Loading...");
+    newDrop = replaceAll(newDrop, '{DISTANCE}', "Loading...");
+    return newDrop;
 }
 
 // Adds a new row to the table in the page
 function addRow(uuid, name, start, current, dest) {
     rowToAdd = populateRow(uuid, name);
+    dropDown = populateDropdown(uuid);
     // Adds row to table
-    $('#packageTable > tbody:last-child').append(rowToAdd + "\n" + populateModal(uuid, name));
+    $('#packageTable > tbody:last-child').append(rowToAdd + "\n" + dropDown);
     // Material design JS loads proper styling for checkboxes (has to be loaded every time)
     $.material.checkbox();
 
@@ -115,9 +115,11 @@ function addRow(uuid, name, start, current, dest) {
     });
 
     console.log("uuid: " + uuid);
+    $(".dropdown-row").hide();
+
     // Puts locations in after row is already in (asynchronous)
-    setLocationName("#start" + uuid, start);
     setLocationName("#current" + uuid, current);
+    setLocationName("#start" + uuid, start);
     setLocationName("#dest" + uuid, dest);
 }
 
@@ -233,6 +235,12 @@ function deliveryCheckCallback(index, concat) {
     };
 }
 
+function distCallback(index) {
+    return function(data) {
+        $("#dist" + packagesMonitored[index]).text(Math.round(data.results / 100) / 10 + " km");
+    }
+}
+
 function etrCallback(index) {
     return function(data) {
         $("#etr" + packagesMonitored[index]).text(moment().add(data.results, 'seconds').calendar());
@@ -264,10 +272,15 @@ function updateData() {
             $.getJSON($SCRIPT_ROOT + '/data', {
                 "dt": "getETR",
                 "uuid": packagesMonitored[i]
-                }, etrCallback(i));
+            }, etrCallback(i));
+            $.getJSON($SCRIPT_ROOT + '/data', {
+                "dt": "getDistance",
+                "uuid": packagesMonitored[i]
+            }, distCallback(i));
         } else {
             // console.log(packagesMonitored[i] + " is delivered");
             $("#etr" + packagesMonitored[i]).text("Delivered");
+            $("#dist" + packagesMonitored[i]).text("0 km");
         }
     }
     updateMap();
@@ -564,8 +577,31 @@ $(window).on('resize', function() {
     } else {
         $('#selectButtons').removeClass('btn-group-justified');
     }
-})
+});
 
-
+$(function() {
+    $(".dropdown-row").hide();
+    $("table").click(function(event) {
+        event.stopPropagation();
+        var target = $(event.target);
+        if ( target.closest("td").attr("colspan") > 1 ) {
+            console.log("target.closest('td') has colspan > 1");
+            //target.slideUp();
+            target.parent().hide();
+            console.log("target.parent: " + target.parent().html());
+            target.closest("tr").prev().find("td:first").html('<span class="glyphicon glyphicon-plus" aria-label="Expand">');
+        } else {
+            //target.closest("tr").next().show();
+            console.log("target.closest.next: " + target.closest("tr").next());
+            if (target.closest("tr").next().find("td:first").html().indexOf("glyphicon-plus") > -1) {
+                target.closest("tr").next().show();
+                target.closest("tr").next().find("td:first").html('<span class="glyphicon glyphicon-minus" aria-label="Collapse">');
+            } else {
+                target.closest("tr").next().hide();
+                target.closest("tr").next().find("td:first").html('<span class="glyphicon glyphicon-plus" aria-label="Expand">');
+            }
+        }
+    });
+});
 
 
