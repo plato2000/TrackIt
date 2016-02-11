@@ -156,5 +156,18 @@ def index():
     #  print "Serving index..."
     return render_template('index.html')
 
+def recover():
+    global packages
+    undelivered = databaseStorage.get_undelivered_packages()
+    for uuid in undelivered:
+        start = databaseStorage.get_first_data(uuid)
+        dest = databaseStorage.get_destination_of_package(uuid)
+        packages[uuid] = package(start, dest)
+        coords = databaseStorage.get_locations(uuid, start[-1])
+        for coord in coords:
+            packages[uuid].add_point(coord)
+
 if __name__ == '__main__':
+    recover()
     app.run(debug=True, use_debugger=False, use_reloader=True)
+    
