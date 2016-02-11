@@ -9,32 +9,19 @@ from flask import Flask, jsonify, render_template, request
 
 app = Flask(__name__)
 
-## TESTING VARS
-initial_data = {}
-package_data = {}
-delivered_packages = []
-packages = {}
 
+## Does dateutil.parser.parse on the string, then converts to a
+#  timetuple, which is converted to seconds since epoch by
+#  time.mktime
+#  @param time_str A timestamp in some ISO format
+#  @return Time in seconds since epoch
 def parse_time(time_str):
-    ## Does dateutil.parser.parse on the string, then converts to a \
-    #  timetuple, which is converted to milliseconds since epoch by \
-    #  time.mktime
     return int(time.mktime(parse(time_str).timetuple()))
 
 
-@app.route('/reset')
-def reset():
-    global begin, cp, visited_points
-    cp = begin[:]
-    print(cp, begin)
-    visited_points = [{'lat': begin[0], 'lng':begin[1]}]
-    print('---', cp, visited_points, '----')
-    return jsonify(a='true')
-
-
+## Gets new package data, with name, destination, and UUID.
 @app.route('/tracknewpackage', methods=['GET'])
 def track_new_package():
-    ## Gets new package data, with name, destination, and UUID.
     global initial_data
     name = request.args.get('name', "", type=str)
     dest_lat = request.args.get('destinationLat', 0, type=float)
@@ -51,11 +38,12 @@ def track_new_package():
     # return "success"
 
 
+## Receives POST data about package's current info, and adds it to the
+#  dictionary of positions.
+#  @param uuid The uuid of the package that is being updated
 @app.route('/packagetrackupdate/<uuid>', methods=['POST'])
 def get_package_update(uuid):
-    ## Receives POST data about package's current info, and adds it to the \
-    #  dictionary of positions.
-    print "Trying to get package update..."
+    # print "Trying to get package update..."
     data = json.loads(request.get_data().replace("[", "{").replace("]", "}"))
     # print data
     if "delivered" in data:
@@ -95,17 +83,17 @@ def get_package_update(uuid):
     return ''
 
 
+## Returns a json version of whatever variable is passed as the value
+#  from the data key
 @app.route('/testdata')
 def test_data():
-    ## Returns a json version of whatever variable is passed as the value \
-    #  from the data key
     return jsonify(results=eval(request.args.get('data', "", type=str)))
 
 
+## Sends data to clientside. dt is for what type of output it's expecting
+#  and uuid is for the package uuid for which data is received.
 @app.route('/data')
 def send_data():
-    ## Sends data to clientside. dt is for what type of output it's expecting, \
-    #  and uuid is for the package uuid for which data is received.
     print "Sending data"
     global begin, initial_data, package_data
     a = request.args.get('dt', "", type=str)
@@ -150,10 +138,10 @@ def send_data():
     return jsonify(results="")
 
 
+## Serves the webpage based on template at /templates/index.html
+#  print "Serving index..."
 @app.route('/')
 def index():
-    ## Serves the webpage based on template at /templates/index.html
-    #  print "Serving index..."
     return render_template('index.html')
 
 ## Recovers undelivered packages from the database on startup.

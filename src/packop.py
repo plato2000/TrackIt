@@ -22,21 +22,21 @@ def roundf(thing):
 ## Returns whether or not the given pixel is over land.
 #
 #  Args:
-#      pixel: tuple
+#  @param pixel tuple
 #
 #  Returns:
-#      bool
+#  @returns bool
 def over_land(pixel):
     return array[pixel[0]][pixel[1]] == 1
 
 ## Generates a line of pixels from two given endpoints.
 #
 #  Args:
-#      pixel1: tuple
-#      pixel2: tuple
+#  @param pixel1 tuple
+#  @param pixel2 tuple
 #
 #  Returns:
-#      list
+#  @returns list
 def generate_line(pixel1, pixel2):
     x1, y1 = pixel1
     x2, y2 = pixel2
@@ -72,10 +72,10 @@ def generate_line(pixel1, pixel2):
 ## Converts from latitude/longitude to pixels on a map projection.
 #
 #  Args:
-#      coord: tuple
+#  @param coord: tuple
 #
 #  Returns:
-#      tuple
+#  @returns tuple
 def to_pixel(coord):
     x = MAP_WIDTH / 360 * coord[1] + MAP_WIDTH / 2
     y = -MAP_HEIGHT / 180 * coord[0] + MAP_HEIGHT / 2
@@ -84,20 +84,20 @@ def to_pixel(coord):
 ## Returns the address of a coordinate.
 #
 #  Args:
-#      coord: tuple
+#  @param coord: tuple
 #
 #  Returns:
-#      str
+#  @returns str
 def get_address(coord):
     return nominatim.reverse(coord).address
 
 ## Converts an ISO 8601 timestamp to seconds from epoch.
 #
 #  Args:
-#      timestamp: str
+#  @param timestamp: str
 #
 #  Returns:
-#      float
+#  @param float
 def parse_time(timestamp):
     ts = time.strptime(timestamp, "%Y-%m-%dT%H:%M:%SZ")
     return time.mktime(ts)
@@ -105,11 +105,11 @@ def parse_time(timestamp):
 ## Returns the Vincenty distance between two coordinates.
 #
 #  Args:
-#      coord1: tuple
-#      coord2: tuple
+#  @param coord1: tuple
+#  @param coord2: tuple
 #
 #  Returns:
-#      float
+#  @returns float
 def vincenty(coord1, coord2):
     while True:
         try:
@@ -120,10 +120,10 @@ def vincenty(coord1, coord2):
 ## Returns the average of a list of numbers.
 #
 #  Args:
-#      elements: list
+#  @param elements: list
 #
 #  Returns:
-#      float
+#  @returns float
 def average(elements):
     return sum(elements) / len(elements)
 
@@ -134,9 +134,9 @@ class package():
     #  and the destination point.
     #
     #  Args:
-    #      self
-    #      coords: list
-    #      destination: tuple
+    #  @param self The object pointer
+    #  @param coords List of format (latitude, longitude, elevation, time) - of current / first point
+    #  @param destination Tuple of format (latitude, longitude)
     #
     #  Coordinates are tuples of the format:
     #  (latitude, longitude, elevation, time).
@@ -160,11 +160,11 @@ class package():
     #  where 0 is for car, and 1 is for boat/ship/plane.
     #
     #  Args:
-    #      self
-    #      coord: tuple
+    #  @param self
+    #  @param coord tuple
     #
     #  Returns:
-    #      int
+    #  @returns int
     def get_vehicle(self, coord):
         x, y = to_pixel(coord[:2])
         if not over_land((x, y)):
@@ -177,8 +177,8 @@ class package():
     #  and creates a new segment if needed.
     #
     #  Args:
-    #      self
-    #      coord: tuple
+    #  @param self
+    #  @param coord tuple
     def add_point(self, coord):
         segment = self.coords[-1]
         vehicle = self.get_vehicle(coord)
@@ -207,10 +207,10 @@ class package():
     #  in meters per second.
     #
     #  Args:
-    #      self
+    #  @param self
     #
     #  Returns:
-    #      float
+    #  @returns float
     def get_speed(self):
         segment = self.coords[-1]
         if len(segment) > 1:
@@ -228,10 +228,10 @@ class package():
     ## Returns the estimated time remaining for the package to arrive.
     #
     #  Args:
-    #      self
+    #  @param self
     #
     #  Returns:
-    #      float
+    #  @returns float
     def etr(self):
         segment = self.coords[-1]
         coord = segment[-1][:2]
