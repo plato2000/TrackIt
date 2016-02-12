@@ -15,28 +15,29 @@ file = open(PATH_TO_MAP, "r")
 array = json.loads(file.read())
 file.close()
 
+## Returns an integer representation of a rounded float.
 
-def roundf(thing):
-    return int(round(thing))
+def roundf(number):
+    return int(round(number))
 
 ## Returns whether or not the given pixel is over land.
 #
 #  Args:
-#  @param pixel tuple
+#  @param pixel the pixel on the land/water map to be checked
 #
 #  Returns:
-#  @returns bool
+#  @returns boolean (true if over land)
 def over_land(pixel):
     return array[pixel[0]][pixel[1]] == 1
 
 ## Generates a line of pixels from two given endpoints.
 #
 #  Args:
-#  @param pixel1 tuple
-#  @param pixel2 tuple
+#  @param pixel1 the first endpoint point of the line 
+#  @param pixel2 the second endpoint pixel of the line
 #
 #  Returns:
-#  @returns list
+#  @returns list of pixels forming a line between the endpoints
 def generate_line(pixel1, pixel2):
     x1, y1 = pixel1
     x2, y2 = pixel2
@@ -72,7 +73,7 @@ def generate_line(pixel1, pixel2):
 ## Converts from latitude/longitude to pixels on a map projection.
 #
 #  Args:
-#  @param coord: tuple
+#  @param coord 
 #
 #  Returns:
 #  @returns tuple
@@ -134,11 +135,11 @@ class package():
     #  and the destination point.
     #
     #  Args:
-    #  @param self The object pointer
-    #  @param coords List of format (latitude, longitude, elevation, time) - of current / first point
-    #  @param destination Tuple of format (latitude, longitude)
+    #  @param self the object pointer
+    #  @param coord starting coordinate point
+    #  @param destination tuple of format (latitude, longitude)
     #
-    #  Coordinates are tuples of the format:
+    #  Coordinates except for destination are tuples of the format:
     #  (latitude, longitude, elevation, time).
     def __init__(self, coord, destination):       
         self.coords = [[coord]]
@@ -160,15 +161,14 @@ class package():
     #  where 0 is for car, and 1 is for boat/ship/plane.
     #
     #  Args:
-    #  @param self
-    #  @param coord tuple
+    #  @param self the object pointer
+    #  @param coord the coordinate to check the mode for
     #
     #  Returns:
-    #  @returns int
+    #  @returns int (0 is for land, 1 is for water)
     def get_vehicle(self, coord):
         x, y = to_pixel(coord[:2])
         if not over_land((x, y)):
-            # For now, water defaults to plane
             return 1
         else:
             return 0
@@ -177,7 +177,7 @@ class package():
     #  and creates a new segment if needed.
     #
     #  Args:
-    #  @param self
+    #  @param self the object pointer
     #  @param coord tuple
     def add_point(self, coord):
         segment = self.coords[-1]

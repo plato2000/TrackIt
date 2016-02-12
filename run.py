@@ -149,13 +149,13 @@ def recover():
     global packages
     undelivered = databaseStorage.get_undelivered_packages()
     for uuid in undelivered:
-        start = databaseStorage.get_first_data(uuid)
+        convert_coord = lambda coord: coord["coords"] + tuple(coord["ele"], coord["time"])
+        start = convert_coord(databaseStorage.get_first_data(uuid))
         dest = databaseStorage.get_destination_of_package(uuid)
         packages[uuid] = package(start, dest)
         coords = databaseStorage.get_locations(uuid, start[-1])
         for coord in coords:
-            c = coord["coords"] + tuple(coord["ele"], coord["time"])
-            packages[uuid].add_point(c)
+            packages[uuid].add_point(convertCoord(coord))
 
 if __name__ == '__main__':
     recover()

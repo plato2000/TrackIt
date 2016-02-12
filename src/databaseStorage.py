@@ -5,10 +5,10 @@ import sys, traceback
 ## Creates a new table for a new package.
 #
 #  Args:
-#  @param uuid the UUID of the package being added
-#  @param name the name of the package being added
-#  @param dest_lat the latitude of the destination of the package
-#  @param dest_lon the longitude of the destination of the package
+#  @param uuid The UUID of the package being added
+#  @param name The name of the package being added
+#  @param dest_lat The latitude of the destination of the package
+#  @param dest_lon The longitude of the destination of the package
 def create_table(uuid, name, dest_lat, dest_lon):
     # print "creating table for uuid", uuid
     command = "CREATE TABLE \"" + uuid + "\" (Latitude DOUBLE(7,4), Longitude DOUBLE(7,4), Elevation INT(6), Time INT(10) PRIMARY KEY)"
@@ -23,11 +23,11 @@ def create_table(uuid, name, dest_lat, dest_lon):
 ## Inserts a package's data into database.
 #
 #  Args:
-#  @param uuid the uuid of the package where things are inserted
-#  @param latitude the latitude of the location at time
-#  @param longitude the longitude of the location at time
-#  @param elevation the elevation of the package at time
-#  @param time the time at which the location is reached
+#  @param uuid The uuid of the package where things are inserted
+#  @param latitude The latitude of the location at time
+#  @param longitude The longitude of the location at time
+#  @param elevation The elevation of the package at time
+#  @param time The time at which the location is reached
 def insert_location(uuid, latitude, longitude, elevation, time_var):
     print "inserting location"
     # now = datetime.now()
@@ -43,7 +43,7 @@ def insert_location(uuid, latitude, longitude, elevation, time_var):
 ## Sets a package's delivered status to true in the database
 #
 #  Args:
-#  @param uuid the uuid of the package to set delivered
+#  @param uuid The uuid of the package to set delivered
 def make_delivered(uuid):
     command = "UPDATE uuids SET delivered='Y' WHERE uuid=" + uuid
     execute_command(command)
@@ -51,11 +51,11 @@ def make_delivered(uuid):
 ## Gets a package's raw data from database.
 #
 #  Args:
-#  @param uuid the uuid of the package to get data for
-#  @param time_var the timestamp (in seconds since 1/1/1970) to start new results
+#  @param uuid The uuid of the package to get data for
+#  @param time_var The timestamp (in seconds since 1/1/1970) to start new results
 #
 #  Returns:
-#  @returns list of dictionaries of package data
+#  @returns List of dictionaries of package data
 def get_locations(uuid, time_var):
     command = "SELECT * FROM \"" + uuid + "\" WHERE Time > " + str(time_var) + " ORDER BY Time ASC"
     results = execute_command(command, results=True)
@@ -66,10 +66,10 @@ def get_locations(uuid, time_var):
 ## Gets a package's name from its uuid
 #
 #  Args:
-#  @param uuid the uuid of the package to get a name for
+#  @param uuid The uuid of the package to get a name for
 #
 #  Returns:
-#  @returns string (the name of the package)
+#  @returns String (the name of the package)
 def get_name(uuid):
     command = "SELECT nameString FROM uuids WHERE uuid='" + uuid + "'"
     results = execute_command(command, results=True)
@@ -80,7 +80,7 @@ def get_name(uuid):
 ## Gets a package's first package data (starting location)
 #
 #  Args:
-#  @param uuid the uuid of the package to get starting location for
+#  @param uuid The uuid of the package to get starting location for
 #
 #   Returns:
 #  @param A dictionary of package data
@@ -94,7 +94,7 @@ def get_first_data(uuid):
 ## Gets a package's last package data (current location)
 #
 #  Args:
-#  @param uuid the uuid of the package to get current location for
+#  @param uuid The uuid of the package to get current location for
 #
 #  Returns:
 #  @returns A dictionary of package data
@@ -108,7 +108,7 @@ def get_current_data(uuid):
 ## Gets the destination of package.
 #
 #  Args:
-#  @param uuid the uuid for which to get a destination
+#  @param uuid The uuid for which to get a destination
 #  Returns:
 #  @returns A tuple (lat, lon)
 def get_destination_of_package(uuid):
@@ -147,7 +147,7 @@ def get_delivered_packages():
 ## Gets all packages not marked as delivered (currently being processed)
 #
 #  Returns:
-#  @returns list of UUIDs
+#  @returns List of UUIDs
 def get_undelivered_packages():
     command = "SELECT uuid FROM uuids WHERE delivered='N'"
     results = execute_command(command, results=True)
@@ -157,10 +157,10 @@ def get_undelivered_packages():
 ## Checks if uuid is in database of uuids.
 #
 #  Args:
-#  @param uuid uuid to check validity for
+#  @param uuid Uuid to check validity for
 #
 #  Returns:
-#  @returns boolean (true if it's there)
+#  @returns Boolean (true if it's there)
 def is_valid_uuid(uuid):
     results = execute_command("SELECT uuid FROM uuids WHERE uuid='" + uuid + "'", results=True)
     print "is_valid_uuid:", results
@@ -169,10 +169,10 @@ def is_valid_uuid(uuid):
 ## Checks if package with given uuid is delivered.
 #
 #  Args:
-#  @param uuid uuid to check delivery status for
+#  @param uuid Uuid to check delivery status for
 #
 #  Returns:
-#  @returns boolean (true if it's delivered)
+#  @returns Boolean (true if it's delivered)
 def is_delivered(uuid):
     results = execute_command("SELECT delivered FROM uuids WHERE uuid='" + uuid + "'", results=True)
     print "delivery_status:", results
@@ -193,11 +193,11 @@ def clear_database_and_create_new():
 ## Executes SQL command given to it
 #
 #  Args:
-#  @param command the command to execute
-#  @param results whether or not to get results
+#  @param command The command to execute
+#  @param results Whether or not to get results
 #
 #  Returns:
-#  @returns success of command (or results if successful and results=True
+#  @returns Success of command (or results if successful and results=True)
 def execute_command(command, results=False):
     try:
         cursor.execute(command)
