@@ -35,6 +35,9 @@ The current dependencies are:
 ```
     flask 0.10.1
     geopy 1.11.0
+    MySQLdb 1.2.5
+    dateutil 2.4.1
+
 ```
 
 If you add libraries to your Python installation, add them to this list so the rest of us know what to get.
