@@ -151,7 +151,10 @@ def recover():
     for uuid in undelivered:
         start = databaseStorage.get_first_data(uuid)
         dest = databaseStorage.get_destination_of_package(uuid)
-        packages[uuid] = package(start, dest)
+        print "start:", start
+        print "dest:", dest
+        print "start[0]:", start[0]
+        packages[uuid] = packop.package(list(start), dest)
         coords = databaseStorage.get_locations(uuid, start[-1])
         for coord in coords:
             c = coord["coords"] + tuple(coord["ele"], coord["time"])
@@ -160,4 +163,3 @@ def recover():
 if __name__ == '__main__':
     recover()
     app.run(debug=True, use_debugger=False, use_reloader=True)
-    
