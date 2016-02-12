@@ -1,5 +1,7 @@
+/// The contents of the table row which gets added for each new package that is tracked
 var DEFAULT_TR_CONTENTS = '<tr class="listRow" id="row{UUID}"><td><span class="glyphicon glyphicon-plus" aria-label="Expand"></span></td><td><div class="checkbox"><label><input type="checkbox" name="{UUID}" onchange="changeMapDisplay(this.name, this.checked)" id="checkbox{UUID}"></label></div><br /><div class="color-container"><input type="hidden" id="color{UUID}" value="{COLOR}"></div></td><td class="uuid" id="uuid{UUID}">{UUID}</td><td class="name" id="name{UUID}">{NAME}</td><td class="location" id="location{UUID}"><p><b>Current location: </b><span id="current{UUID}">{CURRENTLOCATION}</span></p></td><td id="etr{UUID}">{ETA}</td><td><a href="javascript:removeRow(\'{UUID}\')" class="btn btn-raised btn-danger">Stop Tracking</a></td></tr>';
-//var ADMIN_TR_CONTENTS =     '<tr class="listRow" id="row{UUID}"><td><div class="checkbox"><label><input type="checkbox" name="{UUID}" onchange="changeMapDisplay(this.name, this.checked)" id="checkbox{UUID}"></label></div><br /><div class="color-container"><input type="hidden" id="color{UUID}" value="{COLOR}"></div></td><td class="uuid" id="uuid{UUID}">{UUID}</td><td class="name" id="name{UUID}">{NAME}</td><td class="location" id="location{UUID}"><p><b>Starting location: </b><span id="start{UUID}">{STARTLOCATION}</span></p><p><b>Current location: </b><span id="current{UUID}">{CURRENTLOCATION}</span></p><p><b>Destination: </b><span id="dest{UUID}">{DESTLOCATION}</span></p></td><td id="etr{UUID}">{ETA}</td><td></td></tr>';
+
+/// The contents of the dropdown row for each package for additional data
 var DEFAULT_DROPDOWN_CONTENTS = '<tr class="dropdown-row"><td colspan="7" id="dropdown{UUID}"><p><b>Starting location: </b><span id="start{UUID}">{STARTLOCATION}</span></p><p><b>Distance Remaining: </b><span id="dist{UUID}">{DISTANCE}</span></p><p><b>Destination: </b><span id="dest{UUID}">{DESTLOCATION}</span></p></td></tr>';
 
 
@@ -21,39 +23,49 @@ var originMapMarkers = {};
 var destinationMapMarkers = {};
 
 
-var contentString1 = '<div id="content">'+
-     '<div id="siteNotice">'+
-     '</div>'+
-     '<h1 id="firstHeading" class="firstHeading">';
-var contentString2 = '</h1>'+
-     '<div id="bodyContent"><p>'+
-     'Location:';
-var contentString3 = '<br>Here since: ';
-var contentString4 = '<br>Elevation: ';
-var contentString5 = '<br>ETR: ';
-var contentString6 = '</p>'+
-     '</div>'+
-     '</div>';
+var contentString1 = '<div id="content">' +
+                        '<div id="siteNotice">' +
+                        '</div>' +
+                     '<h1 id="firstHeading" class="firstHeading">';
+var contentString2 = '</h1>' +
+                     '<div id="bodyContent">' +
+                        '<p>' + 'Location:';
+var contentString3 =    '<br>Here since: ';
+var contentString4 =    '<br>Elevation: ';
+var contentString5 =    '<br>ETR: ';
+var contentString6 =    '</p>'+
+                    '</div>'+
+                    '</div>';
 
 
 var infowindow;
 
-// Helper function for replaceAll, which uses regex
+/// Helper function for replaceAll, which uses regex
+//  \param str The string for which to escape RegEx characters
+//  \return String with regular expression characters escaped
 function escapeRegExp(str) {
     return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
 }
 
-// Replaces all occurrences of 'find' within string 'str' with 'replace'
+/// Replaces all occurrences of 'find' within string 'str' with 'replace'
+//  \param str The string to search in
+//  \param find The substring to replace
+//  \param replace The string to replace find with
+//  \return A string in which find is replaced with replace
 function replaceAll(str, find, replace) {
     return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
 }
 
-// Gets a random hex color
+/// Gets a random hex color
+//  \return A random hex color of format #xxxxxx
 function getRandomColor() {
     return '#' + ('00000' + (Math.random() * (1 << 24) | 0).toString(16)).slice(-6);
 }
 
-// Uses DEFAULT_TR_CONTENTS and creates HTML for a new table row which
+/// Uses DEFAULT_TR_CONTENTS and creates HTML for a new table row for a newly tracked package
+//  \param uuid The uuid of the package being added to the table
+//  \param name The name of the package being added to the table
+//  \return An HTML string ready to be put into the webpage - replaced some things in it with real data
 function populateRow(uuid, name) {
     if(!adminMode) {
         var newRow = DEFAULT_TR_CONTENTS;
@@ -70,6 +82,10 @@ function populateRow(uuid, name) {
     return newRow;
 }
 
+
+/// Uses DEFAULT_DROPDOWN_CONTENTS and creates specific HTML for a dropdown row for a newly tracked package
+//  \param uuid The uuid of the package for which to generate the dropdown
+//  \return An HTML string ready to be put into the page
 function populateDropdown(uuid) {
     var newDrop = DEFAULT_DROPDOWN_CONTENTS;
     newDrop = replaceAll(newDrop, '{UUID}', uuid);
@@ -79,10 +95,18 @@ function populateDropdown(uuid) {
     return newDrop;
 }
 
-// Adds a new row to the table in the page
+/// Adds a new row to the table in the page
+//  It picks a random color, adds a checkbox for map display, populates a row, and calls the asynchronous
+//  Google Maps reverse geocoding lookup for the coordinates for current location, starting location, and destination.
+//
+//  \param uuid The uuid of the package for which to add a row to the table on the page
+//  \param name The name of the package for which to add a row to the table on the page
+//  \param start The starting coordinates for the package that is being added to the table
+//  \param current The current coordinates for the package
+//  \param destination The destination coordinates for the package
 function addRow(uuid, name, start, current, dest) {
-    rowToAdd = populateRow(uuid, name);
-    dropDown = populateDropdown(uuid);
+    var rowToAdd = populateRow(uuid, name);
+    var dropDown = populateDropdown(uuid);
     // Adds row to table
     $('#packageTable > tbody:last-child').append(rowToAdd + "\n" + dropDown);
     // Material design JS loads proper styling for checkboxes (has to be loaded every time)
@@ -139,7 +163,10 @@ function removeRow(uuid) {
 }
 
 
-// Adds package to table, monitored list after it's entered into text entry box
+/// Adds package to table, monitored list after it's entered into text entry box
+//  Does lookup to server's /data with dt=isValidUUID to perform a serverside check for if the uuid entered is valid
+//  This is done asynchronously and if it is invalid, it shows an alert and if not, it adds the package to the monitored
+//  list of packages.
 function addPackageFromTextInput() {
     var uuid = $("#newPackage").val();
     $.ajax({
@@ -164,7 +191,9 @@ function addPackageFromTextInput() {
     });
 }
 
-// Generic function to get package data from UUID and add to table
+/// Generic function to get package data from UUID and add to table. This is used by the load function and the adminLoad
+//  function and can be used for loading a list of tracked packages from the server as well.
+//  \param uuid The uuid of the package being added to the tracked list
 function addPackage(uuid) {
     if(!adminMode) {
         $.cookie("packagesMonitored", JSON.stringify(packagesMonitored));
@@ -188,6 +217,10 @@ function addPackage(uuid) {
     });
 }
 
+
+/// Converts data results from server to Google Maps coordinates, elevation, and time
+//  \param results An array of dictionaries of coordinates, elevation, and time
+//  \return An array of dictionaries of Google Maps LatLng objects, elevation, and time
 function convertUpdateResults(results) {
     //console.log(results);
     var newResults = [];
@@ -204,8 +237,10 @@ function convertUpdateResults(results) {
     return newResults;
 }
 
-// Used to reset scope because this is called from an asynchronous function. Without this, it would always use the
-// last versions of index, concat because they change in a loop
+/// Used to reset scope because this is called from an asynchronous function. Without this, it would always use the
+//  last versions of index, concat because they change in a loop.
+//  \param index The index in packagesMonitored of the package being updated
+//  \param concat Whether to concatenate the results to the end of the array of package positions or to make a new array
 function updateCallback(index, concat) {
     return function(data) {
         if(concat) {
@@ -222,6 +257,11 @@ function updateCallback(index, concat) {
     };
 }
 
+/// The callback function for the check if a package is delivered. It calls the updateCallback
+//  in order to update the data, since even if it is now delivered, we may not have the latest data. After one run of
+//  this with a delivered package, this will not be called again on that package.
+//  \param index The index in packagesMonitored of the package being updated
+//  \param concat Whether to concatenate the results to the end of the array of package positions or to make a new array
 function deliveryCheckCallback(index, concat) {
     return function(data){
         if(data.results) {
@@ -235,19 +275,25 @@ function deliveryCheckCallback(index, concat) {
     };
 }
 
+/// The callback function for the receiving of the distance remaining for the package to reach its destination.
+//  \param index The index in packagesMonitored of the package being updated
 function distCallback(index) {
     return function(data) {
         $("#dist" + packagesMonitored[index]).text(Math.round(data.results / 100) / 10 + " km");
     }
 }
 
+
+/// The callback function for the receiving of the time remaining for the package to reach its destination.
+//  \param index The index in packagesMonitored of the package being updated
 function etrCallback(index) {
     return function(data) {
         $("#etr" + packagesMonitored[index]).text(moment().add(data.results, 'seconds').calendar());
     }
 }
 
-// Gets new points from server
+/// Gets new points from server. It performs checks for delivery status, etr, and distance remaining. Then it updates
+//  the map after all new data is received.
 // TODO: get this to work for only one uuid at a time with optional arg
 function updateData() {
     for(var i = 0; i < packagesMonitored.length; i++) {
@@ -286,7 +332,10 @@ function updateData() {
     updateMap();
 }
 
-// Adds a list of packages to the table and sets conditions according to arrays passed to it
+/// Sets the monitored packages list to the list it receives (for loading from cookies or another source like the
+//  server). It does the same for the packages on the map list.
+//  \param packageList The new list of UUIDs of packages
+//  \param mapList The new list of UUIDs of packages on the map
 function writePackages(packageList, mapList) {
     packagesMonitored = packageList;
     packagesOnMap = mapList;
@@ -297,7 +346,9 @@ function writePackages(packageList, mapList) {
     }
 }
 
-// Toggles mode between admin mode and regular user
+/// Toggles mode between admin mode and regular user. For now, this is not done with any type of secure communication
+//  between the server and client - this could be done later with login tokens. As of now, the admin status is just a
+//  JavaScript variable and can be changed with a simple function call. Obviously this will change later.
 function changeAdminMode() {
     for(var i = 0; i < packagesOnMap.length; i++) {
         // console.log("removing row " + packagesOnMap[i]);
@@ -319,7 +370,8 @@ function changeAdminMode() {
     }
 }
 
-// Creates a path for the map pin of a given hex color
+/// Creates a path for the map pin of a given hex color
+//  \param color The hex color in format #xxxxxx of the pin symbol to be generated
 function pinSymbol(color) {
     return {
         //path: 'M 0,0 C -2,-20 -10,-22 -10,-30 A 10,10 0 1,1 10,-30 C 10,-22 2,-20 0,0 z M -2,-30 a 2,2 0 1,1 4,0 2,2 0 1,1 -4,0',
@@ -333,38 +385,54 @@ function pinSymbol(color) {
     };
 }
 
-// Changes visibility of package on map.
+/// Changes visibility of package on map. Called onclick of checkbox on table and on load if package is supposed to be
+//  on map.
+//  \param id The UUID of the package being changed
+//  \param checked Whether or not the checkbox is currently checked (checked for display, unchecked for no display)
 function changeMapDisplay(id, checked) {
     // console.log(id);
+    // If package is no longer displayed
     if(!checked) {
+        // Remove package from on map list
         packagesOnMap.splice($.inArray(id, packagesOnMap), 1);
+        // Remove map line from the map
         mapLines[id].setMap(null);
+        // Remove markers from map
         destinationMapMarkers[id].setMap(null);
         originMapMarkers[id].setMap(null);
     } else {
+        // Put package on the map list
         packagesOnMap.push(id);
     }
+    // Doesn't store in cookies if in admin mode so on logout it doesn't keep all the packages
     if(!adminMode) {
         $.cookie("packagesOnMap", JSON.stringify(packagesOnMap));
     }
+    // Updates data and map to reflect changes if new package added to the map list
     updateData();
 }
 
+/// The callback function for the infoWindow for clicking on the map marker
+//  \param destination Whether or not the infoWindow is for the destination (to determine where to place the window)
+//  \param index The index of the package in packagesOnMap
 function infoWindowCallback(destination, index) {
     return function() {
         if(!destination) {
             infowindow.setContent('<div id="content"><p>' + packagesOnMap[index] + '</p></div>');
             infowindow.open(map, originMapMarkers[packagesOnMap[index]]);
         } else {
-            infowindow.setContent('<div id="content"><p>'+packagesOnMap[index]+'</p></div>');
+            infowindow.setContent('<div id="content"><p>' + packagesOnMap[index] + '</p></div>');
             infowindow.open(map, destinationMapMarkers[packagesOnMap[index]]);
         }
     };
 }
 
-// Updates the map view with new coordinates for the line and markers
+/// Updates the map view with new coordinates for the line and markers.
+//
 function updateMap() {
     for (var i = 0; i < packagesOnMap.length; i++) {
+
+        // If the Polyline does not already exist, make a new one
         if (!(packagesOnMap[i] in mapLines)) {
             mapLines[packagesOnMap[i]] = new google.maps.Polyline({
                 path: [],
@@ -375,6 +443,8 @@ function updateMap() {
             });
         }
         mapLines[packagesOnMap[i]].setMap(map);
+
+        // If the destination map marker does not already exist, make a new one
         if (!(packagesOnMap[i] in destinationMapMarkers)) {
             destinationMapMarkers[packagesOnMap[i]] = new google.maps.Marker({
                 position: destinations[packagesOnMap[i]],
@@ -386,9 +456,12 @@ function updateMap() {
                 }
             });
 
+            // Display an infoWindow with the UUID of the package onclick for the marker
             destinationMapMarkers[packagesOnMap[i]].addListener('click', infoWindowCallback(true, i));
         }
         destinationMapMarkers[packagesOnMap[i]].setMap(map);
+
+        // If there is a starting coordinate and the origin map marker does not exist, make a new one
         if (packagePositions[packagesOnMap[i]] != undefined) {
             if(!(packagesOnMap[i] in originMapMarkers)) {
                 originMapMarkers[packagesOnMap[i]] = new google.maps.Marker({
@@ -401,10 +474,13 @@ function updateMap() {
                     }
                 });
 
+                // Display an infoWindow with the UUID of the package onclick for the marker
                 originMapMarkers[packagesOnMap[i]].addListener('click', infoWindowCallback(false, i));
                 
             }
             originMapMarkers[packagesOnMap[i]].setMap(map);
+
+            // Update the Polyline with new points that are not on it already (by number of points)
             var currentPath = mapLines[packagesOnMap[i]].getPath();
             for (var j = currentPath.length; j < packagePositions[packagesOnMap[i]].length; j++) {
                 currentPath.push(packagePositions[packagesOnMap[i]][j]['coords']);
@@ -414,7 +490,9 @@ function updateMap() {
     }
 }
 
-// Callback function for setLocationName
+/// Callback function for setLocationName
+//  \param id The HTML id of the element to set the new location to
+//  \param latlng A Google Maps LatLng object for which to perform reverse geocoding
 function locationCallback(id, latlng) {
     return function (results, status) {
         if (status !== google.maps.GeocoderStatus.OK) {
@@ -441,7 +519,10 @@ function locationCallback(id, latlng) {
     };
 }
 
-// Uses reverse geocoding to get human-readable name for coordinates
+/// Uses reverse geocoding to get human-readable name for coordinates. It calls the locationCallback to wait for the
+//  Google Maps server to respond.
+//  \param id The HTML id of the element to set the new location to
+//  \param latlng A Google Maps LatLng object for which to perform reverse geocoding
 function setLocationName(id, latlng) {
     // console.log("lat: " + latlng.lat() + " lng: " + latlng.lng());
     // This is making the Geocode request
@@ -449,17 +530,9 @@ function setLocationName(id, latlng) {
     geocoder.geocode({'latLng': latlng}, locationCallback(id, latlng));
 }
 
-//// Adds everything on the admin list of UUIDS to the table
-//function adminLoad() {
-//    $.getJSON($SCRIPT_ROOT + '/data', {"dt": "adminUUIDList"}, function(data) {
-//        // console.log(data.results);
-//        packagesMonitored = data.results;
-//        // console.log(packagesMonitored);
-//        writePackages(packagesMonitored, []);
-//    });
-//}
 
-// Adds undelivered packages to packages monitored list if they aren't already there
+/// Adds undelivered packages to packages monitored list if they aren't already there
+//
 function addUndeliveredPackages() {
     $.getJSON($SCRIPT_ROOT + '/data', {"dt": "undeliveredPackages"}, function(data) {
         // console.log(data.results);
@@ -472,7 +545,8 @@ function addUndeliveredPackages() {
     });
 }
 
-// Adds delivered packages to packages monitored list if they aren't already there
+/// Adds delivered packages to packages monitored list if they aren't already there
+//
 function addDeliveredPackages() {
     $.getJSON($SCRIPT_ROOT + '/data', {"dt": "deliveredPackages"}, function(data) {
         // console.log(data.results);
@@ -488,7 +562,8 @@ function addDeliveredPackages() {
     });
 }
 
-// Selects all for display on map
+/// Selects all for display on map
+//
 function selectAll() {
     for(var i = 0; i < packagesMonitored.length; i++) {
         if(packagesOnMap.indexOf(packagesMonitored[i]) < 0) {
@@ -499,7 +574,8 @@ function selectAll() {
     }
 }
 
-// Unselects all packages for display on map
+/// Unselects all packages for display on map
+//
 function selectNone() {
     for(var i = 0; i < packagesMonitored.length; i++) {
         if(packagesOnMap.indexOf(packagesMonitored[i]) > -1) {
@@ -510,7 +586,8 @@ function selectNone() {
     //packagesOnMap = [];
 }
 
-// Selects all delivered packages for display on map
+/// Selects all delivered packages for display on map
+//
 function selectDelivered() {
     for(var i = 0; i < delivered.length; i++) {
         if(packagesOnMap.indexOf(delivered[i]) < 0) {
@@ -520,7 +597,8 @@ function selectDelivered() {
     }
 }
 
-// Selects all undelivered packages for display on map
+/// Selects all undelivered packages for display on map
+//
 function selectUndelivered() {
     for(var i = 0; i < packagesMonitored.length; i++) {
         if(packagesOnMap.indexOf(packagesMonitored[i]) < 0 && delivered.indexOf(packagesMonitored[i]) < 0) {
@@ -531,7 +609,8 @@ function selectUndelivered() {
     }
 }
 
-// For page load and mode toggle - gets data from cookies and adds to list
+/// For page load and mode toggle - gets data from cookies and adds to list
+//
 function loadFunction() {
     if (typeof $.cookie('packagesOnMap') == 'undefined') {
         $.cookie('packagesMonitored', '[]');
@@ -543,14 +622,16 @@ function loadFunction() {
     writePackages(JSON.parse($.cookie("packagesMonitored")), JSON.parse($.cookie("packagesOnMap")));
 }
 
-// for testing purposes
+/// For testing purposes - clears cookies for packagesOnMap and packagesMonitored
+//
 function clearCookies() {
     $.cookie('packagesOnMap', '[]');
     $.cookie('packagesMonitored', '[]');
 }
 
 
-// Creates the map in the "map" div after google maps api loads and does other onload things
+/// Creates the map in the "map" div after google maps api loads and does other onload things
+//
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 2,
@@ -565,12 +646,17 @@ function initMap() {
     $.fn.modal.Constructor.DEFAULTS.keyboard = false;
 }
 
+
+/// Makes buttons for placing things on map a justified button group if window is large
+//
 $(document).ready(function() {
    if($(window).width() > 765) {
         $("#selectButtons").addClass("btn-group-justified");
    }
 });
 
+/// Makes sure button group for placing things on map is justified or not depending on the window size
+//
 $(window).on('resize', function() {
     if($(window).width() > 765) {
         $('#selectButtons').addClass('btn-group-justified');
@@ -579,26 +665,30 @@ $(window).on('resize', function() {
     }
 });
 
+
+
+/// Manages dropdown rows - hides and shows, changes icon at beginning
+//
 $(function() {
     $(".dropdown-row").hide();
     $("table").click(function(event) {
         event.stopPropagation();
         var target = $(event.target);
         if ( target.closest("td").attr("colspan") > 1 ) {
-            console.log("target.closest('td') has colspan > 1");
+            //console.log("target.closest('td') has colspan > 1");
             //target.slideUp();
-            target.parent().hide();
-            console.log("target.parent: " + target.parent().html());
+            target.closest("td").parent().hide();
+            //console.log("target.parent: " + target.parent().html());
             target.closest("tr").prev().find("td:first").html('<span class="glyphicon glyphicon-plus" aria-label="Expand">');
         } else {
             //target.closest("tr").next().show();
-            console.log("target.closest.next: " + target.closest("tr").next());
-            if (target.closest("tr").next().find("td:first").html().indexOf("glyphicon-plus") > -1) {
+            //console.log("target.closest.next: " + target.closest("tr").next().html());
+            if (target.closest("tr").find("td:first").html().indexOf("glyphicon-plus") > -1) {
                 target.closest("tr").next().show();
-                target.closest("tr").next().find("td:first").html('<span class="glyphicon glyphicon-minus" aria-label="Collapse">');
+                target.closest("tr").find("td:first").html('<span class="glyphicon glyphicon-minus" aria-label="Collapse">');
             } else {
                 target.closest("tr").next().hide();
-                target.closest("tr").next().find("td:first").html('<span class="glyphicon glyphicon-plus" aria-label="Expand">');
+                target.closest("tr").find("td:first").html('<span class="glyphicon glyphicon-plus" aria-label="Expand">');
             }
         }
     });
