@@ -8,6 +8,18 @@
 }
 
 .color-container {
-	height: 20px;
-	width: 20px;
+    width: 20px;
+    height: 20px;
+}
+
+.minicolors-theme-default, .minicolors-swatch, .minicolors-swatch-color, .minicolors-swatch .minicolors-sprite {
+    /*top: 5px;*/
+    /*left: 5px;*/
+    width: 20px !important;
+    height: 20px !important;
+    vertical-align: inherit;
+}
+.minicolors-theme-default.minicolors-position-right .minicolors-swatch {
+    left: auto;
+    right: 5px;
 }
