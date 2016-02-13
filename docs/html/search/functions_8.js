@@ -14,5 +14,13 @@ var searchData=
   ['get_5fspeed',['get_speed',['../classsrc_1_1packop_1_1_package.html#afcc4f2e177f4ca3cc99c17ca052d51b7',1,'src::packop::Package']]],
   ['get_5fundelivered_5fpackages',['get_undelivered_packages',['../namespacesrc_1_1database__storage.html#a2eef22a02b0607cbc75d57d42b89ae57',1,'src::database_storage']]],
   ['get_5fvehicle',['get_vehicle',['../classsrc_1_1packop_1_1_package.html#a5ae1df593cc8e7e0cf5578d2ef7112f5',1,'src::packop::Package']]],
-  ['getrandomcolor',['getRandomColor',['../main_8js.html#a0f1deddd735efed96b177d15b665481c',1,'main.js']]]
+  ['getdata',['getData',['../navtree_8js.html#a298a20a1368b0d84c692b97b46e0578c',1,'navtree.js']]],
+  ['getnode',['getNode',['../navtree_8js.html#a8afdb055f1af73ec7844aa70f38ed997',1,'navtree.js']]],
+  ['getrandomcolor',['getRandomColor',['../main_8js.html#a0f1deddd735efed96b177d15b665481c',1,'main.js']]],
+  ['getscript',['getScript',['../navtree_8js.html#aa86c97ac7e9b8d6c17c258602486878e',1,'navtree.js']]],
+  ['getxpos',['getXPos',['../search_8js.html#a410ad619f40f110f761e3ac76a52746e',1,'search.js']]],
+  ['getypos',['getYPos',['../search_8js.html#a5c595aabeb5e2328158ba91e33e6dbb1',1,'search.js']]],
+  ['gloweffect',['glowEffect',['../navtree_8js.html#ad8ac82e9572c50228a42723802606654',1,'navtree.js']]],
+  ['gotoanchor',['gotoAnchor',['../navtree_8js.html#af98d47eb42f10fffb23011c14e4f3d0d',1,'navtree.js']]],
+  ['gotonode',['gotoNode',['../navtree_8js.html#a4b2bc4dfe51e0257be30efec192399d3',1,'navtree.js']]]
 ];

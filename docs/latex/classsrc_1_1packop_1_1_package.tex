@@ -14,7 +14,7 @@ Class containing the path of a single \hyperlink{classsrc_1_1packop_1_1_package}
 
 
 
-Definition at line 126 of file packop.\+py.
+Definition at line 130 of file packop.\+py.
 
 
 
@@ -43,40 +43,40 @@ Initializes the \hyperlink{classsrc_1_1packop_1_1_package}{Package} with the fir
 \end{DoxyParams}
 Coordinates except for destination are tuples of the format\+: (latitude, longitude, elevation, time). 
 
-Definition at line 137 of file packop.\+py.
+Definition at line 141 of file packop.\+py.
 
 
 \begin{DoxyCode}
-137     \textcolor{keyword}{def }\hyperlink{classsrc_1_1packop_1_1_package_a678005969109218a394138a33dc6fce1}{\_\_init\_\_}(self, coord, destination):
-138         \textcolor{comment}{## List of coordinates covered by the path of the package}
-139         self.\hyperlink{classsrc_1_1packop_1_1_package_adf44f03c6ae7b279f60019d07e59891c}{coords} = [[coord]]
-140         \textcolor{comment}{## The destination coordinate of the package}
-141         self.\hyperlink{classsrc_1_1packop_1_1_package_a78018be0196ca47c5ce84ad62a0d4dba}{destination} = destination
-142         \textcolor{comment}{## The average speeds of the package over both land and water,}
-143         \textcolor{comment}{#  represented as a list in that respective order}
-144         self.\hyperlink{classsrc_1_1packop_1_1_package_ad51ff69ce00ee5c869723c572db0eefd}{speeds} = list(DEFAULT\_SPEEDS)
-145         \textcolor{comment}{## A list of average speeds for all land segments on the package's}
-146         \textcolor{comment}{#  current path}
-147         self.\hyperlink{classsrc_1_1packop_1_1_package_a6de40c006b5febc83838475246a10f13}{land\_speeds} = [DEFAULT\_SPEEDS[0]]
-148         \textcolor{comment}{## A list of average speeds for all water segments on the package's}
-149         \textcolor{comment}{#  current path}
-150         self.\hyperlink{classsrc_1_1packop_1_1_package_a4fd9fe5f73cb34aa5b5c7029f024d4f6}{water\_speeds} = [DEFAULT\_SPEEDS[1]]
-151         vehicle = self.\hyperlink{classsrc_1_1packop_1_1_package_a5ae1df593cc8e7e0cf5578d2ef7112f5}{get\_vehicle}(coord)
-152         \textcolor{comment}{## The float distance from the current coordinates to the destination}
-153         self.\hyperlink{classsrc_1_1packop_1_1_package_a93606e6aea9563f73484a536c9c5636d}{dist} = \hyperlink{namespacesrc_1_1packop_ac16b65508182630b4ab800bffc0d06f0}{vincenty}(coord[:2], self.\hyperlink{classsrc_1_1packop_1_1_package_a78018be0196ca47c5ce84ad62a0d4dba}{destination})
-154         \textcolor{keywordflow}{if} vehicle == 0:
-155             \textcolor{comment}{## A boolean that stores whether the package has ever been on land}
-156             \textcolor{comment}{#  on its current path.}
-157             self.\hyperlink{classsrc_1_1packop_1_1_package_a9b051e33800c5a152ad902f886757d26}{seen\_land} = \textcolor{keyword}{True}
-158             \textcolor{comment}{## A boolean that stores whether the package has ever been on water}
-159             \textcolor{comment}{#  on its current path.}
-160             self.\hyperlink{classsrc_1_1packop_1_1_package_a47ad90cdc00f18fca0d9499e89a6baab}{seen\_water} = \textcolor{keyword}{False}
-161         \textcolor{keywordflow}{else}:
-162             self.\hyperlink{classsrc_1_1packop_1_1_package_a47ad90cdc00f18fca0d9499e89a6baab}{seen\_water} = \textcolor{keyword}{True}
-163             self.\hyperlink{classsrc_1_1packop_1_1_package_a9b051e33800c5a152ad902f886757d26}{seen\_land} = \textcolor{keyword}{False}
-164         \textcolor{comment}{## A list of coordinates where the package most likely switched vehicles}
-165         self.\hyperlink{classsrc_1_1packop_1_1_package_aeed2d9226ad1fadceb4f10cdeb20992f}{poi} = [[coord, vehicle]]
-166 
+141     \textcolor{keyword}{def }\hyperlink{classsrc_1_1packop_1_1_package_a678005969109218a394138a33dc6fce1}{\_\_init\_\_}(self, coord, destination):
+142         \textcolor{comment}{## List of coordinates covered by the path of the package}
+143         self.\hyperlink{classsrc_1_1packop_1_1_package_adf44f03c6ae7b279f60019d07e59891c}{coords} = [[coord]]
+144         \textcolor{comment}{## The destination coordinate of the package}
+145         self.\hyperlink{classsrc_1_1packop_1_1_package_a78018be0196ca47c5ce84ad62a0d4dba}{destination} = destination
+146         \textcolor{comment}{## The average speeds of the package over both land and water,}
+147         \textcolor{comment}{#  represented as a list in that respective order}
+148         self.\hyperlink{classsrc_1_1packop_1_1_package_ad51ff69ce00ee5c869723c572db0eefd}{speeds} = list(DEFAULT\_SPEEDS)
+149         \textcolor{comment}{## A list of average speeds for all land segments on the package's}
+150         \textcolor{comment}{#  current path}
+151         self.\hyperlink{classsrc_1_1packop_1_1_package_a6de40c006b5febc83838475246a10f13}{land\_speeds} = [DEFAULT\_SPEEDS[0]]
+152         \textcolor{comment}{## A list of average speeds for all water segments on the package's}
+153         \textcolor{comment}{#  current path}
+154         self.\hyperlink{classsrc_1_1packop_1_1_package_a4fd9fe5f73cb34aa5b5c7029f024d4f6}{water\_speeds} = [DEFAULT\_SPEEDS[1]]
+155         vehicle = self.\hyperlink{classsrc_1_1packop_1_1_package_a5ae1df593cc8e7e0cf5578d2ef7112f5}{get\_vehicle}(coord)
+156         \textcolor{comment}{## The float distance from the current coordinates to the destination}
+157         self.\hyperlink{classsrc_1_1packop_1_1_package_a93606e6aea9563f73484a536c9c5636d}{dist} = \hyperlink{namespacesrc_1_1packop_ac16b65508182630b4ab800bffc0d06f0}{vincenty}(coord[:2], self.\hyperlink{classsrc_1_1packop_1_1_package_a78018be0196ca47c5ce84ad62a0d4dba}{destination})
+158         \textcolor{keywordflow}{if} vehicle == 0:
+159             \textcolor{comment}{## A boolean that stores whether the package has ever been on land}
+160             \textcolor{comment}{#  on its current path.}
+161             self.\hyperlink{classsrc_1_1packop_1_1_package_a9b051e33800c5a152ad902f886757d26}{seen\_land} = \textcolor{keyword}{True}
+162             \textcolor{comment}{## A boolean that stores whether the package has ever been on water}
+163             \textcolor{comment}{#  on its current path.}
+164             self.\hyperlink{classsrc_1_1packop_1_1_package_a47ad90cdc00f18fca0d9499e89a6baab}{seen\_water} = \textcolor{keyword}{False}
+165         \textcolor{keywordflow}{else}:
+166             self.\hyperlink{classsrc_1_1packop_1_1_package_a47ad90cdc00f18fca0d9499e89a6baab}{seen\_water} = \textcolor{keyword}{True}
+167             self.\hyperlink{classsrc_1_1packop_1_1_package_a9b051e33800c5a152ad902f886757d26}{seen\_land} = \textcolor{keyword}{False}
+168         \textcolor{comment}{## A list of coordinates where the package most likely switched vehicles}
+169         self.\hyperlink{classsrc_1_1packop_1_1_package_aeed2d9226ad1fadceb4f10cdeb20992f}{poi} = [[coord, vehicle]]
+170 
 \end{DoxyCode}
 
 
@@ -102,35 +102,35 @@ Adds a point to the current path, and creates a new segment if needed.
 \end{DoxyParams}
 
 
-Definition at line 185 of file packop.\+py.
+Definition at line 189 of file packop.\+py.
 
 
 \begin{DoxyCode}
-185     \textcolor{keyword}{def }\hyperlink{classsrc_1_1packop_1_1_package_a68ab82eb13694098303f2533424ad1d3}{add\_point}(self, coord):
-186         segment = self.\hyperlink{classsrc_1_1packop_1_1_package_adf44f03c6ae7b279f60019d07e59891c}{coords}[-1]
-187         vehicle = self.\hyperlink{classsrc_1_1packop_1_1_package_a5ae1df593cc8e7e0cf5578d2ef7112f5}{get\_vehicle}(coord)
-188         \textcolor{keywordflow}{if} vehicle != self.\hyperlink{classsrc_1_1packop_1_1_package_a5ae1df593cc8e7e0cf5578d2ef7112f5}{get\_vehicle}(segment[-1]):
-189             self.coords.append([])
-190             \textcolor{keywordflow}{if} vehicle == 0:
-191                 \textcolor{keywordflow}{if} self.\hyperlink{classsrc_1_1packop_1_1_package_a9b051e33800c5a152ad902f886757d26}{seen\_land}:
-192                     self.land\_speeds.append(0)
-193                 \textcolor{keywordflow}{else}:
-194                     self.\hyperlink{classsrc_1_1packop_1_1_package_a9b051e33800c5a152ad902f886757d26}{seen\_land} = \textcolor{keyword}{True}
-195             \textcolor{keywordflow}{else}:
-196                 \textcolor{keywordflow}{if} self.\hyperlink{classsrc_1_1packop_1_1_package_a47ad90cdc00f18fca0d9499e89a6baab}{seen\_water}:
-197                     self.water\_speeds.append(0)
-198                 \textcolor{keywordflow}{else}:
-199                     self.\hyperlink{classsrc_1_1packop_1_1_package_a47ad90cdc00f18fca0d9499e89a6baab}{seen\_water} = \textcolor{keyword}{True}
-200             self.poi.append([coord, vehicle])
-201         self.\hyperlink{classsrc_1_1packop_1_1_package_adf44f03c6ae7b279f60019d07e59891c}{coords}[-1].append(coord)
-202         \textcolor{keywordflow}{if} vehicle == 0:
-203             self.\hyperlink{classsrc_1_1packop_1_1_package_a6de40c006b5febc83838475246a10f13}{land\_speeds}[-1] = self.\hyperlink{classsrc_1_1packop_1_1_package_afcc4f2e177f4ca3cc99c17ca052d51b7}{get\_speed}()
-204         \textcolor{keywordflow}{else}:
-205             self.\hyperlink{classsrc_1_1packop_1_1_package_a4fd9fe5f73cb34aa5b5c7029f024d4f6}{water\_speeds}[-1] = self.\hyperlink{classsrc_1_1packop_1_1_package_afcc4f2e177f4ca3cc99c17ca052d51b7}{get\_speed}()
-206         self.\hyperlink{classsrc_1_1packop_1_1_package_ad51ff69ce00ee5c869723c572db0eefd}{speeds} = [\hyperlink{namespacesrc_1_1packop_ab638c612d9512dd1f5b3200461af63c9}{average}(self.\hyperlink{classsrc_1_1packop_1_1_package_a6de40c006b5febc83838475246a10f13}{land\_speeds}), 
+189     \textcolor{keyword}{def }\hyperlink{classsrc_1_1packop_1_1_package_a68ab82eb13694098303f2533424ad1d3}{add\_point}(self, coord):
+190         segment = self.\hyperlink{classsrc_1_1packop_1_1_package_adf44f03c6ae7b279f60019d07e59891c}{coords}[-1]
+191         vehicle = self.\hyperlink{classsrc_1_1packop_1_1_package_a5ae1df593cc8e7e0cf5578d2ef7112f5}{get\_vehicle}(coord)
+192         \textcolor{keywordflow}{if} vehicle != self.\hyperlink{classsrc_1_1packop_1_1_package_a5ae1df593cc8e7e0cf5578d2ef7112f5}{get\_vehicle}(segment[-1]):
+193             self.coords.append([])
+194             \textcolor{keywordflow}{if} vehicle == 0:
+195                 \textcolor{keywordflow}{if} self.\hyperlink{classsrc_1_1packop_1_1_package_a9b051e33800c5a152ad902f886757d26}{seen\_land}:
+196                     self.land\_speeds.append(0)
+197                 \textcolor{keywordflow}{else}:
+198                     self.\hyperlink{classsrc_1_1packop_1_1_package_a9b051e33800c5a152ad902f886757d26}{seen\_land} = \textcolor{keyword}{True}
+199             \textcolor{keywordflow}{else}:
+200                 \textcolor{keywordflow}{if} self.\hyperlink{classsrc_1_1packop_1_1_package_a47ad90cdc00f18fca0d9499e89a6baab}{seen\_water}:
+201                     self.water\_speeds.append(0)
+202                 \textcolor{keywordflow}{else}:
+203                     self.\hyperlink{classsrc_1_1packop_1_1_package_a47ad90cdc00f18fca0d9499e89a6baab}{seen\_water} = \textcolor{keyword}{True}
+204             self.poi.append([coord, vehicle])
+205         self.\hyperlink{classsrc_1_1packop_1_1_package_adf44f03c6ae7b279f60019d07e59891c}{coords}[-1].append(coord)
+206         \textcolor{keywordflow}{if} vehicle == 0:
+207             self.\hyperlink{classsrc_1_1packop_1_1_package_a6de40c006b5febc83838475246a10f13}{land\_speeds}[-1] = self.\hyperlink{classsrc_1_1packop_1_1_package_afcc4f2e177f4ca3cc99c17ca052d51b7}{get\_speed}()
+208         \textcolor{keywordflow}{else}:
+209             self.\hyperlink{classsrc_1_1packop_1_1_package_a4fd9fe5f73cb34aa5b5c7029f024d4f6}{water\_speeds}[-1] = self.\hyperlink{classsrc_1_1packop_1_1_package_afcc4f2e177f4ca3cc99c17ca052d51b7}{get\_speed}()
+210         self.\hyperlink{classsrc_1_1packop_1_1_package_ad51ff69ce00ee5c869723c572db0eefd}{speeds} = [\hyperlink{namespacesrc_1_1packop_ab638c612d9512dd1f5b3200461af63c9}{average}(self.\hyperlink{classsrc_1_1packop_1_1_package_a6de40c006b5febc83838475246a10f13}{land\_speeds}), 
       \hyperlink{namespacesrc_1_1packop_ab638c612d9512dd1f5b3200461af63c9}{average}(self.\hyperlink{classsrc_1_1packop_1_1_package_a4fd9fe5f73cb34aa5b5c7029f024d4f6}{water\_speeds})]
-207         self.\hyperlink{classsrc_1_1packop_1_1_package_a93606e6aea9563f73484a536c9c5636d}{dist} = \hyperlink{namespacesrc_1_1packop_ac16b65508182630b4ab800bffc0d06f0}{vincenty}(coord[:2], self.\hyperlink{classsrc_1_1packop_1_1_package_a78018be0196ca47c5ce84ad62a0d4dba}{destination})
-208 
+211         self.\hyperlink{classsrc_1_1packop_1_1_package_a93606e6aea9563f73484a536c9c5636d}{dist} = \hyperlink{namespacesrc_1_1packop_ac16b65508182630b4ab800bffc0d06f0}{vincenty}(coord[:2], self.\hyperlink{classsrc_1_1packop_1_1_package_a78018be0196ca47c5ce84ad62a0d4dba}{destination})
+212 
 \end{DoxyCode}
 \index{src\+::packop\+::\+Package@{src\+::packop\+::\+Package}!etr@{etr}}
 \index{etr@{etr}!src\+::packop\+::\+Package@{src\+::packop\+::\+Package}}
@@ -153,23 +153,23 @@ Float time remaining for the package to reach its destination
 \end{DoxyReturn}
 
 
-Definition at line 234 of file packop.\+py.
+Definition at line 238 of file packop.\+py.
 
 
 \begin{DoxyCode}
-234     \textcolor{keyword}{def }\hyperlink{classsrc_1_1packop_1_1_package_af57f2a1649a5a1346d4f4843084942af}{etr}(self):
-235         segment = self.\hyperlink{classsrc_1_1packop_1_1_package_adf44f03c6ae7b279f60019d07e59891c}{coords}[-1]
-236         coord = segment[-1][:2]
-237         land\_speed, water\_speed = self.\hyperlink{classsrc_1_1packop_1_1_package_ad51ff69ce00ee5c869723c572db0eefd}{speeds}
-238         pixel1, pixel2 = \hyperlink{namespacesrc_1_1packop_a51973541dd75d68571c154ad06a2d4df}{to\_pixel}(coord), \hyperlink{namespacesrc_1_1packop_a51973541dd75d68571c154ad06a2d4df}{to\_pixel}(self.
+238     \textcolor{keyword}{def }\hyperlink{classsrc_1_1packop_1_1_package_af57f2a1649a5a1346d4f4843084942af}{etr}(self):
+239         segment = self.\hyperlink{classsrc_1_1packop_1_1_package_adf44f03c6ae7b279f60019d07e59891c}{coords}[-1]
+240         coord = segment[-1][:2]
+241         land\_speed, water\_speed = self.\hyperlink{classsrc_1_1packop_1_1_package_ad51ff69ce00ee5c869723c572db0eefd}{speeds}
+242         pixel1, pixel2 = \hyperlink{namespacesrc_1_1packop_a51973541dd75d68571c154ad06a2d4df}{to\_pixel}(coord), \hyperlink{namespacesrc_1_1packop_a51973541dd75d68571c154ad06a2d4df}{to\_pixel}(self.
       \hyperlink{classsrc_1_1packop_1_1_package_a78018be0196ca47c5ce84ad62a0d4dba}{destination})
-239         line = \hyperlink{namespacesrc_1_1packop_a0bcffd2956685d6954e2059daed5a46d}{generate\_line}(pixel1, pixel2)
-240         interval = self.\hyperlink{classsrc_1_1packop_1_1_package_a93606e6aea9563f73484a536c9c5636d}{dist} / len(line)
-241         surfaces = list(map(over\_land, line))
-242         land\_time = surfaces.count(\textcolor{keyword}{True}) * interval / land\_speed
-243         water\_time = surfaces.count(\textcolor{keyword}{False}) * interval / water\_speed
-244         \textcolor{keywordflow}{return} land\_time + water\_time
-245 \end{DoxyCode}
+243         line = \hyperlink{namespacesrc_1_1packop_a0bcffd2956685d6954e2059daed5a46d}{generate\_line}(pixel1, pixel2)
+244         interval = self.\hyperlink{classsrc_1_1packop_1_1_package_a93606e6aea9563f73484a536c9c5636d}{dist} / len(line)
+245         surfaces = list(map(over\_land, line))
+246         land\_time = surfaces.count(\textcolor{keyword}{True}) * interval / land\_speed
+247         water\_time = surfaces.count(\textcolor{keyword}{False}) * interval / water\_speed
+248         \textcolor{keywordflow}{return} land\_time + water\_time
+249 \end{DoxyCode}
 \index{src\+::packop\+::\+Package@{src\+::packop\+::\+Package}!get\+\_\+speed@{get\+\_\+speed}}
 \index{get\+\_\+speed@{get\+\_\+speed}!src\+::packop\+::\+Package@{src\+::packop\+::\+Package}}
 \subsubsection[{\texorpdfstring{get\+\_\+speed( self)}{get_speed( self)}}]{\setlength{\rightskip}{0pt plus 5cm}def get\+\_\+speed (
@@ -191,24 +191,24 @@ Float in m/s of the speed of the \hyperlink{classsrc_1_1packop_1_1_package}{Pack
 \end{DoxyReturn}
 
 
-Definition at line 215 of file packop.\+py.
+Definition at line 219 of file packop.\+py.
 
 
 \begin{DoxyCode}
-215     \textcolor{keyword}{def }\hyperlink{classsrc_1_1packop_1_1_package_afcc4f2e177f4ca3cc99c17ca052d51b7}{get\_speed}(self):
-216         segment = self.\hyperlink{classsrc_1_1packop_1_1_package_adf44f03c6ae7b279f60019d07e59891c}{coords}[-1]
-217         \textcolor{keywordflow}{if} len(segment) > 1:
-218             coord1 = segment[0][:3]
-219             time1 = segment[0][3]
-220             coord2 = segment[-1][:3]
-221             time2 = segment[-1][3]
-222             distance = \hyperlink{namespacesrc_1_1packop_ac16b65508182630b4ab800bffc0d06f0}{vincenty}(coord1[:2], coord2[:2])
-223             time = time2 - time1
-224             \textcolor{keywordflow}{return} abs(distance / time)
-225         \textcolor{keywordflow}{else}:
-226             vehicle = self.\hyperlink{classsrc_1_1packop_1_1_package_a5ae1df593cc8e7e0cf5578d2ef7112f5}{get\_vehicle}(segment[-1])
-227             \textcolor{keywordflow}{return} DEFAULT\_SPEEDS[vehicle]
-228 
+219     \textcolor{keyword}{def }\hyperlink{classsrc_1_1packop_1_1_package_afcc4f2e177f4ca3cc99c17ca052d51b7}{get\_speed}(self):
+220         segment = self.\hyperlink{classsrc_1_1packop_1_1_package_adf44f03c6ae7b279f60019d07e59891c}{coords}[-1]
+221         \textcolor{keywordflow}{if} len(segment) > 1:
+222             coord1 = segment[0][:3]
+223             time1 = segment[0][3]
+224             coord2 = segment[-1][:3]
+225             time2 = segment[-1][3]
+226             distance = \hyperlink{namespacesrc_1_1packop_ac16b65508182630b4ab800bffc0d06f0}{vincenty}(coord1[:2], coord2[:2])
+227             time = time2 - time1
+228             \textcolor{keywordflow}{return} abs(distance / time)
+229         \textcolor{keywordflow}{else}:
+230             vehicle = self.\hyperlink{classsrc_1_1packop_1_1_package_a5ae1df593cc8e7e0cf5578d2ef7112f5}{get\_vehicle}(segment[-1])
+231             \textcolor{keywordflow}{return} DEFAULT\_SPEEDS[vehicle]
+232 
 \end{DoxyCode}
 \index{src\+::packop\+::\+Package@{src\+::packop\+::\+Package}!get\+\_\+vehicle@{get\+\_\+vehicle}}
 \index{get\+\_\+vehicle@{get\+\_\+vehicle}!src\+::packop\+::\+Package@{src\+::packop\+::\+Package}}
@@ -234,17 +234,17 @@ Int (0 is for land, 1 is for water)
 \end{DoxyReturn}
 
 
-Definition at line 173 of file packop.\+py.
+Definition at line 177 of file packop.\+py.
 
 
 \begin{DoxyCode}
-173     \textcolor{keyword}{def }\hyperlink{classsrc_1_1packop_1_1_package_a5ae1df593cc8e7e0cf5578d2ef7112f5}{get\_vehicle}(self, coord):
-174         x, y = \hyperlink{namespacesrc_1_1packop_a51973541dd75d68571c154ad06a2d4df}{to\_pixel}(coord[:2])
-175         \textcolor{keywordflow}{if} \textcolor{keywordflow}{not} \hyperlink{namespacesrc_1_1packop_a6ac8ed111ff691f9bec1c25c44e04af9}{over\_land}((x, y)):
-176             \textcolor{keywordflow}{return} 1
-177         \textcolor{keywordflow}{else}:
-178             \textcolor{keywordflow}{return} 0
-179 
+177     \textcolor{keyword}{def }\hyperlink{classsrc_1_1packop_1_1_package_a5ae1df593cc8e7e0cf5578d2ef7112f5}{get\_vehicle}(self, coord):
+178         x, y = \hyperlink{namespacesrc_1_1packop_a51973541dd75d68571c154ad06a2d4df}{to\_pixel}(coord[:2])
+179         \textcolor{keywordflow}{if} \textcolor{keywordflow}{not} \hyperlink{namespacesrc_1_1packop_a6ac8ed111ff691f9bec1c25c44e04af9}{over\_land}((x, y)):
+180             \textcolor{keywordflow}{return} 1
+181         \textcolor{keywordflow}{else}:
+182             \textcolor{keywordflow}{return} 0
+183 
 \end{DoxyCode}
 
 
@@ -258,7 +258,7 @@ List of coordinates covered by the path of the package.
 
 
 
-Definition at line 139 of file packop.\+py.
+Definition at line 143 of file packop.\+py.
 
 \index{src\+::packop\+::\+Package@{src\+::packop\+::\+Package}!destination@{destination}}
 \index{destination@{destination}!src\+::packop\+::\+Package@{src\+::packop\+::\+Package}}
@@ -269,7 +269,7 @@ The destination coordinate of the package.
 
 
 
-Definition at line 141 of file packop.\+py.
+Definition at line 145 of file packop.\+py.
 
 \index{src\+::packop\+::\+Package@{src\+::packop\+::\+Package}!dist@{dist}}
 \index{dist@{dist}!src\+::packop\+::\+Package@{src\+::packop\+::\+Package}}
@@ -280,7 +280,7 @@ The float distance from the current coordinates to the destination.
 
 
 
-Definition at line 153 of file packop.\+py.
+Definition at line 157 of file packop.\+py.
 
 \index{src\+::packop\+::\+Package@{src\+::packop\+::\+Package}!land\+\_\+speeds@{land\+\_\+speeds}}
 \index{land\+\_\+speeds@{land\+\_\+speeds}!src\+::packop\+::\+Package@{src\+::packop\+::\+Package}}
@@ -291,7 +291,7 @@ A list of average speeds for all land segments on the package\textquotesingle{}s
 
 
 
-Definition at line 147 of file packop.\+py.
+Definition at line 151 of file packop.\+py.
 
 \index{src\+::packop\+::\+Package@{src\+::packop\+::\+Package}!poi@{poi}}
 \index{poi@{poi}!src\+::packop\+::\+Package@{src\+::packop\+::\+Package}}
@@ -302,7 +302,7 @@ A list of coordinates where the package most likely switched vehicles.
 
 
 
-Definition at line 165 of file packop.\+py.
+Definition at line 169 of file packop.\+py.
 
 \index{src\+::packop\+::\+Package@{src\+::packop\+::\+Package}!seen\+\_\+land@{seen\+\_\+land}}
 \index{seen\+\_\+land@{seen\+\_\+land}!src\+::packop\+::\+Package@{src\+::packop\+::\+Package}}
@@ -313,7 +313,7 @@ A boolean that stores whether the package has ever been on land on its current p
 
 
 
-Definition at line 157 of file packop.\+py.
+Definition at line 161 of file packop.\+py.
 
 \index{src\+::packop\+::\+Package@{src\+::packop\+::\+Package}!seen\+\_\+water@{seen\+\_\+water}}
 \index{seen\+\_\+water@{seen\+\_\+water}!src\+::packop\+::\+Package@{src\+::packop\+::\+Package}}
@@ -324,7 +324,7 @@ A boolean that stores whether the package has ever been on water on its current 
 
 
 
-Definition at line 160 of file packop.\+py.
+Definition at line 164 of file packop.\+py.
 
 \index{src\+::packop\+::\+Package@{src\+::packop\+::\+Package}!speeds@{speeds}}
 \index{speeds@{speeds}!src\+::packop\+::\+Package@{src\+::packop\+::\+Package}}
@@ -335,7 +335,7 @@ The average speeds of the package over both land and water, represented as a lis
 
 
 
-Definition at line 144 of file packop.\+py.
+Definition at line 148 of file packop.\+py.
 
 \index{src\+::packop\+::\+Package@{src\+::packop\+::\+Package}!water\+\_\+speeds@{water\+\_\+speeds}}
 \index{water\+\_\+speeds@{water\+\_\+speeds}!src\+::packop\+::\+Package@{src\+::packop\+::\+Package}}
@@ -346,7 +346,7 @@ A list of average speeds for all water segments on the package\textquotesingle{}
 
 
 
-Definition at line 150 of file packop.\+py.
+Definition at line 154 of file packop.\+py.
 
 
 

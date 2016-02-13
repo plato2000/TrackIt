@@ -27,7 +27,7 @@ var NAVTREE =
       [ "File Members", "globals.html", [
         [ "All", "globals.html", "globals_dup" ],
         [ "Functions/Procedures/Processes", "globals_func.html", null ],
-        [ "Variables", "globals_vars.html", null ]
+        [ "Variables", "globals_vars.html", "globals_vars" ]
       ] ]
     ] ]
   ] ]
@@ -36,7 +36,10 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "____init_____8py.html",
-"moment_8min_8js.html#a31a3490f7ff2dd2b0d76b8d6f068ce27"
+"files_8js.html",
+"jquery_8js.html#a89ad527fcd82c01ebb587332f5b4fcd4",
+"moment_8min_8js_source.html",
+"variables__4_8js.html#a837c138891fe70c6abc12f22948922c0"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

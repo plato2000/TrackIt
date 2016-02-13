@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['readme_2emd',['README.md',['../_r_e_a_d_m_e_8md.html',1,'']]],
-  ['requirements_2emd',['requirements.md',['../requirements_8md.html',1,'']]],
-  ['ripples_2ejs',['ripples.js',['../ripples_8js.html',1,'']]],
-  ['run_2epy',['run.py',['../run_8py.html',1,'']]]
+  ['ie_2demulation_2dmodes_2dwarning_2ejs',['ie-emulation-modes-warning.js',['../ie-emulation-modes-warning_8js.html',1,'']]],
+  ['ie_2demulation_2dmodes_2dwarning_5f8js_2ejs',['ie-emulation-modes-warning_8js.js',['../ie-emulation-modes-warning__8js_8js.html',1,'']]],
+  ['ie10_2dviewport_2dbug_2dworkaround_2ejs',['ie10-viewport-bug-workaround.js',['../ie10-viewport-bug-workaround_8js.html',1,'']]],
+  ['ie10_2dviewport_2dbug_2dworkaround_5f8js_2ejs',['ie10-viewport-bug-workaround_8js.js',['../ie10-viewport-bug-workaround__8js_8js.html',1,'']]]
 ];

@@ -38,7 +38,7 @@ Files for server, written by People Who Code. These include the \hyperlink{run_8
 
 \paragraph*{{\ttfamily static} directory}
 
-Helper files for client side web app -\/ not the H\+T\+ML. This includes files such as the J\+Query libraries, Bootstrap libraries, Material Design libraries, and the default glyphicons fonts for Bootstrap. It also includes our own \hyperlink{main_8js}{main.\+js} file, as well as our custom main.\+css file.
+Helper files for client side web app -\/ not the H\+T\+ML. This includes files such as the J\+Query libraries, Bootstrap libraries, Material Design libraries, and the default glyphicons fonts for Bootstrap. It also includes our own main.\+js file, as well as our custom main.\+css file.
 
 \paragraph*{{\ttfamily templates} directory}
 
@@ -85,11 +85,11 @@ The {\ttfamily \hyperlink{run_8py}{run.\+py}} server handles communication betwe
 
 \subsection*{6. Client\+: Bootstrap 3 and other C\+SS}
 
-The clientside web app is built on Bootstrap 3 C\+SS. The C\+SS is in {\ttfamily static/css}. This means that the webpage is responsive -\/ it rescales for differently sized clients. It automatically works for mobile devices. There is a custom Bootstrap theme that was written by Federico Zivolo. This is a Material Design theme based on the Material Design concept from Google. It is located at {\ttfamily static/css/bootstrap-\/material-\/design.\+min.\+css}. This theme has a few Java\+Script files associated with it such as {\ttfamily \hyperlink{ripples_8js}{static/js/ripples.\+js}} and {\ttfamily \hyperlink{material_8js}{static/js/material.\+js}}. These handle the ripples on buttons when clicked and other graphical effects associated with Material Design.
+The clientside web app is built on Bootstrap 3 C\+SS. The C\+SS is in {\ttfamily static/css}. This means that the webpage is responsive -\/ it rescales for differently sized clients. It automatically works for mobile devices. There is a custom Bootstrap theme that was written by Federico Zivolo. This is a Material Design theme based on the Material Design concept from Google. It is located at {\ttfamily static/css/bootstrap-\/material-\/design.\+min.\+css}. This theme has a few Java\+Script files associated with it such as {\ttfamily static/js/ripples.\+js} and {\ttfamily static/js/material.\+js}. These handle the ripples on buttons when clicked and other graphical effects associated with Material Design.
 
 There are also some other C\+SS files associated with Bootstrap themes. {\ttfamily static/css/jumbotron-\/narrow.\+css} includes the C\+SS for the particular Bootstrap layout we chose to use.
 
-There are some JS files that are for Bootstrap also. {\ttfamily \hyperlink{ie10-viewport-bug-workaround_8js}{static/js/ie10-\/viewport-\/bug-\/workaround.\+js}} and {\ttfamily \hyperlink{ie-emulation-modes-warning_8js}{static/js/ie-\/emulation-\/modes-\/warning.\+js}} are files provided by Bootstrap to fix weird quirks with specific versions of Internet Explorer.
+There are some JS files that are for Bootstrap also. {\ttfamily static/js/ie10-\/viewport-\/bug-\/workaround.\+js} and {\ttfamily static/js/ie-\/emulation-\/modes-\/warning.\+js} are files provided by Bootstrap to fix weird quirks with specific versions of Internet Explorer.
 
 There is also a custom C\+SS file ({\ttfamily static/css/main.\+css}) that is used for simple resizing of particular elements.
 
@@ -120,7 +120,7 @@ This is also done using the Google Maps Java\+Script A\+PI v3. Here, a call is m
 
 \subsection*{8. Client\+: Moment.\+js}
 
-The Moment.\+js library is located in {\ttfamily \hyperlink{moment_8min_8js}{static/js/moment.\+min.\+js}}. This does conversions of time. In this project, it is used to make E\+TA into a human-\/readable format. The server passes the client a time in seconds for the time that the package is expected to reach the destination (details about this calculation above). Moment.\+js converts this time in seconds to a readable time -\/ for example, at 8\+:05 pm, if something was scheduled to reach its destination at 9\+:00 pm ($\sim$3,300 seconds), the value passed by the server would be 3300. Moment.\+js would convert this to a string that said \char`\"{}\+Today at 9\+:00 pm\char`\"{}. This works even if the time is much longer -\/ it would convert a time of 18,748,800 that was received on 2/1/2016 to \char`\"{}3/3/2016\char`\"{} for 31 days having passed. It automatically formats the string depending on how far off it is.
+The Moment.\+js library is located in {\ttfamily static/js/moment.\+min.\+js}. This does conversions of time. In this project, it is used to make E\+TA into a human-\/readable format. The server passes the client a time in seconds for the time that the package is expected to reach the destination (details about this calculation above). Moment.\+js converts this time in seconds to a readable time -\/ for example, at 8\+:05 pm, if something was scheduled to reach its destination at 9\+:00 pm ($\sim$3,300 seconds), the value passed by the server would be 3300. Moment.\+js would convert this to a string that said \char`\"{}\+Today at 9\+:00 pm\char`\"{}. This works even if the time is much longer -\/ it would convert a time of 18,748,800 that was received on 2/1/2016 to \char`\"{}3/3/2016\char`\"{} for 31 days having passed. It automatically formats the string depending on how far off it is.
 
 \subsection*{9. Client\+: Custom JS}
 
@@ -146,7 +146,7 @@ For example, {\ttfamily \hyperlink{time__shifter_8py}{I\+D\+T\+\_\+\+Server/time
 
 Python will not allow this line unless {\ttfamily src} is a recognized package -\/ hence, {\ttfamily \hyperlink{____init_____8py}{\+\_\+\+\_\+init\+\_\+\+\_\+.\+py}}.
 
-j\+Query v2.\+1.\+4 is included ({\ttfamily \hyperlink{jquery_8min_8js}{static/js/jquery.\+min.\+js}}) for Bootstrap, Google Maps, and other JS we wrote. There is a j\+Query plugin for the color picker ({\ttfamily \hyperlink{jquery_8minicolors_8min_8js}{static/js/jquery.\+minicolors.\+min.\+js}}).
+j\+Query v2.\+1.\+4 is included ({\ttfamily static/js/jquery.\+min.\+js}) for Bootstrap, Google Maps, and other JS we wrote. There is a j\+Query plugin for the color picker ({\ttfamily static/js/jquery.\+minicolors.\+min.\+js}).
 
 \subsection*{12. Extensibility\+: Accessibility Features}
 

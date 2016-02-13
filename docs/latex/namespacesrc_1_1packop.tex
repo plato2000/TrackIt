@@ -31,14 +31,14 @@ Float representing the average of the numbers
 \end{DoxyReturn}
 
 
-Definition at line 121 of file packop.\+py.
+Definition at line 125 of file packop.\+py.
 
 
 \begin{DoxyCode}
-121 \textcolor{keyword}{def }\hyperlink{namespacesrc_1_1packop_ab638c612d9512dd1f5b3200461af63c9}{average}(elements):
-122     \textcolor{keywordflow}{return} sum(elements) / len(elements)
-123 
-124 
+125 \textcolor{keyword}{def }\hyperlink{namespacesrc_1_1packop_ab638c612d9512dd1f5b3200461af63c9}{average}(elements):
+126     \textcolor{keywordflow}{return} sum(elements) / len(elements)
+127 
+128 
 \end{DoxyCode}
 \index{src\+::packop@{src\+::packop}!generate\+\_\+line@{generate\+\_\+line}}
 \index{generate\+\_\+line@{generate\+\_\+line}!src\+::packop@{src\+::packop}}
@@ -64,43 +64,43 @@ List of pixels forming a line between the endpoints
 \end{DoxyReturn}
 
 
-Definition at line 39 of file packop.\+py.
+Definition at line 43 of file packop.\+py.
 
 
 \begin{DoxyCode}
-39 \textcolor{keyword}{def }\hyperlink{namespacesrc_1_1packop_a0bcffd2956685d6954e2059daed5a46d}{generate\_line}(pixel1, pixel2):
-40     x1, y1 = pixel1
-41     x2, y2 = pixel2
-42     \textcolor{keywordflow}{if} pixel1 == pixel2:
-43         \textcolor{keywordflow}{return} [pixel1]
-44     points = []
-45     \textcolor{keywordflow}{if} abs(y2 - y1) < abs(x2 - x1):
-46         \textcolor{keywordflow}{if} x2 > x1:
-47             inc = 1
-48         \textcolor{keywordflow}{else}:
-49             inc = -1
-50         slope = (y2 - y1) / (x2 - x1)
-51 
-52         \textcolor{keyword}{def }\hyperlink{jquery_8minicolors_8min_8js_ad9f1149dabf074ecf1820ef39ee0daeb}{y}(x):
-53             \textcolor{keywordflow}{return} slope * (x - x1) + y1
-54 
-55         \textcolor{keywordflow}{for} x \textcolor{keywordflow}{in} xrange(x1, x2 + inc, inc):
-56             points.append((x, \hyperlink{namespacesrc_1_1packop_a47157c0bdabd038ed650ac2a385b0705}{roundf}(\hyperlink{jquery_8minicolors_8min_8js_ad9f1149dabf074ecf1820ef39ee0daeb}{y}(x))))
-57     \textcolor{keywordflow}{else}:
-58         \textcolor{keywordflow}{if} y2 > y1:
-59             inc = 1
-60         \textcolor{keywordflow}{else}:
-61             inc = -1
-62         slope = (x2 - x1) / (y2 - y1)
-63 
-64         \textcolor{keyword}{def }\hyperlink{moment_8min_8js_aea8880d873547adc2b184814e8d28a93}{x}(y):
-65             \textcolor{keywordflow}{return} slope * (y - y1) + x1
-66 
-67         \textcolor{keywordflow}{for} y \textcolor{keywordflow}{in} xrange(y1, y2 + inc, inc):
-68             points.append((\hyperlink{namespacesrc_1_1packop_a47157c0bdabd038ed650ac2a385b0705}{roundf}(\hyperlink{moment_8min_8js_aea8880d873547adc2b184814e8d28a93}{x}(y)), y))
-69     \textcolor{keywordflow}{return} points
+43 \textcolor{keyword}{def }\hyperlink{namespacesrc_1_1packop_a0bcffd2956685d6954e2059daed5a46d}{generate\_line}(pixel1, pixel2):
+44     x1, y1 = pixel1
+45     x2, y2 = pixel2
+46     \textcolor{keywordflow}{if} pixel1 == pixel2:
+47         \textcolor{keywordflow}{return} [pixel1]
+48     points = []
+49     \textcolor{keywordflow}{if} abs(y2 - y1) < abs(x2 - x1):
+50         \textcolor{keywordflow}{if} x2 > x1:
+51             inc = 1
+52         \textcolor{keywordflow}{else}:
+53             inc = -1
+54         slope = (y2 - y1) / (x2 - x1)
+55 
+56         \textcolor{keyword}{def }\hyperlink{jquery_8minicolors_8min_8js_ad9f1149dabf074ecf1820ef39ee0daeb}{y}(x):
+57             \textcolor{keywordflow}{return} slope * (x - x1) + y1
+58 
+59         \textcolor{keywordflow}{for} x \textcolor{keywordflow}{in} xrange(x1, x2 + inc, inc):
+60             points.append((x, \hyperlink{namespacesrc_1_1packop_a47157c0bdabd038ed650ac2a385b0705}{roundf}(\hyperlink{jquery_8minicolors_8min_8js_ad9f1149dabf074ecf1820ef39ee0daeb}{y}(x))))
+61     \textcolor{keywordflow}{else}:
+62         \textcolor{keywordflow}{if} y2 > y1:
+63             inc = 1
+64         \textcolor{keywordflow}{else}:
+65             inc = -1
+66         slope = (x2 - x1) / (y2 - y1)
+67 
+68         \textcolor{keyword}{def }\hyperlink{moment_8min_8js_aea8880d873547adc2b184814e8d28a93}{x}(y):
+69             \textcolor{keywordflow}{return} slope * (y - y1) + x1
 70 
-71 
+71         \textcolor{keywordflow}{for} y \textcolor{keywordflow}{in} xrange(y1, y2 + inc, inc):
+72             points.append((\hyperlink{namespacesrc_1_1packop_a47157c0bdabd038ed650ac2a385b0705}{roundf}(\hyperlink{moment_8min_8js_aea8880d873547adc2b184814e8d28a93}{x}(y)), y))
+73     \textcolor{keywordflow}{return} points
+74 
+75 
 \end{DoxyCode}
 \index{src\+::packop@{src\+::packop}!get\+\_\+address@{get\+\_\+address}}
 \index{get\+\_\+address@{get\+\_\+address}!src\+::packop@{src\+::packop}}
@@ -123,14 +123,14 @@ String form of street address of coordinates
 \end{DoxyReturn}
 
 
-Definition at line 88 of file packop.\+py.
+Definition at line 92 of file packop.\+py.
 
 
 \begin{DoxyCode}
-88 \textcolor{keyword}{def }\hyperlink{namespacesrc_1_1packop_a601d6640de50f995caa664b5f41e1341}{get\_address}(coord):
-89     \textcolor{keywordflow}{return} nominatim.reverse(coord).address
-90 
-91 
+92 \textcolor{keyword}{def }\hyperlink{namespacesrc_1_1packop_a601d6640de50f995caa664b5f41e1341}{get\_address}(coord):
+93     \textcolor{keywordflow}{return} nominatim.reverse(coord).address
+94 
+95 
 \end{DoxyCode}
 \index{src\+::packop@{src\+::packop}!over\+\_\+land@{over\+\_\+land}}
 \index{over\+\_\+land@{over\+\_\+land}!src\+::packop@{src\+::packop}}
@@ -153,14 +153,14 @@ Boolean (true if over land)
 \end{DoxyReturn}
 
 
-Definition at line 29 of file packop.\+py.
+Definition at line 33 of file packop.\+py.
 
 
 \begin{DoxyCode}
-29 \textcolor{keyword}{def }\hyperlink{namespacesrc_1_1packop_a6ac8ed111ff691f9bec1c25c44e04af9}{over\_land}(pixel):
-30     \textcolor{keywordflow}{return} array[pixel[0]][pixel[1]] == 1
-31 
-32 
+33 \textcolor{keyword}{def }\hyperlink{namespacesrc_1_1packop_a6ac8ed111ff691f9bec1c25c44e04af9}{over\_land}(pixel):
+34     \textcolor{keywordflow}{return} array[pixel[0]][pixel[1]] == 1
+35 
+36 
 \end{DoxyCode}
 \index{src\+::packop@{src\+::packop}!parse\+\_\+time@{parse\+\_\+time}}
 \index{parse\+\_\+time@{parse\+\_\+time}!src\+::packop@{src\+::packop}}
@@ -182,15 +182,15 @@ Converts an I\+SO 8601 timestamp to seconds from epoch.
 \end{DoxyParams}
 
 
-Definition at line 97 of file packop.\+py.
+Definition at line 101 of file packop.\+py.
 
 
 \begin{DoxyCode}
-97 \textcolor{keyword}{def }\hyperlink{namespacesrc_1_1packop_af2e2c11ef9b3ffde61bd93c3e7e88549}{parse\_time}(timestamp):
-98     ts = time.strptime(timestamp, \textcolor{stringliteral}{"%Y-%m-%dT%H:%M:%SZ"})
-99     \textcolor{keywordflow}{return} time.mktime(ts)
-100 
-101 
+101 \textcolor{keyword}{def }\hyperlink{namespacesrc_1_1packop_af2e2c11ef9b3ffde61bd93c3e7e88549}{parse\_time}(timestamp):
+102     ts = time.strptime(timestamp, \textcolor{stringliteral}{"%Y-%m-%dT%H:%M:%SZ"})
+103     \textcolor{keywordflow}{return} time.mktime(ts)
+104 
+105 
 \end{DoxyCode}
 \index{src\+::packop@{src\+::packop}!roundf@{roundf}}
 \index{roundf@{roundf}!src\+::packop@{src\+::packop}}
@@ -205,14 +205,14 @@ Returns an integer representation of a rounded float.
 
 
 
-Definition at line 20 of file packop.\+py.
+Definition at line 24 of file packop.\+py.
 
 
 \begin{DoxyCode}
-20 \textcolor{keyword}{def }\hyperlink{namespacesrc_1_1packop_a47157c0bdabd038ed650ac2a385b0705}{roundf}(number):
-21     \textcolor{keywordflow}{return} int(round(number))
-22 
-23 
+24 \textcolor{keyword}{def }\hyperlink{namespacesrc_1_1packop_a47157c0bdabd038ed650ac2a385b0705}{roundf}(number):
+25     \textcolor{keywordflow}{return} int(round(number))
+26 
+27 
 \end{DoxyCode}
 \index{src\+::packop@{src\+::packop}!to\+\_\+pixel@{to\+\_\+pixel}}
 \index{to\+\_\+pixel@{to\+\_\+pixel}!src\+::packop@{src\+::packop}}
@@ -235,16 +235,16 @@ Tuple coordinates on the land/water map
 \end{DoxyReturn}
 
 
-Definition at line 77 of file packop.\+py.
+Definition at line 81 of file packop.\+py.
 
 
 \begin{DoxyCode}
-77 \textcolor{keyword}{def }\hyperlink{namespacesrc_1_1packop_a51973541dd75d68571c154ad06a2d4df}{to\_pixel}(coord):
-78     x = MAP\_WIDTH / 360 * coord[1] + MAP\_WIDTH / 2
-79     y = -MAP\_HEIGHT / 180 * coord[0] + MAP\_HEIGHT / 2
-80     \textcolor{keywordflow}{return} (\hyperlink{namespacesrc_1_1packop_a47157c0bdabd038ed650ac2a385b0705}{roundf}(x), \hyperlink{namespacesrc_1_1packop_a47157c0bdabd038ed650ac2a385b0705}{roundf}(y))
-81 
-82 
+81 \textcolor{keyword}{def }\hyperlink{namespacesrc_1_1packop_a51973541dd75d68571c154ad06a2d4df}{to\_pixel}(coord):
+82     x = MAP\_WIDTH / 360 * coord[1] + MAP\_WIDTH / 2
+83     y = -MAP\_HEIGHT / 180 * coord[0] + MAP\_HEIGHT / 2
+84     \textcolor{keywordflow}{return} (\hyperlink{namespacesrc_1_1packop_a47157c0bdabd038ed650ac2a385b0705}{roundf}(x), \hyperlink{namespacesrc_1_1packop_a47157c0bdabd038ed650ac2a385b0705}{roundf}(y))
+85 
+86 
 \end{DoxyCode}
 \index{src\+::packop@{src\+::packop}!vincenty@{vincenty}}
 \index{vincenty@{vincenty}!src\+::packop@{src\+::packop}}
@@ -270,18 +270,18 @@ Float of distance in meters from coord1 to coord2
 \end{DoxyReturn}
 
 
-Definition at line 108 of file packop.\+py.
+Definition at line 112 of file packop.\+py.
 
 
 \begin{DoxyCode}
-108 \textcolor{keyword}{def }\hyperlink{namespacesrc_1_1packop_ac16b65508182630b4ab800bffc0d06f0}{vincenty}(coord1, coord2):
-109     \textcolor{keywordflow}{while} \textcolor{keyword}{True}:
-110         \textcolor{keywordflow}{try}:
-111             \textcolor{keywordflow}{return} distance.vincenty(coord1, coord2).meters
-112         \textcolor{keywordflow}{except}:
-113             \textcolor{keywordflow}{pass}
-114 
-115 
+112 \textcolor{keyword}{def }\hyperlink{namespacesrc_1_1packop_ac16b65508182630b4ab800bffc0d06f0}{vincenty}(coord1, coord2):
+113     \textcolor{keywordflow}{while} \textcolor{keyword}{True}:
+114         \textcolor{keywordflow}{try}:
+115             \textcolor{keywordflow}{return} distance.vincenty(coord1, coord2).meters
+116         \textcolor{keywordflow}{except}:
+117             \textcolor{keywordflow}{pass}
+118 
+119 
 \end{DoxyCode}
 
 
@@ -291,54 +291,54 @@ Definition at line 108 of file packop.\+py.
 \subsubsection[{\texorpdfstring{array}{array}}]{\setlength{\rightskip}{0pt plus 5cm}array = json.\+loads(file.\+read())}\hypertarget{namespacesrc_1_1packop_a41ab4b8b4e6b05e8489555b1bbc7f845}{}\label{namespacesrc_1_1packop_a41ab4b8b4e6b05e8489555b1bbc7f845}
 
 
-Definition at line 15 of file packop.\+py.
+Definition at line 19 of file packop.\+py.
 
 \index{src\+::packop@{src\+::packop}!D\+E\+F\+A\+U\+L\+T\+\_\+\+S\+P\+E\+E\+DS@{D\+E\+F\+A\+U\+L\+T\+\_\+\+S\+P\+E\+E\+DS}}
 \index{D\+E\+F\+A\+U\+L\+T\+\_\+\+S\+P\+E\+E\+DS@{D\+E\+F\+A\+U\+L\+T\+\_\+\+S\+P\+E\+E\+DS}!src\+::packop@{src\+::packop}}
 \subsubsection[{\texorpdfstring{D\+E\+F\+A\+U\+L\+T\+\_\+\+S\+P\+E\+E\+DS}{DEFAULT_SPEEDS}}]{\setlength{\rightskip}{0pt plus 5cm}tuple D\+E\+F\+A\+U\+L\+T\+\_\+\+S\+P\+E\+E\+DS = (27, 245)}\hypertarget{namespacesrc_1_1packop_a21bd10200165ff80dfb55057200f8532}{}\label{namespacesrc_1_1packop_a21bd10200165ff80dfb55057200f8532}
 
 
-Definition at line 11 of file packop.\+py.
+Definition at line 13 of file packop.\+py.
 
 \index{src\+::packop@{src\+::packop}!file@{file}}
 \index{file@{file}!src\+::packop@{src\+::packop}}
 \subsubsection[{\texorpdfstring{file}{file}}]{\setlength{\rightskip}{0pt plus 5cm}file = open({\bf P\+A\+T\+H\+\_\+\+T\+O\+\_\+\+M\+AP}, \char`\"{}r\char`\"{})}\hypertarget{namespacesrc_1_1packop_a40a5d58ffa6e88aa578d6683ac413105}{}\label{namespacesrc_1_1packop_a40a5d58ffa6e88aa578d6683ac413105}
 
 
-Definition at line 14 of file packop.\+py.
+Definition at line 18 of file packop.\+py.
 
 \index{src\+::packop@{src\+::packop}!M\+A\+P\+\_\+\+H\+E\+I\+G\+HT@{M\+A\+P\+\_\+\+H\+E\+I\+G\+HT}}
 \index{M\+A\+P\+\_\+\+H\+E\+I\+G\+HT@{M\+A\+P\+\_\+\+H\+E\+I\+G\+HT}!src\+::packop@{src\+::packop}}
 \subsubsection[{\texorpdfstring{M\+A\+P\+\_\+\+H\+E\+I\+G\+HT}{MAP_HEIGHT}}]{\setlength{\rightskip}{0pt plus 5cm}M\+A\+P\+\_\+\+H\+E\+I\+G\+HT}\hypertarget{namespacesrc_1_1packop_a66c886303dc7450a2538d2d0799d98e3}{}\label{namespacesrc_1_1packop_a66c886303dc7450a2538d2d0799d98e3}
 
 
-Definition at line 13 of file packop.\+py.
+Definition at line 15 of file packop.\+py.
 
 \index{src\+::packop@{src\+::packop}!M\+A\+P\+\_\+\+W\+I\+D\+TH@{M\+A\+P\+\_\+\+W\+I\+D\+TH}}
 \index{M\+A\+P\+\_\+\+W\+I\+D\+TH@{M\+A\+P\+\_\+\+W\+I\+D\+TH}!src\+::packop@{src\+::packop}}
 \subsubsection[{\texorpdfstring{M\+A\+P\+\_\+\+W\+I\+D\+TH}{MAP_WIDTH}}]{\setlength{\rightskip}{0pt plus 5cm}M\+A\+P\+\_\+\+W\+I\+D\+TH}\hypertarget{namespacesrc_1_1packop_ad9405b9e27addc61f310c18d8f5f85e1}{}\label{namespacesrc_1_1packop_ad9405b9e27addc61f310c18d8f5f85e1}
 
 
-Definition at line 13 of file packop.\+py.
+Definition at line 15 of file packop.\+py.
 
 \index{src\+::packop@{src\+::packop}!nominatim@{nominatim}}
 \index{nominatim@{nominatim}!src\+::packop@{src\+::packop}}
 \subsubsection[{\texorpdfstring{nominatim}{nominatim}}]{\setlength{\rightskip}{0pt plus 5cm}nominatim = geopy.\+Nominatim()}\hypertarget{namespacesrc_1_1packop_adb3f5c1dc784a036515907f2303d1fdc}{}\label{namespacesrc_1_1packop_adb3f5c1dc784a036515907f2303d1fdc}
 
 
-Definition at line 10 of file packop.\+py.
+Definition at line 12 of file packop.\+py.
 
 \index{src\+::packop@{src\+::packop}!P\+A\+T\+H\+\_\+\+T\+O\+\_\+\+M\+AP@{P\+A\+T\+H\+\_\+\+T\+O\+\_\+\+M\+AP}}
 \index{P\+A\+T\+H\+\_\+\+T\+O\+\_\+\+M\+AP@{P\+A\+T\+H\+\_\+\+T\+O\+\_\+\+M\+AP}!src\+::packop@{src\+::packop}}
 \subsubsection[{\texorpdfstring{P\+A\+T\+H\+\_\+\+T\+O\+\_\+\+M\+AP}{PATH_TO_MAP}}]{\setlength{\rightskip}{0pt plus 5cm}string P\+A\+T\+H\+\_\+\+T\+O\+\_\+\+M\+AP = \char`\"{}src/map.\+json\char`\"{}}\hypertarget{namespacesrc_1_1packop_ad0b1434232e2f7419383199084141ac0}{}\label{namespacesrc_1_1packop_ad0b1434232e2f7419383199084141ac0}
 
 
-Definition at line 8 of file packop.\+py.
+Definition at line 10 of file packop.\+py.
 
 \index{src\+::packop@{src\+::packop}!R\+A\+D\+I\+US@{R\+A\+D\+I\+US}}
 \index{R\+A\+D\+I\+US@{R\+A\+D\+I\+US}!src\+::packop@{src\+::packop}}
 \subsubsection[{\texorpdfstring{R\+A\+D\+I\+US}{RADIUS}}]{\setlength{\rightskip}{0pt plus 5cm}float R\+A\+D\+I\+US = 6.\+371e6}\hypertarget{namespacesrc_1_1packop_a107fd7168576042ab02c24c419507f1e}{}\label{namespacesrc_1_1packop_a107fd7168576042ab02c24c419507f1e}
 
 
-Definition at line 12 of file packop.\+py.
+Definition at line 14 of file packop.\+py.
 
