@@ -2,7 +2,9 @@ var NAVTREE =
 [
   [ "TrackIt", "index.html", [
     [ "TrackIt: How to Use and Extend", "index.html", null ],
-    [ "README", "md__Users_plato2000_Developer_trackit_README.html", null ],
+    [ "TrackIt: Software Requirements", "md_requirements.html", null ],
+    [ "TrackIt: User Manual", "md_usermanual.html", null ],
+    [ "TrackIt: README", "md__Users_plato2000_Developer_trackit_README.html", null ],
     [ "Packages", null, [
       [ "Packages", "namespaces.html", "namespaces" ],
       [ "Package Functions", "namespacemembers.html", [
@@ -34,7 +36,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "____init_____8py.html",
-"moment_8min_8js.html#a3677ff1e9d6c1f2f03354741a19500b3"
+"moment_8min_8js.html#a31a3490f7ff2dd2b0d76b8d6f068ce27"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

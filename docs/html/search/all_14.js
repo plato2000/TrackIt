@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['readme',['README',['../md__Users_plato2000_Developer_trackit_README.html',1,'']]],
   ['r',['R',['../moment_8min_8js.html#aa59eab306f370d5f705342a433c07380',1,'R(a,b):&#160;moment.min.js'],['../moment_8min_8js.html#ab967f473bc720403947234558c08b83a',1,'R([&quot;M&quot;,&quot;MM&quot;],function(a,b){b[sd]=r(a)-1}):&#160;moment.min.js'],['../jquery_8minicolors_8min_8js.html#affa2c1fafff1cb6a21e98f707d26799d',1,'r(i, t) :&#160;jquery.minicolors.min.js'],['../moment_8min_8js.html#a96f65b399314d93896076ceb474b6b9b',1,'r(a):&#160;moment.min.js']]],
   ['radius',['RADIUS',['../namespacesrc_1_1packop.html#a107fd7168576042ab02c24c419507f1e',1,'src::packop']]],
   ['rc',['Rc',['../moment_8min_8js.html#a5c0a724f375b6234f048a5280b722c9f',1,'moment.min.js']]],
@@ -10,6 +9,7 @@ var searchData=
   ['recover',['recover',['../namespacerun.html#a176b5ba4e7fb1c8e47f1e5449f5c0511',1,'run']]],
   ['removerow',['removeRow',['../main_8js.html#a34aa323b5e6a4413fb439ccc1e404e9f',1,'main.js']]],
   ['replaceall',['replaceAll',['../main_8js.html#a3e31434ba3b125189797c04f307cef2e',1,'main.js']]],
+  ['requirements_2emd',['requirements.md',['../requirements_8md.html',1,'']]],
   ['rippleend',['rippleEnd',['../ripples_8js.html#a17b8a91426ba832d3acd637a8701928a',1,'ripples.js']]],
   ['rippleon',['rippleOn',['../ripples_8js.html#aebd106ade86135e7c075a4fb4f317eb3',1,'ripples.js']]],
   ['rippleout',['rippleOut',['../ripples_8js.html#a1377fcf3030c4f0836f611ee2e1a8147',1,'ripples.js']]],

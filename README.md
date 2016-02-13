@@ -1,4 +1,9 @@
-# README #
+TrackIt: README
+===============
+###Written by People Who Code
+<i>
+Cindy Chen, Parth Oza, Jagan Prem, Kevin Shen
+</i>
 
 ## What is this repository for? ##
 
