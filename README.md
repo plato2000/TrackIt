@@ -2,7 +2,7 @@
 
 ## What is this repository for? ##
 
-This repository is for Parth Oza, Kevin Shen, Jagan Prem, and Cindy Chen's 2015-2016 IDT Automated Software Testing project - automated package tracking and analysis.
+This repository is for Cindy Chen, Parth Oza, Jagan Prem, and Kevin Shen's 2015-2016 IDT Automated Software Testing project - automated package tracking and analysis.
 
 ## How do I get set up? ##
 
