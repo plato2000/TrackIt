@@ -135,19 +135,33 @@ class Package():
     #  Coordinates except for destination are tuples of the format:
     #  (latitude, longitude, elevation, time).
     def __init__(self, coord, destination):
+        ## List of coordinates covered by the path of the package
         self.coords = [[coord]]
+        ## The destination coordinate of the package
         self.destination = destination
+        ## The average speeds of the package over both land and water,
+        #  represented as a list in that respective order
         self.speeds = list(DEFAULT_SPEEDS)
+        ## A list of average speeds for all land segments on the package’s current
+        #  path
         self.land_speeds = [DEFAULT_SPEEDS[0]]
+        ## A list of average speeds for all water segments on the package’s
+        #  current path
         self.water_speeds = [DEFAULT_SPEEDS[1]]
         vehicle = self.get_vehicle(coord)
+        ## The float distance from the current coordinates to the destination
         self.dist = vincenty(coord[:2], self.destination)
         if vehicle == 0:
+            ## A boolean that stores whether the package has ever been on land
+            #  on its current path.
             self.seen_land = True
+            ## A boolean that stores whether the package has ever been on water
+            #  on its current path.
             self.seen_water = False
         else:
             self.seen_water = True
             self.seen_land = False
+        ## A list of coordinates where the package most likely switched vehicles
         self.poi = [[coord, vehicle]]
 
     ## Returns the mode of transport of the Package at the coordinate,
