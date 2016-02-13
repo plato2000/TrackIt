@@ -1,5 +1,7 @@
 import json
 import time
+import urllib
+import os
 
 import geopy
 from geopy import distance
@@ -11,6 +13,8 @@ nominatim = geopy.Nominatim()
 DEFAULT_SPEEDS = (27, 245)  # m/s
 RADIUS = 6.371e6            # m
 MAP_WIDTH, MAP_HEIGHT = 10800, 5400
+if not os.path.isfile(PATH_TO_MAP):
+    urllib.urlretrieve('https://dl.dropboxusercontent.com/u/35301127/map.json', PATH_TO_MAP)
 file = open(PATH_TO_MAP, "r")
 array = json.loads(file.read())
 file.close()
