@@ -1,0 +1,573 @@
+\hypertarget{namespacesrc_1_1database__storage}{}\section{src.\+database\+\_\+storage Namespace Reference}
+\label{namespacesrc_1_1database__storage}\index{src.\+database\+\_\+storage@{src.\+database\+\_\+storage}}
+\subsection*{Functions}
+\subsection*{Variables}
+
+
+\subsection{Function Documentation}
+\index{src\+::database\+\_\+storage@{src\+::database\+\_\+storage}!clear\+\_\+database\+\_\+and\+\_\+create\+\_\+new@{clear\+\_\+database\+\_\+and\+\_\+create\+\_\+new}}
+\index{clear\+\_\+database\+\_\+and\+\_\+create\+\_\+new@{clear\+\_\+database\+\_\+and\+\_\+create\+\_\+new}!src\+::database\+\_\+storage@{src\+::database\+\_\+storage}}
+\subsubsection[{\texorpdfstring{clear\+\_\+database\+\_\+and\+\_\+create\+\_\+new()}{clear_database_and_create_new()}}]{\setlength{\rightskip}{0pt plus 5cm}def src.\+database\+\_\+storage.\+clear\+\_\+database\+\_\+and\+\_\+create\+\_\+new (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacesrc_1_1database__storage_ac8bfcdfbcc3f0aeb1244c86f125e89dc}{}\label{namespacesrc_1_1database__storage_ac8bfcdfbcc3f0aeb1244c86f125e89dc}
+
+
+Clears database and creates a new one. 
+
+
+
+Definition at line 176 of file database\+\_\+storage.\+py.
+
+
+\begin{DoxyCode}
+176 \textcolor{keyword}{def }\hyperlink{namespacesrc_1_1database__storage_ac8bfcdfbcc3f0aeb1244c86f125e89dc}{clear\_database\_and\_create\_new}():
+177     \textcolor{comment}{# command = "DROP DATABASE idt; CREATE DATABASE idt;"}
+178     command1 = \textcolor{stringliteral}{"CREATE TABLE uuids (uuid CHAR(36) PRIMARY KEY, nameString TINYBLOB, delivered ENUM('Y', 'N'
+      ), destLat DOUBLE(7, 4), destLon DOUBLE(7,4));"}
+179     \textcolor{comment}{# execute\_command(command)}
+180     \hyperlink{namespacesrc_1_1database__storage_a7b71f3e5bfe1e4372d048f23e8ca7ed4}{execute\_command}(command1)
+181     \textcolor{comment}{# execute\_command("USE idt")}
+182 
+183 
+\end{DoxyCode}
+\index{src\+::database\+\_\+storage@{src\+::database\+\_\+storage}!close\+\_\+database@{close\+\_\+database}}
+\index{close\+\_\+database@{close\+\_\+database}!src\+::database\+\_\+storage@{src\+::database\+\_\+storage}}
+\subsubsection[{\texorpdfstring{close\+\_\+database()}{close_database()}}]{\setlength{\rightskip}{0pt plus 5cm}def src.\+database\+\_\+storage.\+close\+\_\+database (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacesrc_1_1database__storage_ac8226df71c58ddf9a1d4de0e89a63bc9}{}\label{namespacesrc_1_1database__storage_ac8226df71c58ddf9a1d4de0e89a63bc9}
+
+
+Close database connection. 
+
+
+
+Definition at line 171 of file database\+\_\+storage.\+py.
+
+
+\begin{DoxyCode}
+171 \textcolor{keyword}{def }\hyperlink{namespacesrc_1_1database__storage_ac8226df71c58ddf9a1d4de0e89a63bc9}{close\_database}():
+172     db.close()
+173 
+174 
+\end{DoxyCode}
+\index{src\+::database\+\_\+storage@{src\+::database\+\_\+storage}!create\+\_\+table@{create\+\_\+table}}
+\index{create\+\_\+table@{create\+\_\+table}!src\+::database\+\_\+storage@{src\+::database\+\_\+storage}}
+\subsubsection[{\texorpdfstring{create\+\_\+table( uuid,  name,  dest\+\_\+lat,  dest\+\_\+lon)}{create_table( uuid,  name,  dest_lat,  dest_lon)}}]{\setlength{\rightskip}{0pt plus 5cm}def src.\+database\+\_\+storage.\+create\+\_\+table (
+\begin{DoxyParamCaption}
+\item[{}]{uuid, }
+\item[{}]{name, }
+\item[{}]{dest\+\_\+lat, }
+\item[{}]{dest\+\_\+lon}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacesrc_1_1database__storage_a2036e8cf649aa5e2cdb3b55fe2a5a23c}{}\label{namespacesrc_1_1database__storage_a2036e8cf649aa5e2cdb3b55fe2a5a23c}
+
+
+Creates a new table for a new package. 
+
+The table has \+:(Latitude D\+O\+U\+B\+L\+E(7,4), Longitude D\+O\+U\+B\+L\+E(7,4), Elevation I\+N\+T(6), Time I\+N\+T(10) P\+R\+I\+M\+A\+RY K\+EY) 
+\begin{DoxyParams}{Parameters}
+{\em uuid} & The U\+U\+ID of the package being added \\
+\hline
+{\em name} & The name of the package being added \\
+\hline
+{\em dest\+\_\+lat} & The latitude of the destination of the package \\
+\hline
+{\em dest\+\_\+lon} & The longitude of the destination of the package \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 12 of file database\+\_\+storage.\+py.
+
+
+\begin{DoxyCode}
+12 \textcolor{keyword}{def }\hyperlink{namespacesrc_1_1database__storage_a2036e8cf649aa5e2cdb3b55fe2a5a23c}{create\_table}(uuid, name, dest\_lat, dest\_lon):
+13     \textcolor{comment}{# print "creating table for uuid", uuid}
+14     command = \textcolor{stringliteral}{"CREATE TABLE \(\backslash\)""} + uuid + \textcolor{stringliteral}{"\(\backslash\)" (Latitude DOUBLE(7,4), Longitude DOUBLE(7,4), Elevation
+       INT(6), Time INT(10) PRIMARY KEY)"}
+15     command2 = \textcolor{stringliteral}{"INSERT INTO uuids (uuid, nameString, delivered, destLat, destLon) VALUES ('%s', '%s', 'N',
+       %f, %f)"} % \(\backslash\)
+16                (uuid, name, dest\_lat, dest\_lon)
+17 
+18     \textcolor{comment}{# print "command2:", command2}
+19 
+20     \hyperlink{namespacesrc_1_1database__storage_a7b71f3e5bfe1e4372d048f23e8ca7ed4}{execute\_command}(command)
+21     \hyperlink{namespacesrc_1_1database__storage_a7b71f3e5bfe1e4372d048f23e8ca7ed4}{execute\_command}(command2)
+22 
+23 
+\end{DoxyCode}
+\index{src\+::database\+\_\+storage@{src\+::database\+\_\+storage}!execute\+\_\+command@{execute\+\_\+command}}
+\index{execute\+\_\+command@{execute\+\_\+command}!src\+::database\+\_\+storage@{src\+::database\+\_\+storage}}
+\subsubsection[{\texorpdfstring{execute\+\_\+command( command,  results=\+False)}{execute_command( command,  results=False)}}]{\setlength{\rightskip}{0pt plus 5cm}def src.\+database\+\_\+storage.\+execute\+\_\+command (
+\begin{DoxyParamCaption}
+\item[{}]{command, }
+\item[{}]{results = {\ttfamily False}}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacesrc_1_1database__storage_a7b71f3e5bfe1e4372d048f23e8ca7ed4}{}\label{namespacesrc_1_1database__storage_a7b71f3e5bfe1e4372d048f23e8ca7ed4}
+
+
+Executes S\+QL command given to it. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em command} & The command to execute \\
+\hline
+{\em results} & Whether or not to get results\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Success of command (or results if successful and results=True) 
+\end{DoxyReturn}
+
+
+Definition at line 190 of file database\+\_\+storage.\+py.
+
+
+\begin{DoxyCode}
+190 \textcolor{keyword}{def }\hyperlink{namespacesrc_1_1database__storage_a7b71f3e5bfe1e4372d048f23e8ca7ed4}{execute\_command}(command, results=False):
+191     \textcolor{keywordflow}{try}:
+192         cursor.execute(command)
+193         \textcolor{keywordflow}{if} results:
+194             \textcolor{keywordflow}{return} cursor.fetchall()
+195         \textcolor{keywordflow}{else}:
+196             db.commit()
+197             \textcolor{keywordflow}{return} \textcolor{keyword}{True}
+198     \textcolor{keywordflow}{except}:
+199         traceback.print\_exc(file=sys.stdout)
+200         db.rollback()
+201         \textcolor{keywordflow}{return} \textcolor{keyword}{False}
+202 
+203 
+\end{DoxyCode}
+\index{src\+::database\+\_\+storage@{src\+::database\+\_\+storage}!get\+\_\+all\+\_\+uuids@{get\+\_\+all\+\_\+uuids}}
+\index{get\+\_\+all\+\_\+uuids@{get\+\_\+all\+\_\+uuids}!src\+::database\+\_\+storage@{src\+::database\+\_\+storage}}
+\subsubsection[{\texorpdfstring{get\+\_\+all\+\_\+uuids( get\+\_\+delivered=\+False)}{get_all_uuids( get_delivered=False)}}]{\setlength{\rightskip}{0pt plus 5cm}def src.\+database\+\_\+storage.\+get\+\_\+all\+\_\+uuids (
+\begin{DoxyParamCaption}
+\item[{}]{get\+\_\+delivered = {\ttfamily False}}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacesrc_1_1database__storage_a63dcdcb19a6e7dd70084ebb0cbba7d53}{}\label{namespacesrc_1_1database__storage_a63dcdcb19a6e7dd70084ebb0cbba7d53}
+
+
+Gets all of the U\+U\+I\+Ds tracked by the system. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em get\+\_\+delivered} & Whether or not to include delivered packages (default False)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+List of U\+U\+I\+Ds 
+\end{DoxyReturn}
+
+
+Definition at line 118 of file database\+\_\+storage.\+py.
+
+
+\begin{DoxyCode}
+118 \textcolor{keyword}{def }\hyperlink{namespacesrc_1_1database__storage_a63dcdcb19a6e7dd70084ebb0cbba7d53}{get\_all\_uuids}(get\_delivered=False):
+119     \textcolor{keywordflow}{if} get\_delivered:
+120         command = \textcolor{stringliteral}{"SELECT uuid FROM uuids"}
+121     \textcolor{keywordflow}{else}:
+122         command = \textcolor{stringliteral}{"SELECT uuid FROM uuids WHERE delivered='N'"}
+123     results = \hyperlink{namespacesrc_1_1database__storage_a7b71f3e5bfe1e4372d048f23e8ca7ed4}{execute\_command}(command, results=\textcolor{keyword}{True})
+124     \textcolor{keywordflow}{if} results != \textcolor{keyword}{False}:
+125         \textcolor{keywordflow}{return} [i[0] \textcolor{keywordflow}{for} i \textcolor{keywordflow}{in} results]
+126 
+127 
+\end{DoxyCode}
+\index{src\+::database\+\_\+storage@{src\+::database\+\_\+storage}!get\+\_\+current\+\_\+data@{get\+\_\+current\+\_\+data}}
+\index{get\+\_\+current\+\_\+data@{get\+\_\+current\+\_\+data}!src\+::database\+\_\+storage@{src\+::database\+\_\+storage}}
+\subsubsection[{\texorpdfstring{get\+\_\+current\+\_\+data( uuid)}{get_current_data( uuid)}}]{\setlength{\rightskip}{0pt plus 5cm}def src.\+database\+\_\+storage.\+get\+\_\+current\+\_\+data (
+\begin{DoxyParamCaption}
+\item[{}]{uuid}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacesrc_1_1database__storage_a0172a0a1633496517324142708a9e28a}{}\label{namespacesrc_1_1database__storage_a0172a0a1633496517324142708a9e28a}
+
+
+Gets a package\textquotesingle{}s last package data (current location) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em uuid} & The uuid of the package to get current location for\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A dictionary of package data 
+\end{DoxyReturn}
+
+
+Definition at line 93 of file database\+\_\+storage.\+py.
+
+
+\begin{DoxyCode}
+93 \textcolor{keyword}{def }\hyperlink{namespacesrc_1_1database__storage_a0172a0a1633496517324142708a9e28a}{get\_current\_data}(uuid):
+94     command = \textcolor{stringliteral}{"SELECT * FROM \(\backslash\)""} + uuid + \textcolor{stringliteral}{"\(\backslash\)" ORDER BY Time DESC LIMIT 1"}
+95     results = \hyperlink{namespacesrc_1_1database__storage_a7b71f3e5bfe1e4372d048f23e8ca7ed4}{execute\_command}(command, results=\textcolor{keyword}{True})
+96     \textcolor{comment}{# print "current\_data of", uuid, "is", results}
+97     \textcolor{keywordflow}{if} results != \textcolor{keyword}{False}:
+98         \textcolor{keywordflow}{return} [\{\textcolor{stringliteral}{"coords"}: (i[0], i[1]), \textcolor{stringliteral}{"ele"}: i[2], \textcolor{stringliteral}{"time"}: i[3]\} \textcolor{keywordflow}{for} i \textcolor{keywordflow}{in} results][0]
+99 
+100 
+\end{DoxyCode}
+\index{src\+::database\+\_\+storage@{src\+::database\+\_\+storage}!get\+\_\+delivered\+\_\+packages@{get\+\_\+delivered\+\_\+packages}}
+\index{get\+\_\+delivered\+\_\+packages@{get\+\_\+delivered\+\_\+packages}!src\+::database\+\_\+storage@{src\+::database\+\_\+storage}}
+\subsubsection[{\texorpdfstring{get\+\_\+delivered\+\_\+packages()}{get_delivered_packages()}}]{\setlength{\rightskip}{0pt plus 5cm}def src.\+database\+\_\+storage.\+get\+\_\+delivered\+\_\+packages (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacesrc_1_1database__storage_a7a85dd2acec16c6286249df3d55f57da}{}\label{namespacesrc_1_1database__storage_a7a85dd2acec16c6286249df3d55f57da}
+
+
+Gets all packages marked as delivered. 
+
+\begin{DoxyReturn}{Returns}
+List of U\+U\+I\+Ds 
+\end{DoxyReturn}
+
+
+Definition at line 131 of file database\+\_\+storage.\+py.
+
+
+\begin{DoxyCode}
+131 \textcolor{keyword}{def }\hyperlink{namespacesrc_1_1database__storage_a7a85dd2acec16c6286249df3d55f57da}{get\_delivered\_packages}():
+132     command = \textcolor{stringliteral}{"SELECT uuid FROM uuids WHERE delivered='Y'"}
+133     results = \hyperlink{namespacesrc_1_1database__storage_a7b71f3e5bfe1e4372d048f23e8ca7ed4}{execute\_command}(command, results=\textcolor{keyword}{True})
+134     \textcolor{keywordflow}{if} results != \textcolor{keyword}{False}:
+135         \textcolor{keywordflow}{return} [i[0] \textcolor{keywordflow}{for} i \textcolor{keywordflow}{in} results]
+136 
+137 
+\end{DoxyCode}
+\index{src\+::database\+\_\+storage@{src\+::database\+\_\+storage}!get\+\_\+destination\+\_\+of\+\_\+package@{get\+\_\+destination\+\_\+of\+\_\+package}}
+\index{get\+\_\+destination\+\_\+of\+\_\+package@{get\+\_\+destination\+\_\+of\+\_\+package}!src\+::database\+\_\+storage@{src\+::database\+\_\+storage}}
+\subsubsection[{\texorpdfstring{get\+\_\+destination\+\_\+of\+\_\+package( uuid)}{get_destination_of_package( uuid)}}]{\setlength{\rightskip}{0pt plus 5cm}def src.\+database\+\_\+storage.\+get\+\_\+destination\+\_\+of\+\_\+package (
+\begin{DoxyParamCaption}
+\item[{}]{uuid}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacesrc_1_1database__storage_a64a0ed876f3d3d477fa6efe04d54bf88}{}\label{namespacesrc_1_1database__storage_a64a0ed876f3d3d477fa6efe04d54bf88}
+
+
+Gets the destination of package. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em uuid} & The uuid for which to get a destination \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A tuple (lat, lon) 
+\end{DoxyReturn}
+
+
+Definition at line 105 of file database\+\_\+storage.\+py.
+
+
+\begin{DoxyCode}
+105 \textcolor{keyword}{def }\hyperlink{namespacesrc_1_1database__storage_a64a0ed876f3d3d477fa6efe04d54bf88}{get\_destination\_of\_package}(uuid):
+106     command = \textcolor{stringliteral}{"SELECT destLat, destLon FROM uuids WHERE uuid='"} + uuid + \textcolor{stringliteral}{"'"}
+107     results = \hyperlink{namespacesrc_1_1database__storage_a7b71f3e5bfe1e4372d048f23e8ca7ed4}{execute\_command}(command, results=\textcolor{keyword}{True})
+108     \textcolor{comment}{# print "destination of", uuid, ":", results}
+109     \textcolor{keywordflow}{if} results != \textcolor{keyword}{False}:
+110         \textcolor{keywordflow}{return} results[0]
+111 
+112 
+\end{DoxyCode}
+\index{src\+::database\+\_\+storage@{src\+::database\+\_\+storage}!get\+\_\+first\+\_\+data@{get\+\_\+first\+\_\+data}}
+\index{get\+\_\+first\+\_\+data@{get\+\_\+first\+\_\+data}!src\+::database\+\_\+storage@{src\+::database\+\_\+storage}}
+\subsubsection[{\texorpdfstring{get\+\_\+first\+\_\+data( uuid)}{get_first_data( uuid)}}]{\setlength{\rightskip}{0pt plus 5cm}def src.\+database\+\_\+storage.\+get\+\_\+first\+\_\+data (
+\begin{DoxyParamCaption}
+\item[{}]{uuid}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacesrc_1_1database__storage_ad126f7dcc4d7f3d5337fca7366f468cf}{}\label{namespacesrc_1_1database__storage_ad126f7dcc4d7f3d5337fca7366f468cf}
+
+
+Gets a package\textquotesingle{}s first package data (starting location) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em uuid} & The uuid of the package to get starting location for\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A dictionary of package data 
+\end{DoxyReturn}
+
+
+Definition at line 80 of file database\+\_\+storage.\+py.
+
+
+\begin{DoxyCode}
+80 \textcolor{keyword}{def }\hyperlink{namespacesrc_1_1database__storage_ad126f7dcc4d7f3d5337fca7366f468cf}{get\_first\_data}(uuid):
+81     command = \textcolor{stringliteral}{"SELECT * FROM \(\backslash\)""} + uuid + \textcolor{stringliteral}{"\(\backslash\)" ORDER BY Time ASC LIMIT 1"}
+82     results = \hyperlink{namespacesrc_1_1database__storage_a7b71f3e5bfe1e4372d048f23e8ca7ed4}{execute\_command}(command, results=\textcolor{keyword}{True})
+83     \textcolor{comment}{# print "first data of", uuid, "is", results}
+84     \textcolor{keywordflow}{if} results != \textcolor{keyword}{False}:
+85         \textcolor{keywordflow}{return} [\{\textcolor{stringliteral}{"coords"}: (i[0], i[1]), \textcolor{stringliteral}{"ele"}: i[2], \textcolor{stringliteral}{"time"}: i[3]\} \textcolor{keywordflow}{for} i \textcolor{keywordflow}{in} results][0]
+86 
+87 
+\end{DoxyCode}
+\index{src\+::database\+\_\+storage@{src\+::database\+\_\+storage}!get\+\_\+locations@{get\+\_\+locations}}
+\index{get\+\_\+locations@{get\+\_\+locations}!src\+::database\+\_\+storage@{src\+::database\+\_\+storage}}
+\subsubsection[{\texorpdfstring{get\+\_\+locations( uuid,  time\+\_\+var)}{get_locations( uuid,  time_var)}}]{\setlength{\rightskip}{0pt plus 5cm}def src.\+database\+\_\+storage.\+get\+\_\+locations (
+\begin{DoxyParamCaption}
+\item[{}]{uuid, }
+\item[{}]{time\+\_\+var}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacesrc_1_1database__storage_a8c0870150b23fb9982d7316026e50c2b}{}\label{namespacesrc_1_1database__storage_a8c0870150b23fb9982d7316026e50c2b}
+
+
+Gets a package\textquotesingle{}s raw data from database. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em uuid} & The uuid of the package to get data for \\
+\hline
+{\em time\+\_\+var} & The timestamp (in seconds since 1/1/1970) to start new results\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+List of dictionaries of package data 
+\end{DoxyReturn}
+
+
+Definition at line 54 of file database\+\_\+storage.\+py.
+
+
+\begin{DoxyCode}
+54 \textcolor{keyword}{def }\hyperlink{namespacesrc_1_1database__storage_a8c0870150b23fb9982d7316026e50c2b}{get\_locations}(uuid, time\_var):
+55     command = \textcolor{stringliteral}{"SELECT * FROM \(\backslash\)""} + uuid + \textcolor{stringliteral}{"\(\backslash\)" WHERE Time > "} + str(time\_var) + \textcolor{stringliteral}{" ORDER BY Time ASC"}
+56     results = \hyperlink{namespacesrc_1_1database__storage_a7b71f3e5bfe1e4372d048f23e8ca7ed4}{execute\_command}(command, results=\textcolor{keyword}{True})
+57 
+58     \textcolor{keywordflow}{if} results != \textcolor{keyword}{False}:
+59         \textcolor{keywordflow}{return} [\{\textcolor{stringliteral}{"coords"}: (i[0], i[1]), \textcolor{stringliteral}{"ele"}: i[2], \textcolor{stringliteral}{"time"}: i[3]\} \textcolor{keywordflow}{for} i \textcolor{keywordflow}{in} results]
+60 
+61 
+\end{DoxyCode}
+\index{src\+::database\+\_\+storage@{src\+::database\+\_\+storage}!get\+\_\+name@{get\+\_\+name}}
+\index{get\+\_\+name@{get\+\_\+name}!src\+::database\+\_\+storage@{src\+::database\+\_\+storage}}
+\subsubsection[{\texorpdfstring{get\+\_\+name( uuid)}{get_name( uuid)}}]{\setlength{\rightskip}{0pt plus 5cm}def src.\+database\+\_\+storage.\+get\+\_\+name (
+\begin{DoxyParamCaption}
+\item[{}]{uuid}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacesrc_1_1database__storage_a015630f2e52077bbc64348f08228ffdb}{}\label{namespacesrc_1_1database__storage_a015630f2e52077bbc64348f08228ffdb}
+
+
+Gets a package\textquotesingle{}s name from its uuid. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em uuid} & The uuid of the package to get a name for\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+String (the name of the package) 
+\end{DoxyReturn}
+
+
+Definition at line 67 of file database\+\_\+storage.\+py.
+
+
+\begin{DoxyCode}
+67 \textcolor{keyword}{def }\hyperlink{namespacesrc_1_1database__storage_a015630f2e52077bbc64348f08228ffdb}{get\_name}(uuid):
+68     command = \textcolor{stringliteral}{"SELECT nameString FROM uuids WHERE uuid='"} + uuid + \textcolor{stringliteral}{"'"}
+69     results = \hyperlink{namespacesrc_1_1database__storage_a7b71f3e5bfe1e4372d048f23e8ca7ed4}{execute\_command}(command, results=\textcolor{keyword}{True})
+70     \textcolor{comment}{# print "name of", uuid, "is", results}
+71     \textcolor{keywordflow}{if} results != \textcolor{keyword}{False}:
+72         \textcolor{keywordflow}{return} results[0]
+73 
+74 
+\end{DoxyCode}
+\index{src\+::database\+\_\+storage@{src\+::database\+\_\+storage}!get\+\_\+undelivered\+\_\+packages@{get\+\_\+undelivered\+\_\+packages}}
+\index{get\+\_\+undelivered\+\_\+packages@{get\+\_\+undelivered\+\_\+packages}!src\+::database\+\_\+storage@{src\+::database\+\_\+storage}}
+\subsubsection[{\texorpdfstring{get\+\_\+undelivered\+\_\+packages()}{get_undelivered_packages()}}]{\setlength{\rightskip}{0pt plus 5cm}def src.\+database\+\_\+storage.\+get\+\_\+undelivered\+\_\+packages (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacesrc_1_1database__storage_a2eef22a02b0607cbc75d57d42b89ae57}{}\label{namespacesrc_1_1database__storage_a2eef22a02b0607cbc75d57d42b89ae57}
+
+
+Gets all packages not marked as delivered (currently being processed) 
+
+\begin{DoxyReturn}{Returns}
+List of U\+U\+I\+Ds 
+\end{DoxyReturn}
+
+
+Definition at line 141 of file database\+\_\+storage.\+py.
+
+
+\begin{DoxyCode}
+141 \textcolor{keyword}{def }\hyperlink{namespacesrc_1_1database__storage_a2eef22a02b0607cbc75d57d42b89ae57}{get\_undelivered\_packages}():
+142     command = \textcolor{stringliteral}{"SELECT uuid FROM uuids WHERE delivered='N'"}
+143     results = \hyperlink{namespacesrc_1_1database__storage_a7b71f3e5bfe1e4372d048f23e8ca7ed4}{execute\_command}(command, results=\textcolor{keyword}{True})
+144     \textcolor{keywordflow}{if} results != \textcolor{keyword}{False}:
+145         \textcolor{keywordflow}{return} [i[0] \textcolor{keywordflow}{for} i \textcolor{keywordflow}{in} results]
+146 
+147 
+\end{DoxyCode}
+\index{src\+::database\+\_\+storage@{src\+::database\+\_\+storage}!insert\+\_\+location@{insert\+\_\+location}}
+\index{insert\+\_\+location@{insert\+\_\+location}!src\+::database\+\_\+storage@{src\+::database\+\_\+storage}}
+\subsubsection[{\texorpdfstring{insert\+\_\+location( uuid,  latitude,  longitude,  elevation,  time\+\_\+var)}{insert_location( uuid,  latitude,  longitude,  elevation,  time_var)}}]{\setlength{\rightskip}{0pt plus 5cm}def src.\+database\+\_\+storage.\+insert\+\_\+location (
+\begin{DoxyParamCaption}
+\item[{}]{uuid, }
+\item[{}]{latitude, }
+\item[{}]{longitude, }
+\item[{}]{elevation, }
+\item[{}]{time\+\_\+var}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacesrc_1_1database__storage_ae2be9decb2a5c623591a677e86bbd8fa}{}\label{namespacesrc_1_1database__storage_ae2be9decb2a5c623591a677e86bbd8fa}
+
+
+Inserts a package\textquotesingle{}s data into database. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em uuid} & The uuid of the package where things are inserted \\
+\hline
+{\em latitude} & The latitude of the location at time \\
+\hline
+{\em longitude} & The longitude of the location at time \\
+\hline
+{\em elevation} & The elevation of the package at time \\
+\hline
+{\em time} & The time at which the location is reached \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 31 of file database\+\_\+storage.\+py.
+
+
+\begin{DoxyCode}
+31 \textcolor{keyword}{def }\hyperlink{namespacesrc_1_1database__storage_ae2be9decb2a5c623591a677e86bbd8fa}{insert\_location}(uuid, latitude, longitude, elevation, time\_var):
+32     \textcolor{comment}{# print "inserting location"}
+33     \textcolor{comment}{# print "time\_var:", time\_var}
+34     command = \textcolor{stringliteral}{"INSERT INTO \(\backslash\)""} + uuid + \textcolor{stringliteral}{"\(\backslash\)" (Latitude, Longitude, Elevation, Time) \(\backslash\)}
+35 \textcolor{stringliteral}{               VALUES (%f, %f, %d, %d)"} % \(\backslash\)
+36                (latitude, longitude, elevation, time\_var)
+37     \hyperlink{namespacesrc_1_1database__storage_a7b71f3e5bfe1e4372d048f23e8ca7ed4}{execute\_command}(command)
+38 
+39 
+\end{DoxyCode}
+\index{src\+::database\+\_\+storage@{src\+::database\+\_\+storage}!is\+\_\+delivered@{is\+\_\+delivered}}
+\index{is\+\_\+delivered@{is\+\_\+delivered}!src\+::database\+\_\+storage@{src\+::database\+\_\+storage}}
+\subsubsection[{\texorpdfstring{is\+\_\+delivered( uuid)}{is_delivered( uuid)}}]{\setlength{\rightskip}{0pt plus 5cm}def src.\+database\+\_\+storage.\+is\+\_\+delivered (
+\begin{DoxyParamCaption}
+\item[{}]{uuid}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacesrc_1_1database__storage_a9206e191c57218320572eeaf50ce8d70}{}\label{namespacesrc_1_1database__storage_a9206e191c57218320572eeaf50ce8d70}
+
+
+Checks if package with given uuid is delivered. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em uuid} & Uuid to check delivery status for\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Boolean (true if it\textquotesingle{}s delivered) 
+\end{DoxyReturn}
+
+
+Definition at line 164 of file database\+\_\+storage.\+py.
+
+
+\begin{DoxyCode}
+164 \textcolor{keyword}{def }\hyperlink{namespacesrc_1_1database__storage_a9206e191c57218320572eeaf50ce8d70}{is\_delivered}(uuid):
+165     results = \hyperlink{namespacesrc_1_1database__storage_a7b71f3e5bfe1e4372d048f23e8ca7ed4}{execute\_command}(\textcolor{stringliteral}{"SELECT delivered FROM uuids WHERE uuid='"} + uuid + \textcolor{stringliteral}{"'"}, 
+      results=\textcolor{keyword}{True})
+166     \textcolor{comment}{# print "delivery\_status:", results}
+167     \textcolor{keywordflow}{return} results[0] == \textcolor{stringliteral}{'Y'}
+168 
+169 
+\end{DoxyCode}
+\index{src\+::database\+\_\+storage@{src\+::database\+\_\+storage}!is\+\_\+valid\+\_\+uuid@{is\+\_\+valid\+\_\+uuid}}
+\index{is\+\_\+valid\+\_\+uuid@{is\+\_\+valid\+\_\+uuid}!src\+::database\+\_\+storage@{src\+::database\+\_\+storage}}
+\subsubsection[{\texorpdfstring{is\+\_\+valid\+\_\+uuid( uuid)}{is_valid_uuid( uuid)}}]{\setlength{\rightskip}{0pt plus 5cm}def src.\+database\+\_\+storage.\+is\+\_\+valid\+\_\+uuid (
+\begin{DoxyParamCaption}
+\item[{}]{uuid}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacesrc_1_1database__storage_a835a418f7b244c0bbd8d09bf5347323d}{}\label{namespacesrc_1_1database__storage_a835a418f7b244c0bbd8d09bf5347323d}
+
+
+Checks if uuid is in database of uuids. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em uuid} & Uuid to check validity for\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Boolean (true if it\textquotesingle{}s there) 
+\end{DoxyReturn}
+
+
+Definition at line 153 of file database\+\_\+storage.\+py.
+
+
+\begin{DoxyCode}
+153 \textcolor{keyword}{def }\hyperlink{namespacesrc_1_1database__storage_a835a418f7b244c0bbd8d09bf5347323d}{is\_valid\_uuid}(uuid):
+154     results = \hyperlink{namespacesrc_1_1database__storage_a7b71f3e5bfe1e4372d048f23e8ca7ed4}{execute\_command}(\textcolor{stringliteral}{"SELECT uuid FROM uuids WHERE uuid='"} + uuid + \textcolor{stringliteral}{"'"}, results=\textcolor{keyword}{
+      True})
+155     \textcolor{comment}{# print "is\_valid\_uuid:", results}
+156     \textcolor{keywordflow}{return} len(results) > 0
+157 
+158 
+\end{DoxyCode}
+\index{src\+::database\+\_\+storage@{src\+::database\+\_\+storage}!make\+\_\+delivered@{make\+\_\+delivered}}
+\index{make\+\_\+delivered@{make\+\_\+delivered}!src\+::database\+\_\+storage@{src\+::database\+\_\+storage}}
+\subsubsection[{\texorpdfstring{make\+\_\+delivered( uuid)}{make_delivered( uuid)}}]{\setlength{\rightskip}{0pt plus 5cm}def src.\+database\+\_\+storage.\+make\+\_\+delivered (
+\begin{DoxyParamCaption}
+\item[{}]{uuid}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacesrc_1_1database__storage_a125521d953cfb6d79eec398925c7ed23}{}\label{namespacesrc_1_1database__storage_a125521d953cfb6d79eec398925c7ed23}
+
+
+Sets a package\textquotesingle{}s delivered status to true in the database. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em uuid} & The uuid of the package to set delivered \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 43 of file database\+\_\+storage.\+py.
+
+
+\begin{DoxyCode}
+43 \textcolor{keyword}{def }\hyperlink{namespacesrc_1_1database__storage_a125521d953cfb6d79eec398925c7ed23}{make\_delivered}(uuid):
+44     command = \textcolor{stringliteral}{"UPDATE uuids SET delivered='Y' WHERE uuid='"} + uuid + \textcolor{stringliteral}{"'"}
+45     \hyperlink{namespacesrc_1_1database__storage_a7b71f3e5bfe1e4372d048f23e8ca7ed4}{execute\_command}(command)
+46 
+47 
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\index{src\+::database\+\_\+storage@{src\+::database\+\_\+storage}!cursor@{cursor}}
+\index{cursor@{cursor}!src\+::database\+\_\+storage@{src\+::database\+\_\+storage}}
+\subsubsection[{\texorpdfstring{cursor}{cursor}}]{\setlength{\rightskip}{0pt plus 5cm}cursor = db.\+cursor()}\hypertarget{namespacesrc_1_1database__storage_aa8438784f03812b918cb36a35cf9be0e}{}\label{namespacesrc_1_1database__storage_aa8438784f03812b918cb36a35cf9be0e}
+
+
+Opens database connection. 
+
+
+
+Definition at line 208 of file database\+\_\+storage.\+py.
+
+\index{src\+::database\+\_\+storage@{src\+::database\+\_\+storage}!db@{db}}
+\index{db@{db}!src\+::database\+\_\+storage@{src\+::database\+\_\+storage}}
+\subsubsection[{\texorpdfstring{db}{db}}]{\setlength{\rightskip}{0pt plus 5cm}db = My\+S\+Q\+Ldb.\+connect(host=\char`\"{}localhost\char`\"{}, user=\char`\"{}admin\char`\"{}, passwd=\char`\"{}password1\char`\"{}, db=\char`\"{}idt\char`\"{})}\hypertarget{namespacesrc_1_1database__storage_a89a7f6028a19c3dc081cc5f16eb53891}{}\label{namespacesrc_1_1database__storage_a89a7f6028a19c3dc081cc5f16eb53891}
+
+
+Opens database connection -\/ Host and password may change later. 
+
+
+
+Definition at line 205 of file database\+\_\+storage.\+py.
+

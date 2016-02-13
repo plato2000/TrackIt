@@ -1,0 +1,810 @@
+\hypertarget{jquery_8minicolors_8min_8js}{}\section{/\+Users/plato2000/\+Developer/trackit/static/js/jquery.minicolors.\+min.\+js File Reference}
+\label{jquery_8minicolors_8min_8js}\index{/\+Users/plato2000/\+Developer/trackit/static/js/jquery.\+minicolors.\+min.\+js@{/\+Users/plato2000/\+Developer/trackit/static/js/jquery.\+minicolors.\+min.\+js}}
+
+
+\subsection{Function Documentation}
+\index{jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}!"!function@{"!function}}
+\index{"!function@{"!function}!jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}}
+\subsubsection[{\texorpdfstring{"!function(i) }{!function(i) }}]{\setlength{\rightskip}{0pt plus 5cm}!function (
+\begin{DoxyParamCaption}
+\item[{}]{i}
+\end{DoxyParamCaption}
+)}\hypertarget{jquery_8minicolors_8min_8js_a93ac9d5d36491bfd6cc78106e9c74bc5}{}\label{jquery_8minicolors_8min_8js_a93ac9d5d36491bfd6cc78106e9c74bc5}
+
+
+Definition at line 11 of file jquery.\+minicolors.\+min.\+js.
+
+
+\begin{DoxyCode}
+11               \{
+12     \textcolor{stringliteral}{"function"} == typeof define && define.amd ? define([\textcolor{stringliteral}{"jquery"}], \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}) : \textcolor{stringliteral}{"object"} == typeof exports ? 
+      module.exports = \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}(require(\textcolor{stringliteral}{"jquery"})) : \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}(\hyperlink{material_8js_a2b1d6f9c448e3ce72f4e1865d6e38d2c}{jQuery})
+13 \}(function ($) \{
+\end{DoxyCode}
+\index{jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}!a@{a}}
+\index{a@{a}!jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}}
+\subsubsection[{\texorpdfstring{a() }{a() }}]{\setlength{\rightskip}{0pt plus 5cm}function a (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{}\label{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}
+
+
+Definition at line 38 of file jquery.\+minicolors.\+min.\+js.
+
+
+\begin{DoxyCode}
+38                  \{
+39         $(\textcolor{stringliteral}{".minicolors-focus"}).\hyperlink{jquery_8min_8js_a31ccfe2370b7f6106563fcfa8af16d7f}{each}(\textcolor{keyword}{function} () \{
+40             var \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} = $(\textcolor{keyword}{this}), \hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t} = i.find(\textcolor{stringliteral}{".minicolors-input"}), \hyperlink{jquery_8minicolors_8min_8js_a03f9965317e0a0bdacfb3e886629b2e9}{o} = i.find(\textcolor{stringliteral}{".minicolors-panel"}), 
+      \hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a} = \hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t}.data(\textcolor{stringliteral}{"minicolors-settings"});
+41             \hyperlink{jquery_8minicolors_8min_8js_a03f9965317e0a0bdacfb3e886629b2e9}{o}.fadeOut(\hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a}.hideSpeed, function () \{
+42                 \hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a}.hide && \hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a}.hide.call(\hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t}.get(0)), i.removeClass(\textcolor{stringliteral}{"minicolors-focus"})
+43             \})
+44         \})
+45     \}
+\end{DoxyCode}
+\index{jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}!b@{b}}
+\index{b@{b}!jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}}
+\subsubsection[{\texorpdfstring{b(i) }{b(i) }}]{\setlength{\rightskip}{0pt plus 5cm}function b (
+\begin{DoxyParamCaption}
+\item[{}]{i}
+\end{DoxyParamCaption}
+)}\hypertarget{jquery_8minicolors_8min_8js_a3aede9dec910534ce46e095e5cb5b3f5}{}\label{jquery_8minicolors_8min_8js_a3aede9dec910534ce46e095e5cb5b3f5}
+
+
+Definition at line 229 of file jquery.\+minicolors.\+min.\+js.
+
+
+\begin{DoxyCode}
+229                   \{
+230         \textcolor{keywordflow}{return} \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} = \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.match(/^rgba?[\(\backslash\)\hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}+]?\(\backslash\)([\(\backslash\)\hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}+]?(\(\backslash\)\hyperlink{jquery_8minicolors_8min_8js_a4ff38bc9cac23d19e18b3fab41f4a709}{d}+)[\(\backslash\)\hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}+]?,[\(\backslash\)\hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}+]?(\(\backslash\)\hyperlink{jquery_8minicolors_8min_8js_a4ff38bc9cac23d19e18b3fab41f4a709}{d}+)[\(\backslash\)
+      \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}+]?,[\(\backslash\)\hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}+]?(\(\backslash\)\hyperlink{jquery_8minicolors_8min_8js_a4ff38bc9cac23d19e18b3fab41f4a709}{d}+)[\(\backslash\)\hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}+]?/\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}), \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} && 4 === \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.length ? \textcolor{stringliteral}{"#"} + (\textcolor{stringliteral}{"0"} + parseInt(\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}[1], 10).toString(16)).
+      slice(-2) + (\textcolor{stringliteral}{"0"} + parseInt(\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}[2], 10).toString(16)).slice(-2) + (\textcolor{stringliteral}{"0"} + parseInt(\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}[3], 10).toString(16)).slice(
+      -2) : \textcolor{stringliteral}{""}
+231     \}
+\end{DoxyCode}
+\index{jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}!c@{c}}
+\index{c@{c}!jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}}
+\subsubsection[{\texorpdfstring{c(i) }{c(i) }}]{\setlength{\rightskip}{0pt plus 5cm}function c (
+\begin{DoxyParamCaption}
+\item[{}]{i}
+\end{DoxyParamCaption}
+)}\hypertarget{jquery_8minicolors_8min_8js_ac8a54e1b0c42b4db93e914f072945aa1}{}\label{jquery_8minicolors_8min_8js_ac8a54e1b0c42b4db93e914f072945aa1}
+
+
+Definition at line 174 of file jquery.\+minicolors.\+min.\+js.
+
+
+\begin{DoxyCode}
+174                   \{
+175         var \hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t} = \hyperlink{jquery_8minicolors_8min_8js_a4ff38bc9cac23d19e18b3fab41f4a709}{d}($(\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}).val(), !0), \hyperlink{jquery_8minicolors_8min_8js_a03f9965317e0a0bdacfb3e886629b2e9}{o} = \hyperlink{jquery_8minicolors_8min_8js_a81f5fce85df05f829796d466d3e32da5}{k}(t), \hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a} = $(\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}).attr(\textcolor{stringliteral}{"data-opacity"});
+176         \textcolor{keywordflow}{return} \hyperlink{jquery_8minicolors_8min_8js_a03f9965317e0a0bdacfb3e886629b2e9}{o} ? (\textcolor{keywordtype}{void} 0 !== \hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a} && $.extend(\hyperlink{jquery_8minicolors_8min_8js_a03f9965317e0a0bdacfb3e886629b2e9}{o}, \{\hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a}: parseFloat(\hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a})\}), \hyperlink{jquery_8minicolors_8min_8js_a03f9965317e0a0bdacfb3e886629b2e9}{o}) : null
+177     \}
+\end{DoxyCode}
+\index{jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}!C@{C}}
+\index{C@{C}!jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}}
+\subsubsection[{\texorpdfstring{C(i) }{C(i) }}]{\setlength{\rightskip}{0pt plus 5cm}function C (
+\begin{DoxyParamCaption}
+\item[{}]{i}
+\end{DoxyParamCaption}
+)}\hypertarget{jquery_8minicolors_8min_8js_a1c8c08295f0d4e43629e391fcd9c736c}{}\label{jquery_8minicolors_8min_8js_a1c8c08295f0d4e43629e391fcd9c736c}
+
+
+Definition at line 244 of file jquery.\+minicolors.\+min.\+js.
+
+
+\begin{DoxyCode}
+244                   \{
+245         var \hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t} = \hyperlink{jquery_8minicolors_8min_8js_ac6f204455aefa9dd1e54e9185b44d351}{M}(\hyperlink{jquery_8minicolors_8min_8js_a81f5fce85df05f829796d466d3e32da5}{k}(\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}));
+246         \textcolor{keywordflow}{return} 0 === t.s && (t.h = 360), t
+247     \}
+\end{DoxyCode}
+\index{jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}!d@{d}}
+\index{d@{d}!jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}}
+\subsubsection[{\texorpdfstring{d(i, t) }{d(i, t) }}]{\setlength{\rightskip}{0pt plus 5cm}function d (
+\begin{DoxyParamCaption}
+\item[{}]{i, }
+\item[{}]{t}
+\end{DoxyParamCaption}
+)}\hypertarget{jquery_8minicolors_8min_8js_a4ff38bc9cac23d19e18b3fab41f4a709}{}\label{jquery_8minicolors_8min_8js_a4ff38bc9cac23d19e18b3fab41f4a709}
+
+
+Definition at line 188 of file jquery.\+minicolors.\+min.\+js.
+
+
+\begin{DoxyCode}
+188                      \{
+189         \textcolor{keywordflow}{return} \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} = \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.replace(/^#/\hyperlink{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{g}, \textcolor{stringliteral}{""}), \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.match(/^[\hyperlink{moment_8min_8js_a3a66bd3253d8a58b4b95375783b594ed}{A}-F0-9]\{3,6\}/gi) ? 3 !== 
+      \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.length && 6 !== \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.length ? \textcolor{stringliteral}{""} : (3 === \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.length && \hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t} && (\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} = \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}[0] + \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}[0] + 
+      \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}[1] + \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}[1] + \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}[2] + \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}[2]), \textcolor{stringliteral}{"#"} + \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}) : \textcolor{stringliteral}{""}
+190     \}
+\end{DoxyCode}
+\index{jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}!data@{data}}
+\index{data@{data}!jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}}
+\subsubsection[{\texorpdfstring{data(""minicolors-\/target"", t)}{data("minicolors-target", t)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf i} {\bf document} data (
+\begin{DoxyParamCaption}
+\item[{}]{\char`\"{}minicolors-\/target\char`\"{}, }
+\item[{}]{t}
+\end{DoxyParamCaption}
+)}\hypertarget{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{}\label{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}
+\index{jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}!e@{e}}
+\index{e@{e}!jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}}
+\subsubsection[{\texorpdfstring{e(i, t, o) }{e(i, t, o) }}]{\setlength{\rightskip}{0pt plus 5cm}function e (
+\begin{DoxyParamCaption}
+\item[{}]{i, }
+\item[{}]{t, }
+\item[{}]{o}
+\end{DoxyParamCaption}
+)}\hypertarget{jquery_8minicolors_8min_8js_af594b4f9b7e4cb3f217d3760ee94b814}{}\label{jquery_8minicolors_8min_8js_af594b4f9b7e4cb3f217d3760ee94b814}
+
+
+Definition at line 164 of file jquery.\+minicolors.\+min.\+js.
+
+
+\begin{DoxyCode}
+164                         \{
+165         var \hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a} = \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.data(\textcolor{stringliteral}{"minicolors-settings"}), \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s} = \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.data(\textcolor{stringliteral}{"minicolors-lastChange"});
+166         \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s} && \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}.value === \hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t} && \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}.opacity === \hyperlink{jquery_8minicolors_8min_8js_a03f9965317e0a0bdacfb3e886629b2e9}{o} || (\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.data(\textcolor{stringliteral}{"minicolors-lastChange"}, \{
+167             value: \hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t},
+168             opacity: \hyperlink{jquery_8minicolors_8min_8js_a03f9965317e0a0bdacfb3e886629b2e9}{o}
+169         \}), a.change && (a.changeDelay ? (clearTimeout(\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.data(\textcolor{stringliteral}{"minicolors-changeTimeout"})), 
+      \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.data(\textcolor{stringliteral}{"minicolors-changeTimeout"}, setTimeout(\textcolor{keyword}{function} () \{
+170             a.change.call(\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.get(0), \hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t}, \hyperlink{jquery_8minicolors_8min_8js_a03f9965317e0a0bdacfb3e886629b2e9}{o})
+171         \}, a.changeDelay))) : a.change.call(\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.get(0), \hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t}, \hyperlink{jquery_8minicolors_8min_8js_a03f9965317e0a0bdacfb3e886629b2e9}{o})), \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.trigger(\textcolor{stringliteral}{"change"}).trigger(\textcolor{stringliteral}{"input"}))
+172     \}
+\end{DoxyCode}
+\index{jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}!extend@{extend}}
+\index{extend@{extend}!jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}}
+\subsubsection[{\texorpdfstring{extend(\$.\+fn, \lcurly{} minicolors\+: function (s, n) \lcurly{} switch (s) \lcurly{} case""destroy""\+: return \$(this).\+each(function () \lcurly{}
+                        t(\$(this))
+                    \rcurly{}), \$(this); case""hide""\+: return a(), \$(this); case""opacity""\+: return void 0 === n ? \$(this).\+attr(""data-\/opacity"") \+: (\$(this).\+each(function () \lcurly{}
+                        r(\$(this).\+attr(""data-\/opacity"", n))
+                    \rcurly{}), \$(this)); case""rgb\+Object""\+: return c(\$(this), ""rgba\+Object"" === s); case""rgb\+String""\+: case""rgba\+String""\+: return l(\$(this), ""rgba\+String"" === s); case""settings""\+: return void 0 === n ? \$(this).\+data(""minicolors-\/settings"") \+: (\$(this).\+each(function () \lcurly{}
+                        var i = \$(this).\+data(""minicolors-\/settings"") \texttt{"|}\texttt{"|} \lcurly{}\rcurly{};
+                        t(\$(this)), \$(this).\+minicolors(\$.\+extend("!0, i, n))
+                    \rcurly{}), \$(this)); case""show""\+: return o(\$(this).\+eq(0)), \$(this); case""value""\+: return void 0 === n ? \$(this).\+val() \+: (\$(this).\+each(function () \lcurly{}
+                        ""object"" == typeof n ? (n.\+opacity \&\& \$(this).\+attr(""data-\/opacity"", g(n.\+opacity, 0, 1)), n.\+color \&\& \$(this).\+val(n.\+color)) \+: \$(this).\+val(n), r(\$(this))
+                    \rcurly{}), \$(this)); default\+: return ""create"" "!== s \&\& (n = s), \$(this).\+each(function () \lcurly{}
+                        i(\$(this), n)
+                    \rcurly{}), \$(this) \rcurly{} \rcurly{} \rcurly{})}{extend($.fn, \{ minicolors: function (s, n) \{ switch (s) \{ case"destroy": return $(this).each(function () \{
+                        t($(this))
+                    \}), $(this); case"hide": return a(), $(this); case"opacity": return void 0 === n ? $(this).attr("data-opacity") : ($(this).each(function () \{
+                        r($(this).attr("data-opacity", n))
+                    \}), $(this)); case"rgbObject": return c($(this), "rgbaObject" === s); case"rgbString": case"rgbaString": return l($(this), "rgbaString" === s); case"settings": return void 0 === n ? $(this).data("minicolors-settings") : ($(this).each(function () \{
+                        var i = $(this).data("minicolors-settings") || \{\};
+                        t($(this)), $(this).minicolors($.extend(!0, i, n))
+                    \}), $(this)); case"show": return o($(this).eq(0)), $(this); case"value": return void 0 === n ? $(this).val() : ($(this).each(function () \{
+                        "object" == typeof n ? (n.opacity && $(this).attr("data-opacity", g(n.opacity, 0, 1)), n.color && $(this).val(n.color)) : $(this).val(n), r($(this))
+                    \}), $(this)); default: return "create" !== s && (n = s), $(this).each(function () \{
+                        i($(this), n)
+                    \}), $(this) \} \} \})}}]{\setlength{\rightskip}{0pt plus 5cm}extend (
+\begin{DoxyParamCaption}
+\item[{}]{\$., }
+\item[{}]{\{ minicolors\+: function (s, n) \{ switch (s) \{ case\char`\"{}destroy\char`\"{}\+: return \$(this).\+each(function () \{                        t(\$(this))                    \}), \$(this); case\char`\"{}hide\char`\"{}\+: return a(), \$(this); case\char`\"{}opacity\char`\"{}\+: return void 0 === n ? \$(this).\+attr(\char`\"{}data-\/opacity\char`\"{}) \+: (\$(this).\+each(function () \{                        r(\$(this).\+attr(\char`\"{}data-\/opacity\char`\"{}, n))                    \}), \$(this)); case\char`\"{}rgb\+Object\char`\"{}\+: return c(\$(this), \char`\"{}rgba\+Object\char`\"{} === s); case\char`\"{}rgb\+String\char`\"{}\+: case\char`\"{}rgba\+String\char`\"{}\+: return l(\$(this), \char`\"{}rgba\+String\char`\"{} === s); case\char`\"{}settings\char`\"{}\+: return void 0 === n ? \$(this).\+data(\char`\"{}minicolors-\/settings\char`\"{}) \+: (\$(this).\+each(function () \{                        var i = \$(this).\+data(\char`\"{}minicolors-\/settings\char`\"{}) $\vert$$\vert$ \{\};                        t(\$(this)), \$(this).\+minicolors(\$.\+extend(!0, i, n))                    \}), \$(this)); case\char`\"{}show\char`\"{}\+: return o(\$(this).\+eq(0)), \$(this); case\char`\"{}value\char`\"{}\+: return void 0 === n ? \$(this).\+val() \+: (\$(this).\+each(function () \{                        \char`\"{}object\char`\"{} == typeof n ? (n.\+opacity \&\& \$(this).\+attr(\char`\"{}data-\/opacity\char`\"{}, g(n.\+opacity, 0, 1)), n.\+color \&\& \$(this).\+val(n.\+color)) \+: \$(this).\+val(n), r(\$(this))                    \}), \$(this)); default\+: return \char`\"{}create\char`\"{} !== s \&\& (n = s), \$(this).\+each(function () \{                        i(\$(this), n)                    \}), \$(this) \} \} \}}
+\end{DoxyParamCaption}
+)}\hypertarget{jquery_8minicolors_8min_8js_ab2c0eb107c8c81514a706ec947765aa1}{}\label{jquery_8minicolors_8min_8js_ab2c0eb107c8c81514a706ec947765aa1}
+\index{jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}!f@{f}}
+\index{f@{f}!jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}}
+\subsubsection[{\texorpdfstring{f(i) }{f(i) }}]{\setlength{\rightskip}{0pt plus 5cm}function f (
+\begin{DoxyParamCaption}
+\item[{}]{i}
+\end{DoxyParamCaption}
+)}\hypertarget{jquery_8minicolors_8min_8js_a09c8a339e0860e329627825dab2c8c6d}{}\label{jquery_8minicolors_8min_8js_a09c8a339e0860e329627825dab2c8c6d}
+
+
+Definition at line 215 of file jquery.\+minicolors.\+min.\+js.
+
+
+\begin{DoxyCode}
+215                   \{
+216         var \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} = i.match(/^rgba?[\(\backslash\)\hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}+]?\(\backslash\)([\(\backslash\)\hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}+]?(\(\backslash\)\hyperlink{jquery_8minicolors_8min_8js_a4ff38bc9cac23d19e18b3fab41f4a709}{d}+)[\(\backslash\)\hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}+]?,[\(\backslash\)\hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}+]?(\(\backslash\)\hyperlink{jquery_8minicolors_8min_8js_a4ff38bc9cac23d19e18b3fab41f4a709}{d}+)[\(\backslash\)\hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}+]?,[\(\backslash\)
+      \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}+]?(\(\backslash\)\hyperlink{jquery_8minicolors_8min_8js_a4ff38bc9cac23d19e18b3fab41f4a709}{d}+)[\(\backslash\)\hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}+]?,[\(\backslash\)\hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}+]?(\(\backslash\)\hyperlink{jquery_8minicolors_8min_8js_a4ff38bc9cac23d19e18b3fab41f4a709}{d}+(\(\backslash\).\(\backslash\)\hyperlink{jquery_8minicolors_8min_8js_a4ff38bc9cac23d19e18b3fab41f4a709}{d}\{1,2\})?|\(\backslash\).\(\backslash\)\hyperlink{jquery_8minicolors_8min_8js_a4ff38bc9cac23d19e18b3fab41f4a709}{d}\{1,2\})[\(\backslash\)\hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}+]?/i);
+217         \textcolor{keywordflow}{return} i && 6 === i.length ? i[4] : \textcolor{stringliteral}{"1"}
+218     \}
+\end{DoxyCode}
+\index{jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}!g@{g}}
+\index{g@{g}!jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}}
+\subsubsection[{\texorpdfstring{g(i, t, o) }{g(i, t, o) }}]{\setlength{\rightskip}{0pt plus 5cm}function g (
+\begin{DoxyParamCaption}
+\item[{}]{i, }
+\item[{}]{t, }
+\item[{}]{o}
+\end{DoxyParamCaption}
+)}\hypertarget{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{}\label{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}
+
+
+Definition at line 206 of file jquery.\+minicolors.\+min.\+js.
+
+
+\begin{DoxyCode}
+206                         \{
+207         \textcolor{keywordflow}{return} \hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t} > \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} && (\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} = \hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t}), i > \hyperlink{jquery_8minicolors_8min_8js_a03f9965317e0a0bdacfb3e886629b2e9}{o} && (i = \hyperlink{jquery_8minicolors_8min_8js_a03f9965317e0a0bdacfb3e886629b2e9}{o}), i
+208     \}
+\end{DoxyCode}
+\index{jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}!h@{h}}
+\index{h@{h}!jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}}
+\subsubsection[{\texorpdfstring{h(i, t) }{h(i, t) }}]{\setlength{\rightskip}{0pt plus 5cm}function h (
+\begin{DoxyParamCaption}
+\item[{}]{i, }
+\item[{}]{t}
+\end{DoxyParamCaption}
+)}\hypertarget{jquery_8minicolors_8min_8js_a4103c8729d2048626fcd70c57fa74da3}{}\label{jquery_8minicolors_8min_8js_a4103c8729d2048626fcd70c57fa74da3}
+
+
+Definition at line 184 of file jquery.\+minicolors.\+min.\+js.
+
+
+\begin{DoxyCode}
+184                      \{
+185         \textcolor{keywordflow}{return} \textcolor{stringliteral}{"uppercase"} === \hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t} ? \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.toUpperCase() : \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.toLowerCase()
+186     \}
+\end{DoxyCode}
+\index{jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}!i@{i}}
+\index{i@{i}!jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}}
+\subsubsection[{\texorpdfstring{i(i, t) }{i(i, t) }}]{\setlength{\rightskip}{0pt plus 5cm}function i (
+\begin{DoxyParamCaption}
+\item[{}]{i, }
+\item[{}]{t}
+\end{DoxyParamCaption}
+)}\hypertarget{jquery_8minicolors_8min_8js_a96e3891e3697ed04636009b37a3a0a8c}{}\label{jquery_8minicolors_8min_8js_a96e3891e3697ed04636009b37a3a0a8c}
+
+
+Definition at line 15 of file jquery.\+minicolors.\+min.\+js.
+
+
+\begin{DoxyCode}
+15                      \{
+16         var \hyperlink{jquery_8minicolors_8min_8js_a03f9965317e0a0bdacfb3e886629b2e9}{o} = $(\textcolor{stringliteral}{'<div class="minicolors" />'}), \hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a} = $.\hyperlink{jquery_8minicolors_8min_8js_a623ce2f92a7828fcb489b2482f03f50a}{minicolors}.defaults, 
+      \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s} = \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.attr(\textcolor{stringliteral}{"data-opacity"}), \hyperlink{jquery_8minicolors_8min_8js_a9af8c9ff25cef506f6043fa238b91483}{n};
+17         \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.data(\textcolor{stringliteral}{"minicolors-initialized"}) || (\hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t} = $.extend(!0, \{\}, \hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a}, \hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t}), o.addClass(\textcolor{stringliteral}{"minicolors-theme-"}
+       + \hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t}.theme).toggleClass(\textcolor{stringliteral}{"minicolors-with-opacity"}, \hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t}.opacity).toggleClass(\textcolor{stringliteral}{"minicolors-no-data-uris"}, 
+      \hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t}.dataUris !== !0), \textcolor{keywordtype}{void} 0 !== \hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t}.position && $.each(\hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t}.position.split(\textcolor{stringliteral}{" "}), \textcolor{keyword}{function} () \{
+18             o.addClass(\textcolor{stringliteral}{"minicolors-position-"} + \textcolor{keyword}{this})
+19         \}), \hyperlink{jquery_8minicolors_8min_8js_a9af8c9ff25cef506f6043fa238b91483}{n} = \textcolor{stringliteral}{"rgb"} === \hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t}.format ? \hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t}.opacity ? \textcolor{stringliteral}{"25"} : \textcolor{stringliteral}{"20"} : \hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t}.keywords ? \textcolor{stringliteral}{"11"} : \textcolor{stringliteral}{"7"}, 
+      \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.addClass(\textcolor{stringliteral}{"minicolors-input"}).data(\textcolor{stringliteral}{"minicolors-initialized"}, !1).data(\textcolor{stringliteral}{"minicolors-settings"}, 
+      \hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t}).prop(\textcolor{stringliteral}{"size"}, \hyperlink{jquery_8minicolors_8min_8js_a9af8c9ff25cef506f6043fa238b91483}{n}).wrap(o).after(\textcolor{stringliteral}{'<div class="minicolors-panel minicolors-slider-'} + 
+      \hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t}.control + \textcolor{stringliteral}{'"><div class="minicolors-slider minicolors-sprite"><div
+       class="minicolors-picker"></div></div><div class="minicolors-opacity-slider minicolors-sprite"><div class="minicolors-picker"></div></div><div
+       class="minicolors-grid minicolors-sprite"><div class="minicolors-grid-inner"></div><div
+       class="minicolors-picker"><div></div></div></div></div>'}), \hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t}.inline || (\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.after(\textcolor{stringliteral}{'<span class="minicolors-swatch
+       minicolors-sprite"><span class="minicolors-swatch-color"></span></span>'}), \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.next(\textcolor{stringliteral}{".minicolors-swatch"}).on(\textcolor{stringliteral}{"click"}, \textcolor{keyword}{
+      function} (\hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t}) \{
+20             \hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t}.preventDefault(), \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.focus()
+21         \})), \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.parent().find(\textcolor{stringliteral}{".minicolors-panel"}).on(\textcolor{stringliteral}{"selectstart"}, \textcolor{keyword}{function} () \{
+22             \textcolor{keywordflow}{return} !1
+23         \}).end(), \hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t}.inline && \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.parent().addClass(\textcolor{stringliteral}{"minicolors-inline"}), \hyperlink{jquery_8minicolors_8min_8js_affa2c1fafff1cb6a21e98f707d26799d}{r}(\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}, !1), 
+      \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.data(\textcolor{stringliteral}{"minicolors-initialized"}, !0))
+24     \}
+\end{DoxyCode}
+\index{jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}!k@{k}}
+\index{k@{k}!jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}}
+\subsubsection[{\texorpdfstring{k(i) }{k(i) }}]{\setlength{\rightskip}{0pt plus 5cm}function k (
+\begin{DoxyParamCaption}
+\item[{}]{i}
+\end{DoxyParamCaption}
+)}\hypertarget{jquery_8minicolors_8min_8js_a81f5fce85df05f829796d466d3e32da5}{}\label{jquery_8minicolors_8min_8js_a81f5fce85df05f829796d466d3e32da5}
+
+
+Definition at line 254 of file jquery.\+minicolors.\+min.\+js.
+
+
+\begin{DoxyCode}
+254                   \{
+255         \textcolor{keywordflow}{return} \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} = parseInt(\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.indexOf(\textcolor{stringliteral}{"#"}) > -1 ? \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.substring(1) : \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}, 16), \{
+      \hyperlink{jquery_8minicolors_8min_8js_affa2c1fafff1cb6a21e98f707d26799d}{r}: \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} >> 16, \hyperlink{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{g}: (65280 & \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}) >> 8, \hyperlink{jquery_8minicolors_8min_8js_a3aede9dec910534ce46e095e5cb5b3f5}{b}: 255 & \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}\}
+256     \}
+\end{DoxyCode}
+\index{jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}!l@{l}}
+\index{l@{l}!jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}}
+\subsubsection[{\texorpdfstring{l(i, t) }{l(i, t) }}]{\setlength{\rightskip}{0pt plus 5cm}function l (
+\begin{DoxyParamCaption}
+\item[{}]{i, }
+\item[{}]{t}
+\end{DoxyParamCaption}
+)}\hypertarget{jquery_8minicolors_8min_8js_afc85bcff0d10d44967f03d0bba5362ea}{}\label{jquery_8minicolors_8min_8js_afc85bcff0d10d44967f03d0bba5362ea}
+
+
+Definition at line 179 of file jquery.\+minicolors.\+min.\+js.
+
+
+\begin{DoxyCode}
+179                      \{
+180         var \hyperlink{jquery_8minicolors_8min_8js_a03f9965317e0a0bdacfb3e886629b2e9}{o} = \hyperlink{jquery_8minicolors_8min_8js_a4ff38bc9cac23d19e18b3fab41f4a709}{d}($(\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}).val(), !0), \hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a} = \hyperlink{jquery_8minicolors_8min_8js_a81f5fce85df05f829796d466d3e32da5}{k}(o), \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s} = $(\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}).attr(\textcolor{stringliteral}{"data-opacity"});
+181         \textcolor{keywordflow}{return} \hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a} ? (\textcolor{keywordtype}{void} 0 === \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s} && (\hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s} = 1), \hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t} ? \textcolor{stringliteral}{"rgba("} + \hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a}.r + \textcolor{stringliteral}{", "} + \hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a}.g + \textcolor{stringliteral}{", "} + 
+      \hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a}.b + \textcolor{stringliteral}{", "} + parseFloat(s) + \textcolor{stringliteral}{")"} : \textcolor{stringliteral}{"rgb("} + \hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a}.r + \textcolor{stringliteral}{", "} + \hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a}.g + \textcolor{stringliteral}{", "} + \hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a}.b + \textcolor{stringliteral}{")"}) : null
+182     \}
+\end{DoxyCode}
+\index{jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}!m@{m}}
+\index{m@{m}!jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}}
+\subsubsection[{\texorpdfstring{m(i) }{m(i) }}]{\setlength{\rightskip}{0pt plus 5cm}function m (
+\begin{DoxyParamCaption}
+\item[{}]{i}
+\end{DoxyParamCaption}
+)}\hypertarget{jquery_8minicolors_8min_8js_a82696c85bf41f6cf3962a0f08be9290f}{}\label{jquery_8minicolors_8min_8js_a82696c85bf41f6cf3962a0f08be9290f}
+
+
+Definition at line 210 of file jquery.\+minicolors.\+min.\+js.
+
+
+\begin{DoxyCode}
+210                   \{
+211         var \hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t} = \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.match(/^rgba?[\(\backslash\)\hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}+]?\(\backslash\)([\(\backslash\)\hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}+]?(\(\backslash\)\hyperlink{jquery_8minicolors_8min_8js_a4ff38bc9cac23d19e18b3fab41f4a709}{d}+)[\(\backslash\)\hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}+]?,[\(\backslash\)\hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}+]?(\(\backslash\)\hyperlink{jquery_8minicolors_8min_8js_a4ff38bc9cac23d19e18b3fab41f4a709}{d}+)[\(\backslash\)\hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}+]?,[\(\backslash\)
+      \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}+]?(\(\backslash\)\hyperlink{jquery_8minicolors_8min_8js_a4ff38bc9cac23d19e18b3fab41f4a709}{d}+)[\(\backslash\)\hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}+]?/\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i});
+212         \textcolor{keywordflow}{return} t && 4 === t.length ? !0 : !1
+213     \}
+\end{DoxyCode}
+\index{jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}!M@{M}}
+\index{M@{M}!jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}}
+\subsubsection[{\texorpdfstring{M(i) }{M(i) }}]{\setlength{\rightskip}{0pt plus 5cm}function M (
+\begin{DoxyParamCaption}
+\item[{}]{i}
+\end{DoxyParamCaption}
+)}\hypertarget{jquery_8minicolors_8min_8js_ac6f204455aefa9dd1e54e9185b44d351}{}\label{jquery_8minicolors_8min_8js_ac6f204455aefa9dd1e54e9185b44d351}
+
+
+Definition at line 249 of file jquery.\+minicolors.\+min.\+js.
+
+
+\begin{DoxyCode}
+249                   \{
+250         var \hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t} = \{\hyperlink{jquery_8minicolors_8min_8js_a4103c8729d2048626fcd70c57fa74da3}{h}: 0, \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}: 0, \hyperlink{jquery_8minicolors_8min_8js_a3aede9dec910534ce46e095e5cb5b3f5}{b}: 0\}, \hyperlink{jquery_8minicolors_8min_8js_a03f9965317e0a0bdacfb3e886629b2e9}{o} = Math.min(\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.r, \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.g, \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.b), \hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a} = Math.max(
+      \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.r, \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.g, \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.b), \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s} = \hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a} - \hyperlink{jquery_8minicolors_8min_8js_a03f9965317e0a0bdacfb3e886629b2e9}{o};
+251         \textcolor{keywordflow}{return} t.b = \hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a}, t.s = 0 !== \hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a} ? 255 * \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s} / \hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a} : 0, 0 !== t.s ? \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.r === 
+      \hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a} ? t.h = (\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.g - \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.b) / \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s} : \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.g === \hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a} ? t.h = 2 + (\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.b - \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.r) / \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s} : t.h = 4 + (
+      \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.r - \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.g) / \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s} : t.h = -1, t.h *= 60, t.h < 0 && (t.h += 360), t.s *= 100 / 255, t.b *= 100 / 255, t
+252     \}
+\end{DoxyCode}
+\index{jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}!n@{n}}
+\index{n@{n}!jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}}
+\subsubsection[{\texorpdfstring{n(i, t) }{n(i, t) }}]{\setlength{\rightskip}{0pt plus 5cm}function n (
+\begin{DoxyParamCaption}
+\item[{}]{i, }
+\item[{}]{t}
+\end{DoxyParamCaption}
+)}\hypertarget{jquery_8minicolors_8min_8js_a9af8c9ff25cef506f6043fa238b91483}{}\label{jquery_8minicolors_8min_8js_a9af8c9ff25cef506f6043fa238b91483}
+
+
+Definition at line 59 of file jquery.\+minicolors.\+min.\+js.
+
+
+\begin{DoxyCode}
+59                      \{
+60         \textcolor{keyword}{function} \hyperlink{jquery_8minicolors_8min_8js_a03f9965317e0a0bdacfb3e886629b2e9}{o}(\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}, \hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t}) \{
+61             var \hyperlink{jquery_8minicolors_8min_8js_a03f9965317e0a0bdacfb3e886629b2e9}{o}, \hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a};
+62             \textcolor{keywordflow}{return} \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.length && \hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t} ? (o = \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.offset().left, a = \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.offset().top, \{
+63                 \hyperlink{moment_8min_8js_aea8880d873547adc2b184814e8d28a93}{x}: o - \hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t}.offset().left + \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.outerWidth() / 2,
+64                 \hyperlink{jquery_8minicolors_8min_8js_ad9f1149dabf074ecf1820ef39ee0daeb}{y}: a - \hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t}.offset().top + \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.outerHeight() / 2
+65             \}) : null
+66         \}
+67 
+68         var a, \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}, \hyperlink{jquery_8minicolors_8min_8js_a9af8c9ff25cef506f6043fa238b91483}{n}, \hyperlink{jquery_8minicolors_8min_8js_affa2c1fafff1cb6a21e98f707d26799d}{r}, \hyperlink{jquery_8minicolors_8min_8js_ac8a54e1b0c42b4db93e914f072945aa1}{c}, \hyperlink{jquery_8minicolors_8min_8js_afc85bcff0d10d44967f03d0bba5362ea}{l}, \hyperlink{jquery_8minicolors_8min_8js_a4ff38bc9cac23d19e18b3fab41f4a709}{d}, \hyperlink{jquery_8minicolors_8min_8js_a80104bd07be57ff7c41a03a4bd004296}{u} = \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.val(), \hyperlink{jquery_8minicolors_8min_8js_ab9bb1846a952a2a93626c3efeb2c0baa}{p} = \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.attr(\textcolor{stringliteral}{"data-opacity"}), 
+      \hyperlink{jquery_8minicolors_8min_8js_a82696c85bf41f6cf3962a0f08be9290f}{m}, \hyperlink{jquery_8minicolors_8min_8js_a09c8a339e0860e329627825dab2c8c6d}{f} = \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.parent(), \hyperlink{jquery_8minicolors_8min_8js_a9eec3e2fbcb8d854fc028c18bbd49cf8}{v} = \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.data(\textcolor{stringliteral}{"minicolors-settings"}), \hyperlink{jquery_8minicolors_8min_8js_a3aede9dec910534ce46e095e5cb5b3f5}{b} = f.find(\textcolor{stringliteral}{".minicolors-swatch"}), 
+      \hyperlink{jquery_8minicolors_8min_8js_ad9f1149dabf074ecf1820ef39ee0daeb}{y} = f.find(\textcolor{stringliteral}{".minicolors-grid"}), \hyperlink{jquery_8minicolors_8min_8js_a1c8c08295f0d4e43629e391fcd9c736c}{C} = f.find(\textcolor{stringliteral}{".minicolors-slider"}), \hyperlink{jquery_8minicolors_8min_8js_ac6f204455aefa9dd1e54e9185b44d351}{M} = f.find(\textcolor{stringliteral}{".minicolors-opacity-slider
+      "}), \hyperlink{moment_8min_8js_aea8880d873547adc2b184814e8d28a93}{x} = \hyperlink{jquery_8minicolors_8min_8js_ad9f1149dabf074ecf1820ef39ee0daeb}{y}.find(\textcolor{stringliteral}{"[class$=-picker]"}), \hyperlink{moment_8min_8js_a20a3d41831a76a535c6405bf37bcb731}{I} = \hyperlink{jquery_8minicolors_8min_8js_a1c8c08295f0d4e43629e391fcd9c736c}{C}.find(\textcolor{stringliteral}{"[class$=-picker]"}), \hyperlink{moment_8min_8js_a9f3be8835d206582af4c97eec243e850}{S} = \hyperlink{jquery_8minicolors_8min_8js_ac6f204455aefa9dd1e54e9185b44d351}{M}.find(\textcolor{stringliteral}{"[class$=-picker]"}), 
+      \hyperlink{moment_8min_8js_a75058a5d99f0fb9d79b3c9d4e090ea89}{z} = \hyperlink{jquery_8minicolors_8min_8js_a03f9965317e0a0bdacfb3e886629b2e9}{o}(\hyperlink{moment_8min_8js_aea8880d873547adc2b184814e8d28a93}{x}, \hyperlink{jquery_8minicolors_8min_8js_ad9f1149dabf074ecf1820ef39ee0daeb}{y}), \hyperlink{moment_8min_8js_a942fffcd5ca1d53cdfc7ef3630945a33}{F} = \hyperlink{jquery_8minicolors_8min_8js_a03f9965317e0a0bdacfb3e886629b2e9}{o}(\hyperlink{moment_8min_8js_a20a3d41831a76a535c6405bf37bcb731}{I}, \hyperlink{jquery_8minicolors_8min_8js_a1c8c08295f0d4e43629e391fcd9c736c}{C}), \hyperlink{moment_8min_8js_a5f7d9fc7ba35dc513eb3080d74d27476}{j} = \hyperlink{jquery_8minicolors_8min_8js_a03f9965317e0a0bdacfb3e886629b2e9}{o}(\hyperlink{moment_8min_8js_a9f3be8835d206582af4c97eec243e850}{S}, \hyperlink{jquery_8minicolors_8min_8js_ac6f204455aefa9dd1e54e9185b44d351}{M});
+69         \textcolor{keywordflow}{if} (\hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t}.is(\textcolor{stringliteral}{".minicolors-grid, .minicolors-slider, .minicolors-opacity-slider"})) \{
+70             \textcolor{keywordflow}{switch} (\hyperlink{jquery_8minicolors_8min_8js_a9eec3e2fbcb8d854fc028c18bbd49cf8}{v}.control) \{
+71                 \textcolor{keywordflow}{case}\textcolor{stringliteral}{"wheel"}:
+72                     \hyperlink{jquery_8minicolors_8min_8js_affa2c1fafff1cb6a21e98f707d26799d}{r} = \hyperlink{jquery_8minicolors_8min_8js_ad9f1149dabf074ecf1820ef39ee0daeb}{y}.width() / 2 - \hyperlink{moment_8min_8js_a75058a5d99f0fb9d79b3c9d4e090ea89}{z}.x, \hyperlink{jquery_8minicolors_8min_8js_ac8a54e1b0c42b4db93e914f072945aa1}{c} = \hyperlink{jquery_8minicolors_8min_8js_ad9f1149dabf074ecf1820ef39ee0daeb}{y}.height() / 2 - \hyperlink{moment_8min_8js_a75058a5d99f0fb9d79b3c9d4e090ea89}{z}.y, \hyperlink{jquery_8minicolors_8min_8js_afc85bcff0d10d44967f03d0bba5362ea}{l} = Math.sqrt(
+      \hyperlink{jquery_8minicolors_8min_8js_affa2c1fafff1cb6a21e98f707d26799d}{r} * \hyperlink{jquery_8minicolors_8min_8js_affa2c1fafff1cb6a21e98f707d26799d}{r} + \hyperlink{jquery_8minicolors_8min_8js_ac8a54e1b0c42b4db93e914f072945aa1}{c} * \hyperlink{jquery_8minicolors_8min_8js_ac8a54e1b0c42b4db93e914f072945aa1}{c}), \hyperlink{jquery_8minicolors_8min_8js_a4ff38bc9cac23d19e18b3fab41f4a709}{d} = Math.atan2(c, \hyperlink{jquery_8minicolors_8min_8js_affa2c1fafff1cb6a21e98f707d26799d}{r}), 0 > \hyperlink{jquery_8minicolors_8min_8js_a4ff38bc9cac23d19e18b3fab41f4a709}{d} && (\hyperlink{jquery_8minicolors_8min_8js_a4ff38bc9cac23d19e18b3fab41f4a709}{d} += 2 * Math.PI), \hyperlink{jquery_8minicolors_8min_8js_afc85bcff0d10d44967f03d0bba5362ea}{l} > 75 && (
+      \hyperlink{jquery_8minicolors_8min_8js_afc85bcff0d10d44967f03d0bba5362ea}{l} = 75, \hyperlink{moment_8min_8js_a75058a5d99f0fb9d79b3c9d4e090ea89}{z}.x = 69 - 75 * Math.cos(d), \hyperlink{moment_8min_8js_a75058a5d99f0fb9d79b3c9d4e090ea89}{z}.y = 69 - 75 * Math.sin(d)), \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s} = \hyperlink{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{g}(\hyperlink{jquery_8minicolors_8min_8js_afc85bcff0d10d44967f03d0bba5362ea}{l} / .75, 0, 100), a = 
+      \hyperlink{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{g}(180 * d / Math.PI, 0, 360), \hyperlink{jquery_8minicolors_8min_8js_a9af8c9ff25cef506f6043fa238b91483}{n} = \hyperlink{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{g}(100 - Math.floor(\hyperlink{moment_8min_8js_a942fffcd5ca1d53cdfc7ef3630945a33}{F}.y * (100 / \hyperlink{jquery_8minicolors_8min_8js_a1c8c08295f0d4e43629e391fcd9c736c}{C}.height())), 0, 100), 
+      \hyperlink{jquery_8minicolors_8min_8js_a80104bd07be57ff7c41a03a4bd004296}{u} = \hyperlink{jquery_8minicolors_8min_8js_acf994a60fd0c0112902c8af7b3315b33}{w}(\{
+73                         \hyperlink{jquery_8minicolors_8min_8js_a4103c8729d2048626fcd70c57fa74da3}{h}: \hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a},
+74                         \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}: \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s},
+75                         \hyperlink{jquery_8minicolors_8min_8js_a3aede9dec910534ce46e095e5cb5b3f5}{b}: \hyperlink{jquery_8minicolors_8min_8js_a9af8c9ff25cef506f6043fa238b91483}{n}
+76                     \}), \hyperlink{jquery_8minicolors_8min_8js_a1c8c08295f0d4e43629e391fcd9c736c}{C}.css(\textcolor{stringliteral}{"backgroundColor"}, \hyperlink{jquery_8minicolors_8min_8js_acf994a60fd0c0112902c8af7b3315b33}{w}(\{\hyperlink{jquery_8minicolors_8min_8js_a4103c8729d2048626fcd70c57fa74da3}{h}: \hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a}, \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}: \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}, \hyperlink{jquery_8minicolors_8min_8js_a3aede9dec910534ce46e095e5cb5b3f5}{b}: 100\}));
+77                     \textcolor{keywordflow}{break};
+78                 \textcolor{keywordflow}{case}\textcolor{stringliteral}{"saturation"}:
+79                     a = \hyperlink{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{g}(parseInt(\hyperlink{moment_8min_8js_a75058a5d99f0fb9d79b3c9d4e090ea89}{z}.x * (360 / \hyperlink{jquery_8minicolors_8min_8js_ad9f1149dabf074ecf1820ef39ee0daeb}{y}.width()), 10), 0, 360), \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s} = 
+      \hyperlink{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{g}(100 - Math.floor(\hyperlink{moment_8min_8js_a942fffcd5ca1d53cdfc7ef3630945a33}{F}.y * (100 / \hyperlink{jquery_8minicolors_8min_8js_a1c8c08295f0d4e43629e391fcd9c736c}{C}.height())), 0, 100), \hyperlink{jquery_8minicolors_8min_8js_a9af8c9ff25cef506f6043fa238b91483}{n} = \hyperlink{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{g}(100 - Math.floor(
+      \hyperlink{moment_8min_8js_a75058a5d99f0fb9d79b3c9d4e090ea89}{z}.y * (100 / \hyperlink{jquery_8minicolors_8min_8js_ad9f1149dabf074ecf1820ef39ee0daeb}{y}.height())), 0, 100), \hyperlink{jquery_8minicolors_8min_8js_a80104bd07be57ff7c41a03a4bd004296}{u} = \hyperlink{jquery_8minicolors_8min_8js_acf994a60fd0c0112902c8af7b3315b33}{w}(\{
+80                         \hyperlink{jquery_8minicolors_8min_8js_a4103c8729d2048626fcd70c57fa74da3}{h}: \hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a},
+81                         \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}: \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s},
+82                         \hyperlink{jquery_8minicolors_8min_8js_a3aede9dec910534ce46e095e5cb5b3f5}{b}: \hyperlink{jquery_8minicolors_8min_8js_a9af8c9ff25cef506f6043fa238b91483}{n}
+83                     \}), \hyperlink{jquery_8minicolors_8min_8js_a1c8c08295f0d4e43629e391fcd9c736c}{C}.css(\textcolor{stringliteral}{"backgroundColor"}, \hyperlink{jquery_8minicolors_8min_8js_acf994a60fd0c0112902c8af7b3315b33}{w}(\{
+84                         \hyperlink{jquery_8minicolors_8min_8js_a4103c8729d2048626fcd70c57fa74da3}{h}: \hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a},
+85                         \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}: 100,
+86                         \hyperlink{jquery_8minicolors_8min_8js_a3aede9dec910534ce46e095e5cb5b3f5}{b}: \hyperlink{jquery_8minicolors_8min_8js_a9af8c9ff25cef506f6043fa238b91483}{n}
+87                     \})), f.find(\textcolor{stringliteral}{".minicolors-grid-inner"}).css(\textcolor{stringliteral}{"opacity"}, \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s} / 100);
+88                     \textcolor{keywordflow}{break};
+89                 \textcolor{keywordflow}{case}\textcolor{stringliteral}{"brightness"}:
+90                     a = \hyperlink{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{g}(parseInt(\hyperlink{moment_8min_8js_a75058a5d99f0fb9d79b3c9d4e090ea89}{z}.x * (360 / \hyperlink{jquery_8minicolors_8min_8js_ad9f1149dabf074ecf1820ef39ee0daeb}{y}.width()), 10), 0, 360), \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s} = 
+      \hyperlink{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{g}(100 - Math.floor(\hyperlink{moment_8min_8js_a75058a5d99f0fb9d79b3c9d4e090ea89}{z}.y * (100 / \hyperlink{jquery_8minicolors_8min_8js_ad9f1149dabf074ecf1820ef39ee0daeb}{y}.height())), 0, 100), \hyperlink{jquery_8minicolors_8min_8js_a9af8c9ff25cef506f6043fa238b91483}{n} = \hyperlink{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{g}(100 - Math.floor(
+      \hyperlink{moment_8min_8js_a942fffcd5ca1d53cdfc7ef3630945a33}{F}.y * (100 / \hyperlink{jquery_8minicolors_8min_8js_a1c8c08295f0d4e43629e391fcd9c736c}{C}.height())), 0, 100), \hyperlink{jquery_8minicolors_8min_8js_a80104bd07be57ff7c41a03a4bd004296}{u} = \hyperlink{jquery_8minicolors_8min_8js_acf994a60fd0c0112902c8af7b3315b33}{w}(\{
+91                         \hyperlink{jquery_8minicolors_8min_8js_a4103c8729d2048626fcd70c57fa74da3}{h}: \hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a},
+92                         \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}: \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s},
+93                         \hyperlink{jquery_8minicolors_8min_8js_a3aede9dec910534ce46e095e5cb5b3f5}{b}: \hyperlink{jquery_8minicolors_8min_8js_a9af8c9ff25cef506f6043fa238b91483}{n}
+94                     \}), \hyperlink{jquery_8minicolors_8min_8js_a1c8c08295f0d4e43629e391fcd9c736c}{C}.css(\textcolor{stringliteral}{"backgroundColor"}, \hyperlink{jquery_8minicolors_8min_8js_acf994a60fd0c0112902c8af7b3315b33}{w}(\{
+95                         \hyperlink{jquery_8minicolors_8min_8js_a4103c8729d2048626fcd70c57fa74da3}{h}: \hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a},
+96                         \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}: \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s},
+97                         \hyperlink{jquery_8minicolors_8min_8js_a3aede9dec910534ce46e095e5cb5b3f5}{b}: 100
+98                     \})), f.find(\textcolor{stringliteral}{".minicolors-grid-inner"}).css(\textcolor{stringliteral}{"opacity"}, 1 - \hyperlink{jquery_8minicolors_8min_8js_a9af8c9ff25cef506f6043fa238b91483}{n} / 100);
+99                     \textcolor{keywordflow}{break};
+100                 \textcolor{keywordflow}{default}:
+101                     a = \hyperlink{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{g}(360 - parseInt(\hyperlink{moment_8min_8js_a942fffcd5ca1d53cdfc7ef3630945a33}{F}.y * (360 / \hyperlink{jquery_8minicolors_8min_8js_a1c8c08295f0d4e43629e391fcd9c736c}{C}.height()), 10), 0, 360), 
+      \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s} = \hyperlink{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{g}(Math.floor(\hyperlink{moment_8min_8js_a75058a5d99f0fb9d79b3c9d4e090ea89}{z}.x * (100 / \hyperlink{jquery_8minicolors_8min_8js_ad9f1149dabf074ecf1820ef39ee0daeb}{y}.width())), 0, 100), \hyperlink{jquery_8minicolors_8min_8js_a9af8c9ff25cef506f6043fa238b91483}{n} = \hyperlink{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{g}(100 - Math.floor(
+      \hyperlink{moment_8min_8js_a75058a5d99f0fb9d79b3c9d4e090ea89}{z}.y * (100 / \hyperlink{jquery_8minicolors_8min_8js_ad9f1149dabf074ecf1820ef39ee0daeb}{y}.height())), 0, 100), \hyperlink{jquery_8minicolors_8min_8js_a80104bd07be57ff7c41a03a4bd004296}{u} = \hyperlink{jquery_8minicolors_8min_8js_acf994a60fd0c0112902c8af7b3315b33}{w}(\{
+102                         \hyperlink{jquery_8minicolors_8min_8js_a4103c8729d2048626fcd70c57fa74da3}{h}: \hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a},
+103                         \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}: \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s},
+104                         \hyperlink{jquery_8minicolors_8min_8js_a3aede9dec910534ce46e095e5cb5b3f5}{b}: \hyperlink{jquery_8minicolors_8min_8js_a9af8c9ff25cef506f6043fa238b91483}{n}
+105                     \}), \hyperlink{jquery_8minicolors_8min_8js_ad9f1149dabf074ecf1820ef39ee0daeb}{y}.css(\textcolor{stringliteral}{"backgroundColor"}, \hyperlink{jquery_8minicolors_8min_8js_acf994a60fd0c0112902c8af7b3315b33}{w}(\{\hyperlink{jquery_8minicolors_8min_8js_a4103c8729d2048626fcd70c57fa74da3}{h}: \hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a}, \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}: 100, \hyperlink{jquery_8minicolors_8min_8js_a3aede9dec910534ce46e095e5cb5b3f5}{b}: 100\}))
+106             \}
+107             \textcolor{keywordflow}{if} (\hyperlink{jquery_8minicolors_8min_8js_ab9bb1846a952a2a93626c3efeb2c0baa}{p} = \hyperlink{jquery_8minicolors_8min_8js_a9eec3e2fbcb8d854fc028c18bbd49cf8}{v}.opacity ? parseFloat(1 - \hyperlink{moment_8min_8js_a5f7d9fc7ba35dc513eb3080d74d27476}{j}.y / \hyperlink{jquery_8minicolors_8min_8js_ac6f204455aefa9dd1e54e9185b44d351}{M}.height()).toFixed(2) : 1, 
+      \hyperlink{jquery_8minicolors_8min_8js_a9eec3e2fbcb8d854fc028c18bbd49cf8}{v}.opacity && \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.attr(\textcolor{stringliteral}{"data-opacity"}, \hyperlink{jquery_8minicolors_8min_8js_ab9bb1846a952a2a93626c3efeb2c0baa}{p}), \textcolor{stringliteral}{"rgb"} === \hyperlink{jquery_8minicolors_8min_8js_a9eec3e2fbcb8d854fc028c18bbd49cf8}{v}.format) \{
+108                 var \hyperlink{moment_8min_8js_ac6f2a6bb9d11e0543e46b365824fed89}{D} = \hyperlink{jquery_8minicolors_8min_8js_a81f5fce85df05f829796d466d3e32da5}{k}(\hyperlink{jquery_8minicolors_8min_8js_a80104bd07be57ff7c41a03a4bd004296}{u}), \hyperlink{jquery_8minicolors_8min_8js_ab9bb1846a952a2a93626c3efeb2c0baa}{p} = \textcolor{stringliteral}{""} === \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.attr(\textcolor{stringliteral}{"data-opacity"}) ? 1 : \hyperlink{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{g}(parseFloat(
+      \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.attr(\textcolor{stringliteral}{"data-opacity"})).toFixed(2), 0, 1);
+109                 (isNaN(\hyperlink{jquery_8minicolors_8min_8js_ab9bb1846a952a2a93626c3efeb2c0baa}{p}) || !\hyperlink{jquery_8minicolors_8min_8js_a9eec3e2fbcb8d854fc028c18bbd49cf8}{v}.opacity) && (\hyperlink{jquery_8minicolors_8min_8js_ab9bb1846a952a2a93626c3efeb2c0baa}{p} = 1), \hyperlink{jquery_8minicolors_8min_8js_a82696c85bf41f6cf3962a0f08be9290f}{m} = \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.minicolors(\textcolor{stringliteral}{"rgbObject"}).a <= 1 && D && 
+      \hyperlink{jquery_8minicolors_8min_8js_a9eec3e2fbcb8d854fc028c18bbd49cf8}{v}.opacity ? \textcolor{stringliteral}{"rgba("} + D.r + \textcolor{stringliteral}{", "} + D.g + \textcolor{stringliteral}{", "} + D.b + \textcolor{stringliteral}{", "} + parseFloat(\hyperlink{jquery_8minicolors_8min_8js_ab9bb1846a952a2a93626c3efeb2c0baa}{p}) + \textcolor{stringliteral}{")"} : \textcolor{stringliteral}{"rgb("} + D.r + \textcolor{stringliteral}{", "} + 
+      D.g + \textcolor{stringliteral}{", "} + D.b + \textcolor{stringliteral}{")"}
+110             \} \textcolor{keywordflow}{else} \hyperlink{jquery_8minicolors_8min_8js_a82696c85bf41f6cf3962a0f08be9290f}{m} = \hyperlink{jquery_8minicolors_8min_8js_a4103c8729d2048626fcd70c57fa74da3}{h}(\hyperlink{jquery_8minicolors_8min_8js_a80104bd07be57ff7c41a03a4bd004296}{u}, \hyperlink{jquery_8minicolors_8min_8js_a9eec3e2fbcb8d854fc028c18bbd49cf8}{v}.letterCase);
+111             \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.val(\hyperlink{jquery_8minicolors_8min_8js_a82696c85bf41f6cf3962a0f08be9290f}{m})
+112         \}
+113         \hyperlink{jquery_8minicolors_8min_8js_a3aede9dec910534ce46e095e5cb5b3f5}{b}.find(\textcolor{stringliteral}{"span"}).css(\{backgroundColor: \hyperlink{jquery_8minicolors_8min_8js_a80104bd07be57ff7c41a03a4bd004296}{u}, opacity: \hyperlink{jquery_8minicolors_8min_8js_ab9bb1846a952a2a93626c3efeb2c0baa}{p}\}), \hyperlink{jquery_8minicolors_8min_8js_af594b4f9b7e4cb3f217d3760ee94b814}{e}(\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}, \hyperlink{jquery_8minicolors_8min_8js_a82696c85bf41f6cf3962a0f08be9290f}{m}, \hyperlink{jquery_8minicolors_8min_8js_ab9bb1846a952a2a93626c3efeb2c0baa}{p})
+114     \}
+\end{DoxyCode}
+\index{jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}!o@{o}}
+\index{o@{o}!jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}}
+\subsubsection[{\texorpdfstring{o(i) }{o(i) }}]{\setlength{\rightskip}{0pt plus 5cm}function o (
+\begin{DoxyParamCaption}
+\item[{}]{i}
+\end{DoxyParamCaption}
+)}\hypertarget{jquery_8minicolors_8min_8js_a03f9965317e0a0bdacfb3e886629b2e9}{}\label{jquery_8minicolors_8min_8js_a03f9965317e0a0bdacfb3e886629b2e9}
+
+
+Definition at line 31 of file jquery.\+minicolors.\+min.\+js.
+
+
+\begin{DoxyCode}
+31                   \{
+32         var \hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t} = \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.parent(), \hyperlink{jquery_8minicolors_8min_8js_a03f9965317e0a0bdacfb3e886629b2e9}{o} = t.find(\textcolor{stringliteral}{".minicolors-panel"}), \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s} = \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.data(\textcolor{stringliteral}{"minicolors-settings"});
+33         !\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.data(\textcolor{stringliteral}{"minicolors-initialized"}) || \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.prop(\textcolor{stringliteral}{"disabled"}) || t.hasClass(\textcolor{stringliteral}{"minicolors-inline"}) || t.
+      hasClass(\textcolor{stringliteral}{"minicolors-focus"}) || (\hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a}(), t.addClass(\textcolor{stringliteral}{"minicolors-focus"}), \hyperlink{jquery_8minicolors_8min_8js_a03f9965317e0a0bdacfb3e886629b2e9}{o}.stop(!0, !0).fadeIn(
+      \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}.showSpeed, function () \{
+34             \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}.show && \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}.show.call(\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.get(0))
+35         \}))
+36     \}
+\end{DoxyCode}
+\index{jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}!on@{on}}
+\index{on@{on}!jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}}
+\subsubsection[{\texorpdfstring{on(""mousedown.\+minicolors touchstart.\+minicolors"", function (i) \lcurly{} \$(i.\+target).\+parents().\+add(i.\+target).\+has\+Class(""minicolors"") \texttt{"|}\texttt{"|} a() \rcurly{}).\+on(""mousedown.\+minicolors touchstart.\+minicolors""}{on("mousedown.minicolors touchstart.minicolors", function (i) \{ $(i.target).parents().add(i.target).hasClass("minicolors") || a() \}).on("mousedown.minicolors touchstart.minicolors"}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf document} on (
+\begin{DoxyParamCaption}
+\item[{}]{\char`\"{}mousedown.\+minicolors touchstart.\+minicolors\char`\"{}, }
+\item[{}]{function (i) \{ \$(i.\+target).\+parents().\+add(i.\+target).\+has\+Class(\char`\"{}minicolors\char`\"{}) $\vert$$\vert$ a() \}}
+\end{DoxyParamCaption}
+)}\hypertarget{jquery_8minicolors_8min_8js_ad59201412d4913121f6cfd4df4c7b298}{}\label{jquery_8minicolors_8min_8js_ad59201412d4913121f6cfd4df4c7b298}
+
+
+Makes sure button group for placing things on map is justified or not depending on the window size. 
+
+\index{jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}!p@{p}}
+\index{p@{p}!jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}}
+\subsubsection[{\texorpdfstring{p(i, t) }{p(i, t) }}]{\setlength{\rightskip}{0pt plus 5cm}function p (
+\begin{DoxyParamCaption}
+\item[{}]{i, }
+\item[{}]{t}
+\end{DoxyParamCaption}
+)}\hypertarget{jquery_8minicolors_8min_8js_ab9bb1846a952a2a93626c3efeb2c0baa}{}\label{jquery_8minicolors_8min_8js_ab9bb1846a952a2a93626c3efeb2c0baa}
+
+
+Definition at line 202 of file jquery.\+minicolors.\+min.\+js.
+
+
+\begin{DoxyCode}
+202                      \{
+203         \textcolor{keywordflow}{return} \hyperlink{jquery_8minicolors_8min_8js_a82696c85bf41f6cf3962a0f08be9290f}{m}(\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}) ? \hyperlink{jquery_8minicolors_8min_8js_a80104bd07be57ff7c41a03a4bd004296}{u}(\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}) : \hyperlink{jquery_8minicolors_8min_8js_a4ff38bc9cac23d19e18b3fab41f4a709}{d}(\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}, \hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t})
+204     \}
+\end{DoxyCode}
+\index{jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}!prevent\+Default@{prevent\+Default}}
+\index{prevent\+Default@{prevent\+Default}!jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}}
+\subsubsection[{\texorpdfstring{prevent\+Default()}{preventDefault()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf i} prevent\+Default (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{jquery_8minicolors_8min_8js_a874dda18afdd57c82d2c1a831ed93ff6}{}\label{jquery_8minicolors_8min_8js_a874dda18afdd57c82d2c1a831ed93ff6}
+\index{jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}!r@{r}}
+\index{r@{r}!jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}}
+\subsubsection[{\texorpdfstring{r(i, t) }{r(i, t) }}]{\setlength{\rightskip}{0pt plus 5cm}function r (
+\begin{DoxyParamCaption}
+\item[{}]{i, }
+\item[{}]{t}
+\end{DoxyParamCaption}
+)}\hypertarget{jquery_8minicolors_8min_8js_affa2c1fafff1cb6a21e98f707d26799d}{}\label{jquery_8minicolors_8min_8js_affa2c1fafff1cb6a21e98f707d26799d}
+
+
+Definition at line 116 of file jquery.\+minicolors.\+min.\+js.
+
+
+\begin{DoxyCode}
+116                      \{
+117         var \hyperlink{jquery_8minicolors_8min_8js_a03f9965317e0a0bdacfb3e886629b2e9}{o}, \hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a}, \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}, \hyperlink{jquery_8minicolors_8min_8js_a9af8c9ff25cef506f6043fa238b91483}{n}, \hyperlink{jquery_8minicolors_8min_8js_affa2c1fafff1cb6a21e98f707d26799d}{r}, \hyperlink{jquery_8minicolors_8min_8js_ac8a54e1b0c42b4db93e914f072945aa1}{c}, \hyperlink{jquery_8minicolors_8min_8js_afc85bcff0d10d44967f03d0bba5362ea}{l}, \hyperlink{jquery_8minicolors_8min_8js_a9eec3e2fbcb8d854fc028c18bbd49cf8}{v}, \hyperlink{jquery_8minicolors_8min_8js_ad9f1149dabf074ecf1820ef39ee0daeb}{y}, \hyperlink{jquery_8minicolors_8min_8js_ac6f204455aefa9dd1e54e9185b44d351}{M}, \hyperlink{jquery_8minicolors_8min_8js_a81f5fce85df05f829796d466d3e32da5}{k} = \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.parent(), \hyperlink{moment_8min_8js_aea8880d873547adc2b184814e8d28a93}{x} = \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.data(\textcolor{stringliteral}{"minicolors-settings"}), 
+      \hyperlink{moment_8min_8js_a20a3d41831a76a535c6405bf37bcb731}{I} = k.find(\textcolor{stringliteral}{".minicolors-swatch"}), \hyperlink{moment_8min_8js_a9f3be8835d206582af4c97eec243e850}{S} = k.find(\textcolor{stringliteral}{".minicolors-grid"}), \hyperlink{moment_8min_8js_a75058a5d99f0fb9d79b3c9d4e090ea89}{z} = k.find(\textcolor{stringliteral}{".minicolors-slider"}), 
+      \hyperlink{moment_8min_8js_a942fffcd5ca1d53cdfc7ef3630945a33}{F} = k.find(\textcolor{stringliteral}{".minicolors-opacity-slider"}), \hyperlink{moment_8min_8js_a5f7d9fc7ba35dc513eb3080d74d27476}{j} = \hyperlink{moment_8min_8js_a9f3be8835d206582af4c97eec243e850}{S}.find(\textcolor{stringliteral}{"[class$=-picker]"}), \hyperlink{moment_8min_8js_ac6f2a6bb9d11e0543e46b365824fed89}{D} = 
+      \hyperlink{moment_8min_8js_a75058a5d99f0fb9d79b3c9d4e090ea89}{z}.find(\textcolor{stringliteral}{"[class$=-picker]"}), \hyperlink{moment_8min_8js_a5bdd029f662f8f4de8bb4bda353248c4}{T} = \hyperlink{moment_8min_8js_a942fffcd5ca1d53cdfc7ef3630945a33}{F}.find(\textcolor{stringliteral}{"[class$=-picker]"});
+118         \textcolor{keywordflow}{switch} (\hyperlink{jquery_8minicolors_8min_8js_a82696c85bf41f6cf3962a0f08be9290f}{m}(\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.val()) ? (o = \hyperlink{jquery_8minicolors_8min_8js_a3aede9dec910534ce46e095e5cb5b3f5}{b}(\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.val()), r = \hyperlink{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{g}(parseFloat(\hyperlink{jquery_8minicolors_8min_8js_a09c8a339e0860e329627825dab2c8c6d}{f}(\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.val())).toFixed(2), 0, 1), r && 
+      \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.attr(\textcolor{stringliteral}{"data-opacity"}, r)) : o = \hyperlink{jquery_8minicolors_8min_8js_a4103c8729d2048626fcd70c57fa74da3}{h}(\hyperlink{jquery_8minicolors_8min_8js_a4ff38bc9cac23d19e18b3fab41f4a709}{d}(\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.val(), !0), \hyperlink{moment_8min_8js_aea8880d873547adc2b184814e8d28a93}{x}.letterCase), o || (o = 
+      \hyperlink{jquery_8minicolors_8min_8js_a4103c8729d2048626fcd70c57fa74da3}{h}(\hyperlink{jquery_8minicolors_8min_8js_ab9bb1846a952a2a93626c3efeb2c0baa}{p}(\hyperlink{moment_8min_8js_aea8880d873547adc2b184814e8d28a93}{x}.defaultValue, !0), \hyperlink{moment_8min_8js_aea8880d873547adc2b184814e8d28a93}{x}.letterCase)), a = \hyperlink{jquery_8minicolors_8min_8js_a1c8c08295f0d4e43629e391fcd9c736c}{C}(o), n = \hyperlink{moment_8min_8js_aea8880d873547adc2b184814e8d28a93}{x}.keywords ? $.map(
+      \hyperlink{moment_8min_8js_aea8880d873547adc2b184814e8d28a93}{x}.keywords.split(\textcolor{stringliteral}{","}), \textcolor{keyword}{function} (\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}) \{
+119             \textcolor{keywordflow}{return} $.trim(\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.toLowerCase())
+120         \}) : [], c = \textcolor{stringliteral}{""} !== \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.val() && $.inArray(\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.val().toLowerCase(), \hyperlink{jquery_8minicolors_8min_8js_a9af8c9ff25cef506f6043fa238b91483}{n}) > -1 ? 
+      \hyperlink{jquery_8minicolors_8min_8js_a4103c8729d2048626fcd70c57fa74da3}{h}(\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.val()) : \hyperlink{jquery_8minicolors_8min_8js_a82696c85bf41f6cf3962a0f08be9290f}{m}(\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.val()) ? \hyperlink{jquery_8minicolors_8min_8js_a80104bd07be57ff7c41a03a4bd004296}{u}(\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.val()) : o, \hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t} || \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.val(c), \hyperlink{moment_8min_8js_aea8880d873547adc2b184814e8d28a93}{x}.opacity && (s = \textcolor{stringliteral}{""} === 
+      \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.attr(\textcolor{stringliteral}{"data-opacity"}) ? 1 : \hyperlink{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{g}(parseFloat(\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.attr(\textcolor{stringliteral}{"data-opacity"})).toFixed(2), 0, 1), isNaN(s) && (s = 1)
+      , \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.attr(\textcolor{stringliteral}{"data-opacity"}, s), \hyperlink{moment_8min_8js_a20a3d41831a76a535c6405bf37bcb731}{I}.find(\textcolor{stringliteral}{"span"}).css(\textcolor{stringliteral}{"opacity"}, s), v = \hyperlink{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{g}(\hyperlink{moment_8min_8js_a942fffcd5ca1d53cdfc7ef3630945a33}{F}.height() - 
+      \hyperlink{moment_8min_8js_a942fffcd5ca1d53cdfc7ef3630945a33}{F}.height() * \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}, 0, \hyperlink{moment_8min_8js_a942fffcd5ca1d53cdfc7ef3630945a33}{F}.height()), \hyperlink{moment_8min_8js_a5bdd029f662f8f4de8bb4bda353248c4}{T}.css(\textcolor{stringliteral}{"top"}, v + \textcolor{stringliteral}{"px"})), \textcolor{stringliteral}{"transparent"} === \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.val().toLowerCase() && 
+      \hyperlink{moment_8min_8js_a20a3d41831a76a535c6405bf37bcb731}{I}.find(\textcolor{stringliteral}{"span"}).css(\textcolor{stringliteral}{"opacity"}, 0), \hyperlink{moment_8min_8js_a20a3d41831a76a535c6405bf37bcb731}{I}.find(\textcolor{stringliteral}{"span"}).css(\textcolor{stringliteral}{"backgroundColor"}, o), \hyperlink{moment_8min_8js_aea8880d873547adc2b184814e8d28a93}{x}.control) \{
+121             \textcolor{keywordflow}{case}\textcolor{stringliteral}{"wheel"}:
+122                 y = \hyperlink{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{g}(Math.ceil(.75 * a.s), 0, \hyperlink{moment_8min_8js_a9f3be8835d206582af4c97eec243e850}{S}.height() / 2), M = a.h * Math.PI / 180, l = 
+      \hyperlink{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{g}(75 - Math.cos(M) * \hyperlink{jquery_8minicolors_8min_8js_ad9f1149dabf074ecf1820ef39ee0daeb}{y}, 0, \hyperlink{moment_8min_8js_a9f3be8835d206582af4c97eec243e850}{S}.width()), v = \hyperlink{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{g}(75 - Math.sin(M) * \hyperlink{jquery_8minicolors_8min_8js_ad9f1149dabf074ecf1820ef39ee0daeb}{y}, 0, \hyperlink{moment_8min_8js_a9f3be8835d206582af4c97eec243e850}{S}.height()), 
+      \hyperlink{moment_8min_8js_a5f7d9fc7ba35dc513eb3080d74d27476}{j}.css(\{
+123                     top: v + \textcolor{stringliteral}{"px"},
+124                     left: l + \textcolor{stringliteral}{"px"}
+125                 \}), v = 150 - a.b / (100 / \hyperlink{moment_8min_8js_a9f3be8835d206582af4c97eec243e850}{S}.height()), \textcolor{stringliteral}{""} === o && (v = 0), \hyperlink{moment_8min_8js_ac6f2a6bb9d11e0543e46b365824fed89}{D}.css(\textcolor{stringliteral}{"top"}, v + \textcolor{stringliteral}{"px"}), 
+      \hyperlink{moment_8min_8js_a75058a5d99f0fb9d79b3c9d4e090ea89}{z}.css(\textcolor{stringliteral}{"backgroundColor"}, \hyperlink{jquery_8minicolors_8min_8js_acf994a60fd0c0112902c8af7b3315b33}{w}(\{
+126                     \hyperlink{jquery_8minicolors_8min_8js_a4103c8729d2048626fcd70c57fa74da3}{h}: a.h,
+127                     s: a.s,
+128                     \hyperlink{jquery_8minicolors_8min_8js_a3aede9dec910534ce46e095e5cb5b3f5}{b}: 100
+129                 \}));
+130                 \textcolor{keywordflow}{break};
+131             \textcolor{keywordflow}{case}\textcolor{stringliteral}{"saturation"}:
+132                 l = \hyperlink{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{g}(5 * a.h / 12, 0, 150), v = \hyperlink{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{g}(\hyperlink{moment_8min_8js_a9f3be8835d206582af4c97eec243e850}{S}.height() - Math.ceil(a.b / (100 / 
+      \hyperlink{moment_8min_8js_a9f3be8835d206582af4c97eec243e850}{S}.height())), 0, \hyperlink{moment_8min_8js_a9f3be8835d206582af4c97eec243e850}{S}.height()), \hyperlink{moment_8min_8js_a5f7d9fc7ba35dc513eb3080d74d27476}{j}.css(\{
+133                     top: v + \textcolor{stringliteral}{"px"},
+134                     left: l + \textcolor{stringliteral}{"px"}
+135                 \}), v = \hyperlink{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{g}(\hyperlink{moment_8min_8js_a75058a5d99f0fb9d79b3c9d4e090ea89}{z}.height() - a.s * (\hyperlink{moment_8min_8js_a75058a5d99f0fb9d79b3c9d4e090ea89}{z}.height() / 100), 0, \hyperlink{moment_8min_8js_a75058a5d99f0fb9d79b3c9d4e090ea89}{z}.height()), 
+      \hyperlink{moment_8min_8js_ac6f2a6bb9d11e0543e46b365824fed89}{D}.css(\textcolor{stringliteral}{"top"}, v + \textcolor{stringliteral}{"px"}), \hyperlink{moment_8min_8js_a75058a5d99f0fb9d79b3c9d4e090ea89}{z}.css(\textcolor{stringliteral}{"backgroundColor"}, \hyperlink{jquery_8minicolors_8min_8js_acf994a60fd0c0112902c8af7b3315b33}{w}(\{
+136                     \hyperlink{jquery_8minicolors_8min_8js_a4103c8729d2048626fcd70c57fa74da3}{h}: a.h,
+137                     s: 100,
+138                     \hyperlink{jquery_8minicolors_8min_8js_a3aede9dec910534ce46e095e5cb5b3f5}{b}: a.b
+139                 \})), k.find(\textcolor{stringliteral}{".minicolors-grid-inner"}).css(\textcolor{stringliteral}{"opacity"}, a.s / 100);
+140                 \textcolor{keywordflow}{break};
+141             \textcolor{keywordflow}{case}\textcolor{stringliteral}{"brightness"}:
+142                 l = \hyperlink{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{g}(5 * a.h / 12, 0, 150), v = \hyperlink{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{g}(\hyperlink{moment_8min_8js_a9f3be8835d206582af4c97eec243e850}{S}.height() - Math.ceil(a.s / (100 / 
+      \hyperlink{moment_8min_8js_a9f3be8835d206582af4c97eec243e850}{S}.height())), 0, \hyperlink{moment_8min_8js_a9f3be8835d206582af4c97eec243e850}{S}.height()), \hyperlink{moment_8min_8js_a5f7d9fc7ba35dc513eb3080d74d27476}{j}.css(\{
+143                     top: v + \textcolor{stringliteral}{"px"},
+144                     left: l + \textcolor{stringliteral}{"px"}
+145                 \}), v = \hyperlink{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{g}(\hyperlink{moment_8min_8js_a75058a5d99f0fb9d79b3c9d4e090ea89}{z}.height() - a.b * (\hyperlink{moment_8min_8js_a75058a5d99f0fb9d79b3c9d4e090ea89}{z}.height() / 100), 0, \hyperlink{moment_8min_8js_a75058a5d99f0fb9d79b3c9d4e090ea89}{z}.height()), 
+      \hyperlink{moment_8min_8js_ac6f2a6bb9d11e0543e46b365824fed89}{D}.css(\textcolor{stringliteral}{"top"}, v + \textcolor{stringliteral}{"px"}), \hyperlink{moment_8min_8js_a75058a5d99f0fb9d79b3c9d4e090ea89}{z}.css(\textcolor{stringliteral}{"backgroundColor"}, \hyperlink{jquery_8minicolors_8min_8js_acf994a60fd0c0112902c8af7b3315b33}{w}(\{
+146                     \hyperlink{jquery_8minicolors_8min_8js_a4103c8729d2048626fcd70c57fa74da3}{h}: a.h,
+147                     s: a.s,
+148                     \hyperlink{jquery_8minicolors_8min_8js_a3aede9dec910534ce46e095e5cb5b3f5}{b}: 100
+149                 \})), k.find(\textcolor{stringliteral}{".minicolors-grid-inner"}).css(\textcolor{stringliteral}{"opacity"}, 1 - a.b / 100);
+150                 \textcolor{keywordflow}{break};
+151             \textcolor{keywordflow}{default}:
+152                 l = \hyperlink{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{g}(Math.ceil(a.s / (100 / \hyperlink{moment_8min_8js_a9f3be8835d206582af4c97eec243e850}{S}.width())), 0, \hyperlink{moment_8min_8js_a9f3be8835d206582af4c97eec243e850}{S}.width()), v = 
+      \hyperlink{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{g}(\hyperlink{moment_8min_8js_a9f3be8835d206582af4c97eec243e850}{S}.height() - Math.ceil(a.b / (100 / \hyperlink{moment_8min_8js_a9f3be8835d206582af4c97eec243e850}{S}.height())), 0, \hyperlink{moment_8min_8js_a9f3be8835d206582af4c97eec243e850}{S}.height()), \hyperlink{moment_8min_8js_a5f7d9fc7ba35dc513eb3080d74d27476}{j}.css(\{
+153                     top: v + \textcolor{stringliteral}{"px"},
+154                     left: l + \textcolor{stringliteral}{"px"}
+155                 \}), v = \hyperlink{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{g}(\hyperlink{moment_8min_8js_a75058a5d99f0fb9d79b3c9d4e090ea89}{z}.height() - a.h / (360 / \hyperlink{moment_8min_8js_a75058a5d99f0fb9d79b3c9d4e090ea89}{z}.height()), 0, \hyperlink{moment_8min_8js_a75058a5d99f0fb9d79b3c9d4e090ea89}{z}.height()), 
+      \hyperlink{moment_8min_8js_ac6f2a6bb9d11e0543e46b365824fed89}{D}.css(\textcolor{stringliteral}{"top"}, v + \textcolor{stringliteral}{"px"}), \hyperlink{moment_8min_8js_a9f3be8835d206582af4c97eec243e850}{S}.css(\textcolor{stringliteral}{"backgroundColor"}, \hyperlink{jquery_8minicolors_8min_8js_acf994a60fd0c0112902c8af7b3315b33}{w}(\{
+156                     \hyperlink{jquery_8minicolors_8min_8js_a4103c8729d2048626fcd70c57fa74da3}{h}: a.h,
+157                     s: 100,
+158                     \hyperlink{jquery_8minicolors_8min_8js_a3aede9dec910534ce46e095e5cb5b3f5}{b}: 100
+159                 \}))
+160         \}
+161         \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.data(\textcolor{stringliteral}{"minicolors-initialized"}) && \hyperlink{jquery_8minicolors_8min_8js_af594b4f9b7e4cb3f217d3760ee94b814}{e}(\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}, c, s)
+162     \}
+\end{DoxyCode}
+\index{jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}!s@{s}}
+\index{s@{s}!jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}}
+\subsubsection[{\texorpdfstring{s(i, t, o) }{s(i, t, o) }}]{\setlength{\rightskip}{0pt plus 5cm}function s (
+\begin{DoxyParamCaption}
+\item[{}]{i, }
+\item[{}]{t, }
+\item[{}]{o}
+\end{DoxyParamCaption}
+)}\hypertarget{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{}\label{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}
+
+
+Definition at line 47 of file jquery.\+minicolors.\+min.\+js.
+
+
+\begin{DoxyCode}
+47                         \{
+48         var \hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a} = \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.parents(\textcolor{stringliteral}{".minicolors"}).find(\textcolor{stringliteral}{".minicolors-input"}), \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s} = a.data(\textcolor{stringliteral}{"minicolors-settings"}), 
+      \hyperlink{jquery_8minicolors_8min_8js_affa2c1fafff1cb6a21e98f707d26799d}{r} = \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.find(\textcolor{stringliteral}{"[class$=-picker]"}), \hyperlink{jquery_8minicolors_8min_8js_af594b4f9b7e4cb3f217d3760ee94b814}{e} = \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.offset().left, \hyperlink{jquery_8minicolors_8min_8js_ac8a54e1b0c42b4db93e914f072945aa1}{c} = \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.offset().top, \hyperlink{jquery_8minicolors_8min_8js_afc85bcff0d10d44967f03d0bba5362ea}{l} = Math.round(
+      \hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t}.pageX - \hyperlink{jquery_8minicolors_8min_8js_af594b4f9b7e4cb3f217d3760ee94b814}{e}), \hyperlink{jquery_8minicolors_8min_8js_a4103c8729d2048626fcd70c57fa74da3}{h} = Math.round(\hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t}.pageY - \hyperlink{jquery_8minicolors_8min_8js_ac8a54e1b0c42b4db93e914f072945aa1}{c}), \hyperlink{jquery_8minicolors_8min_8js_a4ff38bc9cac23d19e18b3fab41f4a709}{d} = \hyperlink{jquery_8minicolors_8min_8js_a03f9965317e0a0bdacfb3e886629b2e9}{o} ? \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}.animationSpeed : 0, 
+      \hyperlink{jquery_8minicolors_8min_8js_a80104bd07be57ff7c41a03a4bd004296}{u}, \hyperlink{jquery_8minicolors_8min_8js_ab9bb1846a952a2a93626c3efeb2c0baa}{p}, \hyperlink{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{g}, \hyperlink{jquery_8minicolors_8min_8js_a82696c85bf41f6cf3962a0f08be9290f}{m};
+49         \hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t}.originalEvent.changedTouches && (\hyperlink{jquery_8minicolors_8min_8js_afc85bcff0d10d44967f03d0bba5362ea}{l} = \hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t}.originalEvent.changedTouches[0].pageX - 
+      \hyperlink{jquery_8minicolors_8min_8js_af594b4f9b7e4cb3f217d3760ee94b814}{e}, \hyperlink{jquery_8minicolors_8min_8js_a4103c8729d2048626fcd70c57fa74da3}{h} = \hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t}.originalEvent.changedTouches[0].pageY - \hyperlink{jquery_8minicolors_8min_8js_ac8a54e1b0c42b4db93e914f072945aa1}{c}), 0 > \hyperlink{jquery_8minicolors_8min_8js_afc85bcff0d10d44967f03d0bba5362ea}{l} && (\hyperlink{jquery_8minicolors_8min_8js_afc85bcff0d10d44967f03d0bba5362ea}{l} = 0), 0 > h && (h = 0), 
+      \hyperlink{jquery_8minicolors_8min_8js_afc85bcff0d10d44967f03d0bba5362ea}{l} > \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.width() && (\hyperlink{jquery_8minicolors_8min_8js_afc85bcff0d10d44967f03d0bba5362ea}{l} = \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.width()), h > \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.height() && (h = \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.height()), \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.parent().is(\textcolor{stringliteral}{"
+      .minicolors-slider-wheel"}) && \hyperlink{jquery_8minicolors_8min_8js_affa2c1fafff1cb6a21e98f707d26799d}{r}.parent().is(\textcolor{stringliteral}{".minicolors-grid"}) && (\hyperlink{jquery_8minicolors_8min_8js_a80104bd07be57ff7c41a03a4bd004296}{u} = 75 - \hyperlink{jquery_8minicolors_8min_8js_afc85bcff0d10d44967f03d0bba5362ea}{l}, p = 75 - \hyperlink{jquery_8minicolors_8min_8js_a4103c8729d2048626fcd70c57fa74da3}{h}, g = Math.sqrt(
+      \hyperlink{jquery_8minicolors_8min_8js_a80104bd07be57ff7c41a03a4bd004296}{u} * \hyperlink{jquery_8minicolors_8min_8js_a80104bd07be57ff7c41a03a4bd004296}{u} + p * p), m = Math.atan2(p, \hyperlink{jquery_8minicolors_8min_8js_a80104bd07be57ff7c41a03a4bd004296}{u}), 0 > m && (m += 2 * Math.PI), g > 75 && (g = 75, 
+      \hyperlink{jquery_8minicolors_8min_8js_afc85bcff0d10d44967f03d0bba5362ea}{l} = 75 - 75 * Math.cos(m), h = 75 - 75 * Math.sin(m)), \hyperlink{jquery_8minicolors_8min_8js_afc85bcff0d10d44967f03d0bba5362ea}{l} = Math.round(\hyperlink{jquery_8minicolors_8min_8js_afc85bcff0d10d44967f03d0bba5362ea}{l}), h = Math.round(h)), 
+      \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.is(\textcolor{stringliteral}{".minicolors-grid"}) ? \hyperlink{jquery_8minicolors_8min_8js_affa2c1fafff1cb6a21e98f707d26799d}{r}.stop(!0).animate(\{
+50             top: h + \textcolor{stringliteral}{"px"},
+51             left: \hyperlink{jquery_8minicolors_8min_8js_afc85bcff0d10d44967f03d0bba5362ea}{l} + \textcolor{stringliteral}{"px"}
+52         \}, \hyperlink{jquery_8minicolors_8min_8js_a4ff38bc9cac23d19e18b3fab41f4a709}{d}, \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}.animationEasing, \textcolor{keyword}{function} () \{
+53             \hyperlink{jquery_8minicolors_8min_8js_a9af8c9ff25cef506f6043fa238b91483}{n}(a, \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i})
+54         \}) : \hyperlink{jquery_8minicolors_8min_8js_affa2c1fafff1cb6a21e98f707d26799d}{r}.stop(!0).animate(\{top: h + \textcolor{stringliteral}{"px"}\}, \hyperlink{jquery_8minicolors_8min_8js_a4ff38bc9cac23d19e18b3fab41f4a709}{d}, \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}.animationEasing, \textcolor{keyword}{function} () \{
+55             \hyperlink{jquery_8minicolors_8min_8js_a9af8c9ff25cef506f6043fa238b91483}{n}(a, \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i})
+56         \})
+57     \}
+\end{DoxyCode}
+\index{jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}!s@{s}}
+\index{s@{s}!jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}}
+\subsubsection[{\texorpdfstring{s(t, i, "!0) \rcurly{}).\+on(""mousemove.\+minicolors touchmove.\+minicolors""}{s(t, i, !0) \}).on("mousemove.minicolors touchmove.minicolors"}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf i} {\bf document} s (
+\begin{DoxyParamCaption}
+\item[{}]{t, }
+\item[{}]{i, }
+\item[{!}]{0}
+\end{DoxyParamCaption}
+)}\hypertarget{jquery_8minicolors_8min_8js_ad929c8b8241ae555939a054cf451b9ce}{}\label{jquery_8minicolors_8min_8js_ad929c8b8241ae555939a054cf451b9ce}
+\index{jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}!s@{s}}
+\index{s@{s}!jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}}
+\subsubsection[{\texorpdfstring{s(t, i) \rcurly{}).\+on(""mouseup.\+minicolors touchend.\+minicolors""}{s(t, i) \}).on("mouseup.minicolors touchend.minicolors"}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf t}\&\& s (
+\begin{DoxyParamCaption}
+\item[{}]{t, }
+\item[{}]{i}
+\end{DoxyParamCaption}
+)}\hypertarget{jquery_8minicolors_8min_8js_a0890427ce156947fb0be301f0a1e5f16}{}\label{jquery_8minicolors_8min_8js_a0890427ce156947fb0be301f0a1e5f16}
+\index{jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}!t@{t}}
+\index{t@{t}!jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}}
+\subsubsection[{\texorpdfstring{t(i) }{t(i) }}]{\setlength{\rightskip}{0pt plus 5cm}function t (
+\begin{DoxyParamCaption}
+\item[{}]{i}
+\end{DoxyParamCaption}
+)}\hypertarget{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{}\label{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}
+
+
+Definition at line 26 of file jquery.\+minicolors.\+min.\+js.
+
+
+\begin{DoxyCode}
+26                   \{
+27         var \hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t} = \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.parent();
+28         \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.removeData(\textcolor{stringliteral}{"minicolors-initialized"}).removeData(\textcolor{stringliteral}{"minicolors-settings"}).removeProp(\textcolor{stringliteral}{"size"}).
+      removeClass(\textcolor{stringliteral}{"minicolors-input"}), t.before(\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}).remove()
+29     \}
+\end{DoxyCode}
+\index{jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}!u@{u}}
+\index{u@{u}!jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}}
+\subsubsection[{\texorpdfstring{u(i, t) }{u(i, t) }}]{\setlength{\rightskip}{0pt plus 5cm}function u (
+\begin{DoxyParamCaption}
+\item[{}]{i, }
+\item[{}]{t}
+\end{DoxyParamCaption}
+)}\hypertarget{jquery_8minicolors_8min_8js_a80104bd07be57ff7c41a03a4bd004296}{}\label{jquery_8minicolors_8min_8js_a80104bd07be57ff7c41a03a4bd004296}
+
+
+Definition at line 192 of file jquery.\+minicolors.\+min.\+js.
+
+
+\begin{DoxyCode}
+192                      \{
+193         var \hyperlink{jquery_8minicolors_8min_8js_a03f9965317e0a0bdacfb3e886629b2e9}{o} = \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.replace(/[^\(\backslash\)\hyperlink{jquery_8minicolors_8min_8js_a4ff38bc9cac23d19e18b3fab41f4a709}{d},.]/\hyperlink{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{g}, \textcolor{stringliteral}{""}), \hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a} = o.split(\textcolor{stringliteral}{","}), \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s};
+194         \textcolor{keywordflow}{return} \hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a}[0] = \hyperlink{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{g}(parseInt(\hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a}[0], 10), 0, 255), \hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a}[1] = \hyperlink{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{g}(parseInt(\hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a}[1], 10), 0, 255), 
+      \hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a}[2] = \hyperlink{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{g}(parseInt(\hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a}[2], 10), 0, 255), \hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a}[3] && (\hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a}[3] = \hyperlink{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{g}(parseFloat(a[3], 10), 0, 1)), 
+      \hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t} ? \{
+195             \hyperlink{jquery_8minicolors_8min_8js_affa2c1fafff1cb6a21e98f707d26799d}{r}: a[0],
+196             \hyperlink{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{g}: a[1],
+197             \hyperlink{jquery_8minicolors_8min_8js_a3aede9dec910534ce46e095e5cb5b3f5}{b}: a[2],
+198             a: a[3] ? a[3] : null
+199         \} : \textcolor{stringliteral}{"undefined"} != typeof a[3] && a[3] <= 1 ? \textcolor{stringliteral}{"rgba("} + a[0] + \textcolor{stringliteral}{", "} + a[1] + \textcolor{stringliteral}{", "} + a[2] + \textcolor{stringliteral}{", "} + a
+      [3] + \textcolor{stringliteral}{")"} : \textcolor{stringliteral}{"rgb("} + a[0] + \textcolor{stringliteral}{", "} + a[1] + \textcolor{stringliteral}{", "} + a[2] + \textcolor{stringliteral}{")"}
+200     \}
+\end{DoxyCode}
+\index{jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}!v@{v}}
+\index{v@{v}!jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}}
+\subsubsection[{\texorpdfstring{v(i) }{v(i) }}]{\setlength{\rightskip}{0pt plus 5cm}function v (
+\begin{DoxyParamCaption}
+\item[{}]{i}
+\end{DoxyParamCaption}
+)}\hypertarget{jquery_8minicolors_8min_8js_a9eec3e2fbcb8d854fc028c18bbd49cf8}{}\label{jquery_8minicolors_8min_8js_a9eec3e2fbcb8d854fc028c18bbd49cf8}
+
+
+Definition at line 220 of file jquery.\+minicolors.\+min.\+js.
+
+
+\begin{DoxyCode}
+220                   \{
+221         var \hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t} = \{\}, \hyperlink{jquery_8minicolors_8min_8js_a03f9965317e0a0bdacfb3e886629b2e9}{o} = Math.round(\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.h), \hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a} = Math.round(255 * \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.s / 100), \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s} = Math.round(255 * 
+      \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.b / 100);
+222         \textcolor{keywordflow}{if} (0 === \hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a})t.r = t.g = t.b = \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}; \textcolor{keywordflow}{else} \{
+223             var \hyperlink{jquery_8minicolors_8min_8js_a9af8c9ff25cef506f6043fa238b91483}{n} = \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s}, \hyperlink{jquery_8minicolors_8min_8js_affa2c1fafff1cb6a21e98f707d26799d}{r} = (255 - \hyperlink{jquery_8minicolors_8min_8js_ac798a805a78383e8e2b683b7ca1c936a}{a}) * \hyperlink{jquery_8minicolors_8min_8js_ad56b2c1ec71d18f60c7ab8acb10426ae}{s} / 255, \hyperlink{jquery_8minicolors_8min_8js_af594b4f9b7e4cb3f217d3760ee94b814}{e} = (n - r) * (\hyperlink{jquery_8minicolors_8min_8js_a03f9965317e0a0bdacfb3e886629b2e9}{o} % 60) / 60;
+224             360 === \hyperlink{jquery_8minicolors_8min_8js_a03f9965317e0a0bdacfb3e886629b2e9}{o} && (\hyperlink{jquery_8minicolors_8min_8js_a03f9965317e0a0bdacfb3e886629b2e9}{o} = 0), 60 > o ? (t.r = n, t.b = r, t.g = r + \hyperlink{jquery_8minicolors_8min_8js_af594b4f9b7e4cb3f217d3760ee94b814}{e}) : 120 > o ? (t.
+      \hyperlink{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{g} = n, t.\hyperlink{jquery_8minicolors_8min_8js_a3aede9dec910534ce46e095e5cb5b3f5}{b} = r, t.r = n - \hyperlink{jquery_8minicolors_8min_8js_af594b4f9b7e4cb3f217d3760ee94b814}{e}) : 180 > o ? (t.\hyperlink{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{g} = n, t.r = r, t.\hyperlink{jquery_8minicolors_8min_8js_a3aede9dec910534ce46e095e5cb5b3f5}{b} = r + \hyperlink{jquery_8minicolors_8min_8js_af594b4f9b7e4cb3f217d3760ee94b814}{e}) : 240 > o ? (t.
+      \hyperlink{jquery_8minicolors_8min_8js_a3aede9dec910534ce46e095e5cb5b3f5}{b} = n, t.r = r, t.\hyperlink{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{g} = n - \hyperlink{jquery_8minicolors_8min_8js_af594b4f9b7e4cb3f217d3760ee94b814}{e}) : 300 > o ? (t.\hyperlink{jquery_8minicolors_8min_8js_a3aede9dec910534ce46e095e5cb5b3f5}{b} = n, t.\hyperlink{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{g} = r, t.r = r + \hyperlink{jquery_8minicolors_8min_8js_af594b4f9b7e4cb3f217d3760ee94b814}{e}) : 360 > o ? (t.r = n, t.
+      \hyperlink{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{g} = r, t.\hyperlink{jquery_8minicolors_8min_8js_a3aede9dec910534ce46e095e5cb5b3f5}{b} = n - \hyperlink{jquery_8minicolors_8min_8js_af594b4f9b7e4cb3f217d3760ee94b814}{e}) : (t.r = 0, t.\hyperlink{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{g} = 0, t.\hyperlink{jquery_8minicolors_8min_8js_a3aede9dec910534ce46e095e5cb5b3f5}{b} = 0)
+225         \}
+226         return \{r: Math.round(t.r), \hyperlink{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{g}: Math.round(t.g), \hyperlink{jquery_8minicolors_8min_8js_a3aede9dec910534ce46e095e5cb5b3f5}{b}: Math.round(t.b)\}
+227     \}
+\end{DoxyCode}
+\index{jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}!w@{w}}
+\index{w@{w}!jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}}
+\subsubsection[{\texorpdfstring{w(i) }{w(i) }}]{\setlength{\rightskip}{0pt plus 5cm}function w (
+\begin{DoxyParamCaption}
+\item[{}]{i}
+\end{DoxyParamCaption}
+)}\hypertarget{jquery_8minicolors_8min_8js_acf994a60fd0c0112902c8af7b3315b33}{}\label{jquery_8minicolors_8min_8js_acf994a60fd0c0112902c8af7b3315b33}
+
+
+Definition at line 240 of file jquery.\+minicolors.\+min.\+js.
+
+
+\begin{DoxyCode}
+240                   \{
+241         \textcolor{keywordflow}{return} \hyperlink{jquery_8minicolors_8min_8js_ad9f1149dabf074ecf1820ef39ee0daeb}{y}(\hyperlink{jquery_8minicolors_8min_8js_a9eec3e2fbcb8d854fc028c18bbd49cf8}{v}(\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}))
+242     \}
+\end{DoxyCode}
+\index{jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}!y@{y}}
+\index{y@{y}!jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}}
+\subsubsection[{\texorpdfstring{y(i) }{y(i) }}]{\setlength{\rightskip}{0pt plus 5cm}function y (
+\begin{DoxyParamCaption}
+\item[{}]{i}
+\end{DoxyParamCaption}
+)}\hypertarget{jquery_8minicolors_8min_8js_ad9f1149dabf074ecf1820ef39ee0daeb}{}\label{jquery_8minicolors_8min_8js_ad9f1149dabf074ecf1820ef39ee0daeb}
+
+
+Definition at line 233 of file jquery.\+minicolors.\+min.\+js.
+
+
+\begin{DoxyCode}
+233                   \{
+234         var \hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t} = [\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.r.toString(16), \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.g.toString(16), \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.b.toString(16)];
+235         \textcolor{keywordflow}{return} $.each(t, \textcolor{keyword}{function} (\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}, \hyperlink{jquery_8minicolors_8min_8js_a03f9965317e0a0bdacfb3e886629b2e9}{o}) \{
+236             1 === \hyperlink{jquery_8minicolors_8min_8js_a03f9965317e0a0bdacfb3e886629b2e9}{o}.length && (t[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}] = \textcolor{stringliteral}{"0"} + \hyperlink{jquery_8minicolors_8min_8js_a03f9965317e0a0bdacfb3e886629b2e9}{o})
+237         \}), \textcolor{stringliteral}{"#"} + t.join(\textcolor{stringliteral}{""})
+238     \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\index{jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}!grid@{grid}}
+\index{grid@{grid}!jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}}
+\subsubsection[{\texorpdfstring{grid}{grid}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf document} {\bf minicolors} grid}\hypertarget{jquery_8minicolors_8min_8js_a1c8848d7c3cd0f6bc35a0f44b51fac74}{}\label{jquery_8minicolors_8min_8js_a1c8848d7c3cd0f6bc35a0f44b51fac74}
+
+
+Definition at line 316 of file jquery.\+minicolors.\+min.\+js.
+
+\index{jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}!i@{i}}
+\index{i@{i}!jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}}
+\subsubsection[{\texorpdfstring{i}{i}}]{\setlength{\rightskip}{0pt plus 5cm}function i}\hypertarget{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{}\label{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+\{
+        var \hyperlink{jquery_8minicolors_8min_8js_aa659474bd7f9bc3af383c94d589ad2f0}{t} = $(\textcolor{keyword}{this})
+\end{DoxyCode}
+
+
+Definition at line 316 of file jquery.\+minicolors.\+min.\+js.
+
+\index{jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}!minicolors@{minicolors}}
+\index{minicolors@{minicolors}!jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}}
+\subsubsection[{\texorpdfstring{minicolors}{minicolors}}]{\setlength{\rightskip}{0pt plus 5cm}minicolors}\hypertarget{jquery_8minicolors_8min_8js_a623ce2f92a7828fcb489b2482f03f50a}{}\label{jquery_8minicolors_8min_8js_a623ce2f92a7828fcb489b2482f03f50a}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \{
+        \hyperlink{ripples_8js_a25652520ac081f98103987b0e68544cf}{defaults}: \{
+            animationSpeed: 50,
+            animationEasing: \textcolor{stringliteral}{"swing"},
+            \hyperlink{namespacetime__shifter_ac710c7bfde8686dcdfa07f1800ab01b5}{change}: null,
+            changeDelay: 0,
+            control: \textcolor{stringliteral}{"hue"},
+            dataUris: !0,
+            defaultValue: \textcolor{stringliteral}{""},
+            format: \textcolor{stringliteral}{"hex"},
+            hide: null,
+            hideSpeed: 100,
+            \textcolor{keyword}{inline}: !1,
+            keywords: \textcolor{stringliteral}{""},
+            letterCase: \textcolor{stringliteral}{"lowercase"},
+            opacity: !1,
+            position: \textcolor{stringliteral}{"bottom left"},
+            show: null,
+            showSpeed: 100,
+            theme: \textcolor{stringliteral}{"default"}
+        \}
+    \}
+\end{DoxyCode}
+
+
+Definition at line 258 of file jquery.\+minicolors.\+min.\+js.
+
+\index{jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}!slider@{slider}}
+\index{slider@{slider}!jquery.\+minicolors.\+min.\+js@{jquery.\+minicolors.\+min.\+js}}
+\subsubsection[{\texorpdfstring{slider}{slider}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf document} {\bf minicolors} {\bf minicolors} {\bf minicolors} opacity slider}\hypertarget{jquery_8minicolors_8min_8js_ad78487e61c4e343a7301475676e52711}{}\label{jquery_8minicolors_8min_8js_ad78487e61c4e343a7301475676e52711}
+
+
+Definition at line 316 of file jquery.\+minicolors.\+min.\+js.
+

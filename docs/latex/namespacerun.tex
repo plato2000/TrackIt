@@ -1,0 +1,323 @@
+\hypertarget{namespacerun}{}\section{run Namespace Reference}
+\label{namespacerun}\index{run@{run}}
+\subsection*{Functions}
+\subsection*{Variables}
+
+
+\subsection{Function Documentation}
+\index{run@{run}!get\+\_\+package\+\_\+update@{get\+\_\+package\+\_\+update}}
+\index{get\+\_\+package\+\_\+update@{get\+\_\+package\+\_\+update}!run@{run}}
+\subsubsection[{\texorpdfstring{get\+\_\+package\+\_\+update( uuid)}{get_package_update( uuid)}}]{\setlength{\rightskip}{0pt plus 5cm}def run.\+get\+\_\+package\+\_\+update (
+\begin{DoxyParamCaption}
+\item[{}]{uuid}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacerun_a432d624c0f4e135377bbf7d16186bf04}{}\label{namespacerun_a432d624c0f4e135377bbf7d16186bf04}
+
+
+Receives P\+O\+ST data about Package\textquotesingle{}s current info, and adds it to the dictionary of positions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em uuid} & The uuid of the Package that is being updated \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 49 of file run.\+py.
+
+
+\begin{DoxyCode}
+49 \textcolor{keyword}{def }\hyperlink{namespacerun_a432d624c0f4e135377bbf7d16186bf04}{get\_package\_update}(uuid):
+50     \textcolor{comment}{# print "Trying to get Package update..."}
+51     data = json.loads(request.get\_data().replace(\textcolor{stringliteral}{"["}, \textcolor{stringliteral}{"\{"}).replace(\textcolor{stringliteral}{"]"}, \textcolor{stringliteral}{"\}"}))
+52     \textcolor{comment}{# print data}
+53     \textcolor{keywordflow}{if} \textcolor{stringliteral}{"delivered"} \textcolor{keywordflow}{in} data:
+54         database\_storage.make\_delivered(uuid)
+55         del packages[uuid]
+56         \textcolor{comment}{# print "uuid:", uuid, "delivered:", data['delivered']}
+57     \textcolor{keywordflow}{else}:
+58         \textcolor{comment}{# print "response:", data}
+59         lat = float(data[\textcolor{stringliteral}{'lat'}])
+60         lon = float(data[\textcolor{stringliteral}{'lon'}])
+61         elevation = int(data[\textcolor{stringliteral}{'ele'}])
+62         timestamp = data[\textcolor{stringliteral}{'time'}]
+63         coord = (float(lat), float(lon), float(elevation), \hyperlink{namespacerun_a24e731324376cce7c7e80c7a50186b67}{parse\_time}(timestamp))
+64 
+65         \textcolor{comment}{# if uuid in package\_data:}
+66         \textcolor{comment}{#     package\_data[uuid].append(\{}
+67         \textcolor{comment}{#         "coords": (lat, lon),}
+68         \textcolor{comment}{#         "ele": elevation,}
+69         \textcolor{comment}{#         "time": parse\_time(time)}
+70         \textcolor{comment}{#         \})}
+71         \textcolor{comment}{# else:}
+72         \textcolor{comment}{#     package\_data[uuid] = [\{}
+73         \textcolor{comment}{#         "coords": (lat, lon),}
+74         \textcolor{comment}{#         "ele": elevation,}
+75         \textcolor{comment}{#         "time": parse\_time(time)}
+76         \textcolor{comment}{#         \}]}
+77         database\_storage.insert\_location(uuid, coord[0], coord[1], coord[2], coord[3])
+78         \textcolor{comment}{# print "uuid:", uuid, "lat:", lat, "long:", lon,}
+79         \textcolor{comment}{#                "ele:", elevation, "time:", time}
+80         \textcolor{comment}{# print package\_data}
+81         \textcolor{keywordflow}{if} packages[uuid] \textcolor{keywordflow}{is} \textcolor{keywordtype}{None}:
+82             \textcolor{keywordflow}{print} \textcolor{stringliteral}{"death by yaegan"}
+83             packages[uuid] = packop.Package(
+84                 coord, database\_storage.get\_destination\_of\_package(uuid))
+85         \textcolor{keywordflow}{else}:
+86             packages[uuid].add\_point(coord)
+87     \textcolor{keywordflow}{return} \textcolor{stringliteral}{''}
+88 
+89 
+90 @app.route(\textcolor{stringliteral}{'/testdata'})
+\end{DoxyCode}
+\index{run@{run}!index@{index}}
+\index{index@{index}!run@{run}}
+\subsubsection[{\texorpdfstring{index()}{index()}}]{\setlength{\rightskip}{0pt plus 5cm}def run.\+index (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacerun_a097929f584dbbd7b464a79534332d16c}{}\label{namespacerun_a097929f584dbbd7b464a79534332d16c}
+
+
+Serves the webpage based on template at /templates/index.html print \char`\"{}\+Serving index...\char`\"{}. 
+
+
+
+Definition at line 141 of file run.\+py.
+
+
+\begin{DoxyCode}
+141 \textcolor{keyword}{def }\hyperlink{namespacerun_a097929f584dbbd7b464a79534332d16c}{index}():
+142     \textcolor{keywordflow}{return} render\_template(\textcolor{stringliteral}{'index.html'})
+143 
+144 
+\end{DoxyCode}
+\index{run@{run}!parse\+\_\+time@{parse\+\_\+time}}
+\index{parse\+\_\+time@{parse\+\_\+time}!run@{run}}
+\subsubsection[{\texorpdfstring{parse\+\_\+time( time\+\_\+str)}{parse_time( time_str)}}]{\setlength{\rightskip}{0pt plus 5cm}def run.\+parse\+\_\+time (
+\begin{DoxyParamCaption}
+\item[{}]{time\+\_\+str}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacerun_a24e731324376cce7c7e80c7a50186b67}{}\label{namespacerun_a24e731324376cce7c7e80c7a50186b67}
+
+
+Does dateutil.\+parser.\+parse on the string, then converts to a timetuple, which is converted to seconds since epoch by time.\+mktime. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em time\+\_\+str} & A timestamp in some I\+SO format \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Time in seconds since epoch 
+\end{DoxyReturn}
+
+
+Definition at line 21 of file run.\+py.
+
+
+\begin{DoxyCode}
+21 \textcolor{keyword}{def }\hyperlink{namespacerun_a24e731324376cce7c7e80c7a50186b67}{parse\_time}(time\_str):
+22     \textcolor{keywordflow}{return} int(time.mktime(parse(time\_str).timetuple()))
+23 
+24 
+25 @app.route(\textcolor{stringliteral}{'/tracknewpackage'}, methods=[\textcolor{stringliteral}{'GET'}])
+\end{DoxyCode}
+\index{run@{run}!recover@{recover}}
+\index{recover@{recover}!run@{run}}
+\subsubsection[{\texorpdfstring{recover()}{recover()}}]{\setlength{\rightskip}{0pt plus 5cm}def run.\+recover (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacerun_a176b5ba4e7fb1c8e47f1e5449f5c0511}{}\label{namespacerun_a176b5ba4e7fb1c8e47f1e5449f5c0511}
+
+
+Recovers undelivered packages from the database on startup. 
+
+
+
+Definition at line 146 of file run.\+py.
+
+
+\begin{DoxyCode}
+146 \textcolor{keyword}{def }\hyperlink{namespacerun_a176b5ba4e7fb1c8e47f1e5449f5c0511}{recover}():
+147     \textcolor{keyword}{global} packages
+148     undelivered = database\_storage.get\_undelivered\_packages()
+149     \textcolor{keywordflow}{for} uuid \textcolor{keywordflow}{in} undelivered:
+150         convert\_coord = \textcolor{keyword}{lambda} coord: coord[\textcolor{stringliteral}{"coords"}] + (coord[\textcolor{stringliteral}{"ele"}], coord[\textcolor{stringliteral}{"time"}])
+151         start = convert\_coord(database\_storage.get\_first\_data(uuid))
+152         dest = database\_storage.get\_destination\_of\_package(uuid)
+153         packages[uuid] = packop.Package(start, dest)
+154         coords = database\_storage.get\_locations(uuid, start[-1])
+155         \textcolor{keywordflow}{for} coord \textcolor{keywordflow}{in} coords:
+156             packages[uuid].add\_point(convert\_coord(coord))
+157 
+\end{DoxyCode}
+\index{run@{run}!send\+\_\+data@{send\+\_\+data}}
+\index{send\+\_\+data@{send\+\_\+data}!run@{run}}
+\subsubsection[{\texorpdfstring{send\+\_\+data()}{send_data()}}]{\setlength{\rightskip}{0pt plus 5cm}def run.\+send\+\_\+data (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacerun_aeefb6baadf72429a8685237fc18b7756}{}\label{namespacerun_aeefb6baadf72429a8685237fc18b7756}
+
+
+Sends data to clientside. 
+
+dt is for what type of output it\textquotesingle{}s expecting and uuid is for the Package uuid for which data is received. 
+
+Definition at line 100 of file run.\+py.
+
+
+\begin{DoxyCode}
+100 \textcolor{keyword}{def }\hyperlink{namespacerun_aeefb6baadf72429a8685237fc18b7756}{send\_data}():
+101     \textcolor{keyword}{global} begin, initial\_data, package\_data
+102     a = request.args.get(\textcolor{stringliteral}{'dt'}, \textcolor{stringliteral}{""}, type=str)
+103     uuid = request.args.get(\textcolor{stringliteral}{'uuid'}, \textcolor{stringliteral}{""}, type=str)
+104     \textcolor{keywordflow}{if} a == \textcolor{stringliteral}{'isValidUUID'}:
+105         \textcolor{keywordflow}{return} jsonify(results=database\_storage.is\_valid\_uuid(uuid))
+106     \textcolor{keywordflow}{elif} a == \textcolor{stringliteral}{'initialData'}:
+107         \textcolor{keywordflow}{return} jsonify(\{\textcolor{stringliteral}{"name"}: database\_storage.get\_name(uuid),
+108                         \textcolor{stringliteral}{"end\_coords"}: database\_storage.get\_destination\_of\_package(uuid),
+109                         \textcolor{stringliteral}{"start\_coords"}: database\_storage.get\_first\_data(uuid)[\textcolor{stringliteral}{'coords'}],
+110                         \textcolor{stringliteral}{"curr\_coords"}: database\_storage.get\_current\_data(uuid)[\textcolor{stringliteral}{'coords'}]\})
+111     \textcolor{keywordflow}{elif} a == \textcolor{stringliteral}{'isDelivered'}:
+112         \textcolor{keywordflow}{return} jsonify(results=database\_storage.is\_delivered(uuid))
+113     \textcolor{keywordflow}{elif} a == \textcolor{stringliteral}{'getNewPoints'}:
+114         prev\_time = request.args.get(\textcolor{stringliteral}{'time'}, 0, type=int)
+115         \textcolor{keywordflow}{return} jsonify(results=database\_storage.get\_locations(uuid, prev\_time))
+116     \textcolor{keywordflow}{elif} a == \textcolor{stringliteral}{'undeliveredPackages'}:
+117         \textcolor{keywordflow}{return} jsonify(results=database\_storage.get\_undelivered\_packages())
+118     \textcolor{keywordflow}{elif} a == \textcolor{stringliteral}{'deliveredPackages'}:
+119         \textcolor{keywordflow}{return} jsonify(results=database\_storage.get\_delivered\_packages())
+120     \textcolor{keywordflow}{elif} a == \textcolor{stringliteral}{'getETR'}:
+121         \textcolor{keywordflow}{try}:
+122             \textcolor{keywordflow}{return} jsonify(results=packages[uuid].etr())
+123         \textcolor{keywordflow}{except} KeyError:
+124             \textcolor{keywordflow}{return} jsonify(results=database\_storage.get\_current\_data(uuid)[\textcolor{stringliteral}{'time'}] - time.time())
+125     \textcolor{keywordflow}{elif} a == \textcolor{stringliteral}{'getPOI'}:
+126         \textcolor{keywordflow}{try}:
+127             \textcolor{keywordflow}{return} jsonify(results=packages[uuid].poi)
+128         \textcolor{keywordflow}{except} KeyError:
+129             \textcolor{keywordflow}{return} jsonify(results=[])
+130     \textcolor{keywordflow}{elif} a == \textcolor{stringliteral}{'getDistance'}:
+131         \textcolor{keywordflow}{try}:
+132             \textcolor{keywordflow}{return} jsonify(results=packages[uuid].dist)
+133         \textcolor{keywordflow}{except} KeyError:
+134             \textcolor{keywordflow}{return} jsonify(results=[])
+135     \textcolor{keywordflow}{return} jsonify(results=\textcolor{stringliteral}{""})
+136 
+137 
+138 @app.route(\textcolor{stringliteral}{'/'})
+\end{DoxyCode}
+\index{run@{run}!test\+\_\+data@{test\+\_\+data}}
+\index{test\+\_\+data@{test\+\_\+data}!run@{run}}
+\subsubsection[{\texorpdfstring{test\+\_\+data()}{test_data()}}]{\setlength{\rightskip}{0pt plus 5cm}def run.\+test\+\_\+data (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacerun_a315c247d5768c60f49f07979d3005779}{}\label{namespacerun_a315c247d5768c60f49f07979d3005779}
+
+
+Returns a json version of whatever variable is passed as the value from the data key. 
+
+
+
+Definition at line 93 of file run.\+py.
+
+
+\begin{DoxyCode}
+93 \textcolor{keyword}{def }\hyperlink{namespacerun_a315c247d5768c60f49f07979d3005779}{test\_data}():
+94     \textcolor{keywordflow}{return} jsonify(results=eval(request.args.get(\textcolor{stringliteral}{'data'}, \textcolor{stringliteral}{""}, type=str)))
+95 
+96 
+97 @app.route(\textcolor{stringliteral}{'/data'})
+\end{DoxyCode}
+\index{run@{run}!track\+\_\+new\+\_\+package@{track\+\_\+new\+\_\+package}}
+\index{track\+\_\+new\+\_\+package@{track\+\_\+new\+\_\+package}!run@{run}}
+\subsubsection[{\texorpdfstring{track\+\_\+new\+\_\+package()}{track_new_package()}}]{\setlength{\rightskip}{0pt plus 5cm}def run.\+track\+\_\+new\+\_\+package (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacerun_aa2d7bc76e937566fe3f05617c102bba9}{}\label{namespacerun_aa2d7bc76e937566fe3f05617c102bba9}
+
+
+Gets new Package data, with name, destination, and U\+U\+ID. 
+
+
+
+Definition at line 28 of file run.\+py.
+
+
+\begin{DoxyCode}
+28 \textcolor{keyword}{def }\hyperlink{namespacerun_aa2d7bc76e937566fe3f05617c102bba9}{track\_new\_package}():
+29     \textcolor{keyword}{global} initial\_data
+30     name = request.args.get(\textcolor{stringliteral}{'name'}, \textcolor{stringliteral}{""}, type=str)
+31     dest\_lat = request.args.get(\textcolor{stringliteral}{'destinationLat'}, 0, type=float)
+32     dest\_lng = request.args.get(\textcolor{stringliteral}{'destinationLon'}, 0, type=float)
+33     uuid = request.args.get(\textcolor{stringliteral}{'uuid'}, \textcolor{stringliteral}{""}, type=str)
+34     \textcolor{comment}{# initial\_data[uuid] = \{"name": name, "end\_coords": (dest\_lat, dest\_lng)\}}
+35     database\_storage.create\_table(uuid, name, dest\_lat, dest\_lng)
+36     \textcolor{comment}{# print "name:", name, "dest\_lat:", dest\_lat,}
+37     \textcolor{comment}{#                       "dest\_lng:", dest\_lng, "uuid:", uuid}
+38     out = \{\textcolor{stringliteral}{'ackUUID'}: \textcolor{stringliteral}{'['}+uuid+\textcolor{stringliteral}{']'}\}
+39     packages[uuid] = \textcolor{keywordtype}{None}
+40     \textcolor{comment}{# print "ran through here"}
+41     \textcolor{keywordflow}{return} str(out)
+42     \textcolor{comment}{# return "success"}
+43 
+44 
+45 @app.route(\textcolor{stringliteral}{'/packagetrackupdate/<uuid>'}, methods=[\textcolor{stringliteral}{'POST'}])
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\index{run@{run}!app@{app}}
+\index{app@{app}!run@{run}}
+\subsubsection[{\texorpdfstring{app}{app}}]{\setlength{\rightskip}{0pt plus 5cm}app = Flask(\+\_\+\+\_\+name\+\_\+\+\_\+)}\hypertarget{namespacerun_afe63fea7be31b0200b496d08bc6b517d}{}\label{namespacerun_afe63fea7be31b0200b496d08bc6b517d}
+
+
+Definition at line 14 of file run.\+py.
+
+\index{run@{run}!debug@{debug}}
+\index{debug@{debug}!run@{run}}
+\subsubsection[{\texorpdfstring{debug}{debug}}]{\setlength{\rightskip}{0pt plus 5cm}debug}\hypertarget{namespacerun_a0514aabed091ee5e2f35766eb01eced6}{}\label{namespacerun_a0514aabed091ee5e2f35766eb01eced6}
+
+
+Definition at line 162 of file run.\+py.
+
+\index{run@{run}!False@{False}}
+\index{False@{False}!run@{run}}
+\subsubsection[{\texorpdfstring{False}{False}}]{\setlength{\rightskip}{0pt plus 5cm}False}\hypertarget{namespacerun_a36cde68b055f3f2ee671020af4ccf4e2}{}\label{namespacerun_a36cde68b055f3f2ee671020af4ccf4e2}
+
+
+Definition at line 162 of file run.\+py.
+
+\index{run@{run}!packages@{packages}}
+\index{packages@{packages}!run@{run}}
+\subsubsection[{\texorpdfstring{packages}{packages}}]{\setlength{\rightskip}{0pt plus 5cm}dictionary packages = \{\}}\hypertarget{namespacerun_ab966ab9458ccaf3792ee29eb175a235c}{}\label{namespacerun_ab966ab9458ccaf3792ee29eb175a235c}
+
+
+Definition at line 158 of file run.\+py.
+
+\index{run@{run}!True@{True}}
+\index{True@{True}!run@{run}}
+\subsubsection[{\texorpdfstring{True}{True}}]{\setlength{\rightskip}{0pt plus 5cm}True}\hypertarget{namespacerun_a643a20c0c59588a0f741a6095e2025fd}{}\label{namespacerun_a643a20c0c59588a0f741a6095e2025fd}
+
+
+Definition at line 162 of file run.\+py.
+
+\index{run@{run}!use\+\_\+debugger@{use\+\_\+debugger}}
+\index{use\+\_\+debugger@{use\+\_\+debugger}!run@{run}}
+\subsubsection[{\texorpdfstring{use\+\_\+debugger}{use_debugger}}]{\setlength{\rightskip}{0pt plus 5cm}use\+\_\+debugger}\hypertarget{namespacerun_a84ec172ec1d54c6a54e6e648c35c934f}{}\label{namespacerun_a84ec172ec1d54c6a54e6e648c35c934f}
+
+
+Definition at line 162 of file run.\+py.
+
+\index{run@{run}!use\+\_\+reloader@{use\+\_\+reloader}}
+\index{use\+\_\+reloader@{use\+\_\+reloader}!run@{run}}
+\subsubsection[{\texorpdfstring{use\+\_\+reloader}{use_reloader}}]{\setlength{\rightskip}{0pt plus 5cm}use\+\_\+reloader}\hypertarget{namespacerun_a33f3d888c60d659e953c90c18f532678}{}\label{namespacerun_a33f3d888c60d659e953c90c18f532678}
+
+
+Definition at line 162 of file run.\+py.
+

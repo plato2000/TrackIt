@@ -151,10 +151,11 @@ function addRow(uuid, name, start, current, dest) {
 function removeRow(uuid) {
     packagesMonitored.splice($.inArray(uuid, packagesMonitored), 1);
     $("#row" + uuid).remove();
-    if(packagesOnMap.indexOf(uuid) > -1) {
-        // console.log("changing display of " + uuid);
-        changeMapDisplay(uuid, false);
-    }
+    changeMapDisplay(uuid, false);
+    //if(packagesOnMap.indexOf(uuid) > -1) {
+    //    // console.log("changing display of " + uuid);
+    //    changeMapDisplay(uuid, false);
+    //}
     packagesOnMap.splice($.inArray(uuid, packagesOnMap), 1);
     if(!adminMode) {
         $.cookie("packagesOnMap", JSON.stringify(packagesOnMap));
@@ -490,7 +491,9 @@ function updateMap() {
     }
 }
 
-/// Callback function for setLocationName
+/// Callback function for setLocationName. It calls itself in a few seconds if there were too many queries in a short
+//  period of time - like if many packages were loaded at once.
+//
 //  \param id The HTML id of the element to set the new location to
 //  \param latlng A Google Maps LatLng object for which to perform reverse geocoding
 function locationCallback(id, latlng) {

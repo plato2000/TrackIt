@@ -1,0 +1,1287 @@
+\hypertarget{main_8js}{}\section{/\+Users/plato2000/\+Developer/trackit/static/js/main.js File Reference}
+\label{main_8js}\index{/\+Users/plato2000/\+Developer/trackit/static/js/main.\+js@{/\+Users/plato2000/\+Developer/trackit/static/js/main.\+js}}
+
+
+\subsection{Function Documentation}
+\index{main.\+js@{main.\+js}!add\+Delivered\+Packages@{add\+Delivered\+Packages}}
+\index{add\+Delivered\+Packages@{add\+Delivered\+Packages}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{add\+Delivered\+Packages() }{addDeliveredPackages() }}]{\setlength{\rightskip}{0pt plus 5cm}function add\+Delivered\+Packages (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{main_8js_adab0bb20301c1611b5eb48627d49de3a}{}\label{main_8js_adab0bb20301c1611b5eb48627d49de3a}
+
+
+Adds delivered packages to packages monitored list if they aren\textquotesingle{}t already there. 
+
+
+
+Definition at line 553 of file main.\+js.
+
+
+\begin{DoxyCode}
+553                                 \{
+554     $.getJSON($SCRIPT\_ROOT + \textcolor{stringliteral}{'/data'}, \{\textcolor{stringliteral}{"dt"}: \textcolor{stringliteral}{"deliveredPackages"}\}, \textcolor{keyword}{function}(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}) \{
+555         \textcolor{comment}{// console.log(data.results);}
+556         \textcolor{keywordflow}{for}(var \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} = 0; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} < \hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.results.length; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}++) \{
+557             \textcolor{keywordflow}{if}(\hyperlink{main_8js_a7bcbd7191893f7300ad00bd1b8908950}{delivered}.indexOf(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.results[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]) < 0) \{
+558                 \hyperlink{main_8js_a7bcbd7191893f7300ad00bd1b8908950}{delivered}.push(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.results[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]);
+559             \}
+560             \textcolor{keywordflow}{if}(\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}.indexOf(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.results[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]) < 0) \{
+561                 \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}.push(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.results[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]);
+562                 \hyperlink{main_8js_ae99cfb389602e780ffd02f5ae2ffb62f}{addPackage}(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.results[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]);
+563             \}
+564         \}
+565     \});
+566 \}
+\end{DoxyCode}
+\index{main.\+js@{main.\+js}!add\+Package@{add\+Package}}
+\index{add\+Package@{add\+Package}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{add\+Package(uuid) }{addPackage(uuid) }}]{\setlength{\rightskip}{0pt plus 5cm}function add\+Package (
+\begin{DoxyParamCaption}
+\item[{}]{uuid}
+\end{DoxyParamCaption}
+)}\hypertarget{main_8js_ae99cfb389602e780ffd02f5ae2ffb62f}{}\label{main_8js_ae99cfb389602e780ffd02f5ae2ffb62f}
+
+
+Generic function to get package data from U\+U\+ID and add to table. This is used by the load function and the admin\+Load. 
+
+
+
+Definition at line 198 of file main.\+js.
+
+
+\begin{DoxyCode}
+198                           \{
+199     \textcolor{keywordflow}{if}(!\hyperlink{main_8js_a7f2fc3f001c9d60e9f83509eb4e944d8}{adminMode}) \{
+200         $.cookie(\textcolor{stringliteral}{"packagesMonitored"}, JSON.stringify(\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}));
+201     \}
+202     $.ajax(\{
+203         type: \textcolor{stringliteral}{'GET'},
+204         url: $SCRIPT\_ROOT + \textcolor{stringliteral}{'/data'},
+205         dataType: \textcolor{stringliteral}{'json'},
+206         success: \textcolor{keyword}{function}(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}) \{
+207             var name = \hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.name;
+208             var start\_coords = \textcolor{keyword}{new} google.maps.LatLng(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.start\_coords[0], 
+      \hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.start\_coords[1]);
+209             var end\_coords = \textcolor{keyword}{new} google.maps.LatLng(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.end\_coords[0], \hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.end\_coords[1]);
+210             var curr\_coords = \textcolor{keyword}{new} google.maps.LatLng(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.curr\_coords[0], 
+      \hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.curr\_coords[1]);
+211             \hyperlink{main_8js_a19e632cab94d67a54007824cff4e985b}{destinations}[uuid] = end\_coords;
+212             \hyperlink{main_8js_a205bb968a83c85324e6b50fecdb4b630}{colors}[uuid] = \hyperlink{main_8js_a0f1deddd735efed96b177d15b665481c}{getRandomColor}();
+213             \hyperlink{main_8js_a3d659090a82a559bdf2779c954627771}{addRow}(uuid, name, start\_coords, curr\_coords, end\_coords)
+214             \hyperlink{main_8js_af706c6c897429353a19872f2cb33ef38}{updateData}();
+215         \},
+216         \hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}: \{\textcolor{stringliteral}{"dt"}:\textcolor{stringliteral}{"initialData"}, \textcolor{stringliteral}{"uuid"}:uuid\},
+217         async: \textcolor{keyword}{true}
+218     \});
+219 \}
+\end{DoxyCode}
+\index{main.\+js@{main.\+js}!add\+Package\+From\+Text\+Input@{add\+Package\+From\+Text\+Input}}
+\index{add\+Package\+From\+Text\+Input@{add\+Package\+From\+Text\+Input}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{add\+Package\+From\+Text\+Input() }{addPackageFromTextInput() }}]{\setlength{\rightskip}{0pt plus 5cm}function add\+Package\+From\+Text\+Input (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{main_8js_a94bf04c636a8404683ecea15db912405}{}\label{main_8js_a94bf04c636a8404683ecea15db912405}
+
+
+Adds package to table, monitored list after it\textquotesingle{}s entered into text entry box. 
+
+
+
+Definition at line 171 of file main.\+js.
+
+
+\begin{DoxyCode}
+171                                    \{
+172     var uuid = $(\textcolor{stringliteral}{"#newPackage"}).val();
+173     $.ajax(\{
+174         type: \textcolor{stringliteral}{'GET'},
+175         url: $SCRIPT\_ROOT + \textcolor{stringliteral}{'/data'},
+176         dataType: \textcolor{stringliteral}{'json'},
+177         success: \textcolor{keyword}{function}(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}) \{
+178             var isValidUUID = \hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.results;
+179             \textcolor{keywordflow}{if}(isValidUUID) \{
+180                 $(\textcolor{stringliteral}{"#newPackage"}).val(\textcolor{stringliteral}{""});
+181                 \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}.push(uuid);
+182                 \hyperlink{main_8js_ae99cfb389602e780ffd02f5ae2ffb62f}{addPackage}(uuid);
+183             \} \textcolor{keywordflow}{else} \{
+184                 $(\textcolor{stringliteral}{"#invalidUUIDAlert"}).show();
+185                 $(\textcolor{stringliteral}{"#invalidUUIDAlert"}).fadeTo(2000, 500).slideUp(500, \textcolor{keyword}{function}()\{
+186                     $(\textcolor{stringliteral}{"#invalidUUIDAlert"}).hide();
+187                 \});
+188             \}
+189         \},
+190         \hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}: \{\textcolor{stringliteral}{"dt"}:\textcolor{stringliteral}{"isValidUUID"}, \textcolor{stringliteral}{"uuid"}:uuid\},
+191         async: \textcolor{keyword}{true}
+192     \});
+193 \}
+\end{DoxyCode}
+\index{main.\+js@{main.\+js}!add\+Row@{add\+Row}}
+\index{add\+Row@{add\+Row}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{add\+Row(uuid, name, start, current, dest) }{addRow(uuid, name, start, current, dest) }}]{\setlength{\rightskip}{0pt plus 5cm}function add\+Row (
+\begin{DoxyParamCaption}
+\item[{}]{uuid, }
+\item[{}]{name, }
+\item[{}]{start, }
+\item[{}]{current, }
+\item[{}]{dest}
+\end{DoxyParamCaption}
+)}\hypertarget{main_8js_a3d659090a82a559bdf2779c954627771}{}\label{main_8js_a3d659090a82a559bdf2779c954627771}
+
+
+Adds a new row to the table in the page. 
+
+
+
+Definition at line 107 of file main.\+js.
+
+
+\begin{DoxyCode}
+107                                                   \{
+108     var rowToAdd = \hyperlink{main_8js_abd576e0f2f4908397757e6ea0bdb99c2}{populateRow}(uuid, name);
+109     var dropDown = \hyperlink{main_8js_ad29c08ca5b9fc5c1358dab4699d1b1c7}{populateDropdown}(uuid);
+110     \textcolor{comment}{// Adds row to table}
+111     $(\textcolor{stringliteral}{'#packageTable > tbody:last-child'}).append(rowToAdd + \textcolor{stringliteral}{"\(\backslash\)n"} + dropDown);
+112     \textcolor{comment}{// Material design JS loads proper styling for checkboxes (has to be loaded every time)}
+113     $.material.checkbox();
+114 
+115     \textcolor{keywordflow}{if}(\hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}.indexOf(uuid) > -1) \{
+116         $(\textcolor{stringliteral}{"#checkbox"} + uuid).prop(\textcolor{stringliteral}{"checked"}, \textcolor{keyword}{true});
+117         \textcolor{comment}{//console.log("Status of " + "#checkbox" + uuid + ": " + $("#checkbox" + uuid).prop("checked"));}
+118     \}
+119 
+120     \textcolor{comment}{// Loads color picker}
+121     $(\textcolor{stringliteral}{"#color"} + uuid).\hyperlink{jquery_8minicolors_8min_8js_a623ce2f92a7828fcb489b2482f03f50a}{minicolors}(\{
+122         theme: \textcolor{stringliteral}{'default'},
+123         changedelay: 100,
+124         \hyperlink{namespacetime__shifter_ac710c7bfde8686dcdfa07f1800ab01b5}{change}: \textcolor{keyword}{function}(value, opacity) \{
+125             \textcolor{comment}{// console.log("value: " + value);}
+126             \hyperlink{main_8js_a205bb968a83c85324e6b50fecdb4b630}{colors}[uuid] = value;
+127             \textcolor{keywordflow}{if}(uuid in \hyperlink{main_8js_a2b33618c9f421e426905ee387b6c6bc5}{destinationMapMarkers}) \{
+128                 destinationMapMarkers[uuid].setIcon(\hyperlink{main_8js_a411811df2cac289120b37b323bb6917e}{pinSymbol}(value));
+129             \}
+130             \textcolor{keywordflow}{if}(uuid in \hyperlink{main_8js_a90467ae029236a37b76f3383e82bb730}{originMapMarkers}) \{
+131                 originMapMarkers[uuid].setIcon(\hyperlink{main_8js_a411811df2cac289120b37b323bb6917e}{pinSymbol}(value));
+132             \}
+133             \textcolor{keywordflow}{if}(uuid in \hyperlink{main_8js_a4f01a6af54b3f7e164d2dbbb37e04f86}{mapLines}) \{
+134                 mapLines[uuid].setOptions(\{strokeColor: value\});
+135             \}
+136             map.setZoom(map.getZoom());
+137         \}
+138 
+139     \});
+140 
+141     console.log(\textcolor{stringliteral}{"uuid: "} + uuid);
+142     $(\textcolor{stringliteral}{".dropdown-row"}).hide();
+143 
+144     \textcolor{comment}{// Puts locations in after row is already in (asynchronous)}
+145     \hyperlink{main_8js_a57d760f8a6da116945a372314d39a78c}{setLocationName}(\textcolor{stringliteral}{"#current"} + uuid, current);
+146     \hyperlink{main_8js_a57d760f8a6da116945a372314d39a78c}{setLocationName}(\textcolor{stringliteral}{"#start"} + uuid, start);
+147     \hyperlink{main_8js_a57d760f8a6da116945a372314d39a78c}{setLocationName}(\textcolor{stringliteral}{"#dest"} + uuid, dest);
+148 \}
+\end{DoxyCode}
+\index{main.\+js@{main.\+js}!add\+Undelivered\+Packages@{add\+Undelivered\+Packages}}
+\index{add\+Undelivered\+Packages@{add\+Undelivered\+Packages}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{add\+Undelivered\+Packages() }{addUndeliveredPackages() }}]{\setlength{\rightskip}{0pt plus 5cm}function add\+Undelivered\+Packages (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{main_8js_a092227b4b44d408f0825ceaaeffefe64}{}\label{main_8js_a092227b4b44d408f0825ceaaeffefe64}
+
+
+Adds undelivered packages to packages monitored list if they aren\textquotesingle{}t already there. 
+
+
+
+Definition at line 539 of file main.\+js.
+
+
+\begin{DoxyCode}
+539                                   \{
+540     $.getJSON($SCRIPT\_ROOT + \textcolor{stringliteral}{'/data'}, \{\textcolor{stringliteral}{"dt"}: \textcolor{stringliteral}{"undeliveredPackages"}\}, \textcolor{keyword}{function}(
+      \hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}) \{
+541         \textcolor{comment}{// console.log(data.results);}
+542         \textcolor{keywordflow}{for}(var \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} = 0; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} < \hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.results.length; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}++) \{
+543             \textcolor{keywordflow}{if}(\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}.indexOf(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.results[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]) < 0) \{
+544                 \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}.push(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.results[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]);
+545                 \hyperlink{main_8js_ae99cfb389602e780ffd02f5ae2ffb62f}{addPackage}(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.results[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]);
+546             \}
+547         \}
+548     \});
+549 \}
+\end{DoxyCode}
+\index{main.\+js@{main.\+js}!change\+Admin\+Mode@{change\+Admin\+Mode}}
+\index{change\+Admin\+Mode@{change\+Admin\+Mode}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{change\+Admin\+Mode() }{changeAdminMode() }}]{\setlength{\rightskip}{0pt plus 5cm}function change\+Admin\+Mode (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{main_8js_a2a84f34e6061e86f13eaa80035f1d5d4}{}\label{main_8js_a2a84f34e6061e86f13eaa80035f1d5d4}
+
+
+Toggles mode between admin mode and regular user. For now, this is not done with any type of secure communication. 
+
+
+
+Definition at line 353 of file main.\+js.
+
+
+\begin{DoxyCode}
+353                            \{
+354     \textcolor{keywordflow}{for}(var \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} = 0; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} < \hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}.length; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}++) \{
+355         \textcolor{comment}{// console.log("removing row " + packagesOnMap[i]);}
+356         \hyperlink{main_8js_a34aa323b5e6a4413fb439ccc1e404e9f}{removeRow}(\hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]);
+357     \}
+358     \hyperlink{main_8js_a7f2fc3f001c9d60e9f83509eb4e944d8}{adminMode} = !\hyperlink{main_8js_a7f2fc3f001c9d60e9f83509eb4e944d8}{adminMode};
+359     \textcolor{keywordflow}{if}(!\hyperlink{main_8js_a7f2fc3f001c9d60e9f83509eb4e944d8}{adminMode}) \{
+360         $(\textcolor{stringliteral}{"#loginButton"}).html(\textcolor{stringliteral}{"Log in&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"});
+361         $(\textcolor{stringliteral}{"#deliveredPackagesButton"}).html(\textcolor{stringliteral}{""});
+362         $(\textcolor{stringliteral}{"#undeliveredPackagesButton"}).html(\textcolor{stringliteral}{""});
+363         $(\textcolor{stringliteral}{"#listBody"}).html(\textcolor{stringliteral}{""});
+364         \hyperlink{main_8js_a2c9bf86fb554b8e6f080ad224b490ca5}{loadFunction}();
+365     \} \textcolor{keywordflow}{else} \{
+366         $(\textcolor{stringliteral}{"#loginButton"}).html(\textcolor{stringliteral}{"Log out&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"});
+367         $(\textcolor{stringliteral}{"#deliveredPackagesButton"}).html(\textcolor{stringliteral}{"<a href='javascript:addDeliveredPackages()'>Track delivered
+       packages</a>"});
+368         $(\textcolor{stringliteral}{"#undeliveredPackagesButton"}).html(\textcolor{stringliteral}{"<a href='javascript:addUndeliveredPackages()'>Track
+       undelivered packages</a>"});
+369         $(\textcolor{stringliteral}{"#listBody"}).html(\textcolor{stringliteral}{""});
+370         \textcolor{comment}{//adminLoad();}
+371     \}
+372 \}
+\end{DoxyCode}
+\index{main.\+js@{main.\+js}!change\+Map\+Display@{change\+Map\+Display}}
+\index{change\+Map\+Display@{change\+Map\+Display}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{change\+Map\+Display(id, checked) }{changeMapDisplay(id, checked) }}]{\setlength{\rightskip}{0pt plus 5cm}function change\+Map\+Display (
+\begin{DoxyParamCaption}
+\item[{}]{id, }
+\item[{}]{checked}
+\end{DoxyParamCaption}
+)}\hypertarget{main_8js_a578e50528efb5c415d8a5c50dd91fd5f}{}\label{main_8js_a578e50528efb5c415d8a5c50dd91fd5f}
+
+
+Changes visibility of package on map. Called onclick of checkbox on table and on load if package is supposed to be. 
+
+
+
+Definition at line 393 of file main.\+js.
+
+
+\begin{DoxyCode}
+393                                        \{
+394     \textcolor{comment}{// console.log(id);}
+395     \textcolor{comment}{// If package is no longer displayed}
+396     \textcolor{keywordflow}{if}(!checked) \{
+397         \textcolor{comment}{// Remove package from on map list}
+398         \hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}.splice($.inArray(\textcolor{keywordtype}{id}, \hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}), 1);
+399         \textcolor{comment}{// Remove map line from the map}
+400         \hyperlink{main_8js_a4f01a6af54b3f7e164d2dbbb37e04f86}{mapLines}[\hyperlink{moment_8min_8js_a46207c7091ab14788d5b3e389828eddb}{id}].setMap(null);
+401         \textcolor{comment}{// Remove markers from map}
+402         \hyperlink{main_8js_a2b33618c9f421e426905ee387b6c6bc5}{destinationMapMarkers}[\hyperlink{moment_8min_8js_a46207c7091ab14788d5b3e389828eddb}{id}].setMap(null);
+403         \hyperlink{main_8js_a90467ae029236a37b76f3383e82bb730}{originMapMarkers}[\hyperlink{moment_8min_8js_a46207c7091ab14788d5b3e389828eddb}{id}].setMap(null);
+404     \} \textcolor{keywordflow}{else} \{
+405         \textcolor{comment}{// Put package on the map list}
+406         \hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}.push(\textcolor{keywordtype}{id});
+407     \}
+408     \textcolor{comment}{// Doesn't store in cookies if in admin mode so on logout it doesn't keep all the packages}
+409     \textcolor{keywordflow}{if}(!\hyperlink{main_8js_a7f2fc3f001c9d60e9f83509eb4e944d8}{adminMode}) \{
+410         $.cookie(\textcolor{stringliteral}{"packagesOnMap"}, JSON.stringify(\hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}));
+411     \}
+412     \textcolor{comment}{// Updates data and map to reflect changes if new package added to the map list}
+413     \hyperlink{main_8js_af706c6c897429353a19872f2cb33ef38}{updateData}();
+414 \}
+\end{DoxyCode}
+\index{main.\+js@{main.\+js}!clear\+Cookies@{clear\+Cookies}}
+\index{clear\+Cookies@{clear\+Cookies}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{clear\+Cookies() }{clearCookies() }}]{\setlength{\rightskip}{0pt plus 5cm}function clear\+Cookies (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{main_8js_a612897296dfd3a25348d5778cc934d15}{}\label{main_8js_a612897296dfd3a25348d5778cc934d15}
+
+
+For testing purposes -\/ clears cookies for packages\+On\+Map and packages\+Monitored. 
+
+
+
+Definition at line 630 of file main.\+js.
+
+
+\begin{DoxyCode}
+630                         \{
+631     $.cookie(\textcolor{stringliteral}{'packagesOnMap'}, \textcolor{stringliteral}{'[]'});
+632     $.cookie(\textcolor{stringliteral}{'packagesMonitored'}, \textcolor{stringliteral}{'[]'});
+633 \}
+\end{DoxyCode}
+\index{main.\+js@{main.\+js}!click@{click}}
+\index{click@{click}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{click(function(event) \lcurly{} event.\+stop\+Propagation(); var target = \$(event.\+target); if ( target.\+closest(""td"").\+attr(""colspan"") $>$ 1 ) \lcurly{}   target.\+closest(""td"").\+parent().\+hide();  target.\+closest(""tr"").\+prev().\+find(""td\+:first"").\+html(\textquotesingle{}$<$span class=""glyphicon glyphicon-\/plus"" aria-\/label=""Expand""$>$\textquotesingle{}); \rcurly{} else \lcurly{}   if (target.\+closest(""tr"").\+find(""td\+:first"").\+html().\+index\+Of(""glyphicon-\/plus"") $>$ -\/1) \lcurly{} target.\+closest(""tr"").\+next().\+show(); target.\+closest(""tr"").\+find(""td\+:first"").\+html(\textquotesingle{}$<$span class=""glyphicon glyphicon-\/minus"" aria-\/label=""Collapse""$>$\textquotesingle{}); \rcurly{} else \lcurly{} target.\+closest(""tr"").\+next().\+hide(); target.\+closest(""tr"").\+find(""td\+:first"").\+html(\textquotesingle{}$<$span class=""glyphicon glyphicon-\/plus"" aria-\/label=""Expand""$>$\textquotesingle{}); \rcurly{} \rcurly{} \rcurly{})}{click(function(event) \{ event.stopPropagation(); var target = $(event.target); if ( target.closest("td").attr("colspan") > 1 ) \{   target.closest("td").parent().hide();  target.closest("tr").prev().find("td:first").html('<span class="glyphicon glyphicon-plus" aria-label="Expand">'); \} else \{   if (target.closest("tr").find("td:first").html().indexOf("glyphicon-plus") > -1) \{ target.closest("tr").next().show(); target.closest("tr").find("td:first").html('<span class="glyphicon glyphicon-minus" aria-label="Collapse">'); \} else \{ target.closest("tr").next().hide(); target.closest("tr").find("td:first").html('<span class="glyphicon glyphicon-plus" aria-label="Expand">'); \} \} \})}}]{\setlength{\rightskip}{0pt plus 5cm}function table click (
+\begin{DoxyParamCaption}
+\item[{function(event) \{ event.\+stop\+Propagation(); var target = \$(event.\+target); {\bf if} ( target.\+closest(\char`\"{}td\char`\"{}).attr(\char`\"{}colspan\char`\"{}) $>$ 1 ) \{   target.\+closest(\char`\"{}td\char`\"{}).parent().hide();  target.\+closest(\char`\"{}tr\char`\"{}).prev().find(\char`\"{}td\+:first\char`\"{}).html(\textquotesingle{}$<$span class=\char`\"{}glyphicon glyphicon-\/plus\char`\"{} aria-\/label=\char`\"{}Expand\char`\"{}$>$\textquotesingle{}); \} else \{   {\bf if} (target.\+closest(\char`\"{}tr\char`\"{}).find(\char`\"{}td\+:first\char`\"{}).html().index\+Of(\char`\"{}glyphicon-\/plus\char`\"{}) $>$ -\/1) \{ target.\+closest(\char`\"{}tr\char`\"{}).next().show(); target.\+closest(\char`\"{}tr\char`\"{}).find(\char`\"{}td\+:first\char`\"{}).html(\textquotesingle{}$<$span class=\char`\"{}glyphicon glyphicon-\/minus\char`\"{} aria-\/label=\char`\"{}Collapse\char`\"{}$>$\textquotesingle{}); \} else \{ target.\+closest(\char`\"{}tr\char`\"{}).next().hide(); target.\+closest(\char`\"{}tr\char`\"{}).find(\char`\"{}td\+:first\char`\"{}).html(\textquotesingle{}$<$span class=\char`\"{}glyphicon glyphicon-\/plus\char`\"{} aria-\/label=\char`\"{}Expand\char`\"{}$>$\textquotesingle{}); \} \} \}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{main_8js_aacf197cbf0d724aef49a3699b75a3238}{}\label{main_8js_aacf197cbf0d724aef49a3699b75a3238}
+
+
+Manages dropdown rows -\/ hides and shows, changes icon at beginning. 
+
+\index{main.\+js@{main.\+js}!convert\+Update\+Results@{convert\+Update\+Results}}
+\index{convert\+Update\+Results@{convert\+Update\+Results}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{convert\+Update\+Results(results) }{convertUpdateResults(results) }}]{\setlength{\rightskip}{0pt plus 5cm}function convert\+Update\+Results (
+\begin{DoxyParamCaption}
+\item[{}]{results}
+\end{DoxyParamCaption}
+)}\hypertarget{main_8js_ad52c0cd59ea9825bd00f8a31bc4f9ad4}{}\label{main_8js_ad52c0cd59ea9825bd00f8a31bc4f9ad4}
+
+
+Converts data results from server to Google Maps coordinates, elevation, and time. 
+
+
+
+Definition at line 225 of file main.\+js.
+
+
+\begin{DoxyCode}
+225                                        \{
+226     \textcolor{comment}{//console.log(results);}
+227     var newResults = [];
+228     \textcolor{keywordflow}{for}(var \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} = 0; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} < results.length; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}++) \{
+229         newResults.push(
+230             \{
+231                 \textcolor{stringliteral}{"coords"}: \textcolor{keyword}{new} google.maps.LatLng(results[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}][\textcolor{stringliteral}{'coords'}][0], results[i][\textcolor{stringliteral}{'coords'}][1]),
+232                 \textcolor{stringliteral}{"ele"}: results[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}][\textcolor{stringliteral}{'ele'}],
+233                 \textcolor{stringliteral}{"time"}: results[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}][\textcolor{stringliteral}{'time'}]
+234             \}
+235         );
+236         \textcolor{comment}{// console.log("results[i]['coords']: " + results[i]['coords']);}
+237     \}
+238     \textcolor{keywordflow}{return} newResults;
+239 \}
+\end{DoxyCode}
+\index{main.\+js@{main.\+js}!delivery\+Check\+Callback@{delivery\+Check\+Callback}}
+\index{delivery\+Check\+Callback@{delivery\+Check\+Callback}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{delivery\+Check\+Callback(index, concat) }{deliveryCheckCallback(index, concat) }}]{\setlength{\rightskip}{0pt plus 5cm}function delivery\+Check\+Callback (
+\begin{DoxyParamCaption}
+\item[{}]{index, }
+\item[{}]{concat}
+\end{DoxyParamCaption}
+)}\hypertarget{main_8js_a7344efb8284f8b25da9509b0af50927b}{}\label{main_8js_a7344efb8284f8b25da9509b0af50927b}
+
+
+The callback function for the check if a package is delivered. It calls the update\+Callback. 
+
+
+
+Definition at line 266 of file main.\+js.
+
+
+\begin{DoxyCode}
+266                                               \{
+267     \textcolor{keywordflow}{return} \textcolor{keyword}{function}(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data})\{
+268         \textcolor{keywordflow}{if}(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.results) \{
+269             \hyperlink{main_8js_a7bcbd7191893f7300ad00bd1b8908950}{delivered}.push(\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[\hyperlink{namespacerun_a097929f584dbbd7b464a79534332d16c}{index}]);
+270         \}
+271         $.getJSON($SCRIPT\_ROOT + \textcolor{stringliteral}{'/data'}, \{
+272             \textcolor{stringliteral}{"dt"}: \textcolor{stringliteral}{"getNewPoints"},
+273             \textcolor{stringliteral}{"uuid"}: \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[\hyperlink{namespacerun_a097929f584dbbd7b464a79534332d16c}{index}],
+274             \textcolor{stringliteral}{"time"}: \hyperlink{main_8js_a1d88ce79f484d9bfb4056fa9e356bea7}{packagePositions}[\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[
+      \hyperlink{namespacerun_a097929f584dbbd7b464a79534332d16c}{index}]].slice(-1)[0][\textcolor{stringliteral}{'time'}]
+275         \}, \hyperlink{main_8js_a733855036aac13a8db397970b1f54e3c}{updateCallback}(\hyperlink{namespacerun_a097929f584dbbd7b464a79534332d16c}{index}, concat));
+276     \};
+277 \}
+\end{DoxyCode}
+\index{main.\+js@{main.\+js}!dist\+Callback@{dist\+Callback}}
+\index{dist\+Callback@{dist\+Callback}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{dist\+Callback(index) }{distCallback(index) }}]{\setlength{\rightskip}{0pt plus 5cm}function dist\+Callback (
+\begin{DoxyParamCaption}
+\item[{}]{index}
+\end{DoxyParamCaption}
+)}\hypertarget{main_8js_ab4f120a2dc41fbbd3cd2b98990649c29}{}\label{main_8js_ab4f120a2dc41fbbd3cd2b98990649c29}
+
+
+The callback function for the receiving of the distance remaining for the package to reach its destination. 
+
+
+
+Definition at line 281 of file main.\+js.
+
+
+\begin{DoxyCode}
+281                              \{
+282     \textcolor{keywordflow}{return} \textcolor{keyword}{function}(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}) \{
+283         $(\textcolor{stringliteral}{"#dist"} + \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[\hyperlink{namespacerun_a097929f584dbbd7b464a79534332d16c}{index}]).text(Math.round(
+      \hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.results / 100) / 10 + \textcolor{stringliteral}{" km"});
+284     \}
+285 \}
+\end{DoxyCode}
+\index{main.\+js@{main.\+js}!escape\+Reg\+Exp@{escape\+Reg\+Exp}}
+\index{escape\+Reg\+Exp@{escape\+Reg\+Exp}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{escape\+Reg\+Exp(str) }{escapeRegExp(str) }}]{\setlength{\rightskip}{0pt plus 5cm}function escape\+Reg\+Exp (
+\begin{DoxyParamCaption}
+\item[{}]{str}
+\end{DoxyParamCaption}
+)}\hypertarget{main_8js_a3a26e9f5aaf58c3022d7c76492cca395}{}\label{main_8js_a3a26e9f5aaf58c3022d7c76492cca395}
+
+
+Helper function for replace\+All, which uses regex. 
+
+
+
+Definition at line 46 of file main.\+js.
+
+
+\begin{DoxyCode}
+46                            \{
+47     \textcolor{keywordflow}{return} str.replace(/([.*+?^=!:$\{\}()|\(\backslash\)[\(\backslash\)]\(\backslash\)/\(\backslash\)\(\backslash\)])/\hyperlink{jquery_8minicolors_8min_8js_a5cc52098afa4fad42724751f98527c84}{g}, \textcolor{stringliteral}{"\(\backslash\)\(\backslash\)$1"});
+48 \}
+\end{DoxyCode}
+\index{main.\+js@{main.\+js}!etr\+Callback@{etr\+Callback}}
+\index{etr\+Callback@{etr\+Callback}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{etr\+Callback(index) }{etrCallback(index) }}]{\setlength{\rightskip}{0pt plus 5cm}function etr\+Callback (
+\begin{DoxyParamCaption}
+\item[{}]{index}
+\end{DoxyParamCaption}
+)}\hypertarget{main_8js_af35fa17610a22ebfb17ba93a6255600b}{}\label{main_8js_af35fa17610a22ebfb17ba93a6255600b}
+
+
+The callback function for the receiving of the time remaining for the package to reach its destination. 
+
+
+
+Definition at line 290 of file main.\+js.
+
+
+\begin{DoxyCode}
+290                             \{
+291     \textcolor{keywordflow}{return} \textcolor{keyword}{function}(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}) \{
+292         $(\textcolor{stringliteral}{"#etr"} + \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[\hyperlink{namespacerun_a097929f584dbbd7b464a79534332d16c}{index}]).text(moment().add(
+      \hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.results, \textcolor{stringliteral}{'seconds'}).calendar());
+293     \}
+294 \}
+\end{DoxyCode}
+\index{main.\+js@{main.\+js}!get\+Random\+Color@{get\+Random\+Color}}
+\index{get\+Random\+Color@{get\+Random\+Color}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{get\+Random\+Color() }{getRandomColor() }}]{\setlength{\rightskip}{0pt plus 5cm}function get\+Random\+Color (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{main_8js_a0f1deddd735efed96b177d15b665481c}{}\label{main_8js_a0f1deddd735efed96b177d15b665481c}
+
+
+Gets a random hex color. 
+
+
+
+Definition at line 61 of file main.\+js.
+
+
+\begin{DoxyCode}
+61                           \{
+62     \textcolor{keywordflow}{return} \textcolor{charliteral}{'#'} + (\textcolor{stringliteral}{'00000'} + (Math.random() * (1 << 24) | 0).toString(16)).slice(-6);
+63 \}
+\end{DoxyCode}
+\index{main.\+js@{main.\+js}!info\+Window\+Callback@{info\+Window\+Callback}}
+\index{info\+Window\+Callback@{info\+Window\+Callback}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{info\+Window\+Callback(destination, index) }{infoWindowCallback(destination, index) }}]{\setlength{\rightskip}{0pt plus 5cm}function info\+Window\+Callback (
+\begin{DoxyParamCaption}
+\item[{}]{destination, }
+\item[{}]{index}
+\end{DoxyParamCaption}
+)}\hypertarget{main_8js_a1092b60d06b3c0dccbec7d0333182918}{}\label{main_8js_a1092b60d06b3c0dccbec7d0333182918}
+
+
+The callback function for the info\+Window for clicking on the map marker. 
+
+
+
+Definition at line 419 of file main.\+js.
+
+
+\begin{DoxyCode}
+419                                                 \{
+420     \textcolor{keywordflow}{return} \textcolor{keyword}{function}() \{
+421         \textcolor{keywordflow}{if}(!destination) \{
+422             \hyperlink{main_8js_a01c7912c86e502f69c34d6fa66662ac6}{infowindow}.setContent(\textcolor{stringliteral}{'<div id="content"><p>'} + 
+      \hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}[\hyperlink{namespacerun_a097929f584dbbd7b464a79534332d16c}{index}] + \textcolor{stringliteral}{'</p></div>'});
+423             \hyperlink{main_8js_a01c7912c86e502f69c34d6fa66662ac6}{infowindow}.open(map, \hyperlink{main_8js_a90467ae029236a37b76f3383e82bb730}{originMapMarkers}[
+      \hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}[\hyperlink{namespacerun_a097929f584dbbd7b464a79534332d16c}{index}]]);
+424         \} \textcolor{keywordflow}{else} \{
+425             \hyperlink{main_8js_a01c7912c86e502f69c34d6fa66662ac6}{infowindow}.setContent(\textcolor{stringliteral}{'<div id="content"><p>'} + 
+      \hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}[\hyperlink{namespacerun_a097929f584dbbd7b464a79534332d16c}{index}] + \textcolor{stringliteral}{'</p></div>'});
+426             \hyperlink{main_8js_a01c7912c86e502f69c34d6fa66662ac6}{infowindow}.open(map, \hyperlink{main_8js_a2b33618c9f421e426905ee387b6c6bc5}{destinationMapMarkers}[
+      \hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}[\hyperlink{namespacerun_a097929f584dbbd7b464a79534332d16c}{index}]]);
+427         \}
+428     \};
+429 \}
+\end{DoxyCode}
+\index{main.\+js@{main.\+js}!init\+Map@{init\+Map}}
+\index{init\+Map@{init\+Map}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{init\+Map() }{initMap() }}]{\setlength{\rightskip}{0pt plus 5cm}function init\+Map (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{main_8js_a63a64d7f02260dd99fb7b1d508f85a28}{}\label{main_8js_a63a64d7f02260dd99fb7b1d508f85a28}
+
+
+Creates the map in the \char`\"{}map\char`\"{} div after google maps api loads and does other onload things. 
+
+
+
+Definition at line 638 of file main.\+js.
+
+
+\begin{DoxyCode}
+638                    \{
+639     map = \textcolor{keyword}{new} google.maps.Map(\hyperlink{ripples_8js_aa14f8e0338cced6720590fd2ea13bd4b}{document}.getElementById(\textcolor{stringliteral}{'map'}), \{
+640         zoom: 2,
+641         center: \{lat: 0, lng: 0\},
+642         minZoom: 2
+643     \});
+644     \hyperlink{main_8js_a01c7912c86e502f69c34d6fa66662ac6}{infowindow} = \textcolor{keyword}{new} google.maps.InfoWindow(\{
+645         content: \textcolor{stringliteral}{"hello"}
+646     \});
+647     \hyperlink{main_8js_a2c9bf86fb554b8e6f080ad224b490ca5}{loadFunction}();
+648     setInterval(\hyperlink{main_8js_af706c6c897429353a19872f2cb33ef38}{updateData}, 10000);
+649     $.fn.modal.Constructor.DEFAULTS.keyboard = \textcolor{keyword}{false};
+650 \}
+\end{DoxyCode}
+\index{main.\+js@{main.\+js}!load\+Function@{load\+Function}}
+\index{load\+Function@{load\+Function}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{load\+Function() }{loadFunction() }}]{\setlength{\rightskip}{0pt plus 5cm}function load\+Function (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{main_8js_a2c9bf86fb554b8e6f080ad224b490ca5}{}\label{main_8js_a2c9bf86fb554b8e6f080ad224b490ca5}
+
+
+For page load and mode toggle -\/ gets data from cookies and adds to list. 
+
+
+
+Definition at line 617 of file main.\+js.
+
+
+\begin{DoxyCode}
+617                         \{
+618     \textcolor{keywordflow}{if} (typeof $.cookie(\textcolor{stringliteral}{'packagesOnMap'}) == \textcolor{stringliteral}{'undefined'}) \{
+619         $.cookie(\textcolor{stringliteral}{'packagesMonitored'}, \textcolor{stringliteral}{'[]'});
+620     \}
+621     \textcolor{keywordflow}{if} (typeof $.cookie(\textcolor{stringliteral}{'packagesOnMap'}) == \textcolor{stringliteral}{'undefined'}) \{
+622         $.cookie(\textcolor{stringliteral}{'packagesOnMap'}, \textcolor{stringliteral}{'[]'});
+623     \}
+624     console.log(\textcolor{stringliteral}{"packagesMonitored: "} +$.cookie(\textcolor{stringliteral}{"packagesMonitored"}) );
+625     \hyperlink{main_8js_a5e2369539a560e1d5630d99699250ca4}{writePackages}(JSON.parse($.cookie(\textcolor{stringliteral}{"packagesMonitored"})), JSON.parse($.cookie(\textcolor{stringliteral}{"
+      packagesOnMap"})));
+626 \}
+\end{DoxyCode}
+\index{main.\+js@{main.\+js}!location\+Callback@{location\+Callback}}
+\index{location\+Callback@{location\+Callback}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{location\+Callback(id, latlng) }{locationCallback(id, latlng) }}]{\setlength{\rightskip}{0pt plus 5cm}function location\+Callback (
+\begin{DoxyParamCaption}
+\item[{}]{id, }
+\item[{}]{latlng}
+\end{DoxyParamCaption}
+)}\hypertarget{main_8js_a09263c55674477ebb19c9655832480fa}{}\label{main_8js_a09263c55674477ebb19c9655832480fa}
+
+
+Callback function for set\+Location\+Name. It calls itself in a few seconds if there were too many queries in a short. 
+
+
+
+Definition at line 499 of file main.\+js.
+
+
+\begin{DoxyCode}
+499                                       \{
+500     \textcolor{keywordflow}{return} \textcolor{keyword}{function} (results, status) \{
+501         \textcolor{keywordflow}{if} (status !== google.maps.GeocoderStatus.OK) \{
+502             \textcolor{comment}{// console.log("status: " + status + " id: " + id);}
+503             \textcolor{keywordflow}{if} (status == \textcolor{stringliteral}{"OVER\_QUERY\_LIMIT"}) \{
+504                 \textcolor{comment}{// console.log(status);}
+505                 setTimeout(\textcolor{keyword}{function} () \{
+506                     \hyperlink{main_8js_a57d760f8a6da116945a372314d39a78c}{setLocationName}(\textcolor{keywordtype}{id}, latlng);
+507                 \}, 5000);
+508                 \textcolor{keywordflow}{return};
+509             \}
+510             \textcolor{keywordflow}{if} ($(\textcolor{keywordtype}{id}).text() == \textcolor{stringliteral}{"Loading..."}) \{
+511                 $(\hyperlink{moment_8min_8js_a46207c7091ab14788d5b3e389828eddb}{id}).text(\textcolor{stringliteral}{"No name for location."});
+512             \}
+513         \}
+514         \textcolor{comment}{// This is checking to see if the Geocoder Status is OK before proceeding}
+515         \textcolor{keywordflow}{if} (status == google.maps.GeocoderStatus.OK) \{
+516             \textcolor{comment}{// console.log(results);}
+517             var address = (results[0].formatted\_address);
+518             \textcolor{comment}{//console.log("id: " + id);}
+519             $(\hyperlink{moment_8min_8js_a46207c7091ab14788d5b3e389828eddb}{id}).text(address);
+520             \textcolor{comment}{//console.log("address: " + address);}
+521         \}
+522     \};
+523 \}
+\end{DoxyCode}
+\index{main.\+js@{main.\+js}!on@{on}}
+\index{on@{on}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{on(\textquotesingle{}resize\textquotesingle{}, function() \lcurly{} if(\$(window).\+width() $>$ 765) \lcurly{} \$(\textquotesingle{}\#select\+Buttons\textquotesingle{}).\+add\+Class(\textquotesingle{}btn-\/group-\/justified\textquotesingle{}); \rcurly{} else \lcurly{} \$(\textquotesingle{}\#select\+Buttons\textquotesingle{}).\+remove\+Class(\textquotesingle{}btn-\/group-\/justified\textquotesingle{}); \rcurly{} \rcurly{})}{on('resize', function() \{ if($(window).width() > 765) \{ $('#selectButtons').addClass('btn-group-justified'); \} else \{ $('#selectButtons').removeClass('btn-group-justified'); \} \})}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf window} on (
+\begin{DoxyParamCaption}
+\item[{\textquotesingle{}resize\textquotesingle{}}]{, }
+\item[{function() \{ {\bf if}(\$({\bf window}).width() $>$ 765) \{ \$(\textquotesingle{}\#select\+Buttons\textquotesingle{}).add\+Class(\textquotesingle{}btn-\/group-\/justified\textquotesingle{}); \} else \{ \$(\textquotesingle{}\#select\+Buttons\textquotesingle{}).remove\+Class(\textquotesingle{}btn-\/group-\/justified\textquotesingle{}); \} \}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{main_8js_adbbdb6ad96b3e4e00ecad0ae11dfbdcb}{}\label{main_8js_adbbdb6ad96b3e4e00ecad0ae11dfbdcb}
+
+
+Makes sure button group for placing things on map is justified or not depending on the window size. 
+
+\index{main.\+js@{main.\+js}!pin\+Symbol@{pin\+Symbol}}
+\index{pin\+Symbol@{pin\+Symbol}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{pin\+Symbol(color) }{pinSymbol(color) }}]{\setlength{\rightskip}{0pt plus 5cm}function pin\+Symbol (
+\begin{DoxyParamCaption}
+\item[{}]{color}
+\end{DoxyParamCaption}
+)}\hypertarget{main_8js_a411811df2cac289120b37b323bb6917e}{}\label{main_8js_a411811df2cac289120b37b323bb6917e}
+
+
+Creates a path for the map pin of a given hex color. 
+
+
+
+Definition at line 376 of file main.\+js.
+
+
+\begin{DoxyCode}
+376                           \{
+377     \textcolor{keywordflow}{return} \{
+378         \textcolor{comment}{//path: 'M 0,0 C -2,-20 -10,-22 -10,-30 A 10,10 0 1,1 10,-30 C 10,-22 2,-20 0,0 z M -2,-30 a 2,2 0
+       1,1 4,0 2,2 0 1,1 -4,0',}
+379         path: \textcolor{stringliteral}{'M 0,0 C -2,-20 -10,-22 -10,-30 A 10,10 0 1,1 10,-30 C 10,-22 2,-20 0,0'},
+380         fillColor: color,
+381         fillOpacity: 1,
+382         strokeColor: \textcolor{stringliteral}{'#000'},
+383         strokeWeight: 2,
+384         scale: 1,
+385         labelOrigin: \textcolor{keyword}{new} google.maps.Point(0, -30)
+386     \};
+387 \}
+\end{DoxyCode}
+\index{main.\+js@{main.\+js}!populate\+Dropdown@{populate\+Dropdown}}
+\index{populate\+Dropdown@{populate\+Dropdown}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{populate\+Dropdown(uuid) }{populateDropdown(uuid) }}]{\setlength{\rightskip}{0pt plus 5cm}function populate\+Dropdown (
+\begin{DoxyParamCaption}
+\item[{}]{uuid}
+\end{DoxyParamCaption}
+)}\hypertarget{main_8js_ad29c08ca5b9fc5c1358dab4699d1b1c7}{}\label{main_8js_ad29c08ca5b9fc5c1358dab4699d1b1c7}
+
+
+Uses D\+E\+F\+A\+U\+L\+T\+\_\+\+D\+R\+O\+P\+D\+O\+W\+N\+\_\+\+C\+O\+N\+T\+E\+N\+TS and creates specific H\+T\+ML for a dropdown row for a newly tracked package. 
+
+
+
+Definition at line 89 of file main.\+js.
+
+
+\begin{DoxyCode}
+89                                 \{
+90     var newDrop = \hyperlink{main_8js_a0cf85ac779e39b635de940670ee868b9}{DEFAULT\_DROPDOWN\_CONTENTS};
+91     newDrop = \hyperlink{main_8js_a3e31434ba3b125189797c04f307cef2e}{replaceAll}(newDrop, \textcolor{stringliteral}{'\{UUID\}'}, uuid);
+92     newDrop = \hyperlink{main_8js_a3e31434ba3b125189797c04f307cef2e}{replaceAll}(newDrop, \textcolor{stringliteral}{'\{STARTLOCATION\}'}, \textcolor{stringliteral}{"Loading..."});
+93     newDrop = \hyperlink{main_8js_a3e31434ba3b125189797c04f307cef2e}{replaceAll}(newDrop, \textcolor{stringliteral}{'\{DESTLOCATION\}'}, \textcolor{stringliteral}{"Loading..."});
+94     newDrop = \hyperlink{main_8js_a3e31434ba3b125189797c04f307cef2e}{replaceAll}(newDrop, \textcolor{stringliteral}{'\{DISTANCE\}'}, \textcolor{stringliteral}{"Loading..."});
+95     \textcolor{keywordflow}{return} newDrop;
+96 \}
+\end{DoxyCode}
+\index{main.\+js@{main.\+js}!populate\+Row@{populate\+Row}}
+\index{populate\+Row@{populate\+Row}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{populate\+Row(uuid, name) }{populateRow(uuid, name) }}]{\setlength{\rightskip}{0pt plus 5cm}function populate\+Row (
+\begin{DoxyParamCaption}
+\item[{}]{uuid, }
+\item[{}]{name}
+\end{DoxyParamCaption}
+)}\hypertarget{main_8js_abd576e0f2f4908397757e6ea0bdb99c2}{}\label{main_8js_abd576e0f2f4908397757e6ea0bdb99c2}
+
+
+Uses D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+R\+\_\+\+C\+O\+N\+T\+E\+N\+TS and creates H\+T\+ML for a new table row for a newly tracked package. 
+
+
+
+Definition at line 69 of file main.\+js.
+
+
+\begin{DoxyCode}
+69                                  \{
+70     \textcolor{keywordflow}{if}(!\hyperlink{main_8js_a7f2fc3f001c9d60e9f83509eb4e944d8}{adminMode}) \{
+71         var newRow = \hyperlink{main_8js_a1eb01732164ee60af5dcf487ab5245d5}{DEFAULT\_TR\_CONTENTS};
+72     \} \textcolor{keywordflow}{else} \{
+73         \textcolor{comment}{//var newRow = ADMIN\_TR\_CONTENTS;}
+74         var newRow = \hyperlink{main_8js_a1eb01732164ee60af5dcf487ab5245d5}{DEFAULT\_TR\_CONTENTS};
+75     \}
+76     newRow = \hyperlink{main_8js_a3e31434ba3b125189797c04f307cef2e}{replaceAll}(newRow, \textcolor{stringliteral}{'\{UUID\}'}, uuid);
+77     newRow = \hyperlink{main_8js_a3e31434ba3b125189797c04f307cef2e}{replaceAll}(newRow, \textcolor{stringliteral}{'\{NAME\}'}, name);
+78     \textcolor{comment}{// Location is updated later, as reverse geocoding is not always instant}
+79     newRow = \hyperlink{main_8js_a3e31434ba3b125189797c04f307cef2e}{replaceAll}(newRow, \textcolor{stringliteral}{'\{CURRENTLOCATION\}'}, \textcolor{stringliteral}{"Loading..."});
+80     newRow = \hyperlink{main_8js_a3e31434ba3b125189797c04f307cef2e}{replaceAll}(newRow, \textcolor{stringliteral}{'\{COLOR\}'}, \hyperlink{main_8js_a205bb968a83c85324e6b50fecdb4b630}{colors}[uuid]);
+81     newRow = \hyperlink{main_8js_a3e31434ba3b125189797c04f307cef2e}{replaceAll}(newRow, \textcolor{stringliteral}{'\{ETA\}'}, \textcolor{stringliteral}{"Loading..."});
+82     \textcolor{keywordflow}{return} newRow;
+83 \}
+\end{DoxyCode}
+\index{main.\+js@{main.\+js}!ready@{ready}}
+\index{ready@{ready}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{ready(function() \lcurly{} if(\$(window).\+width() $>$ 765) \lcurly{} \$(""\#select\+Buttons"").\+add\+Class(""btn-\/group-\/justified""); \rcurly{} \rcurly{})}{ready(function() \{ if($(window).width() > 765) \{ $("#selectButtons").addClass("btn-group-justified"); \} \})}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf document} ready (
+\begin{DoxyParamCaption}
+\item[{function() \{ {\bf if}(\$({\bf window}).width() $>$ 765) \{ \$(\char`\"{}\#select\+Buttons\char`\"{}).add\+Class(\char`\"{}btn-\/group-\/justified\char`\"{}); \} \}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{main_8js_a42b9844afd7656a8bb0b990bd900d75c}{}\label{main_8js_a42b9844afd7656a8bb0b990bd900d75c}
+
+
+Makes buttons for placing things on map a justified button group if window is large. 
+
+\index{main.\+js@{main.\+js}!remove\+Row@{remove\+Row}}
+\index{remove\+Row@{remove\+Row}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{remove\+Row(uuid) }{removeRow(uuid) }}]{\setlength{\rightskip}{0pt plus 5cm}function remove\+Row (
+\begin{DoxyParamCaption}
+\item[{}]{uuid}
+\end{DoxyParamCaption}
+)}\hypertarget{main_8js_a34aa323b5e6a4413fb439ccc1e404e9f}{}\label{main_8js_a34aa323b5e6a4413fb439ccc1e404e9f}
+
+
+Definition at line 151 of file main.\+js.
+
+
+\begin{DoxyCode}
+151                          \{
+152     \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}.splice($.inArray(uuid, \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}), 1);
+153     $(\textcolor{stringliteral}{"#row"} + uuid).\textcolor{keyword}{remove}();
+154     \hyperlink{main_8js_a578e50528efb5c415d8a5c50dd91fd5f}{changeMapDisplay}(uuid, \textcolor{keyword}{false});
+155     \textcolor{comment}{//if(packagesOnMap.indexOf(uuid) > -1) \{}
+156     \textcolor{comment}{//    // console.log("changing display of " + uuid);}
+157     \textcolor{comment}{//    changeMapDisplay(uuid, false);}
+158     \textcolor{comment}{//\}}
+159     \hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}.splice($.inArray(uuid, \hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}), 1);
+160     \textcolor{keywordflow}{if}(!\hyperlink{main_8js_a7f2fc3f001c9d60e9f83509eb4e944d8}{adminMode}) \{
+161         $.cookie(\textcolor{stringliteral}{"packagesOnMap"}, JSON.stringify(\hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}));
+162         $.cookie(\textcolor{stringliteral}{"packagesMonitored"}, JSON.stringify(\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}));
+163     \}
+164 \}
+\end{DoxyCode}
+\index{main.\+js@{main.\+js}!replace\+All@{replace\+All}}
+\index{replace\+All@{replace\+All}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{replace\+All(str, find, replace) }{replaceAll(str, find, replace) }}]{\setlength{\rightskip}{0pt plus 5cm}function replace\+All (
+\begin{DoxyParamCaption}
+\item[{}]{str, }
+\item[{}]{find, }
+\item[{}]{replace}
+\end{DoxyParamCaption}
+)}\hypertarget{main_8js_a3e31434ba3b125189797c04f307cef2e}{}\label{main_8js_a3e31434ba3b125189797c04f307cef2e}
+
+
+Replaces all occurrences of \textquotesingle{}find\textquotesingle{} within string \textquotesingle{}str\textquotesingle{} with \textquotesingle{}replace\textquotesingle{}. 
+
+
+
+Definition at line 55 of file main.\+js.
+
+
+\begin{DoxyCode}
+55                                         \{
+56     \textcolor{keywordflow}{return} str.replace(\textcolor{keyword}{new} RegExp(\hyperlink{main_8js_a3a26e9f5aaf58c3022d7c76492cca395}{escapeRegExp}(find), \textcolor{charliteral}{'g'}), replace);
+57 \}
+\end{DoxyCode}
+\index{main.\+js@{main.\+js}!select\+All@{select\+All}}
+\index{select\+All@{select\+All}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{select\+All() }{selectAll() }}]{\setlength{\rightskip}{0pt plus 5cm}function select\+All (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{main_8js_a8c501483dad2126e5129c30016fad6c7}{}\label{main_8js_a8c501483dad2126e5129c30016fad6c7}
+
+
+Selects all for display on map. 
+
+
+
+Definition at line 570 of file main.\+js.
+
+
+\begin{DoxyCode}
+570                      \{
+571     \textcolor{keywordflow}{for}(var \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} = 0; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} < \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}.length; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}++) \{
+572         \textcolor{keywordflow}{if}(\hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}.indexOf(\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[
+      \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]) < 0) \{
+573             \textcolor{comment}{//packagesOnMap.push(packagesMonitored[i]);}
+574             $(\textcolor{stringliteral}{"#checkbox"} + \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]).prop(\textcolor{stringliteral}{"checked"}, \textcolor{keyword}{true});
+575             \hyperlink{main_8js_a578e50528efb5c415d8a5c50dd91fd5f}{changeMapDisplay}(\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[i], \textcolor{keyword}{true});
+576         \}
+577     \}
+578 \}
+\end{DoxyCode}
+\index{main.\+js@{main.\+js}!select\+Delivered@{select\+Delivered}}
+\index{select\+Delivered@{select\+Delivered}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{select\+Delivered() }{selectDelivered() }}]{\setlength{\rightskip}{0pt plus 5cm}function select\+Delivered (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{main_8js_a57a99e59d78da487604399a4d9dab1b9}{}\label{main_8js_a57a99e59d78da487604399a4d9dab1b9}
+
+
+Selects all delivered packages for display on map. 
+
+
+
+Definition at line 594 of file main.\+js.
+
+
+\begin{DoxyCode}
+594                            \{
+595     \textcolor{keywordflow}{for}(var \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} = 0; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} < \hyperlink{main_8js_a7bcbd7191893f7300ad00bd1b8908950}{delivered}.length; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}++) \{
+596         \textcolor{keywordflow}{if}(\hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}.indexOf(\hyperlink{main_8js_a7bcbd7191893f7300ad00bd1b8908950}{delivered}[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]) < 0) \{
+597             $(\textcolor{stringliteral}{"#checkbox"} + \hyperlink{main_8js_a7bcbd7191893f7300ad00bd1b8908950}{delivered}[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]).prop(\textcolor{stringliteral}{"checked"}, \textcolor{keyword}{true});
+598             \hyperlink{main_8js_a578e50528efb5c415d8a5c50dd91fd5f}{changeMapDisplay}(\hyperlink{main_8js_a7bcbd7191893f7300ad00bd1b8908950}{delivered}[i], \textcolor{keyword}{true});
+599         \}
+600     \}
+601 \}
+\end{DoxyCode}
+\index{main.\+js@{main.\+js}!select\+None@{select\+None}}
+\index{select\+None@{select\+None}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{select\+None() }{selectNone() }}]{\setlength{\rightskip}{0pt plus 5cm}function select\+None (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{main_8js_af35f0a63c4f902f16a7812672a8e2df7}{}\label{main_8js_af35f0a63c4f902f16a7812672a8e2df7}
+
+
+Unselects all packages for display on map. 
+
+
+
+Definition at line 582 of file main.\+js.
+
+
+\begin{DoxyCode}
+582                       \{
+583     \textcolor{keywordflow}{for}(var \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} = 0; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} < \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}.length; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}++) \{
+584         \textcolor{keywordflow}{if}(\hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}.indexOf(\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[
+      \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]) > -1) \{
+585             $(\textcolor{stringliteral}{"#checkbox"} + \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]).prop(\textcolor{stringliteral}{"checked"}, \textcolor{keyword}{false});
+586             \hyperlink{main_8js_a578e50528efb5c415d8a5c50dd91fd5f}{changeMapDisplay}(\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[i], \textcolor{keyword}{false});
+587         \}
+588     \}
+589     \textcolor{comment}{//packagesOnMap = [];}
+590 \}
+\end{DoxyCode}
+\index{main.\+js@{main.\+js}!select\+Undelivered@{select\+Undelivered}}
+\index{select\+Undelivered@{select\+Undelivered}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{select\+Undelivered() }{selectUndelivered() }}]{\setlength{\rightskip}{0pt plus 5cm}function select\+Undelivered (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{main_8js_a9d194dae9bcc54a932d5edb22bf6be59}{}\label{main_8js_a9d194dae9bcc54a932d5edb22bf6be59}
+
+
+Selects all undelivered packages for display on map. 
+
+
+
+Definition at line 605 of file main.\+js.
+
+
+\begin{DoxyCode}
+605                              \{
+606     \textcolor{keywordflow}{for}(var \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} = 0; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} < \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}.length; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}++) \{
+607         \textcolor{keywordflow}{if}(\hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}.indexOf(\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[
+      \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]) < 0 && \hyperlink{main_8js_a7bcbd7191893f7300ad00bd1b8908950}{delivered}.indexOf(\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[i]) < 0) \{
+608             \textcolor{comment}{//packagesOnMap.push(packagesMonitored[i]);}
+609             $(\textcolor{stringliteral}{"#checkbox"} + \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]).prop(\textcolor{stringliteral}{"checked"}, \textcolor{keyword}{true});
+610             \hyperlink{main_8js_a578e50528efb5c415d8a5c50dd91fd5f}{changeMapDisplay}(\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[i], \textcolor{keyword}{true});
+611         \}
+612     \}
+613 \}
+\end{DoxyCode}
+\index{main.\+js@{main.\+js}!set\+Location\+Name@{set\+Location\+Name}}
+\index{set\+Location\+Name@{set\+Location\+Name}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{set\+Location\+Name(id, latlng) }{setLocationName(id, latlng) }}]{\setlength{\rightskip}{0pt plus 5cm}function set\+Location\+Name (
+\begin{DoxyParamCaption}
+\item[{}]{id, }
+\item[{}]{latlng}
+\end{DoxyParamCaption}
+)}\hypertarget{main_8js_a57d760f8a6da116945a372314d39a78c}{}\label{main_8js_a57d760f8a6da116945a372314d39a78c}
+
+
+Uses reverse geocoding to get human-\/readable name for coordinates. It calls the location\+Callback to wait for the. 
+
+
+
+Definition at line 529 of file main.\+js.
+
+
+\begin{DoxyCode}
+529                                      \{
+530     \textcolor{comment}{// console.log("lat: " + latlng.lat() + " lng: " + latlng.lng());}
+531     \textcolor{comment}{// This is making the Geocode request}
+532     var geocoder = \textcolor{keyword}{new} google.maps.Geocoder();
+533     geocoder.geocode(\{\textcolor{stringliteral}{'latLng'}: latlng\}, \hyperlink{main_8js_a09263c55674477ebb19c9655832480fa}{locationCallback}(\textcolor{keywordtype}{id}, latlng));
+534 \}
+\end{DoxyCode}
+\index{main.\+js@{main.\+js}!update\+Callback@{update\+Callback}}
+\index{update\+Callback@{update\+Callback}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{update\+Callback(index, concat) }{updateCallback(index, concat) }}]{\setlength{\rightskip}{0pt plus 5cm}function update\+Callback (
+\begin{DoxyParamCaption}
+\item[{}]{index, }
+\item[{}]{concat}
+\end{DoxyParamCaption}
+)}\hypertarget{main_8js_a733855036aac13a8db397970b1f54e3c}{}\label{main_8js_a733855036aac13a8db397970b1f54e3c}
+
+
+Used to reset scope because this is called from an asynchronous function. Without this, it would always use the. 
+
+
+
+Definition at line 245 of file main.\+js.
+
+
+\begin{DoxyCode}
+245                                        \{
+246     \textcolor{keywordflow}{return} \textcolor{keyword}{function}(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}) \{
+247         \textcolor{keywordflow}{if}(concat) \{
+248             \hyperlink{main_8js_a1d88ce79f484d9bfb4056fa9e356bea7}{packagePositions}[\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[
+      \hyperlink{namespacerun_a097929f584dbbd7b464a79534332d16c}{index}]] = \hyperlink{main_8js_a1d88ce79f484d9bfb4056fa9e356bea7}{packagePositions}[packagesMonitored[\hyperlink{namespacerun_a097929f584dbbd7b464a79534332d16c}{index}]].concat(
+      \hyperlink{main_8js_ad52c0cd59ea9825bd00f8a31bc4f9ad4}{convertUpdateResults}(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.results));
+249         \} \textcolor{keywordflow}{else} \{
+250             \hyperlink{main_8js_a1d88ce79f484d9bfb4056fa9e356bea7}{packagePositions}[packagesMonitored[\hyperlink{namespacerun_a097929f584dbbd7b464a79534332d16c}{index}]] = 
+      \hyperlink{main_8js_ad52c0cd59ea9825bd00f8a31bc4f9ad4}{convertUpdateResults}(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.results);
+251         \}
+252         \textcolor{comment}{// console.log("i: " + index);}
+253         \textcolor{comment}{// console.log("packagesMonitored[i]: " + packagesMonitored[index]);}
+254         \textcolor{comment}{// console.log("packagePositions[^]: " + packagePositions[packagesMonitored[index]]);}
+255         \textcolor{keywordflow}{if}(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.results.length > 0) \{
+256             \hyperlink{main_8js_a57d760f8a6da116945a372314d39a78c}{setLocationName}(\textcolor{stringliteral}{"#current"} + packagesMonitored[\hyperlink{namespacerun_a097929f584dbbd7b464a79534332d16c}{index}], 
+      \hyperlink{main_8js_a1d88ce79f484d9bfb4056fa9e356bea7}{packagePositions}[packagesMonitored[index]].slice(-1)[0][\textcolor{stringliteral}{'coords'}]);
+257         \}
+258     \};
+259 \}
+\end{DoxyCode}
+\index{main.\+js@{main.\+js}!update\+Data@{update\+Data}}
+\index{update\+Data@{update\+Data}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{update\+Data() }{updateData() }}]{\setlength{\rightskip}{0pt plus 5cm}function update\+Data (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{main_8js_af706c6c897429353a19872f2cb33ef38}{}\label{main_8js_af706c6c897429353a19872f2cb33ef38}
+
+
+Gets new points from server. It performs checks for delivery status, etr, and distance remaining. Then it updates. 
+
+
+
+Definition at line 299 of file main.\+js.
+
+
+\begin{DoxyCode}
+299                       \{
+300     \textcolor{keywordflow}{for}(var \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} = 0; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} < \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}.length; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}++) \{
+301         \textcolor{keywordflow}{if}(!(\hyperlink{main_8js_a7bcbd7191893f7300ad00bd1b8908950}{delivered}.indexOf(\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]) > -1)) \{
+302             \textcolor{keywordflow}{if} (\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[i] in \hyperlink{main_8js_a1d88ce79f484d9bfb4056fa9e356bea7}{packagePositions}) \{
+303                 $.ajax(\{
+304                     type: \textcolor{stringliteral}{'GET'},
+305                     url: $SCRIPT\_ROOT + \textcolor{stringliteral}{'/data'},
+306                     dataType: \textcolor{stringliteral}{'json'},
+307                     success: \hyperlink{main_8js_a7344efb8284f8b25da9509b0af50927b}{deliveryCheckCallback}(i, \textcolor{keyword}{true}),
+308                     \hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}: \{\textcolor{stringliteral}{"dt"}:\textcolor{stringliteral}{"isDelivered"}, \textcolor{stringliteral}{"uuid"}:\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[
+      \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]\},
+309                     async: \textcolor{keyword}{true}
+310                 \});
+311             \} \textcolor{keywordflow}{else} \{
+312                 $.getJSON($SCRIPT\_ROOT + \textcolor{stringliteral}{'/data'}, \{
+313                     \textcolor{stringliteral}{"dt"}: \textcolor{stringliteral}{"getNewPoints"},
+314                     \textcolor{stringliteral}{"uuid"}: \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}],
+315                     \textcolor{stringliteral}{"time"}: 0
+316                 \}, \hyperlink{main_8js_a733855036aac13a8db397970b1f54e3c}{updateCallback}(i, \textcolor{keyword}{false}));
+317             \}
+318             \textcolor{comment}{// console.log("getting etr for " + packagesMonitored[i]);}
+319             $.getJSON($SCRIPT\_ROOT + \textcolor{stringliteral}{'/data'}, \{
+320                 \textcolor{stringliteral}{"dt"}: \textcolor{stringliteral}{"getETR"},
+321                 \textcolor{stringliteral}{"uuid"}: \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]
+322             \}, \hyperlink{main_8js_af35fa17610a22ebfb17ba93a6255600b}{etrCallback}(i));
+323             $.getJSON($SCRIPT\_ROOT + \textcolor{stringliteral}{'/data'}, \{
+324                 \textcolor{stringliteral}{"dt"}: \textcolor{stringliteral}{"getDistance"},
+325                 \textcolor{stringliteral}{"uuid"}: \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]
+326             \}, \hyperlink{main_8js_ab4f120a2dc41fbbd3cd2b98990649c29}{distCallback}(i));
+327         \} \textcolor{keywordflow}{else} \{
+328             \textcolor{comment}{// console.log(packagesMonitored[i] + " is delivered");}
+329             $(\textcolor{stringliteral}{"#etr"} + \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]).text(\textcolor{stringliteral}{"Delivered"});
+330             $(\textcolor{stringliteral}{"#dist"} + \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]).text(\textcolor{stringliteral}{"0 km"});
+331         \}
+332     \}
+333     \hyperlink{main_8js_a1f5de2f863a9aa3f590f015a0d3ab621}{updateMap}();
+334 \}
+\end{DoxyCode}
+\index{main.\+js@{main.\+js}!update\+Map@{update\+Map}}
+\index{update\+Map@{update\+Map}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{update\+Map() }{updateMap() }}]{\setlength{\rightskip}{0pt plus 5cm}function update\+Map (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{main_8js_a1f5de2f863a9aa3f590f015a0d3ab621}{}\label{main_8js_a1f5de2f863a9aa3f590f015a0d3ab621}
+
+
+Updates the map view with new coordinates for the line and markers. 
+
+
+
+Definition at line 433 of file main.\+js.
+
+
+\begin{DoxyCode}
+433                      \{
+434     \textcolor{keywordflow}{for} (var \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} = 0; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} < \hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}.length; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}++) \{
+435 
+436         \textcolor{comment}{// If the Polyline does not already exist, make a new one}
+437         \textcolor{keywordflow}{if} (!(\hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}] in \hyperlink{main_8js_a4f01a6af54b3f7e164d2dbbb37e04f86}{mapLines})) \{
+438             mapLines[\hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]] = \textcolor{keyword}{new} google.maps.Polyline(\{
+439                 path: [],
+440                 geodesic: \textcolor{keyword}{true},
+441                 strokeColor: \hyperlink{main_8js_a205bb968a83c85324e6b50fecdb4b630}{colors}[packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]],
+442                 strokeOpacity: 1.0,
+443                 strokeWeight: 3
+444             \});
+445         \}
+446         mapLines[packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]].setMap(map);
+447 
+448         \textcolor{comment}{// If the destination map marker does not already exist, make a new one}
+449         \textcolor{keywordflow}{if} (!(packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}] in \hyperlink{main_8js_a2b33618c9f421e426905ee387b6c6bc5}{destinationMapMarkers})) \{
+450             destinationMapMarkers[packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]] = \textcolor{keyword}{new} google.maps.Marker(\{
+451                 position: \hyperlink{main_8js_a19e632cab94d67a54007824cff4e985b}{destinations}[packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]],
+452                 animation: null,
+453                 title: packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}] + \textcolor{stringliteral}{"'s Destination Marker"},
+454                 icon: \hyperlink{main_8js_a411811df2cac289120b37b323bb6917e}{pinSymbol}(\hyperlink{main_8js_a205bb968a83c85324e6b50fecdb4b630}{colors}[packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]]),
+455                 label: \{
+456                     text: \textcolor{charliteral}{'B'}
+457                 \}
+458             \});
+459 
+460             \textcolor{comment}{// Display an infoWindow with the UUID of the package onclick for the marker}
+461             destinationMapMarkers[packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]].addListener(\textcolor{stringliteral}{'click'}, 
+      \hyperlink{main_8js_a1092b60d06b3c0dccbec7d0333182918}{infoWindowCallback}(\textcolor{keyword}{true}, \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}));
+462         \}
+463         destinationMapMarkers[packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]].setMap(map);
+464 
+465         \textcolor{comment}{// If there is a starting coordinate and the origin map marker does not exist, make a new one}
+466         \textcolor{keywordflow}{if} (\hyperlink{main_8js_a1d88ce79f484d9bfb4056fa9e356bea7}{packagePositions}[packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]] != \hyperlink{jquery_8min_8js_ae21cc36bf0d65014c717a481a3f8a468}{undefined}) \{
+467             \textcolor{keywordflow}{if}(!(packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}] in \hyperlink{main_8js_a90467ae029236a37b76f3383e82bb730}{originMapMarkers})) \{
+468                 originMapMarkers[packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]] = \textcolor{keyword}{new} google.maps.Marker(\{
+469                     position: \hyperlink{main_8js_a1d88ce79f484d9bfb4056fa9e356bea7}{packagePositions}[packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]][0][\textcolor{stringliteral}{'coords'}],
+470                     animation: null,
+471                     title: packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}] + \textcolor{stringliteral}{"'s Origin Marker"},
+472                     icon: \hyperlink{main_8js_a411811df2cac289120b37b323bb6917e}{pinSymbol}(\hyperlink{main_8js_a205bb968a83c85324e6b50fecdb4b630}{colors}[packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]]),
+473                     label: \{
+474                         text: \textcolor{charliteral}{'A'}
+475                     \}
+476                 \});
+477 
+478                 \textcolor{comment}{// Display an infoWindow with the UUID of the package onclick for the marker}
+479                 originMapMarkers[packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]].addListener(\textcolor{stringliteral}{'click'}, 
+      \hyperlink{main_8js_a1092b60d06b3c0dccbec7d0333182918}{infoWindowCallback}(\textcolor{keyword}{false}, \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}));
+480                 
+481             \}
+482             originMapMarkers[packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]].setMap(map);
+483 
+484             \textcolor{comment}{// Update the Polyline with new points that are not on it already (by number of points)}
+485             var currentPath = mapLines[packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]].getPath();
+486             \textcolor{keywordflow}{for} (var \hyperlink{moment_8min_8js_a5f7d9fc7ba35dc513eb3080d74d27476}{j} = currentPath.length; \hyperlink{moment_8min_8js_a5f7d9fc7ba35dc513eb3080d74d27476}{j} < \hyperlink{main_8js_a1d88ce79f484d9bfb4056fa9e356bea7}{packagePositions}[packagesOnMap[
+      \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]].length; \hyperlink{moment_8min_8js_a5f7d9fc7ba35dc513eb3080d74d27476}{j}++) \{
+487                 currentPath.push(\hyperlink{main_8js_a1d88ce79f484d9bfb4056fa9e356bea7}{packagePositions}[packagesOnMap[
+      \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]][\hyperlink{moment_8min_8js_a5f7d9fc7ba35dc513eb3080d74d27476}{j}][\textcolor{stringliteral}{'coords'}]);
+488             \}
+489             mapLines[packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]].setPath(currentPath);
+490         \}
+491     \}
+492 \}
+\end{DoxyCode}
+\index{main.\+js@{main.\+js}!write\+Packages@{write\+Packages}}
+\index{write\+Packages@{write\+Packages}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{write\+Packages(package\+List, map\+List) }{writePackages(packageList, mapList) }}]{\setlength{\rightskip}{0pt plus 5cm}function write\+Packages (
+\begin{DoxyParamCaption}
+\item[{}]{package\+List, }
+\item[{}]{map\+List}
+\end{DoxyParamCaption}
+)}\hypertarget{main_8js_a5e2369539a560e1d5630d99699250ca4}{}\label{main_8js_a5e2369539a560e1d5630d99699250ca4}
+
+
+Sets the monitored packages list to the list it receives (for loading from cookies or another source like the. 
+
+
+
+Definition at line 340 of file main.\+js.
+
+
+\begin{DoxyCode}
+340                                              \{
+341     \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored} = packageList;
+342     \hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap} = mapList;
+343     \textcolor{comment}{// console.log("mapList: " + packagesOnMap);}
+344     \textcolor{keywordflow}{for} (var \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} = 0; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} < packageList.length; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}++) \{
+345         \textcolor{comment}{// console.log("adding package " + packageList[i]);}
+346         \hyperlink{main_8js_ae99cfb389602e780ffd02f5ae2ffb62f}{addPackage}(packageList[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]);
+347     \}
+348 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\index{main.\+js@{main.\+js}!admin\+Mode@{admin\+Mode}}
+\index{admin\+Mode@{admin\+Mode}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{admin\+Mode}{adminMode}}]{\setlength{\rightskip}{0pt plus 5cm}var admin\+Mode = false}\hypertarget{main_8js_a7f2fc3f001c9d60e9f83509eb4e944d8}{}\label{main_8js_a7f2fc3f001c9d60e9f83509eb4e944d8}
+
+
+Definition at line 19 of file main.\+js.
+
+\index{main.\+js@{main.\+js}!colors@{colors}}
+\index{colors@{colors}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{colors}{colors}}]{\setlength{\rightskip}{0pt plus 5cm}var colors = \{\}}\hypertarget{main_8js_a205bb968a83c85324e6b50fecdb4b630}{}\label{main_8js_a205bb968a83c85324e6b50fecdb4b630}
+
+
+Definition at line 17 of file main.\+js.
+
+\index{main.\+js@{main.\+js}!content\+String1@{content\+String1}}
+\index{content\+String1@{content\+String1}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{content\+String1}{contentString1}}]{\setlength{\rightskip}{0pt plus 5cm}var content\+String1}\hypertarget{main_8js_a14f04e0426e9017eb72dd1f8935d9010}{}\label{main_8js_a14f04e0426e9017eb72dd1f8935d9010}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \textcolor{stringliteral}{'<div id="content">'} +
+                        \textcolor{stringliteral}{'<div id="siteNotice">'} +
+                        \textcolor{stringliteral}{'</div>'} +
+                     \textcolor{stringliteral}{'<h1 id="firstHeading" class="firstHeading">'}
+\end{DoxyCode}
+
+
+Definition at line 26 of file main.\+js.
+
+\index{main.\+js@{main.\+js}!content\+String2@{content\+String2}}
+\index{content\+String2@{content\+String2}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{content\+String2}{contentString2}}]{\setlength{\rightskip}{0pt plus 5cm}var content\+String2}\hypertarget{main_8js_a4a67013024419808669b5a5fdb4a16ee}{}\label{main_8js_a4a67013024419808669b5a5fdb4a16ee}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \textcolor{stringliteral}{'</h1>'} +
+                     \textcolor{stringliteral}{'<div id="bodyContent">'} +
+                        \textcolor{stringliteral}{'<p>'} + \textcolor{stringliteral}{'Location:'}
+\end{DoxyCode}
+
+
+Definition at line 30 of file main.\+js.
+
+\index{main.\+js@{main.\+js}!content\+String3@{content\+String3}}
+\index{content\+String3@{content\+String3}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{content\+String3}{contentString3}}]{\setlength{\rightskip}{0pt plus 5cm}var content\+String3 = \textquotesingle{}$<$br$>$Here since\+: \textquotesingle{}}\hypertarget{main_8js_afdaf576004a699089d0a7cf22cf25e7c}{}\label{main_8js_afdaf576004a699089d0a7cf22cf25e7c}
+
+
+Definition at line 33 of file main.\+js.
+
+\index{main.\+js@{main.\+js}!content\+String4@{content\+String4}}
+\index{content\+String4@{content\+String4}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{content\+String4}{contentString4}}]{\setlength{\rightskip}{0pt plus 5cm}var content\+String4 = \textquotesingle{}$<$br$>$Elevation\+: \textquotesingle{}}\hypertarget{main_8js_a669ffb4dbe874962e0fe8bbfe36504ab}{}\label{main_8js_a669ffb4dbe874962e0fe8bbfe36504ab}
+
+
+Definition at line 34 of file main.\+js.
+
+\index{main.\+js@{main.\+js}!content\+String5@{content\+String5}}
+\index{content\+String5@{content\+String5}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{content\+String5}{contentString5}}]{\setlength{\rightskip}{0pt plus 5cm}var content\+String5 = \textquotesingle{}$<$br$>$E\+T\+R\+: \textquotesingle{}}\hypertarget{main_8js_ae66280f42e371f9edb8c5ca225e938b7}{}\label{main_8js_ae66280f42e371f9edb8c5ca225e938b7}
+
+
+Definition at line 35 of file main.\+js.
+
+\index{main.\+js@{main.\+js}!content\+String6@{content\+String6}}
+\index{content\+String6@{content\+String6}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{content\+String6}{contentString6}}]{\setlength{\rightskip}{0pt plus 5cm}var content\+String6}\hypertarget{main_8js_acae40d08e72e089ac4b02946579164e8}{}\label{main_8js_acae40d08e72e089ac4b02946579164e8}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=    \textcolor{stringliteral}{'</p>'}+
+                    \textcolor{stringliteral}{'</div>'}+
+                    \textcolor{stringliteral}{'</div>'}
+\end{DoxyCode}
+
+
+Definition at line 36 of file main.\+js.
+
+\index{main.\+js@{main.\+js}!D\+E\+F\+A\+U\+L\+T\+\_\+\+D\+R\+O\+P\+D\+O\+W\+N\+\_\+\+C\+O\+N\+T\+E\+N\+TS@{D\+E\+F\+A\+U\+L\+T\+\_\+\+D\+R\+O\+P\+D\+O\+W\+N\+\_\+\+C\+O\+N\+T\+E\+N\+TS}}
+\index{D\+E\+F\+A\+U\+L\+T\+\_\+\+D\+R\+O\+P\+D\+O\+W\+N\+\_\+\+C\+O\+N\+T\+E\+N\+TS@{D\+E\+F\+A\+U\+L\+T\+\_\+\+D\+R\+O\+P\+D\+O\+W\+N\+\_\+\+C\+O\+N\+T\+E\+N\+TS}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{D\+E\+F\+A\+U\+L\+T\+\_\+\+D\+R\+O\+P\+D\+O\+W\+N\+\_\+\+C\+O\+N\+T\+E\+N\+TS}{DEFAULT_DROPDOWN_CONTENTS}}]{\setlength{\rightskip}{0pt plus 5cm}var D\+E\+F\+A\+U\+L\+T\+\_\+\+D\+R\+O\+P\+D\+O\+W\+N\+\_\+\+C\+O\+N\+T\+E\+N\+TS = \textquotesingle{}$<$tr class=\char`\"{}dropdown-\/row\char`\"{}$>$$<$td colspan=\char`\"{}7\char`\"{} {\bf id}=\char`\"{}dropdown\{U\+U\+ID\}\char`\"{}$>$$<$p$>$$<${\bf b}$>$Starting location\+: $<$/{\bf b}$>$$<$span {\bf id}=\char`\"{}start\{U\+U\+ID\}\char`\"{}$>$\{S\+T\+A\+R\+T\+L\+O\+C\+A\+T\+I\+ON\}$<$/span$>$$<$/{\bf p}$>$$<${\bf p}$>$$<${\bf b}$>$Distance Remaining\+: $<$/{\bf b}$>$$<$span {\bf id}=\char`\"{}dist\{U\+U\+ID\}\char`\"{}$>$\{D\+I\+S\+T\+A\+N\+CE\}$<$/span$>$$<$/{\bf p}$>$$<${\bf p}$>$$<${\bf b}$>$Destination\+: $<$/{\bf b}$>$$<$span {\bf id}=\char`\"{}dest\{U\+U\+ID\}\char`\"{}$>$\{D\+E\+S\+T\+L\+O\+C\+A\+T\+I\+ON\}$<$/span$>$$<$/{\bf p}$>$$<$/{\bf td}$>$$<$/tr$>$\textquotesingle{}}\hypertarget{main_8js_a0cf85ac779e39b635de940670ee868b9}{}\label{main_8js_a0cf85ac779e39b635de940670ee868b9}
+
+
+The contents of the dropdown row for each package for additional data. 
+
+
+
+Definition at line 5 of file main.\+js.
+
+\index{main.\+js@{main.\+js}!D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+R\+\_\+\+C\+O\+N\+T\+E\+N\+TS@{D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+R\+\_\+\+C\+O\+N\+T\+E\+N\+TS}}
+\index{D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+R\+\_\+\+C\+O\+N\+T\+E\+N\+TS@{D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+R\+\_\+\+C\+O\+N\+T\+E\+N\+TS}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+R\+\_\+\+C\+O\+N\+T\+E\+N\+TS}{DEFAULT_TR_CONTENTS}}]{\setlength{\rightskip}{0pt plus 5cm}var D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+R\+\_\+\+C\+O\+N\+T\+E\+N\+TS = \textquotesingle{}$<$tr class=\char`\"{}list\+Row\char`\"{} id=\char`\"{}row\{U\+U\+ID\}\char`\"{}$>$$<$td$>$$<$span class=\char`\"{}glyphicon glyphicon-\/plus\char`\"{} aria-\/label=\char`\"{}Expand\char`\"{}$>$$<$/span$>$$<$/{\bf td}$>$$<${\bf td}$>$$<$div class=\char`\"{}checkbox\char`\"{}$>$$<$label$>$$<$input type=\char`\"{}checkbox\char`\"{} name=\char`\"{}\{U\+U\+ID\}\char`\"{} onchange=\char`\"{}change\+Map\+Display(this.\+name, this.\+checked)\char`\"{} id=\char`\"{}checkbox\{U\+U\+ID\}\char`\"{}$>$$<$/label$>$$<$/div$>$$<$br /$>$$<$div class=\char`\"{}color-\/container\char`\"{}$>$$<$input type=\char`\"{}hidden\char`\"{} id=\char`\"{}color\{U\+U\+ID\}\char`\"{} value=\char`\"{}\{C\+O\+L\+OR\}\char`\"{}$>$$<$/div$>$$<$/{\bf td}$>$$<${\bf td} class=\char`\"{}uuid\char`\"{} id=\char`\"{}uuid\{U\+U\+ID\}\char`\"{}$>$\{U\+U\+ID\}$<$/{\bf td}$>$$<${\bf td} class=\char`\"{}name\char`\"{} id=\char`\"{}name\{U\+U\+ID\}\char`\"{}$>$\{N\+A\+ME\}$<$/{\bf td}$>$$<${\bf td} class=\char`\"{}location\char`\"{} id=\char`\"{}location\{U\+U\+ID\}\char`\"{}$>$$<$p$>$$<${\bf b}$>$Current location\+: $<$/{\bf b}$>$$<$span {\bf id}=\char`\"{}current\{U\+U\+ID\}\char`\"{}$>$\{C\+U\+R\+R\+E\+N\+T\+L\+O\+C\+A\+T\+I\+ON\}$<$/span$>$$<$/{\bf p}$>$$<$/{\bf td}$>$$<${\bf td} {\bf id}=\char`\"{}etr\{U\+U\+ID\}\char`\"{}$>$\{E\+TA\}$<$/{\bf td}$>$$<${\bf td}$>$$<${\bf a} href=\char`\"{}javascript\+:remove\+Row(\textbackslash{}\textquotesingle{}\{U\+U\+ID\}\textbackslash{}\textquotesingle{})\char`\"{} class=\char`\"{}btn btn-\/raised btn-\/danger\char`\"{}$>$Stop Tracking$<$/{\bf a}$>$$<$/{\bf td}$>$$<$/tr$>$\textquotesingle{}}\hypertarget{main_8js_a1eb01732164ee60af5dcf487ab5245d5}{}\label{main_8js_a1eb01732164ee60af5dcf487ab5245d5}
+
+
+The contents of the table row which gets added for each new package that is tracked. 
+
+
+
+Definition at line 2 of file main.\+js.
+
+\index{main.\+js@{main.\+js}!delivered@{delivered}}
+\index{delivered@{delivered}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{delivered}{delivered}}]{\setlength{\rightskip}{0pt plus 5cm}var delivered = \mbox{[}$\,$\mbox{]}}\hypertarget{main_8js_a7bcbd7191893f7300ad00bd1b8908950}{}\label{main_8js_a7bcbd7191893f7300ad00bd1b8908950}
+
+
+Definition at line 11 of file main.\+js.
+
+\index{main.\+js@{main.\+js}!destination\+Map\+Markers@{destination\+Map\+Markers}}
+\index{destination\+Map\+Markers@{destination\+Map\+Markers}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{destination\+Map\+Markers}{destinationMapMarkers}}]{\setlength{\rightskip}{0pt plus 5cm}var destination\+Map\+Markers = \{\}}\hypertarget{main_8js_a2b33618c9f421e426905ee387b6c6bc5}{}\label{main_8js_a2b33618c9f421e426905ee387b6c6bc5}
+
+
+Definition at line 23 of file main.\+js.
+
+\index{main.\+js@{main.\+js}!destinations@{destinations}}
+\index{destinations@{destinations}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{destinations}{destinations}}]{\setlength{\rightskip}{0pt plus 5cm}var destinations = \{\}}\hypertarget{main_8js_a19e632cab94d67a54007824cff4e985b}{}\label{main_8js_a19e632cab94d67a54007824cff4e985b}
+
+
+Definition at line 15 of file main.\+js.
+
+\index{main.\+js@{main.\+js}!infowindow@{infowindow}}
+\index{infowindow@{infowindow}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{infowindow}{infowindow}}]{\setlength{\rightskip}{0pt plus 5cm}var infowindow}\hypertarget{main_8js_a01c7912c86e502f69c34d6fa66662ac6}{}\label{main_8js_a01c7912c86e502f69c34d6fa66662ac6}
+
+
+Definition at line 41 of file main.\+js.
+
+\index{main.\+js@{main.\+js}!map\+Lines@{map\+Lines}}
+\index{map\+Lines@{map\+Lines}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{map\+Lines}{mapLines}}]{\setlength{\rightskip}{0pt plus 5cm}var map\+Lines = \{\}}\hypertarget{main_8js_a4f01a6af54b3f7e164d2dbbb37e04f86}{}\label{main_8js_a4f01a6af54b3f7e164d2dbbb37e04f86}
+
+
+Definition at line 21 of file main.\+js.
+
+\index{main.\+js@{main.\+js}!origin\+Map\+Markers@{origin\+Map\+Markers}}
+\index{origin\+Map\+Markers@{origin\+Map\+Markers}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{origin\+Map\+Markers}{originMapMarkers}}]{\setlength{\rightskip}{0pt plus 5cm}var origin\+Map\+Markers = \{\}}\hypertarget{main_8js_a90467ae029236a37b76f3383e82bb730}{}\label{main_8js_a90467ae029236a37b76f3383e82bb730}
+
+
+Definition at line 22 of file main.\+js.
+
+\index{main.\+js@{main.\+js}!package\+Positions@{package\+Positions}}
+\index{package\+Positions@{package\+Positions}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{package\+Positions}{packagePositions}}]{\setlength{\rightskip}{0pt plus 5cm}var package\+Positions = \{\}}\hypertarget{main_8js_a1d88ce79f484d9bfb4056fa9e356bea7}{}\label{main_8js_a1d88ce79f484d9bfb4056fa9e356bea7}
+
+
+Definition at line 13 of file main.\+js.
+
+\index{main.\+js@{main.\+js}!packages\+Monitored@{packages\+Monitored}}
+\index{packages\+Monitored@{packages\+Monitored}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{packages\+Monitored}{packagesMonitored}}]{\setlength{\rightskip}{0pt plus 5cm}var packages\+Monitored = \mbox{[}$\,$\mbox{]}}\hypertarget{main_8js_ad60881fa59f00ed3a37a380c5942a025}{}\label{main_8js_ad60881fa59f00ed3a37a380c5942a025}
+
+
+Definition at line 8 of file main.\+js.
+
+\index{main.\+js@{main.\+js}!packages\+On\+Map@{packages\+On\+Map}}
+\index{packages\+On\+Map@{packages\+On\+Map}!main.\+js@{main.\+js}}
+\subsubsection[{\texorpdfstring{packages\+On\+Map}{packagesOnMap}}]{\setlength{\rightskip}{0pt plus 5cm}var packages\+On\+Map = \mbox{[}$\,$\mbox{]}}\hypertarget{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{}\label{main_8js_a060ddd58cd6a0136ef1759b536d933ec}
+
+
+Definition at line 9 of file main.\+js.
+

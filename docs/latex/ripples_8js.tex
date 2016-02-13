@@ -1,0 +1,299 @@
+\hypertarget{ripples_8js}{}\section{/\+Users/plato2000/\+Developer/trackit/static/js/ripples.js File Reference}
+\label{ripples_8js}\index{/\+Users/plato2000/\+Developer/trackit/static/js/ripples.\+js@{/\+Users/plato2000/\+Developer/trackit/static/js/ripples.\+js}}
+
+
+\subsection{Function Documentation}
+\index{ripples.\+js@{ripples.\+js}!Ripples@{Ripples}}
+\index{Ripples@{Ripples}!ripples.\+js@{ripples.\+js}}
+\subsubsection[{\texorpdfstring{Ripples(element, options) }{Ripples(element, options) }}]{\setlength{\rightskip}{0pt plus 5cm}function Ripples (
+\begin{DoxyParamCaption}
+\item[{}]{element, }
+\item[{}]{options}
+\end{DoxyParamCaption}
+)}\hypertarget{ripples_8js_a767d27f9bdf9452f2227b96677a6809f}{}\label{ripples_8js_a767d27f9bdf9452f2227b96677a6809f}
+Create the main plugin function 
+
+Definition at line 29 of file ripples.\+js.
+
+
+\begin{DoxyCode}
+29                                      \{
+30     \textcolor{keyword}{self} = \textcolor{keyword}{this};
+31 
+32     this.element = $(element);
+33 
+34     this.options = $.extend(\{\}, \hyperlink{ripples_8js_a25652520ac081f98103987b0e68544cf}{defaults}, options);
+35 
+36     this.\_defaults = \hyperlink{ripples_8js_a25652520ac081f98103987b0e68544cf}{defaults};
+37     this.\_name = \hyperlink{ripples_8js_a7aaf270c8a2620904760aaed69ab4493}{ripples};
+38 
+39     this.\hyperlink{ripples_8js_aa5384a5c7bb0ad512a96bd16330cfca0}{init}();
+40   \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\index{ripples.\+js@{ripples.\+js}!defaults@{defaults}}
+\index{defaults@{defaults}!ripples.\+js@{ripples.\+js}}
+\subsubsection[{\texorpdfstring{defaults}{defaults}}]{\setlength{\rightskip}{0pt plus 5cm}var defaults = \{\}}\hypertarget{ripples_8js_a25652520ac081f98103987b0e68544cf}{}\label{ripples_8js_a25652520ac081f98103987b0e68544cf}
+Define the defaults of the plugin 
+
+Definition at line 23 of file ripples.\+js.
+
+\index{ripples.\+js@{ripples.\+js}!document@{document}}
+\index{document@{document}!ripples.\+js@{ripples.\+js}}
+\subsubsection[{\texorpdfstring{document}{document}}]{\setlength{\rightskip}{0pt plus 5cm}document}\hypertarget{ripples_8js_aa14f8e0338cced6720590fd2ea13bd4b}{}\label{ripples_8js_aa14f8e0338cced6720590fd2ea13bd4b}
+
+
+Definition at line 4 of file ripples.\+js.
+
+\index{ripples.\+js@{ripples.\+js}!get\+New\+Size@{get\+New\+Size}}
+\index{get\+New\+Size@{get\+New\+Size}!ripples.\+js@{ripples.\+js}}
+\subsubsection[{\texorpdfstring{get\+New\+Size}{getNewSize}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ripples} prototype get\+New\+Size}\hypertarget{ripples_8js_a30979b284ebdc99dd49a777dd7572ce5}{}\label{ripples_8js_a30979b284ebdc99dd49a777dd7572ce5}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \textcolor{keyword}{function}($element, $ripple) \{
+
+    \textcolor{keywordflow}{return} (Math.max($element.outerWidth(), $element.outerHeight()) / $ripple.outerWidth()) * 2.5;
+  \}
+\end{DoxyCode}
+Get the new size based on the element height/width and the ripple width 
+
+Definition at line 152 of file ripples.\+js.
+
+\index{ripples.\+js@{ripples.\+js}!get\+RelX@{get\+RelX}}
+\index{get\+RelX@{get\+RelX}!ripples.\+js@{ripples.\+js}}
+\subsubsection[{\texorpdfstring{get\+RelX}{getRelX}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ripples} prototype get\+RelX}\hypertarget{ripples_8js_a7b007710a54621b3f11981cee32a6ba5}{}\label{ripples_8js_a7b007710a54621b3f11981cee32a6ba5}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \textcolor{keyword}{function}($wrapper,  event) \{
+    var wrapperOffset = $wrapper.offset();
+
+    \textcolor{keywordflow}{if}(!\textcolor{keyword}{self}.\hyperlink{ripples_8js_a866b67e491bc85e95f00b63e4231f816}{isTouch}()) \{
+      
+      \textcolor{keywordflow}{return} \textcolor{keyword}{event}.pageX - wrapperOffset.left;
+    \} \textcolor{keywordflow}{else} \{
+      
+      \textcolor{keyword}{event} = \textcolor{keyword}{event}.originalEvent;
+
+      \textcolor{keywordflow}{if}(event.touches.length === 1) \{
+        \textcolor{keywordflow}{return} \textcolor{keyword}{event}.touches[0].pageX - wrapperOffset.left;
+      \}
+
+      \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+    \}
+  \}
+\end{DoxyCode}
+Get the relX 
+
+Definition at line 161 of file ripples.\+js.
+
+\index{ripples.\+js@{ripples.\+js}!get\+RelY@{get\+RelY}}
+\index{get\+RelY@{get\+RelY}!ripples.\+js@{ripples.\+js}}
+\subsubsection[{\texorpdfstring{get\+RelY}{getRelY}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ripples} prototype get\+RelY}\hypertarget{ripples_8js_a6c7c6ad382c000997e103a804af2c421}{}\label{ripples_8js_a6c7c6ad382c000997e103a804af2c421}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \textcolor{keyword}{function}($wrapper, event) \{
+    var wrapperOffset = $wrapper.offset();
+
+    \textcolor{keywordflow}{if}(!\textcolor{keyword}{self}.\hyperlink{ripples_8js_a866b67e491bc85e95f00b63e4231f816}{isTouch}()) \{
+      
+      \textcolor{keywordflow}{return} \textcolor{keyword}{event}.pageY - wrapperOffset.top;
+    \} \textcolor{keywordflow}{else} \{
+      
+      \textcolor{keyword}{event} = \textcolor{keyword}{event}.originalEvent;
+
+      \textcolor{keywordflow}{if}(event.touches.length === 1) \{
+        \textcolor{keywordflow}{return} \textcolor{keyword}{event}.touches[0].pageY - wrapperOffset.top;
+      \}
+
+      \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+    \}
+  \}
+\end{DoxyCode}
+Get the relY 
+
+Definition at line 188 of file ripples.\+js.
+
+\index{ripples.\+js@{ripples.\+js}!get\+Ripples\+Color@{get\+Ripples\+Color}}
+\index{get\+Ripples\+Color@{get\+Ripples\+Color}!ripples.\+js@{ripples.\+js}}
+\subsubsection[{\texorpdfstring{get\+Ripples\+Color}{getRipplesColor}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ripples} prototype get\+Ripples\+Color}\hypertarget{ripples_8js_a9997876496e9a765d206c6be03ed17c2}{}\label{ripples_8js_a9997876496e9a765d206c6be03ed17c2}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \textcolor{keyword}{function}($element) \{
+
+    var color = $element.data(\textcolor{stringliteral}{"ripple-color"}) ? $element.data(\textcolor{stringliteral}{"ripple-color"}) : 
+      \hyperlink{ripples_8js_a04a8a2bbfa9c15500892b8e5033d625b}{window}.getComputedStyle($element[0]).color;
+
+    \textcolor{keywordflow}{return} color;
+  \}
+\end{DoxyCode}
+Get the ripple color 
+
+Definition at line 215 of file ripples.\+js.
+
+\index{ripples.\+js@{ripples.\+js}!has\+Transition\+Support@{has\+Transition\+Support}}
+\index{has\+Transition\+Support@{has\+Transition\+Support}!ripples.\+js@{ripples.\+js}}
+\subsubsection[{\texorpdfstring{has\+Transition\+Support}{hasTransitionSupport}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ripples} prototype has\+Transition\+Support}\hypertarget{ripples_8js_ad6968af6f57ae44a1405714b037db1b8}{}\label{ripples_8js_ad6968af6f57ae44a1405714b037db1b8}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \textcolor{keyword}{function}() \{
+    var thisBody  = \hyperlink{ripples_8js_aa14f8e0338cced6720590fd2ea13bd4b}{document}.body || \hyperlink{ripples_8js_aa14f8e0338cced6720590fd2ea13bd4b}{document}.documentElement;
+    var thisStyle = thisBody.style;
+
+    var support = (
+      thisStyle.transition !== \hyperlink{ripples_8js_a08113a236cc18d2a9d5ce27e638012be}{undefined} ||
+      thisStyle.WebkitTransition !== \hyperlink{ripples_8js_a08113a236cc18d2a9d5ce27e638012be}{undefined} ||
+      thisStyle.MozTransition !== \hyperlink{ripples_8js_a08113a236cc18d2a9d5ce27e638012be}{undefined} ||
+      thisStyle.MsTransition !== \hyperlink{ripples_8js_a08113a236cc18d2a9d5ce27e638012be}{undefined} ||
+      thisStyle.OTransition !== \hyperlink{ripples_8js_a08113a236cc18d2a9d5ce27e638012be}{undefined}
+    );
+
+    \textcolor{keywordflow}{return} support;
+  \}
+\end{DoxyCode}
+Verify if the client browser has transistion support 
+
+Definition at line 226 of file ripples.\+js.
+
+\index{ripples.\+js@{ripples.\+js}!init@{init}}
+\index{init@{init}!ripples.\+js@{ripples.\+js}}
+\subsubsection[{\texorpdfstring{init}{init}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ripples} prototype init}\hypertarget{ripples_8js_aa5384a5c7bb0ad512a96bd16330cfca0}{}\label{ripples_8js_aa5384a5c7bb0ad512a96bd16330cfca0}
+Initialize the plugin 
+
+Definition at line 46 of file ripples.\+js.
+
+\index{ripples.\+js@{ripples.\+js}!is\+Touch@{is\+Touch}}
+\index{is\+Touch@{is\+Touch}!ripples.\+js@{ripples.\+js}}
+\subsubsection[{\texorpdfstring{is\+Touch}{isTouch}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ripples} prototype is\+Touch}\hypertarget{ripples_8js_a866b67e491bc85e95f00b63e4231f816}{}\label{ripples_8js_a866b67e491bc85e95f00b63e4231f816}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \textcolor{keyword}{function}() \{
+    \textcolor{keywordflow}{return} /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}.test(navigator.userAgent);
+  \}
+\end{DoxyCode}
+Verify if the client is using a mobile device 
+
+Definition at line 245 of file ripples.\+js.
+
+\index{ripples.\+js@{ripples.\+js}!j\+Query@{j\+Query}}
+\index{j\+Query@{j\+Query}!ripples.\+js@{ripples.\+js}}
+\subsubsection[{\texorpdfstring{j\+Query}{jQuery}}]{\setlength{\rightskip}{0pt plus 5cm}j\+Query}\hypertarget{ripples_8js_a2b1d6f9c448e3ce72f4e1865d6e38d2c}{}\label{ripples_8js_a2b1d6f9c448e3ce72f4e1865d6e38d2c}
+
+
+Definition at line 324 of file ripples.\+js.
+
+\index{ripples.\+js@{ripples.\+js}!ripple\+End@{ripple\+End}}
+\index{ripple\+End@{ripple\+End}!ripples.\+js@{ripples.\+js}}
+\subsubsection[{\texorpdfstring{ripple\+End}{rippleEnd}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ripples} prototype ripple\+End}\hypertarget{ripples_8js_a17b8a91426ba832d3acd637a8701928a}{}\label{ripples_8js_a17b8a91426ba832d3acd637a8701928a}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \textcolor{keyword}{function}($ripple) \{
+    $ripple.data(\textcolor{stringliteral}{"animating"}, \textcolor{stringliteral}{"off"});
+
+    \textcolor{keywordflow}{if}($ripple.data(\textcolor{stringliteral}{"mousedown"}) === \textcolor{stringliteral}{"off"}) \{
+      \textcolor{keyword}{self}.rippleOut($ripple);
+    \}
+  \}
+\end{DoxyCode}
+End the animation of the ripple 
+
+Definition at line 253 of file ripples.\+js.
+
+\index{ripples.\+js@{ripples.\+js}!ripple\+On@{ripple\+On}}
+\index{ripple\+On@{ripple\+On}!ripples.\+js@{ripples.\+js}}
+\subsubsection[{\texorpdfstring{ripple\+On}{rippleOn}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ripples} prototype ripple\+On}\hypertarget{ripples_8js_aebd106ade86135e7c075a4fb4f317eb3}{}\label{ripples_8js_aebd106ade86135e7c075a4fb4f317eb3}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \textcolor{keyword}{function}($element, $ripple) \{
+    var size = \textcolor{keyword}{self}.getNewSize($element, $ripple);
+
+    \textcolor{keywordflow}{if}(\textcolor{keyword}{self}.\hyperlink{ripples_8js_ad6968af6f57ae44a1405714b037db1b8}{hasTransitionSupport}()) \{
+      $ripple
+      .css(\{
+        \textcolor{stringliteral}{"-ms-transform"}: \textcolor{stringliteral}{"scale("} + size + \textcolor{stringliteral}{")"},
+        \textcolor{stringliteral}{"-moz-transform"}: \textcolor{stringliteral}{"scale("} + size + \textcolor{stringliteral}{")"},
+        \textcolor{stringliteral}{"-webkit-transform"}: \textcolor{stringliteral}{"scale("} + size + \textcolor{stringliteral}{")"},
+        \textcolor{stringliteral}{"transform"}: \textcolor{stringliteral}{"scale("} + size + \textcolor{stringliteral}{")"}
+      \})
+      .addClass(\textcolor{stringliteral}{"ripple-on"})
+      .data(\textcolor{stringliteral}{"animating"}, \textcolor{stringliteral}{"on"})
+      .data(\textcolor{stringliteral}{"mousedown"}, \textcolor{stringliteral}{"on"});
+    \} \textcolor{keywordflow}{else} \{
+      $ripple.animate(\{
+        \textcolor{stringliteral}{"width"}: Math.max($element.outerWidth(), $element.outerHeight()) * 2,
+        \textcolor{stringliteral}{"height"}: Math.max($element.outerWidth(), $element.outerHeight()) * 2,
+        \textcolor{stringliteral}{"margin-left"}: Math.max($element.outerWidth(), $element.outerHeight()) * (-1),
+        \textcolor{stringliteral}{"margin-top"}: Math.max($element.outerWidth(), $element.outerHeight()) * (-1),
+        \textcolor{stringliteral}{"opacity"}: 0.2
+      \}, 500, \textcolor{keyword}{function}() \{
+        $ripple.trigger(\textcolor{stringliteral}{"transitionend"});
+      \});
+    \}
+  \}
+\end{DoxyCode}
+Turn on the ripple effect 
+
+Definition at line 285 of file ripples.\+js.
+
+\index{ripples.\+js@{ripples.\+js}!ripple\+Out@{ripple\+Out}}
+\index{ripple\+Out@{ripple\+Out}!ripples.\+js@{ripples.\+js}}
+\subsubsection[{\texorpdfstring{ripple\+Out}{rippleOut}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ripples} prototype ripple\+Out}\hypertarget{ripples_8js_a1377fcf3030c4f0836f611ee2e1a8147}{}\label{ripples_8js_a1377fcf3030c4f0836f611ee2e1a8147}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \textcolor{keyword}{function}($ripple) \{
+    $ripple.off();
+
+    \textcolor{keywordflow}{if}(\textcolor{keyword}{self}.\hyperlink{ripples_8js_ad6968af6f57ae44a1405714b037db1b8}{hasTransitionSupport}()) \{
+      $ripple.addClass(\textcolor{stringliteral}{"ripple-out"});
+    \} \textcolor{keywordflow}{else} \{
+      $ripple.animate(\{\textcolor{stringliteral}{"opacity"}: 0\}, 100, \textcolor{keyword}{function}() \{
+        $ripple.trigger(\textcolor{stringliteral}{"transitionend"});
+      \});
+    \}
+
+    $ripple.on(\textcolor{stringliteral}{"transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd"}, \textcolor{keyword}{function}() \{
+      $ripple.remove();
+    \});
+  \}
+\end{DoxyCode}
+Turn off the ripple effect 
+
+Definition at line 265 of file ripples.\+js.
+
+\index{ripples.\+js@{ripples.\+js}!ripples@{ripples}}
+\index{ripples@{ripples}!ripples.\+js@{ripples.\+js}}
+\subsubsection[{\texorpdfstring{ripples}{ripples}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf fn} ripples = \char`\"{}ripples\char`\"{}}\hypertarget{ripples_8js_a7aaf270c8a2620904760aaed69ab4493}{}\label{ripples_8js_a7aaf270c8a2620904760aaed69ab4493}
+Define the name of the plugin
+
+Create the jquery plugin function 
+
+Definition at line 11 of file ripples.\+js.
+
+\index{ripples.\+js@{ripples.\+js}!self@{self}}
+\index{self@{self}!ripples.\+js@{ripples.\+js}}
+\subsubsection[{\texorpdfstring{self}{self}}]{\setlength{\rightskip}{0pt plus 5cm}var self = null}\hypertarget{ripples_8js_a67b9624a73d0c7dbd44bc7b41817b579}{}\label{ripples_8js_a67b9624a73d0c7dbd44bc7b41817b579}
+Get an instance of the plugin 
+
+Definition at line 17 of file ripples.\+js.
+
+\index{ripples.\+js@{ripples.\+js}!undefined@{undefined}}
+\index{undefined@{undefined}!ripples.\+js@{ripples.\+js}}
+\subsubsection[{\texorpdfstring{undefined}{undefined}}]{\setlength{\rightskip}{0pt plus 5cm}function undefined}\hypertarget{ripples_8js_a08113a236cc18d2a9d5ce27e638012be}{}\label{ripples_8js_a08113a236cc18d2a9d5ce27e638012be}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+\{
+
+  \textcolor{stringliteral}{"use strict"}
+\end{DoxyCode}
+
+
+Definition at line 4 of file ripples.\+js.
+
+\index{ripples.\+js@{ripples.\+js}!window@{window}}
+\index{window@{window}!ripples.\+js@{ripples.\+js}}
+\subsubsection[{\texorpdfstring{window}{window}}]{\setlength{\rightskip}{0pt plus 5cm}window}\hypertarget{ripples_8js_a04a8a2bbfa9c15500892b8e5033d625b}{}\label{ripples_8js_a04a8a2bbfa9c15500892b8e5033d625b}
+
+
+Definition at line 4 of file ripples.\+js.
+

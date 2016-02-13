@@ -1,0 +1,87 @@
+\hypertarget{ie-emulation-modes-warning_8js}{}\section{/\+Users/plato2000/\+Developer/trackit/static/js/ie-\/emulation-\/modes-\/warning.js File Reference}
+\label{ie-emulation-modes-warning_8js}\index{/\+Users/plato2000/\+Developer/trackit/static/js/ie-\/emulation-\/modes-\/warning.\+js@{/\+Users/plato2000/\+Developer/trackit/static/js/ie-\/emulation-\/modes-\/warning.\+js}}
+
+
+\subsection{Function Documentation}
+\index{ie-\/emulation-\/modes-\/warning.\+js@{ie-\/emulation-\/modes-\/warning.\+js}!actual\+Non\+Emulated\+I\+E\+Major\+Version@{actual\+Non\+Emulated\+I\+E\+Major\+Version}}
+\index{actual\+Non\+Emulated\+I\+E\+Major\+Version@{actual\+Non\+Emulated\+I\+E\+Major\+Version}!ie-\/emulation-\/modes-\/warning.\+js@{ie-\/emulation-\/modes-\/warning.\+js}}
+\subsubsection[{\texorpdfstring{actual\+Non\+Emulated\+I\+E\+Major\+Version() }{actualNonEmulatedIEMajorVersion() }}]{\setlength{\rightskip}{0pt plus 5cm}function actual\+Non\+Emulated\+I\+E\+Major\+Version (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{ie-emulation-modes-warning_8js_a57d09af6df991e1d9995cbd34d71cf55}{}\label{ie-emulation-modes-warning_8js_a57d09af6df991e1d9995cbd34d71cf55}
+
+
+Definition at line 24 of file ie-\/emulation-\/modes-\/warning.\+js.
+
+
+\begin{DoxyCode}
+24                                              \{
+25     \textcolor{comment}{// Detects the actual version of IE in use, even if it's in an older-IE emulation mode.}
+26     \textcolor{comment}{// IE JavaScript conditional compilation docs:
+       https://msdn.microsoft.com/library/121hztk3%28v=vs.94%29.aspx}
+27     \textcolor{comment}{// @cc\_on docs: https://msdn.microsoft.com/library/8ka90k2e%28v=vs.94%29.aspx}
+28     var jscriptVersion = \textcolor{keyword}{new} Function(\textcolor{stringliteral}{'/*@cc\_on return @\_jscript\_version; @*/'})() \textcolor{comment}{// jshint ignore:line}
+29     \textcolor{keywordflow}{if} (jscriptVersion === \hyperlink{jquery_8min_8js_ae21cc36bf0d65014c717a481a3f8a468}{undefined}) \{
+30       \textcolor{keywordflow}{return} 11 \textcolor{comment}{// IE11+ not in emulation mode}
+31     \}
+32     \textcolor{keywordflow}{if} (jscriptVersion < 9) \{
+33       \textcolor{keywordflow}{return} 8 \textcolor{comment}{// IE8 (or lower; haven't tested on IE<8)}
+34     \}
+35     \textcolor{keywordflow}{return} jscriptVersion \textcolor{comment}{// IE9 or IE10 in any mode, or IE11 in non-IE11 mode}
+36   \}
+\end{DoxyCode}
+\index{ie-\/emulation-\/modes-\/warning.\+js@{ie-\/emulation-\/modes-\/warning.\+js}!emulated\+I\+E\+Major\+Version@{emulated\+I\+E\+Major\+Version}}
+\index{emulated\+I\+E\+Major\+Version@{emulated\+I\+E\+Major\+Version}!ie-\/emulation-\/modes-\/warning.\+js@{ie-\/emulation-\/modes-\/warning.\+js}}
+\subsubsection[{\texorpdfstring{emulated\+I\+E\+Major\+Version() }{emulatedIEMajorVersion() }}]{\setlength{\rightskip}{0pt plus 5cm}function emulated\+I\+E\+Major\+Version (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{ie-emulation-modes-warning_8js_a0d49bb3ac3a67ced06fe8828d80f09d3}{}\label{ie-emulation-modes-warning_8js_a0d49bb3ac3a67ced06fe8828d80f09d3}
+Copyright 2014-\/2015 Twitter, Inc.
+
+Licensed under the Creative Commons Attribution 3.\+0 Unported License. For details, see \href{https://creativecommons.org/licenses/by/3.0/}{\tt https\+://creativecommons.\+org/licenses/by/3.\+0/}. 
+
+Definition at line 14 of file ie-\/emulation-\/modes-\/warning.\+js.
+
+
+\begin{DoxyCode}
+14                                     \{
+15     var groups = /MSIE ([0-9.]+)/.exec(\hyperlink{ripples_8js_a04a8a2bbfa9c15500892b8e5033d625b}{window}.navigator.userAgent)
+16     \textcolor{keywordflow}{if} (groups === null) \{
+17       \textcolor{keywordflow}{return} null
+18     \}
+19     var ieVersionNum = parseInt(groups[1], 10)
+20     var ieMajorVersion = Math.floor(ieVersionNum)
+21     return ieMajorVersion
+22   \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\index{ie-\/emulation-\/modes-\/warning.\+js@{ie-\/emulation-\/modes-\/warning.\+js}!ua@{ua}}
+\index{ua@{ua}!ie-\/emulation-\/modes-\/warning.\+js@{ie-\/emulation-\/modes-\/warning.\+js}}
+\subsubsection[{\texorpdfstring{ua}{ua}}]{\setlength{\rightskip}{0pt plus 5cm}var ua}\hypertarget{ie-emulation-modes-warning_8js_a77a824a514e5c023c3617f2f740c707e}{}\label{ie-emulation-modes-warning_8js_a77a824a514e5c023c3617f2f740c707e}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \hyperlink{ripples_8js_a04a8a2bbfa9c15500892b8e5033d625b}{window}.navigator.userAgent
+  \textcolor{keywordflow}{if} (\hyperlink{ie-emulation-modes-warning_8js_a77a824a514e5c023c3617f2f740c707e}{ua}.indexOf(\textcolor{stringliteral}{'Opera'}) > -1 || \hyperlink{ie-emulation-modes-warning_8js_a77a824a514e5c023c3617f2f740c707e}{ua}.indexOf(\textcolor{stringliteral}{'Presto'}) > -1) \{
+    \textcolor{keywordflow}{return} 
+  \}
+  var emulated = \hyperlink{ie-emulation-modes-warning_8js_a0d49bb3ac3a67ced06fe8828d80f09d3}{emulatedIEMajorVersion}()
+  \hyperlink{bootstrap_8min_8js_aa902c7649ec0f5d8953e7e191138fde2}{if} (emulated === null) \{
+    \textcolor{keywordflow}{return} 
+  \}
+  var nonEmulated = \hyperlink{ie-emulation-modes-warning_8js_a57d09af6df991e1d9995cbd34d71cf55}{actualNonEmulatedIEMajorVersion}()
+
+  \hyperlink{bootstrap_8min_8js_aa902c7649ec0f5d8953e7e191138fde2}{if} (emulated !== nonEmulated) \{
+    \hyperlink{ripples_8js_a04a8a2bbfa9c15500892b8e5033d625b}{window}.alert(\textcolor{stringliteral}{'WARNING: You appear to be using IE'} + nonEmulated + \textcolor{stringliteral}{' in IE'} + emulated + \textcolor{stringliteral}{'
+       emulation mode.\(\backslash\)nIE emulation modes can behave significantly differently from ACTUAL older versions of IE.\(\backslash\)nPLEASE
+       DON\(\backslash\)'T FILE BOOTSTRAP BUGS based on testing in IE emulation modes!'})
+  \}
+\})()
+\end{DoxyCode}
+
+
+Definition at line 38 of file ie-\/emulation-\/modes-\/warning.\+js.
+

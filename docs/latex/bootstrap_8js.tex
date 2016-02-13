@@ -1,0 +1,143 @@
+\hypertarget{bootstrap_8js}{}\section{/\+Users/plato2000/\+Developer/trackit/static/js/bootstrap.js File Reference}
+\label{bootstrap_8js}\index{/\+Users/plato2000/\+Developer/trackit/static/js/bootstrap.\+js@{/\+Users/plato2000/\+Developer/trackit/static/js/bootstrap.\+js}}
+
+
+\subsection{Function Documentation}
+\index{bootstrap.\+js@{bootstrap.\+js}!if@{if}}
+\index{if@{if}!bootstrap.\+js@{bootstrap.\+js}}
+\subsubsection[{\texorpdfstring{if(typeof j\+Query === \textquotesingle{}undefined\textquotesingle{}) }{if(typeof jQuery === 'undefined') }}]{\setlength{\rightskip}{0pt plus 5cm}if (
+\begin{DoxyParamCaption}
+\item[{typeof}]{j\+Query = {\ttfamily ==~\textquotesingle{}{\bf undefined}\textquotesingle{}}}
+\end{DoxyParamCaption}
+)}\hypertarget{bootstrap_8js_a233cac603be31aac65c34e9b9767115c}{}\label{bootstrap_8js_a233cac603be31aac65c34e9b9767115c}
+Bootstrap v3.\+3.\+6 (\href{http://getbootstrap.com}{\tt http\+://getbootstrap.\+com}) Copyright 2011-\/2015 Twitter, Inc. Licensed under the M\+IT license 
+
+Definition at line 7 of file bootstrap.\+js.
+
+
+\begin{DoxyCode}
+7                                    \{
+8   \textcolor{keywordflow}{throw} \textcolor{keyword}{new} Error(\textcolor{stringliteral}{'Bootstrap\(\backslash\)'s JavaScript requires jQuery'})
+9 \}
+\end{DoxyCode}
+\index{bootstrap.\+js@{bootstrap.\+js}!transition\+End@{transition\+End}}
+\index{transition\+End@{transition\+End}!bootstrap.\+js@{bootstrap.\+js}}
+\subsubsection[{\texorpdfstring{transition\+End() }{transitionEnd() }}]{\setlength{\rightskip}{0pt plus 5cm}function transition\+End (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{bootstrap_8js_a1369de7b662efaf7df891fa51fefa904}{}\label{bootstrap_8js_a1369de7b662efaf7df891fa51fefa904}
+
+
+Definition at line 34 of file bootstrap.\+js.
+
+
+\begin{DoxyCode}
+34                            \{
+35     var el = \hyperlink{ripples_8js_aa14f8e0338cced6720590fd2ea13bd4b}{document}.createElement(\textcolor{stringliteral}{'bootstrap'})
+36 
+37     var transEndEventNames = \{
+38       WebkitTransition : \textcolor{stringliteral}{'webkitTransitionEnd'},
+39       MozTransition    : \textcolor{stringliteral}{'transitionend'},
+40       OTransition      : \textcolor{stringliteral}{'oTransitionEnd otransitionend'},
+41       transition       : \textcolor{stringliteral}{'transitionend'}
+42     \}
+43 
+44     \textcolor{keywordflow}{for} (var name in transEndEventNames) \{
+45       \textcolor{keywordflow}{if} (el.style[name] !== \hyperlink{jquery_8min_8js_ae21cc36bf0d65014c717a481a3f8a468}{undefined}) \{
+46         \textcolor{keywordflow}{return} \{ end: transEndEventNames[name] \}
+47       \}
+48     \}
+49 
+50     \textcolor{keywordflow}{return} \textcolor{keyword}{false} \textcolor{comment}{// explicit for ie8 (  .\_.)}
+51   \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\index{bootstrap.\+js@{bootstrap.\+js}!backdrop@{backdrop}}
+\index{backdrop@{backdrop}!bootstrap.\+js@{bootstrap.\+js}}
+\subsubsection[{\texorpdfstring{backdrop}{backdrop}}]{\setlength{\rightskip}{0pt plus 5cm}var backdrop}\hypertarget{bootstrap_8js_aba65c57a7d9ee9d45d314e2bba7dd072}{}\label{bootstrap_8js_aba65c57a7d9ee9d45d314e2bba7dd072}
+
+
+Definition at line 760 of file bootstrap.\+js.
+
+\index{bootstrap.\+js@{bootstrap.\+js}!Button@{Button}}
+\index{Button@{Button}!bootstrap.\+js@{bootstrap.\+js}}
+\subsubsection[{\texorpdfstring{Button}{Button}}]{\setlength{\rightskip}{0pt plus 5cm}var Button}\hypertarget{bootstrap_8js_a261c5f999cc82b4ce70e4914330a1ef6}{}\label{bootstrap_8js_a261c5f999cc82b4ce70e4914330a1ef6}
+
+
+Definition at line 189 of file bootstrap.\+js.
+
+\index{bootstrap.\+js@{bootstrap.\+js}!Carousel@{Carousel}}
+\index{Carousel@{Carousel}!bootstrap.\+js@{bootstrap.\+js}}
+\subsubsection[{\texorpdfstring{Carousel}{Carousel}}]{\setlength{\rightskip}{0pt plus 5cm}var Carousel}\hypertarget{bootstrap_8js_a423054031c78e782a9ea7433185ebafe}{}\label{bootstrap_8js_a423054031c78e782a9ea7433185ebafe}
+
+
+Definition at line 310 of file bootstrap.\+js.
+
+\index{bootstrap.\+js@{bootstrap.\+js}!Collapse@{Collapse}}
+\index{Collapse@{Collapse}!bootstrap.\+js@{bootstrap.\+js}}
+\subsubsection[{\texorpdfstring{Collapse}{Collapse}}]{\setlength{\rightskip}{0pt plus 5cm}var Collapse}\hypertarget{bootstrap_8js_a702a68ef70b72eabdbdce3fc9ad195d4}{}\label{bootstrap_8js_a702a68ef70b72eabdbdce3fc9ad195d4}
+
+
+Definition at line 548 of file bootstrap.\+js.
+
+\index{bootstrap.\+js@{bootstrap.\+js}!dismiss@{dismiss}}
+\index{dismiss@{dismiss}!bootstrap.\+js@{bootstrap.\+js}}
+\subsubsection[{\texorpdfstring{dismiss}{dismiss}}]{\setlength{\rightskip}{0pt plus 5cm}var dismiss}\hypertarget{bootstrap_8js_a5a23b6797090169c0f80e3372ca76a4d}{}\label{bootstrap_8js_a5a23b6797090169c0f80e3372ca76a4d}
+
+
+Definition at line 94 of file bootstrap.\+js.
+
+\index{bootstrap.\+js@{bootstrap.\+js}!emulate\+Transition\+End@{emulate\+Transition\+End}}
+\index{emulate\+Transition\+End@{emulate\+Transition\+End}!bootstrap.\+js@{bootstrap.\+js}}
+\subsubsection[{\texorpdfstring{emulate\+Transition\+End}{emulateTransitionEnd}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf fn} emulate\+Transition\+End}\hypertarget{bootstrap_8js_a2eb5ccc0cd870ff2cc5ce9b8d53cec48}{}\label{bootstrap_8js_a2eb5ccc0cd870ff2cc5ce9b8d53cec48}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \textcolor{keyword}{function} (duration) \{
+    var called = \textcolor{keyword}{false}
+    var $el = \textcolor{keyword}{this}
+    $(\textcolor{keyword}{this}).one(\textcolor{stringliteral}{'bsTransitionEnd'}, \textcolor{keyword}{function} () \{ called = \textcolor{keyword}{true} \})
+    var callback = \textcolor{keyword}{function} () \{ \textcolor{keywordflow}{if} (!called) $($el).trigger($.support.transition.end) \}
+    setTimeout(callback, duration)
+    return \hyperlink{moment_8min_8js_a05c09a5e9d53fa7adf0a7936038c2fa3}{this}
+  \}
+
+  $(function () \{
+    $.support.transition = \hyperlink{bootstrap_8js_a1369de7b662efaf7df891fa51fefa904}{transitionEnd}()
+
+    \hyperlink{bootstrap_8js_a233cac603be31aac65c34e9b9767115c}{if} (!$.support.transition) return
+
+    $.event.special.bsTransitionEnd = \{
+      bindType: $.support.transition.end,
+      delegateType: $.support.transition.end,
+      handle: \textcolor{keyword}{function} (\hyperlink{bootstrap_8min_8js_ab5902775854a8b8440bcd25e0fe1c120}{e}) \{
+        \textcolor{keywordflow}{if} ($(\hyperlink{bootstrap_8min_8js_ab5902775854a8b8440bcd25e0fe1c120}{e}.target).is(\textcolor{keyword}{this})) \textcolor{keywordflow}{return} \hyperlink{bootstrap_8min_8js_ab5902775854a8b8440bcd25e0fe1c120}{e}.handleObj.handler.apply(\textcolor{keyword}{this}, arguments)
+      \}
+    \}
+  \})
+
+\}(\hyperlink{material_8js_a2b1d6f9c448e3ce72f4e1865d6e38d2c}{jQuery})
+\end{DoxyCode}
+
+
+Definition at line 54 of file bootstrap.\+js.
+
+\index{bootstrap.\+js@{bootstrap.\+js}!version@{version}}
+\index{version@{version}!bootstrap.\+js@{bootstrap.\+js}}
+\subsubsection[{\texorpdfstring{version}{version}}]{\setlength{\rightskip}{0pt plus 5cm}var version}\hypertarget{bootstrap_8js_a614229fff4211edebc3c193d1e7763ec}{}\label{bootstrap_8js_a614229fff4211edebc3c193d1e7763ec}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= $.fn.jquery.split(\textcolor{charliteral}{' '})[0].split(\textcolor{charliteral}{'.'})
+  \textcolor{keywordflow}{if} ((\hyperlink{bootstrap_8js_a614229fff4211edebc3c193d1e7763ec}{version}[0] < 2 && \hyperlink{bootstrap_8js_a614229fff4211edebc3c193d1e7763ec}{version}[1] < 9) || (\hyperlink{bootstrap_8js_a614229fff4211edebc3c193d1e7763ec}{version}[0] == 1 && 
+      \hyperlink{bootstrap_8js_a614229fff4211edebc3c193d1e7763ec}{version}[1] == 9 && \hyperlink{bootstrap_8js_a614229fff4211edebc3c193d1e7763ec}{version}[2] < 1) || (\hyperlink{bootstrap_8js_a614229fff4211edebc3c193d1e7763ec}{version}[0] > 2)) \{
+    \textcolor{keywordflow}{throw} \textcolor{keyword}{new} Error(\textcolor{stringliteral}{'Bootstrap\(\backslash\)'s JavaScript requires jQuery version 1.9.1 or higher, but lower than
+       version 3'})
+  \}
+\}(\hyperlink{material_8js_a2b1d6f9c448e3ce72f4e1865d6e38d2c}{jQuery})
+\end{DoxyCode}
+
+
+Definition at line 13 of file bootstrap.\+js.
+

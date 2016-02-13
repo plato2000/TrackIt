@@ -67,7 +67,7 @@ def get_locations(uuid, time_var):
 def get_name(uuid):
     command = "SELECT nameString FROM uuids WHERE uuid='" + uuid + "'"
     results = execute_command(command, results=True)
-    print "name of", uuid, "is", results
+    # print "name of", uuid, "is", results
     if results != False:
         return results[0]
 
@@ -80,7 +80,7 @@ def get_name(uuid):
 def get_first_data(uuid):
     command = "SELECT * FROM \"" + uuid + "\" ORDER BY Time ASC LIMIT 1"
     results = execute_command(command, results=True)
-    print "first data of", uuid, "is", results
+    # print "first data of", uuid, "is", results
     if results != False:
         return [{"coords": (i[0], i[1]), "ele": i[2], "time": i[3]} for i in results][0]
 
@@ -93,7 +93,7 @@ def get_first_data(uuid):
 def get_current_data(uuid):
     command = "SELECT * FROM \"" + uuid + "\" ORDER BY Time DESC LIMIT 1"
     results = execute_command(command, results=True)
-    print "current_data of", uuid, "is", results
+    # print "current_data of", uuid, "is", results
     if results != False:
         return [{"coords": (i[0], i[1]), "ele": i[2], "time": i[3]} for i in results][0]
 
@@ -105,7 +105,7 @@ def get_current_data(uuid):
 def get_destination_of_package(uuid):
     command = "SELECT destLat, destLon FROM uuids WHERE uuid='" + uuid + "'"
     results = execute_command(command, results=True)
-    print "destination of", uuid, ":", results
+    # print "destination of", uuid, ":", results
     if results != False:
         return results[0]
 
@@ -152,7 +152,7 @@ def get_undelivered_packages():
 #  @returns Boolean (true if it's there)
 def is_valid_uuid(uuid):
     results = execute_command("SELECT uuid FROM uuids WHERE uuid='" + uuid + "'", results=True)
-    print "is_valid_uuid:", results
+    # print "is_valid_uuid:", results
     return len(results) > 0
 
 
@@ -163,7 +163,7 @@ def is_valid_uuid(uuid):
 #  @returns Boolean (true if it's delivered)
 def is_delivered(uuid):
     results = execute_command("SELECT delivered FROM uuids WHERE uuid='" + uuid + "'", results=True)
-    print "delivery_status:", results
+    # print "delivery_status:", results
     return results[0] == 'Y'
 
 

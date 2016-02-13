@@ -1,0 +1,28 @@
+\hypertarget{ie10-viewport-bug-workaround_8js}{}\section{/\+Users/plato2000/\+Developer/trackit/static/js/ie10-\/viewport-\/bug-\/workaround.js File Reference}
+\label{ie10-viewport-bug-workaround_8js}\index{/\+Users/plato2000/\+Developer/trackit/static/js/ie10-\/viewport-\/bug-\/workaround.\+js@{/\+Users/plato2000/\+Developer/trackit/static/js/ie10-\/viewport-\/bug-\/workaround.\+js}}
+
+
+\subsection{Function Documentation}
+\index{ie10-\/viewport-\/bug-\/workaround.\+js@{ie10-\/viewport-\/bug-\/workaround.\+js}!if@{if}}
+\index{if@{if}!ie10-\/viewport-\/bug-\/workaround.\+js@{ie10-\/viewport-\/bug-\/workaround.\+js}}
+\subsubsection[{\texorpdfstring{if(navigator.\+user\+Agent.\+match(/\+I\+E\+Mobile\textbackslash{}/10\textbackslash{}.\+0/)) }{if(navigator.userAgent.match(/IEMobile\textbackslash{}/10\textbackslash{}.0/)) }}]{\setlength{\rightskip}{0pt plus 5cm}function if (
+\begin{DoxyParamCaption}
+\item[{navigator.\+user\+Agent.}]{match/\+I\+E\+Mobile\textbackslash{}/10\textbackslash{}.\+0/}
+\end{DoxyParamCaption}
+)}\hypertarget{ie10-viewport-bug-workaround_8js_afded5488b4fc61c67ee75d2c527ce30c}{}\label{ie10-viewport-bug-workaround_8js_afded5488b4fc61c67ee75d2c527ce30c}
+I\+E10 viewport hack for Surface/desktop Windows 8 bug Copyright 2014-\/2015 Twitter, Inc. Licensed under M\+IT (\href{https://github.com/twbs/bootstrap/blob/master/LICENSE}{\tt https\+://github.\+com/twbs/bootstrap/blob/master/\+L\+I\+C\+E\+N\+SE}) 
+
+Definition at line 13 of file ie10-\/viewport-\/bug-\/workaround.\+js.
+
+
+\begin{DoxyCode}
+13                                                     \{
+14     var msViewportStyle = \hyperlink{ripples_8js_aa14f8e0338cced6720590fd2ea13bd4b}{document}.createElement(\textcolor{stringliteral}{'style'})
+15     msViewportStyle.appendChild(
+16       \hyperlink{ripples_8js_aa14f8e0338cced6720590fd2ea13bd4b}{document}.createTextNode(
+17         \textcolor{stringliteral}{'@-ms-viewport\{width:auto!important\}'}
+18       )
+19     )
+20     \hyperlink{ripples_8js_aa14f8e0338cced6720590fd2ea13bd4b}{document}.querySelector(\textcolor{stringliteral}{'head'}).appendChild(msViewportStyle)
+21   \}
+\end{DoxyCode}

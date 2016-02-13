@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['g',['g',['../jquery_8minicolors_8min_8js.html#a5cc52098afa4fad42724751f98527c84',1,'g(i, t, o) :&#160;jquery.minicolors.min.js'],['../moment_8min_8js.html#a9edc8545beca4c8931a9d238fcfac968',1,'g(a,b):&#160;moment.min.js'],['../moment_8min_8js.html#a5b3f2c413dcb58e27633c85ac06dd2bf',1,'G(a,b,c):&#160;moment.min.js']]],
+  ['gd',['gd',['../moment_8min_8js.html#a4408ff0e85c48e717263ea71747aebb4',1,'gd():&#160;moment.min.js'],['../moment_8min_8js.html#a0058ac0f0158a3b9c90d2ed51dad82bb',1,'Gd():&#160;moment.min.js']]],
+  ['generate_5fline',['generate_line',['../namespacesrc_1_1packop.html#a0bcffd2956685d6954e2059daed5a46d',1,'src::packop']]],
+  ['get_5faddress',['get_address',['../namespacesrc_1_1packop.html#a601d6640de50f995caa664b5f41e1341',1,'src::packop']]],
+  ['get_5fall_5fuuids',['get_all_uuids',['../namespacesrc_1_1database__storage.html#a63dcdcb19a6e7dd70084ebb0cbba7d53',1,'src::database_storage']]],
+  ['get_5fcurrent_5fdata',['get_current_data',['../namespacesrc_1_1database__storage.html#a0172a0a1633496517324142708a9e28a',1,'src::database_storage']]],
+  ['get_5fdelivered_5fpackages',['get_delivered_packages',['../namespacesrc_1_1database__storage.html#a7a85dd2acec16c6286249df3d55f57da',1,'src::database_storage']]],
+  ['get_5fdestination_5fof_5fpackage',['get_destination_of_package',['../namespacesrc_1_1database__storage.html#a64a0ed876f3d3d477fa6efe04d54bf88',1,'src::database_storage']]],
+  ['get_5ffirst_5fdata',['get_first_data',['../namespacesrc_1_1database__storage.html#ad126f7dcc4d7f3d5337fca7366f468cf',1,'src::database_storage']]],
+  ['get_5flocations',['get_locations',['../namespacesrc_1_1database__storage.html#a8c0870150b23fb9982d7316026e50c2b',1,'src::database_storage']]],
+  ['get_5fname',['get_name',['../namespacesrc_1_1database__storage.html#a015630f2e52077bbc64348f08228ffdb',1,'src::database_storage']]],
+  ['get_5fpackage_5fupdate',['get_package_update',['../namespacerun.html#a432d624c0f4e135377bbf7d16186bf04',1,'run']]],
+  ['get_5fspeed',['get_speed',['../classsrc_1_1packop_1_1_package.html#afcc4f2e177f4ca3cc99c17ca052d51b7',1,'src::packop::Package']]],
+  ['get_5fundelivered_5fpackages',['get_undelivered_packages',['../namespacesrc_1_1database__storage.html#a2eef22a02b0607cbc75d57d42b89ae57',1,'src::database_storage']]],
+  ['get_5fvehicle',['get_vehicle',['../classsrc_1_1packop_1_1_package.html#a5ae1df593cc8e7e0cf5578d2ef7112f5',1,'src::packop::Package']]],
+  ['getnewsize',['getNewSize',['../ripples_8js.html#a30979b284ebdc99dd49a777dd7572ce5',1,'ripples.js']]],
+  ['getrandomcolor',['getRandomColor',['../main_8js.html#a0f1deddd735efed96b177d15b665481c',1,'main.js']]],
+  ['getrelx',['getRelX',['../ripples_8js.html#a7b007710a54621b3f11981cee32a6ba5',1,'ripples.js']]],
+  ['getrely',['getRelY',['../ripples_8js.html#a6c7c6ad382c000997e103a804af2c421',1,'ripples.js']]],
+  ['getripplescolor',['getRipplesColor',['../ripples_8js.html#a9997876496e9a765d206c6be03ed17c2',1,'ripples.js']]],
+  ['gpx',['gpx',['../namespacetime__shifter.html#a701030976c24adaa37c6bbf9af499ac8',1,'time_shifter']]],
+  ['gpx_5ffiles',['gpx_files',['../namespacepackage__events.html#a962f35982bbdbfcd60bc627b6f5c283a',1,'package_events']]],
+  ['grid',['grid',['../jquery_8minicolors_8min_8js.html#a1c8848d7c3cd0f6bc35a0f44b51fac74',1,'jquery.minicolors.min.js']]]
+];

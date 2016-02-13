@@ -22,7 +22,11 @@ To commit your changes, run `git commit -m "message"`, where message is your com
 
 After you commit, run `git push`, which will send everything to the server.
 
-Oh, and you should also probably have `groovy` installed. That's what their server uses.
+Oh, and you should also probably have `groovy` installed. That's what the IDT event simulator uses.
+
+If you do not have Python 2.7.* installed, visit [https://www.python.org/downloads/](Python install site) and download the latest version of Python 2.7.
+
+If you do not have MySQL installed, visit [https://dev.mysql.com/downloads/installer/](MySQL install site) and install the correct version of MySQL for your server / system.
 
 ### Configuration ###
 
@@ -48,17 +52,17 @@ Generally, to install Python libraries, you just run `pip2 install LIBRARYNAME`,
 ### Database configuration ###
 
 Install MySQL Installer at 
-[https://dev.mysql.com/downloads/installer/](Link URL) (mysql-installer-web-community-5.7.10.0.msi - this is the first option)
+[https://dev.mysql.com/downloads/installer/](MySQL install site) (mysql-installer-web-community-5.7.10.0.msi - this is the first option)
 
 Follow the instructions on this link to successfully install MySQL: 
-[http://corlewsolutions.com/articles/article-21-how-to-install-mysql-server-5-6-on-windows-7-development-machine](Link URL)
+[http://corlewsolutions.com/articles/article-21-how-to-install-mysql-server-5-6-on-windows-7-development-machine](Installation tutorial)
 
-After installation, follow the Post-installation Steps on this page to set a root password: [http://www.tutorialspoint.com/mysql/mysql-installation.htm](Link URL)
+After installation, follow the Post-installation Steps on this page to set a root password: [http://www.tutorialspoint.com/mysql/mysql-installation.htm](Set root password)
 
 
 ### How to run tests ###
 
-We're probably going to have to write scripts to add dummy packages in a large quantity. We don't have that yet, so this is for later. 
+We do not have unit tests yet. However, the solution can be tested by running `IDT_Server/package_events.py` while the server is running to receive test data from the `.gpx` files provided.
 
 
 ## How to add stuff to the repo ##

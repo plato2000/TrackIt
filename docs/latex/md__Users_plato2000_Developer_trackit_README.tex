@@ -1,0 +1,80 @@
+\subsection*{What is this repository for?}
+
+This repository is for Parth Oza, Kevin Shen, Jagan Prem, and Cindy Chen\textquotesingle{}s 2015-\/2016 I\+DT Automated Software Testing project -\/ automated package tracking and analysis.
+
+\subsection*{How do I get set up?}
+
+\subsubsection*{Summary of set up}
+
+Run {\ttfamily git clone} using the U\+RL on the sidebar to clone the repository.
+
+We are only using the {\ttfamily master} branch for release builds -\/ as in when everything is working, we merge to master and then go back to develop for other things.
+
+To switch to the {\ttfamily master} branch, do {\ttfamily git checkout master}. Before and after every {\ttfamily git} operation you do, you should do {\ttfamily git pull} to prevent merge conflicts.
+
+After we get basic stuff done, we will switch to using different branches for each person.
+
+To add your changes to the {\ttfamily index}, you do {\ttfamily git add -\/A} or {\ttfamily git add F\+I\+L\+E\+N\+A\+ME} if you just want to add a few files.
+
+To commit your changes, run {\ttfamily git commit -\/m \char`\"{}message\char`\"{}}, where message is your commit message.
+
+After you commit, run {\ttfamily git push}, which will send everything to the server.
+
+Oh, and you should also probably have {\ttfamily groovy} installed. That\textquotesingle{}s what the I\+DT event simulator uses.
+
+If you do not have Python 2.\+7.$\ast$ installed, visit \mbox{[}\href{https://www.python.org/downloads/}{\tt https\+://www.\+python.\+org/downloads/}\mbox{]}(Python install site) and download the latest version of Python 2.\+7.
+
+If you do not have My\+S\+QL installed, visit \mbox{[}\href{https://dev.mysql.com/downloads/installer/}{\tt https\+://dev.\+mysql.\+com/downloads/installer/}\mbox{]}(My\+S\+QL install site) and install the correct version of My\+S\+QL for your server / system.
+
+\subsubsection*{Configuration}
+
+The code that is on here is serverside. Our server is going to be separate from the I\+DT server, though it may be on the same machine.
+
+\subsubsection*{Dependencies}
+
+The current dependencies are\+:
+
+
+\begin{DoxyCode}
+1 flask 0.10.1
+2 geopy 1.11.0
+3 MySQLdb 1.2.5
+4 dateutil 2.4.1
+\end{DoxyCode}
+
+
+If you add libraries to your Python installation, add them to this list so the rest of us know what to get.
+
+Generally, to install Python libraries, you just run {\ttfamily pip2 install L\+I\+B\+R\+A\+R\+Y\+N\+A\+ME}, where {\ttfamily L\+I\+B\+R\+A\+R\+Y\+N\+A\+ME} is the name of the library. {\ttfamily pip} may not be in your {\ttfamily P\+A\+TH}. If this is the case, add your python2 installation to path and run {\ttfamily python -\/m pip install L\+I\+B\+R\+A\+R\+Y\+N\+A\+ME}.
+
+\subsubsection*{Database configuration}
+
+Install My\+S\+QL Installer at \mbox{[}\href{https://dev.mysql.com/downloads/installer/}{\tt https\+://dev.\+mysql.\+com/downloads/installer/}\mbox{]}(My\+S\+QL install site) (mysql-\/installer-\/web-\/community-\/5.\+7.\+10.\+0.\+msi -\/ this is the first option)
+
+Follow the instructions on this link to successfully install My\+S\+QL\+: \mbox{[}\href{http://corlewsolutions.com/articles/article-21-how-to-install-mysql-server-5-6-on-windows-7-development-machine}{\tt http\+://corlewsolutions.\+com/articles/article-\/21-\/how-\/to-\/install-\/mysql-\/server-\/5-\/6-\/on-\/windows-\/7-\/development-\/machine}\mbox{]}(Installation tutorial)
+
+After installation, follow the Post-\/installation Steps on this page to set a root password\+: \mbox{[}\href{http://www.tutorialspoint.com/mysql/mysql-installation.htm}{\tt http\+://www.\+tutorialspoint.\+com/mysql/mysql-\/installation.\+htm}\mbox{]}(Set root password)
+
+\subsubsection*{How to run tests}
+
+We do not have unit tests yet. However, the solution can be tested by running {\ttfamily \hyperlink{package__events_8py}{I\+D\+T\+\_\+\+Server/package\+\_\+events.\+py}} while the server is running to receive test data from the {\ttfamily .gpx} files provided.
+
+\subsection*{How to add stuff to the repo}
+
+\subsubsection*{Contribution guidelines}
+
+Before you commit code, it should be commented properly and well-\/documented. It should also follow P\+E\+P-\/8.
+
+\subsubsection*{Writing tests}
+
+For later
+
+\subsubsection*{Code review}
+
+Have comments, but not too many comments. For Python, follow the P\+E\+P-\/8 conventions. Py\+Charm has plugins that do this for you and alert if you do something wrong. (If you noticed, this document doesn\textquotesingle{}t follow P\+E\+P-\/8, but it doesn\textquotesingle{}t matter since it\textquotesingle{}s not in Python \+:D)
+
+Have a docstring at the beginning of each function/class that documents what it does. Have a comment before the line of obscure bits of code to identify them. DO N\+OT have inline comments.
+
+\subsubsection*{Other guidelines}
+
+Save early, save often. Commit early, commit often. Write good commit messages. Don\textquotesingle{}t wait to comment until the end. 
