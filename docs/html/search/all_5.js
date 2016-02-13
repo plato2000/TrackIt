@@ -7,7 +7,7 @@ var searchData=
   ['changemapdisplay',['changeMapDisplay',['../main_8js.html#a578e50528efb5c415d8a5c50dd91fd5f',1,'main.js']]],
   ['clear_5fdatabase_5fand_5fcreate_5fnew',['clear_database_and_create_new',['../namespacesrc_1_1database__storage.html#ac8bfcdfbcc3f0aeb1244c86f125e89dc',1,'src::database_storage']]],
   ['clearcookies',['clearCookies',['../main_8js.html#a612897296dfd3a25348d5778cc934d15',1,'main.js']]],
-  ['click',['click',['../main_8js.html#aacf197cbf0d724aef49a3699b75a3238',1,'main.js']]],
+  ['click',['click',['../main_8js.html#ab2a102d0987686895e998da66d81ee40',1,'main.js']]],
   ['close',['close',['../bootstrap_8min_8js.html#a72fbb3628c3cc943ced8aad64247888c',1,'close():&#160;bootstrap.min.js'],['../bootstrap_8min_8js.html#afaca3a961d693f40135a872e93e71198',1,'close(jQuery):&#160;bootstrap.min.js']]],
   ['close_5fdatabase',['close_database',['../namespacesrc_1_1database__storage.html#ac8226df71c58ddf9a1d4de0e89a63bc9',1,'src::database_storage']]],
   ['colors',['colors',['../main_8js.html#a205bb968a83c85324e6b50fecdb4b630',1,'main.js']]],
