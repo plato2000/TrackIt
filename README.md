@@ -40,7 +40,7 @@ The current dependencies are:
     flask 0.10.1
     geopy 1.11.0
     MySQLdb 1.2.5
-    dateutil 2.4.1
+    python-dateutil 2.4.1
     gpxpy 1.0.0
 
 ```
