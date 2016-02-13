@@ -9,25 +9,41 @@
 \subsubsection[{\texorpdfstring{change}{change}}]{\setlength{\rightskip}{0pt plus 5cm}int change = {\bf now}-\/gpx.\+tracks\mbox{[}0\mbox{]}.segments\mbox{[}0\mbox{]}.points\mbox{[}0\mbox{]}.time.\+timestamp()+6000}\hypertarget{namespacetime__shifter_ac710c7bfde8686dcdfa07f1800ab01b5}{}\label{namespacetime__shifter_ac710c7bfde8686dcdfa07f1800ab01b5}
 
 
-Definition at line 11 of file time\+\_\+shifter.\+py.
+The seconds needed to shift the G\+PX\textquotesingle{}s time to now. 
+
+
+
+Definition at line 13 of file time\+\_\+shifter.\+py.
 
 \index{time\+\_\+shifter@{time\+\_\+shifter}!delta@{delta}}
 \index{delta@{delta}!time\+\_\+shifter@{time\+\_\+shifter}}
 \subsubsection[{\texorpdfstring{delta}{delta}}]{\setlength{\rightskip}{0pt plus 5cm}delta = datetime.\+timedelta(0, {\bf change}, 0)}\hypertarget{namespacetime__shifter_a66db7c5e4e9699c54207ab857ae72cb7}{}\label{namespacetime__shifter_a66db7c5e4e9699c54207ab857ae72cb7}
 
 
-Definition at line 12 of file time\+\_\+shifter.\+py.
+The shift represented as a datetime.\+timedelta. 
+
+
+
+Definition at line 15 of file time\+\_\+shifter.\+py.
 
 \index{time\+\_\+shifter@{time\+\_\+shifter}!file@{file}}
 \index{file@{file}!time\+\_\+shifter@{time\+\_\+shifter}}
 \subsubsection[{\texorpdfstring{file}{file}}]{\setlength{\rightskip}{0pt plus 5cm}file = open(F\+I\+L\+E\+\_\+\+N\+A\+ME, \char`\"{}w\char`\"{})}\hypertarget{namespacetime__shifter_a40a5d58ffa6e88aa578d6683ac413105}{}\label{namespacetime__shifter_a40a5d58ffa6e88aa578d6683ac413105}
 
 
-Definition at line 17 of file time\+\_\+shifter.\+py.
+The G\+PX that is being shifted. 
+
+
+
+Definition at line 22 of file time\+\_\+shifter.\+py.
 
 \index{time\+\_\+shifter@{time\+\_\+shifter}!gpx@{gpx}}
 \index{gpx@{gpx}!time\+\_\+shifter@{time\+\_\+shifter}}
 \subsubsection[{\texorpdfstring{gpx}{gpx}}]{\setlength{\rightskip}{0pt plus 5cm}gpx = gpxpy.\+parse(open(F\+I\+L\+E\+\_\+\+N\+A\+ME))}\hypertarget{namespacetime__shifter_a701030976c24adaa37c6bbf9af499ac8}{}\label{namespacetime__shifter_a701030976c24adaa37c6bbf9af499ac8}
+
+
+The G\+PX object created from the G\+PX file data. 
+
 
 
 Definition at line 9 of file time\+\_\+shifter.\+py.
@@ -37,12 +53,20 @@ Definition at line 9 of file time\+\_\+shifter.\+py.
 \subsubsection[{\texorpdfstring{now}{now}}]{\setlength{\rightskip}{0pt plus 5cm}now = time.\+time()}\hypertarget{namespacetime__shifter_afdc24ca189ea1f66dfd9245b4c970d59}{}\label{namespacetime__shifter_afdc24ca189ea1f66dfd9245b4c970d59}
 
 
-Definition at line 10 of file time\+\_\+shifter.\+py.
+The current time in seconds from epoch. 
+
+
+
+Definition at line 11 of file time\+\_\+shifter.\+py.
 
 \index{time\+\_\+shifter@{time\+\_\+shifter}!temp\+\_\+text@{temp\+\_\+text}}
 \index{temp\+\_\+text@{temp\+\_\+text}!time\+\_\+shifter@{time\+\_\+shifter}}
 \subsubsection[{\texorpdfstring{temp\+\_\+text}{temp_text}}]{\setlength{\rightskip}{0pt plus 5cm}temp\+\_\+text = gpx.\+to\+\_\+xml()}\hypertarget{namespacetime__shifter_acfe3ecceec8adb15641afbf1805061dc}{}\label{namespacetime__shifter_acfe3ecceec8adb15641afbf1805061dc}
 
 
-Definition at line 14 of file time\+\_\+shifter.\+py.
+The time-\/shifted data for the G\+PX file. 
+
+
+
+Definition at line 18 of file time\+\_\+shifter.\+py.
 

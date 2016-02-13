@@ -9,12 +9,25 @@
 \subsubsection[{\texorpdfstring{gpx\+\_\+files}{gpx_files}}]{\setlength{\rightskip}{0pt plus 5cm}gpx\+\_\+files = glob.\+glob(\char`\"{}gpx\+\_\+files/$\ast$.gpx\char`\"{})}\hypertarget{namespacepackage__events_a962f35982bbdbfcd60bc627b6f5c283a}{}\label{namespacepackage__events_a962f35982bbdbfcd60bc627b6f5c283a}
 
 
-Definition at line 4 of file package\+\_\+events.\+py.
+A list of the G\+PX files to load in for use in the run. 
 
-\index{package\+\_\+events@{package\+\_\+events}!processes@{processes}}
-\index{processes@{processes}!package\+\_\+events@{package\+\_\+events}}
-\subsubsection[{\texorpdfstring{processes}{processes}}]{\setlength{\rightskip}{0pt plus 5cm}list processes = \mbox{[}subprocess.\+Popen(\mbox{[}\char`\"{}groovy\char`\"{}, \char`\"{}Package\+Events\+Simulator.\+groovy\char`\"{}, \char`\"{}-\/{\bf n}\char`\"{}, n\mbox{]}) for {\bf n} in {\bf gpx\+\_\+files}\mbox{]}}\hypertarget{namespacepackage__events_aa17e16eb31b762381c96aa7bfdd6109c}{}\label{namespacepackage__events_aa17e16eb31b762381c96aa7bfdd6109c}
 
 
 Definition at line 5 of file package\+\_\+events.\+py.
+
+\index{package\+\_\+events@{package\+\_\+events}!processes@{processes}}
+\index{processes@{processes}!package\+\_\+events@{package\+\_\+events}}
+\subsubsection[{\texorpdfstring{processes}{processes}}]{\setlength{\rightskip}{0pt plus 5cm}list processes}\hypertarget{namespacepackage__events_aa17e16eb31b762381c96aa7bfdd6109c}{}\label{namespacepackage__events_aa17e16eb31b762381c96aa7bfdd6109c}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+1 = [subprocess.Popen([\textcolor{stringliteral}{"groovy"}, \textcolor{stringliteral}{"PackageEventsSimulator.groovy"},
+2                                \textcolor{stringliteral}{"-n"}, n]) \textcolor{keywordflow}{for} n \textcolor{keywordflow}{in} gpx\_files]
+\end{DoxyCode}
+
+
+A list of subprocesses for simulating each of the G\+PX files. 
+
+
+
+Definition at line 7 of file package\+\_\+events.\+py.
 
