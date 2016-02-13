@@ -17,7 +17,6 @@ file.close()
 
 
 ## Returns an integer representation of a rounded float.
-#
 def roundf(number):
     return int(round(number))
 
@@ -74,7 +73,7 @@ def generate_line(pixel1, pixel2):
 #
 #  @param coord A tuple of (lat, lon)
 #
-#  @returns tuple
+#  @returns Tuple coordinates on the land/water map 
 def to_pixel(coord):
     x = MAP_WIDTH / 360 * coord[1] + MAP_WIDTH / 2
     y = -MAP_HEIGHT / 180 * coord[0] + MAP_HEIGHT / 2
@@ -116,9 +115,9 @@ def vincenty(coord1, coord2):
 
 ## Returns the average of a list of numbers.
 #
-#  @param elements: list
+#  @param elements List of numbers
 #
-#  @returns float
+#  @returns Float representing the average of the numbers
 def average(elements):
     return sum(elements) / len(elements)
 
@@ -135,7 +134,7 @@ class Package():
     #
     #  Coordinates except for destination are tuples of the format:
     #  (latitude, longitude, elevation, time).
-    def __init__(self, coord, destination):       
+    def __init__(self, coord, destination):
         self.coords = [[coord]]
         self.destination = destination
         self.speeds = list(DEFAULT_SPEEDS)
@@ -156,7 +155,7 @@ class Package():
     #  @param self The object pointer
     #  @param coord The coordinate to check the mode for
     #
-    #  @returns int (0 is for land, 1 is for water)
+    #  @returns Int (0 is for land, 1 is for water)
     def get_vehicle(self, coord):
         x, y = to_pixel(coord[:2])
         if not over_land((x, y)):
@@ -168,7 +167,7 @@ class Package():
     #  and creates a new segment if needed.
     #
     #  @param self The object pointer
-    #  @param coord Tuple
+    #  @param coord Tuple of (lat, lon)
     def add_point(self, coord):
         segment = self.coords[-1]
         vehicle = self.get_vehicle(coord)
@@ -217,7 +216,7 @@ class Package():
     #
     #  @param self The object pointer
     #
-    #  @returns float The time remaining for the Package to reach its destination
+    #  @returns Float time remaining for the package to reach its destination
     def etr(self):
         segment = self.coords[-1]
         coord = segment[-1][:2]
