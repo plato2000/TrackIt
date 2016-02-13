@@ -162,9 +162,10 @@ def is_valid_uuid(uuid):
 #
 #  @returns Boolean (true if it's delivered)
 def is_delivered(uuid):
+    print "is_delivered", uuid
     results = execute_command("SELECT delivered FROM uuids WHERE uuid='" + uuid + "'", results=True)
-    # print "delivery_status:", results
-    return results[0] == 'Y'
+    print "delivery_status:", results
+    return results[0][0] == 'Y'
 
 
 ## Close database connection
