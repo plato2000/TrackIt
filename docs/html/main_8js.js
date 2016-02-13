@@ -8,7 +8,7 @@ var main_8js =
     [ "changeAdminMode", "main_8js.html#a2a84f34e6061e86f13eaa80035f1d5d4", null ],
     [ "changeMapDisplay", "main_8js.html#a578e50528efb5c415d8a5c50dd91fd5f", null ],
     [ "clearCookies", "main_8js.html#a612897296dfd3a25348d5778cc934d15", null ],
-    [ "click", "main_8js.html#aacf197cbf0d724aef49a3699b75a3238", null ],
+    [ "click", "main_8js.html#ab2a102d0987686895e998da66d81ee40", null ],
     [ "convertUpdateResults", "main_8js.html#ad52c0cd59ea9825bd00f8a31bc4f9ad4", null ],
     [ "deliveryCheckCallback", "main_8js.html#a7344efb8284f8b25da9509b0af50927b", null ],
     [ "distCallback", "main_8js.html#ab4f120a2dc41fbbd3cd2b98990649c29", null ],

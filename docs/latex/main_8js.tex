@@ -16,24 +16,24 @@ Adds delivered packages to packages monitored list if they aren\textquotesingle{
 
 
 
-Definition at line 553 of file main.\+js.
+Definition at line 564 of file main.\+js.
 
 
 \begin{DoxyCode}
-553                                 \{
-554     $.getJSON($SCRIPT\_ROOT + \textcolor{stringliteral}{'/data'}, \{\textcolor{stringliteral}{"dt"}: \textcolor{stringliteral}{"deliveredPackages"}\}, \textcolor{keyword}{function}(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}) \{
-555         \textcolor{comment}{// console.log(data.results);}
-556         \textcolor{keywordflow}{for}(var \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} = 0; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} < \hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.results.length; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}++) \{
-557             \textcolor{keywordflow}{if}(\hyperlink{main_8js_a7bcbd7191893f7300ad00bd1b8908950}{delivered}.indexOf(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.results[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]) < 0) \{
-558                 \hyperlink{main_8js_a7bcbd7191893f7300ad00bd1b8908950}{delivered}.push(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.results[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]);
-559             \}
-560             \textcolor{keywordflow}{if}(\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}.indexOf(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.results[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]) < 0) \{
-561                 \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}.push(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.results[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]);
-562                 \hyperlink{main_8js_ae99cfb389602e780ffd02f5ae2ffb62f}{addPackage}(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.results[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]);
-563             \}
-564         \}
-565     \});
-566 \}
+564                                 \{
+565     $.getJSON($SCRIPT\_ROOT + \textcolor{stringliteral}{'/data'}, \{\textcolor{stringliteral}{"dt"}: \textcolor{stringliteral}{"deliveredPackages"}\}, \textcolor{keyword}{function}(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}) \{
+566         \textcolor{comment}{// console.log(data.results);}
+567         \textcolor{keywordflow}{for}(var \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} = 0; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} < \hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.results.length; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}++) \{
+568             \textcolor{comment}{//if(delivered.indexOf(data.results[i]) < 0) \{}
+569             \textcolor{comment}{//    delivered.push(data.results[i]);}
+570             \textcolor{comment}{//\}}
+571             \textcolor{keywordflow}{if}(\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}.indexOf(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.results[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]) < 0) \{
+572                 \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}.push(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.results[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]);
+573                 \hyperlink{main_8js_ae99cfb389602e780ffd02f5ae2ffb62f}{addPackage}(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.results[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]);
+574             \}
+575         \}
+576     \});
+577 \}
 \end{DoxyCode}
 \index{main.\+js@{main.\+js}!add\+Package@{add\+Package}}
 \index{add\+Package@{add\+Package}!main.\+js@{main.\+js}}
@@ -48,34 +48,34 @@ Generic function to get package data from U\+U\+ID and add to table. This is use
 
 
 
-Definition at line 198 of file main.\+js.
+Definition at line 199 of file main.\+js.
 
 
 \begin{DoxyCode}
-198                           \{
-199     \textcolor{keywordflow}{if}(!\hyperlink{main_8js_a7f2fc3f001c9d60e9f83509eb4e944d8}{adminMode}) \{
-200         $.cookie(\textcolor{stringliteral}{"packagesMonitored"}, JSON.stringify(\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}));
-201     \}
-202     $.ajax(\{
-203         type: \textcolor{stringliteral}{'GET'},
-204         url: $SCRIPT\_ROOT + \textcolor{stringliteral}{'/data'},
-205         dataType: \textcolor{stringliteral}{'json'},
-206         success: \textcolor{keyword}{function}(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}) \{
-207             var name = \hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.name;
-208             var start\_coords = \textcolor{keyword}{new} google.maps.LatLng(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.start\_coords[0], 
+199                           \{
+200     \textcolor{keywordflow}{if}(!\hyperlink{main_8js_a7f2fc3f001c9d60e9f83509eb4e944d8}{adminMode}) \{
+201         $.cookie(\textcolor{stringliteral}{"packagesMonitored"}, JSON.stringify(\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}));
+202     \}
+203     $.ajax(\{
+204         type: \textcolor{stringliteral}{'GET'},
+205         url: $SCRIPT\_ROOT + \textcolor{stringliteral}{'/data'},
+206         dataType: \textcolor{stringliteral}{'json'},
+207         success: \textcolor{keyword}{function}(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}) \{
+208             var name = \hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.name;
+209             var start\_coords = \textcolor{keyword}{new} google.maps.LatLng(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.start\_coords[0], 
       \hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.start\_coords[1]);
-209             var end\_coords = \textcolor{keyword}{new} google.maps.LatLng(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.end\_coords[0], \hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.end\_coords[1]);
-210             var curr\_coords = \textcolor{keyword}{new} google.maps.LatLng(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.curr\_coords[0], 
+210             var end\_coords = \textcolor{keyword}{new} google.maps.LatLng(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.end\_coords[0], \hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.end\_coords[1]);
+211             var curr\_coords = \textcolor{keyword}{new} google.maps.LatLng(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.curr\_coords[0], 
       \hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.curr\_coords[1]);
-211             \hyperlink{main_8js_a19e632cab94d67a54007824cff4e985b}{destinations}[uuid] = end\_coords;
-212             \hyperlink{main_8js_a205bb968a83c85324e6b50fecdb4b630}{colors}[uuid] = \hyperlink{main_8js_a0f1deddd735efed96b177d15b665481c}{getRandomColor}();
-213             \hyperlink{main_8js_a3d659090a82a559bdf2779c954627771}{addRow}(uuid, name, start\_coords, curr\_coords, end\_coords)
-214             \hyperlink{main_8js_af706c6c897429353a19872f2cb33ef38}{updateData}();
-215         \},
-216         \hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}: \{\textcolor{stringliteral}{"dt"}:\textcolor{stringliteral}{"initialData"}, \textcolor{stringliteral}{"uuid"}:uuid\},
-217         async: \textcolor{keyword}{true}
-218     \});
-219 \}
+212             \hyperlink{main_8js_a19e632cab94d67a54007824cff4e985b}{destinations}[uuid] = end\_coords;
+213             \hyperlink{main_8js_a205bb968a83c85324e6b50fecdb4b630}{colors}[uuid] = \hyperlink{main_8js_a0f1deddd735efed96b177d15b665481c}{getRandomColor}();
+214             \hyperlink{main_8js_a3d659090a82a559bdf2779c954627771}{addRow}(uuid, name, start\_coords, curr\_coords, end\_coords)
+215             \hyperlink{main_8js_af706c6c897429353a19872f2cb33ef38}{updateData}();
+216         \},
+217         \hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}: \{\textcolor{stringliteral}{"dt"}:\textcolor{stringliteral}{"initialData"}, \textcolor{stringliteral}{"uuid"}:uuid\},
+218         async: \textcolor{keyword}{true}
+219     \});
+220 \}
 \end{DoxyCode}
 \index{main.\+js@{main.\+js}!add\+Package\+From\+Text\+Input@{add\+Package\+From\+Text\+Input}}
 \index{add\+Package\+From\+Text\+Input@{add\+Package\+From\+Text\+Input}!main.\+js@{main.\+js}}
@@ -90,33 +90,33 @@ Adds package to table, monitored list after it\textquotesingle{}s entered into t
 
 
 
-Definition at line 171 of file main.\+js.
+Definition at line 172 of file main.\+js.
 
 
 \begin{DoxyCode}
-171                                    \{
-172     var uuid = $(\textcolor{stringliteral}{"#newPackage"}).val();
-173     $.ajax(\{
-174         type: \textcolor{stringliteral}{'GET'},
-175         url: $SCRIPT\_ROOT + \textcolor{stringliteral}{'/data'},
-176         dataType: \textcolor{stringliteral}{'json'},
-177         success: \textcolor{keyword}{function}(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}) \{
-178             var isValidUUID = \hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.results;
-179             \textcolor{keywordflow}{if}(isValidUUID) \{
-180                 $(\textcolor{stringliteral}{"#newPackage"}).val(\textcolor{stringliteral}{""});
-181                 \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}.push(uuid);
-182                 \hyperlink{main_8js_ae99cfb389602e780ffd02f5ae2ffb62f}{addPackage}(uuid);
-183             \} \textcolor{keywordflow}{else} \{
-184                 $(\textcolor{stringliteral}{"#invalidUUIDAlert"}).show();
-185                 $(\textcolor{stringliteral}{"#invalidUUIDAlert"}).fadeTo(2000, 500).slideUp(500, \textcolor{keyword}{function}()\{
-186                     $(\textcolor{stringliteral}{"#invalidUUIDAlert"}).hide();
-187                 \});
-188             \}
-189         \},
-190         \hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}: \{\textcolor{stringliteral}{"dt"}:\textcolor{stringliteral}{"isValidUUID"}, \textcolor{stringliteral}{"uuid"}:uuid\},
-191         async: \textcolor{keyword}{true}
-192     \});
-193 \}
+172                                    \{
+173     var uuid = $(\textcolor{stringliteral}{"#newPackage"}).val();
+174     $.ajax(\{
+175         type: \textcolor{stringliteral}{'GET'},
+176         url: $SCRIPT\_ROOT + \textcolor{stringliteral}{'/data'},
+177         dataType: \textcolor{stringliteral}{'json'},
+178         success: \textcolor{keyword}{function}(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}) \{
+179             var isValidUUID = \hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.results;
+180             \textcolor{keywordflow}{if}(isValidUUID) \{
+181                 $(\textcolor{stringliteral}{"#newPackage"}).val(\textcolor{stringliteral}{""});
+182                 \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}.push(uuid);
+183                 \hyperlink{main_8js_ae99cfb389602e780ffd02f5ae2ffb62f}{addPackage}(uuid);
+184             \} \textcolor{keywordflow}{else} \{
+185                 $(\textcolor{stringliteral}{"#invalidUUIDAlert"}).show();
+186                 $(\textcolor{stringliteral}{"#invalidUUIDAlert"}).fadeTo(2000, 500).slideUp(500, \textcolor{keyword}{function}()\{
+187                     $(\textcolor{stringliteral}{"#invalidUUIDAlert"}).hide();
+188                 \});
+189             \}
+190         \},
+191         \hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}: \{\textcolor{stringliteral}{"dt"}:\textcolor{stringliteral}{"isValidUUID"}, \textcolor{stringliteral}{"uuid"}:uuid\},
+192         async: \textcolor{keyword}{true}
+193     \});
+194 \}
 \end{DoxyCode}
 \index{main.\+js@{main.\+js}!add\+Row@{add\+Row}}
 \index{add\+Row@{add\+Row}!main.\+js@{main.\+js}}
@@ -195,22 +195,22 @@ Adds undelivered packages to packages monitored list if they aren\textquotesingl
 
 
 
-Definition at line 539 of file main.\+js.
+Definition at line 550 of file main.\+js.
 
 
 \begin{DoxyCode}
-539                                   \{
-540     $.getJSON($SCRIPT\_ROOT + \textcolor{stringliteral}{'/data'}, \{\textcolor{stringliteral}{"dt"}: \textcolor{stringliteral}{"undeliveredPackages"}\}, \textcolor{keyword}{function}(
+550                                   \{
+551     $.getJSON($SCRIPT\_ROOT + \textcolor{stringliteral}{'/data'}, \{\textcolor{stringliteral}{"dt"}: \textcolor{stringliteral}{"undeliveredPackages"}\}, \textcolor{keyword}{function}(
       \hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}) \{
-541         \textcolor{comment}{// console.log(data.results);}
-542         \textcolor{keywordflow}{for}(var \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} = 0; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} < \hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.results.length; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}++) \{
-543             \textcolor{keywordflow}{if}(\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}.indexOf(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.results[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]) < 0) \{
-544                 \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}.push(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.results[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]);
-545                 \hyperlink{main_8js_ae99cfb389602e780ffd02f5ae2ffb62f}{addPackage}(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.results[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]);
-546             \}
-547         \}
-548     \});
-549 \}
+552         \textcolor{comment}{// console.log(data.results);}
+553         \textcolor{keywordflow}{for}(var \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} = 0; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} < \hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.results.length; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}++) \{
+554             \textcolor{keywordflow}{if}(\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}.indexOf(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.results[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]) < 0) \{
+555                 \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}.push(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.results[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]);
+556                 \hyperlink{main_8js_ae99cfb389602e780ffd02f5ae2ffb62f}{addPackage}(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.results[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]);
+557             \}
+558         \}
+559     \});
+560 \}
 \end{DoxyCode}
 \index{main.\+js@{main.\+js}!change\+Admin\+Mode@{change\+Admin\+Mode}}
 \index{change\+Admin\+Mode@{change\+Admin\+Mode}!main.\+js@{main.\+js}}
@@ -225,32 +225,34 @@ Toggles mode between admin mode and regular user. For now, this is not done with
 
 
 
-Definition at line 353 of file main.\+js.
+Definition at line 356 of file main.\+js.
 
 
 \begin{DoxyCode}
-353                            \{
-354     \textcolor{keywordflow}{for}(var \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} = 0; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} < \hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}.length; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}++) \{
-355         \textcolor{comment}{// console.log("removing row " + packagesOnMap[i]);}
-356         \hyperlink{main_8js_a34aa323b5e6a4413fb439ccc1e404e9f}{removeRow}(\hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]);
-357     \}
-358     \hyperlink{main_8js_a7f2fc3f001c9d60e9f83509eb4e944d8}{adminMode} = !\hyperlink{main_8js_a7f2fc3f001c9d60e9f83509eb4e944d8}{adminMode};
-359     \textcolor{keywordflow}{if}(!\hyperlink{main_8js_a7f2fc3f001c9d60e9f83509eb4e944d8}{adminMode}) \{
-360         $(\textcolor{stringliteral}{"#loginButton"}).html(\textcolor{stringliteral}{"Log in&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"});
-361         $(\textcolor{stringliteral}{"#deliveredPackagesButton"}).html(\textcolor{stringliteral}{""});
-362         $(\textcolor{stringliteral}{"#undeliveredPackagesButton"}).html(\textcolor{stringliteral}{""});
-363         $(\textcolor{stringliteral}{"#listBody"}).html(\textcolor{stringliteral}{""});
-364         \hyperlink{main_8js_a2c9bf86fb554b8e6f080ad224b490ca5}{loadFunction}();
-365     \} \textcolor{keywordflow}{else} \{
-366         $(\textcolor{stringliteral}{"#loginButton"}).html(\textcolor{stringliteral}{"Log out&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"});
-367         $(\textcolor{stringliteral}{"#deliveredPackagesButton"}).html(\textcolor{stringliteral}{"<a href='javascript:addDeliveredPackages()'>Track delivered
+356                            \{
+357 
+358     \textcolor{keywordflow}{while}(\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}.length > 0) \{
+359         \textcolor{comment}{//console.log("removing row " + packagesOnMap[0]);}
+360         \hyperlink{main_8js_a34aa323b5e6a4413fb439ccc1e404e9f}{removeRow}(\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[0]);
+361         console.log(\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored});
+362     \}
+363     \hyperlink{main_8js_a7f2fc3f001c9d60e9f83509eb4e944d8}{adminMode} = !\hyperlink{main_8js_a7f2fc3f001c9d60e9f83509eb4e944d8}{adminMode};
+364     \textcolor{keywordflow}{if}(!\hyperlink{main_8js_a7f2fc3f001c9d60e9f83509eb4e944d8}{adminMode}) \{
+365         $(\textcolor{stringliteral}{"#loginButton"}).html(\textcolor{stringliteral}{"Log in&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"});
+366         $(\textcolor{stringliteral}{"#deliveredPackagesButton"}).html(\textcolor{stringliteral}{""});
+367         $(\textcolor{stringliteral}{"#undeliveredPackagesButton"}).html(\textcolor{stringliteral}{""});
+368         $(\textcolor{stringliteral}{"#listBody"}).html(\textcolor{stringliteral}{""});
+369         \hyperlink{main_8js_a2c9bf86fb554b8e6f080ad224b490ca5}{loadFunction}();
+370     \} \textcolor{keywordflow}{else} \{
+371         $(\textcolor{stringliteral}{"#loginButton"}).html(\textcolor{stringliteral}{"Log out&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"});
+372         $(\textcolor{stringliteral}{"#deliveredPackagesButton"}).html(\textcolor{stringliteral}{"<a href='javascript:addDeliveredPackages()'>Track delivered
        packages</a>"});
-368         $(\textcolor{stringliteral}{"#undeliveredPackagesButton"}).html(\textcolor{stringliteral}{"<a href='javascript:addUndeliveredPackages()'>Track
+373         $(\textcolor{stringliteral}{"#undeliveredPackagesButton"}).html(\textcolor{stringliteral}{"<a href='javascript:addUndeliveredPackages()'>Track
        undelivered packages</a>"});
-369         $(\textcolor{stringliteral}{"#listBody"}).html(\textcolor{stringliteral}{""});
-370         \textcolor{comment}{//adminLoad();}
-371     \}
-372 \}
+374         $(\textcolor{stringliteral}{"#listBody"}).html(\textcolor{stringliteral}{""});
+375         \textcolor{comment}{//adminLoad();}
+376     \}
+377 \}
 \end{DoxyCode}
 \index{main.\+js@{main.\+js}!change\+Map\+Display@{change\+Map\+Display}}
 \index{change\+Map\+Display@{change\+Map\+Display}!main.\+js@{main.\+js}}
@@ -266,32 +268,38 @@ Changes visibility of package on map. Called onclick of checkbox on table and on
 
 
 
-Definition at line 393 of file main.\+js.
+Definition at line 398 of file main.\+js.
 
 
 \begin{DoxyCode}
-393                                        \{
-394     \textcolor{comment}{// console.log(id);}
-395     \textcolor{comment}{// If package is no longer displayed}
-396     \textcolor{keywordflow}{if}(!checked) \{
-397         \textcolor{comment}{// Remove package from on map list}
-398         \hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}.splice($.inArray(\textcolor{keywordtype}{id}, \hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}), 1);
-399         \textcolor{comment}{// Remove map line from the map}
-400         \hyperlink{main_8js_a4f01a6af54b3f7e164d2dbbb37e04f86}{mapLines}[\hyperlink{moment_8min_8js_a46207c7091ab14788d5b3e389828eddb}{id}].setMap(null);
-401         \textcolor{comment}{// Remove markers from map}
-402         \hyperlink{main_8js_a2b33618c9f421e426905ee387b6c6bc5}{destinationMapMarkers}[\hyperlink{moment_8min_8js_a46207c7091ab14788d5b3e389828eddb}{id}].setMap(null);
-403         \hyperlink{main_8js_a90467ae029236a37b76f3383e82bb730}{originMapMarkers}[\hyperlink{moment_8min_8js_a46207c7091ab14788d5b3e389828eddb}{id}].setMap(null);
-404     \} \textcolor{keywordflow}{else} \{
-405         \textcolor{comment}{// Put package on the map list}
-406         \hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}.push(\textcolor{keywordtype}{id});
-407     \}
-408     \textcolor{comment}{// Doesn't store in cookies if in admin mode so on logout it doesn't keep all the packages}
-409     \textcolor{keywordflow}{if}(!\hyperlink{main_8js_a7f2fc3f001c9d60e9f83509eb4e944d8}{adminMode}) \{
-410         $.cookie(\textcolor{stringliteral}{"packagesOnMap"}, JSON.stringify(\hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}));
-411     \}
-412     \textcolor{comment}{// Updates data and map to reflect changes if new package added to the map list}
-413     \hyperlink{main_8js_af706c6c897429353a19872f2cb33ef38}{updateData}();
-414 \}
+398                                        \{
+399     \textcolor{comment}{// console.log(id);}
+400     \textcolor{comment}{// If package is no longer displayed}
+401     \textcolor{keywordflow}{if}(!checked) \{
+402         \textcolor{comment}{// Remove package from on map list}
+403         \textcolor{keywordflow}{if}(\hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}.indexOf(\textcolor{keywordtype}{id}) > -1) \{
+404             \hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}.splice($.inArray(\textcolor{keywordtype}{id}, \hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}), 1);
+405         \}
+406         \textcolor{comment}{// Remove map line from the map}
+407         \hyperlink{main_8js_a4f01a6af54b3f7e164d2dbbb37e04f86}{mapLines}[\hyperlink{moment_8min_8js_a46207c7091ab14788d5b3e389828eddb}{id}].setMap(null);
+408         \textcolor{comment}{// Remove markers from map}
+409         \hyperlink{main_8js_a2b33618c9f421e426905ee387b6c6bc5}{destinationMapMarkers}[\hyperlink{moment_8min_8js_a46207c7091ab14788d5b3e389828eddb}{id}].setMap(null);
+410         \hyperlink{main_8js_a90467ae029236a37b76f3383e82bb730}{originMapMarkers}[\hyperlink{moment_8min_8js_a46207c7091ab14788d5b3e389828eddb}{id}].setMap(null);
+411         \textcolor{keyword}{delete} \hyperlink{main_8js_a2b33618c9f421e426905ee387b6c6bc5}{destinationMapMarkers}[\hyperlink{moment_8min_8js_a46207c7091ab14788d5b3e389828eddb}{id}];
+412         \textcolor{keyword}{delete} \hyperlink{main_8js_a90467ae029236a37b76f3383e82bb730}{originMapMarkers}[\hyperlink{moment_8min_8js_a46207c7091ab14788d5b3e389828eddb}{id}];
+413         \textcolor{keyword}{delete} \hyperlink{main_8js_a4f01a6af54b3f7e164d2dbbb37e04f86}{mapLines}[\hyperlink{moment_8min_8js_a46207c7091ab14788d5b3e389828eddb}{id}];
+414 
+415     \} \textcolor{keywordflow}{else} \{
+416         \textcolor{comment}{// Put package on the map list}
+417         \hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}.push(\textcolor{keywordtype}{id});
+418     \}
+419     \textcolor{comment}{// Doesn't store in cookies if in admin mode so on logout it doesn't keep all the packages}
+420     \textcolor{keywordflow}{if}(!\hyperlink{main_8js_a7f2fc3f001c9d60e9f83509eb4e944d8}{adminMode}) \{
+421         $.cookie(\textcolor{stringliteral}{"packagesOnMap"}, JSON.stringify(\hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}));
+422     \}
+423     \textcolor{comment}{// Updates data and map to reflect changes if new package added to the map list}
+424     \hyperlink{main_8js_af706c6c897429353a19872f2cb33ef38}{updateData}();
+425 \}
 \end{DoxyCode}
 \index{main.\+js@{main.\+js}!clear\+Cookies@{clear\+Cookies}}
 \index{clear\+Cookies@{clear\+Cookies}!main.\+js@{main.\+js}}
@@ -306,22 +314,22 @@ For testing purposes -\/ clears cookies for packages\+On\+Map and packages\+Moni
 
 
 
-Definition at line 630 of file main.\+js.
+Definition at line 641 of file main.\+js.
 
 
 \begin{DoxyCode}
-630                         \{
-631     $.cookie(\textcolor{stringliteral}{'packagesOnMap'}, \textcolor{stringliteral}{'[]'});
-632     $.cookie(\textcolor{stringliteral}{'packagesMonitored'}, \textcolor{stringliteral}{'[]'});
-633 \}
+641                         \{
+642     $.cookie(\textcolor{stringliteral}{'packagesOnMap'}, \textcolor{stringliteral}{'[]'});
+643     $.cookie(\textcolor{stringliteral}{'packagesMonitored'}, \textcolor{stringliteral}{'[]'});
+644 \}
 \end{DoxyCode}
 \index{main.\+js@{main.\+js}!click@{click}}
 \index{click@{click}!main.\+js@{main.\+js}}
-\subsubsection[{\texorpdfstring{click(function(event) \lcurly{} event.\+stop\+Propagation(); var target = \$(event.\+target); if ( target.\+closest(""td"").\+attr(""colspan"") $>$ 1 ) \lcurly{}   target.\+closest(""td"").\+parent().\+hide();  target.\+closest(""tr"").\+prev().\+find(""td\+:first"").\+html(\textquotesingle{}$<$span class=""glyphicon glyphicon-\/plus"" aria-\/label=""Expand""$>$\textquotesingle{}); \rcurly{} else \lcurly{}   if (target.\+closest(""tr"").\+find(""td\+:first"").\+html().\+index\+Of(""glyphicon-\/plus"") $>$ -\/1) \lcurly{} target.\+closest(""tr"").\+next().\+show(); target.\+closest(""tr"").\+find(""td\+:first"").\+html(\textquotesingle{}$<$span class=""glyphicon glyphicon-\/minus"" aria-\/label=""Collapse""$>$\textquotesingle{}); \rcurly{} else \lcurly{} target.\+closest(""tr"").\+next().\+hide(); target.\+closest(""tr"").\+find(""td\+:first"").\+html(\textquotesingle{}$<$span class=""glyphicon glyphicon-\/plus"" aria-\/label=""Expand""$>$\textquotesingle{}); \rcurly{} \rcurly{} \rcurly{})}{click(function(event) \{ event.stopPropagation(); var target = $(event.target); if ( target.closest("td").attr("colspan") > 1 ) \{   target.closest("td").parent().hide();  target.closest("tr").prev().find("td:first").html('<span class="glyphicon glyphicon-plus" aria-label="Expand">'); \} else \{   if (target.closest("tr").find("td:first").html().indexOf("glyphicon-plus") > -1) \{ target.closest("tr").next().show(); target.closest("tr").find("td:first").html('<span class="glyphicon glyphicon-minus" aria-label="Collapse">'); \} else \{ target.closest("tr").next().hide(); target.closest("tr").find("td:first").html('<span class="glyphicon glyphicon-plus" aria-label="Expand">'); \} \} \})}}]{\setlength{\rightskip}{0pt plus 5cm}function table click (
+\subsubsection[{\texorpdfstring{click(function(event) \lcurly{} event.\+stop\+Propagation(); var target = \$(event.\+target); if ( target.\+closest(""td"").\+attr(""colspan"") $>$ 1 ) \lcurly{}   target.\+closest(""td"").\+parent().\+hide();  target.\+closest(""tr"").\+prev().\+find(""td\+:first"").\+html(\textquotesingle{}$<$br /$>$$<$span class=""glyphicon glyphicon-\/plus"" aria-\/label=""Expand""$>$\textquotesingle{}); \rcurly{} else \lcurly{}   if (target.\+closest(""tr"").\+find(""td\+:first"").\+html().\+index\+Of(""glyphicon-\/plus"") $>$ -\/1) \lcurly{} target.\+closest(""tr"").\+next().\+show(); target.\+closest(""tr"").\+find(""td\+:first"").\+html(\textquotesingle{}$<$span class=""glyphicon glyphicon-\/minus"" aria-\/label=""Collapse""$>$\textquotesingle{}); \rcurly{} else \lcurly{} target.\+closest(""tr"").\+next().\+hide(); target.\+closest(""tr"").\+find(""td\+:first"").\+html(\textquotesingle{}$<$span class=""glyphicon glyphicon-\/plus"" aria-\/label=""Expand""$>$\textquotesingle{}); \rcurly{} \rcurly{} \rcurly{})}{click(function(event) \{ event.stopPropagation(); var target = $(event.target); if ( target.closest("td").attr("colspan") > 1 ) \{   target.closest("td").parent().hide();  target.closest("tr").prev().find("td:first").html('<br /><span class="glyphicon glyphicon-plus" aria-label="Expand">'); \} else \{   if (target.closest("tr").find("td:first").html().indexOf("glyphicon-plus") > -1) \{ target.closest("tr").next().show(); target.closest("tr").find("td:first").html('<span class="glyphicon glyphicon-minus" aria-label="Collapse">'); \} else \{ target.closest("tr").next().hide(); target.closest("tr").find("td:first").html('<span class="glyphicon glyphicon-plus" aria-label="Expand">'); \} \} \})}}]{\setlength{\rightskip}{0pt plus 5cm}function table click (
 \begin{DoxyParamCaption}
-\item[{function(event) \{ event.\+stop\+Propagation(); var target = \$(event.\+target); {\bf if} ( target.\+closest(\char`\"{}td\char`\"{}).attr(\char`\"{}colspan\char`\"{}) $>$ 1 ) \{   target.\+closest(\char`\"{}td\char`\"{}).parent().hide();  target.\+closest(\char`\"{}tr\char`\"{}).prev().find(\char`\"{}td\+:first\char`\"{}).html(\textquotesingle{}$<$span class=\char`\"{}glyphicon glyphicon-\/plus\char`\"{} aria-\/label=\char`\"{}Expand\char`\"{}$>$\textquotesingle{}); \} else \{   {\bf if} (target.\+closest(\char`\"{}tr\char`\"{}).find(\char`\"{}td\+:first\char`\"{}).html().index\+Of(\char`\"{}glyphicon-\/plus\char`\"{}) $>$ -\/1) \{ target.\+closest(\char`\"{}tr\char`\"{}).next().show(); target.\+closest(\char`\"{}tr\char`\"{}).find(\char`\"{}td\+:first\char`\"{}).html(\textquotesingle{}$<$span class=\char`\"{}glyphicon glyphicon-\/minus\char`\"{} aria-\/label=\char`\"{}Collapse\char`\"{}$>$\textquotesingle{}); \} else \{ target.\+closest(\char`\"{}tr\char`\"{}).next().hide(); target.\+closest(\char`\"{}tr\char`\"{}).find(\char`\"{}td\+:first\char`\"{}).html(\textquotesingle{}$<$span class=\char`\"{}glyphicon glyphicon-\/plus\char`\"{} aria-\/label=\char`\"{}Expand\char`\"{}$>$\textquotesingle{}); \} \} \}}]{}
+\item[{function(event) \{ event.\+stop\+Propagation(); var target = \$(event.\+target); {\bf if} ( target.\+closest(\char`\"{}td\char`\"{}).attr(\char`\"{}colspan\char`\"{}) $>$ 1 ) \{   target.\+closest(\char`\"{}td\char`\"{}).parent().hide();  target.\+closest(\char`\"{}tr\char`\"{}).prev().find(\char`\"{}td\+:first\char`\"{}).html(\textquotesingle{}$<$br /$>$$<$span class=\char`\"{}glyphicon glyphicon-\/plus\char`\"{} aria-\/label=\char`\"{}Expand\char`\"{}$>$\textquotesingle{}); \} else \{   {\bf if} (target.\+closest(\char`\"{}tr\char`\"{}).find(\char`\"{}td\+:first\char`\"{}).html().index\+Of(\char`\"{}glyphicon-\/plus\char`\"{}) $>$ -\/1) \{ target.\+closest(\char`\"{}tr\char`\"{}).next().show(); target.\+closest(\char`\"{}tr\char`\"{}).find(\char`\"{}td\+:first\char`\"{}).html(\textquotesingle{}$<$span class=\char`\"{}glyphicon glyphicon-\/minus\char`\"{} aria-\/label=\char`\"{}Collapse\char`\"{}$>$\textquotesingle{}); \} else \{ target.\+closest(\char`\"{}tr\char`\"{}).next().hide(); target.\+closest(\char`\"{}tr\char`\"{}).find(\char`\"{}td\+:first\char`\"{}).html(\textquotesingle{}$<$span class=\char`\"{}glyphicon glyphicon-\/plus\char`\"{} aria-\/label=\char`\"{}Expand\char`\"{}$>$\textquotesingle{}); \} \} \}}]{}
 \end{DoxyParamCaption}
-)}\hypertarget{main_8js_aacf197cbf0d724aef49a3699b75a3238}{}\label{main_8js_aacf197cbf0d724aef49a3699b75a3238}
+)}\hypertarget{main_8js_ab2a102d0987686895e998da66d81ee40}{}\label{main_8js_ab2a102d0987686895e998da66d81ee40}
 
 
 Manages dropdown rows -\/ hides and shows, changes icon at beginning. 
@@ -339,25 +347,25 @@ Converts data results from server to Google Maps coordinates, elevation, and tim
 
 
 
-Definition at line 225 of file main.\+js.
+Definition at line 226 of file main.\+js.
 
 
 \begin{DoxyCode}
-225                                        \{
-226     \textcolor{comment}{//console.log(results);}
-227     var newResults = [];
-228     \textcolor{keywordflow}{for}(var \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} = 0; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} < results.length; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}++) \{
-229         newResults.push(
-230             \{
-231                 \textcolor{stringliteral}{"coords"}: \textcolor{keyword}{new} google.maps.LatLng(results[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}][\textcolor{stringliteral}{'coords'}][0], results[i][\textcolor{stringliteral}{'coords'}][1]),
-232                 \textcolor{stringliteral}{"ele"}: results[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}][\textcolor{stringliteral}{'ele'}],
-233                 \textcolor{stringliteral}{"time"}: results[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}][\textcolor{stringliteral}{'time'}]
-234             \}
-235         );
-236         \textcolor{comment}{// console.log("results[i]['coords']: " + results[i]['coords']);}
-237     \}
-238     \textcolor{keywordflow}{return} newResults;
-239 \}
+226                                        \{
+227     \textcolor{comment}{//console.log(results);}
+228     var newResults = [];
+229     \textcolor{keywordflow}{for}(var \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} = 0; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} < results.length; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}++) \{
+230         newResults.push(
+231             \{
+232                 \textcolor{stringliteral}{"coords"}: \textcolor{keyword}{new} google.maps.LatLng(results[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}][\textcolor{stringliteral}{'coords'}][0], results[i][\textcolor{stringliteral}{'coords'}][1]),
+233                 \textcolor{stringliteral}{"ele"}: results[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}][\textcolor{stringliteral}{'ele'}],
+234                 \textcolor{stringliteral}{"time"}: results[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}][\textcolor{stringliteral}{'time'}]
+235             \}
+236         );
+237         \textcolor{comment}{// console.log("results[i]['coords']: " + results[i]['coords']);}
+238     \}
+239     \textcolor{keywordflow}{return} newResults;
+240 \}
 \end{DoxyCode}
 \index{main.\+js@{main.\+js}!delivery\+Check\+Callback@{delivery\+Check\+Callback}}
 \index{delivery\+Check\+Callback@{delivery\+Check\+Callback}!main.\+js@{main.\+js}}
@@ -373,23 +381,24 @@ The callback function for the check if a package is delivered. It calls the upda
 
 
 
-Definition at line 266 of file main.\+js.
+Definition at line 267 of file main.\+js.
 
 
 \begin{DoxyCode}
-266                                               \{
-267     \textcolor{keywordflow}{return} \textcolor{keyword}{function}(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data})\{
-268         \textcolor{keywordflow}{if}(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.results) \{
-269             \hyperlink{main_8js_a7bcbd7191893f7300ad00bd1b8908950}{delivered}.push(\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[\hyperlink{namespacerun_a097929f584dbbd7b464a79534332d16c}{index}]);
-270         \}
-271         $.getJSON($SCRIPT\_ROOT + \textcolor{stringliteral}{'/data'}, \{
-272             \textcolor{stringliteral}{"dt"}: \textcolor{stringliteral}{"getNewPoints"},
-273             \textcolor{stringliteral}{"uuid"}: \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[\hyperlink{namespacerun_a097929f584dbbd7b464a79534332d16c}{index}],
-274             \textcolor{stringliteral}{"time"}: \hyperlink{main_8js_a1d88ce79f484d9bfb4056fa9e356bea7}{packagePositions}[\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[
+267                                               \{
+268     \textcolor{keywordflow}{return} \textcolor{keyword}{function}(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data})\{
+269         \textcolor{comment}{//console.log(index + " " + data.results);}
+270         \textcolor{keywordflow}{if}(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.results) \{
+271             \hyperlink{main_8js_a7bcbd7191893f7300ad00bd1b8908950}{delivered}.push(\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[\hyperlink{namespacerun_a097929f584dbbd7b464a79534332d16c}{index}]);
+272         \}
+273         $.getJSON($SCRIPT\_ROOT + \textcolor{stringliteral}{'/data'}, \{
+274             \textcolor{stringliteral}{"dt"}: \textcolor{stringliteral}{"getNewPoints"},
+275             \textcolor{stringliteral}{"uuid"}: \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[\hyperlink{namespacerun_a097929f584dbbd7b464a79534332d16c}{index}],
+276             \textcolor{stringliteral}{"time"}: \hyperlink{main_8js_a1d88ce79f484d9bfb4056fa9e356bea7}{packagePositions}[\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[
       \hyperlink{namespacerun_a097929f584dbbd7b464a79534332d16c}{index}]].slice(-1)[0][\textcolor{stringliteral}{'time'}]
-275         \}, \hyperlink{main_8js_a733855036aac13a8db397970b1f54e3c}{updateCallback}(\hyperlink{namespacerun_a097929f584dbbd7b464a79534332d16c}{index}, concat));
-276     \};
-277 \}
+277         \}, \hyperlink{main_8js_a733855036aac13a8db397970b1f54e3c}{updateCallback}(\hyperlink{namespacerun_a097929f584dbbd7b464a79534332d16c}{index}, concat));
+278     \};
+279 \}
 \end{DoxyCode}
 \index{main.\+js@{main.\+js}!dist\+Callback@{dist\+Callback}}
 \index{dist\+Callback@{dist\+Callback}!main.\+js@{main.\+js}}
@@ -404,16 +413,16 @@ The callback function for the receiving of the distance remaining for the packag
 
 
 
-Definition at line 281 of file main.\+js.
+Definition at line 283 of file main.\+js.
 
 
 \begin{DoxyCode}
-281                              \{
-282     \textcolor{keywordflow}{return} \textcolor{keyword}{function}(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}) \{
-283         $(\textcolor{stringliteral}{"#dist"} + \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[\hyperlink{namespacerun_a097929f584dbbd7b464a79534332d16c}{index}]).text(Math.round(
+283                              \{
+284     \textcolor{keywordflow}{return} \textcolor{keyword}{function}(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}) \{
+285         $(\textcolor{stringliteral}{"#dist"} + \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[\hyperlink{namespacerun_a097929f584dbbd7b464a79534332d16c}{index}]).text(Math.round(
       \hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.results / 100) / 10 + \textcolor{stringliteral}{" km"});
-284     \}
-285 \}
+286     \}
+287 \}
 \end{DoxyCode}
 \index{main.\+js@{main.\+js}!escape\+Reg\+Exp@{escape\+Reg\+Exp}}
 \index{escape\+Reg\+Exp@{escape\+Reg\+Exp}!main.\+js@{main.\+js}}
@@ -449,16 +458,16 @@ The callback function for the receiving of the time remaining for the package to
 
 
 
-Definition at line 290 of file main.\+js.
+Definition at line 292 of file main.\+js.
 
 
 \begin{DoxyCode}
-290                             \{
-291     \textcolor{keywordflow}{return} \textcolor{keyword}{function}(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}) \{
-292         $(\textcolor{stringliteral}{"#etr"} + \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[\hyperlink{namespacerun_a097929f584dbbd7b464a79534332d16c}{index}]).text(moment().add(
+292                             \{
+293     \textcolor{keywordflow}{return} \textcolor{keyword}{function}(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}) \{
+294         $(\textcolor{stringliteral}{"#etr"} + \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[\hyperlink{namespacerun_a097929f584dbbd7b464a79534332d16c}{index}]).text(moment().add(
       \hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.results, \textcolor{stringliteral}{'seconds'}).calendar());
-293     \}
-294 \}
+295     \}
+296 \}
 \end{DoxyCode}
 \index{main.\+js@{main.\+js}!get\+Random\+Color@{get\+Random\+Color}}
 \index{get\+Random\+Color@{get\+Random\+Color}!main.\+js@{main.\+js}}
@@ -495,25 +504,25 @@ The callback function for the info\+Window for clicking on the map marker.
 
 
 
-Definition at line 419 of file main.\+js.
+Definition at line 430 of file main.\+js.
 
 
 \begin{DoxyCode}
-419                                                 \{
-420     \textcolor{keywordflow}{return} \textcolor{keyword}{function}() \{
-421         \textcolor{keywordflow}{if}(!destination) \{
-422             \hyperlink{main_8js_a01c7912c86e502f69c34d6fa66662ac6}{infowindow}.setContent(\textcolor{stringliteral}{'<div id="content"><p>'} + 
+430                                                 \{
+431     \textcolor{keywordflow}{return} \textcolor{keyword}{function}() \{
+432         \textcolor{keywordflow}{if}(!destination) \{
+433             \hyperlink{main_8js_a01c7912c86e502f69c34d6fa66662ac6}{infowindow}.setContent(\textcolor{stringliteral}{'<div id="content"><p>'} + 
       \hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}[\hyperlink{namespacerun_a097929f584dbbd7b464a79534332d16c}{index}] + \textcolor{stringliteral}{'</p></div>'});
-423             \hyperlink{main_8js_a01c7912c86e502f69c34d6fa66662ac6}{infowindow}.open(map, \hyperlink{main_8js_a90467ae029236a37b76f3383e82bb730}{originMapMarkers}[
+434             \hyperlink{main_8js_a01c7912c86e502f69c34d6fa66662ac6}{infowindow}.open(map, \hyperlink{main_8js_a90467ae029236a37b76f3383e82bb730}{originMapMarkers}[
       \hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}[\hyperlink{namespacerun_a097929f584dbbd7b464a79534332d16c}{index}]]);
-424         \} \textcolor{keywordflow}{else} \{
-425             \hyperlink{main_8js_a01c7912c86e502f69c34d6fa66662ac6}{infowindow}.setContent(\textcolor{stringliteral}{'<div id="content"><p>'} + 
+435         \} \textcolor{keywordflow}{else} \{
+436             \hyperlink{main_8js_a01c7912c86e502f69c34d6fa66662ac6}{infowindow}.setContent(\textcolor{stringliteral}{'<div id="content"><p>'} + 
       \hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}[\hyperlink{namespacerun_a097929f584dbbd7b464a79534332d16c}{index}] + \textcolor{stringliteral}{'</p></div>'});
-426             \hyperlink{main_8js_a01c7912c86e502f69c34d6fa66662ac6}{infowindow}.open(map, \hyperlink{main_8js_a2b33618c9f421e426905ee387b6c6bc5}{destinationMapMarkers}[
+437             \hyperlink{main_8js_a01c7912c86e502f69c34d6fa66662ac6}{infowindow}.open(map, \hyperlink{main_8js_a2b33618c9f421e426905ee387b6c6bc5}{destinationMapMarkers}[
       \hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}[\hyperlink{namespacerun_a097929f584dbbd7b464a79534332d16c}{index}]]);
-427         \}
-428     \};
-429 \}
+438         \}
+439     \};
+440 \}
 \end{DoxyCode}
 \index{main.\+js@{main.\+js}!init\+Map@{init\+Map}}
 \index{init\+Map@{init\+Map}!main.\+js@{main.\+js}}
@@ -528,23 +537,23 @@ Creates the map in the \char`\"{}map\char`\"{} div after google maps api loads a
 
 
 
-Definition at line 638 of file main.\+js.
+Definition at line 649 of file main.\+js.
 
 
 \begin{DoxyCode}
-638                    \{
-639     map = \textcolor{keyword}{new} google.maps.Map(\hyperlink{ripples_8js_aa14f8e0338cced6720590fd2ea13bd4b}{document}.getElementById(\textcolor{stringliteral}{'map'}), \{
-640         zoom: 2,
-641         center: \{lat: 0, lng: 0\},
-642         minZoom: 2
-643     \});
-644     \hyperlink{main_8js_a01c7912c86e502f69c34d6fa66662ac6}{infowindow} = \textcolor{keyword}{new} google.maps.InfoWindow(\{
-645         content: \textcolor{stringliteral}{"hello"}
-646     \});
-647     \hyperlink{main_8js_a2c9bf86fb554b8e6f080ad224b490ca5}{loadFunction}();
-648     setInterval(\hyperlink{main_8js_af706c6c897429353a19872f2cb33ef38}{updateData}, 10000);
-649     $.fn.modal.Constructor.DEFAULTS.keyboard = \textcolor{keyword}{false};
-650 \}
+649                    \{
+650     map = \textcolor{keyword}{new} google.maps.Map(\hyperlink{ripples_8js_aa14f8e0338cced6720590fd2ea13bd4b}{document}.getElementById(\textcolor{stringliteral}{'map'}), \{
+651         zoom: 2,
+652         center: \{lat: 0, lng: 0\},
+653         minZoom: 2
+654     \});
+655     \hyperlink{main_8js_a01c7912c86e502f69c34d6fa66662ac6}{infowindow} = \textcolor{keyword}{new} google.maps.InfoWindow(\{
+656         content: \textcolor{stringliteral}{"hello"}
+657     \});
+658     \hyperlink{main_8js_a2c9bf86fb554b8e6f080ad224b490ca5}{loadFunction}();
+659     setInterval(\hyperlink{main_8js_af706c6c897429353a19872f2cb33ef38}{updateData}, 10000);
+660     $.fn.modal.Constructor.DEFAULTS.keyboard = \textcolor{keyword}{false};
+661 \}
 \end{DoxyCode}
 \index{main.\+js@{main.\+js}!load\+Function@{load\+Function}}
 \index{load\+Function@{load\+Function}!main.\+js@{main.\+js}}
@@ -559,21 +568,21 @@ For page load and mode toggle -\/ gets data from cookies and adds to list.
 
 
 
-Definition at line 617 of file main.\+js.
+Definition at line 628 of file main.\+js.
 
 
 \begin{DoxyCode}
-617                         \{
-618     \textcolor{keywordflow}{if} (typeof $.cookie(\textcolor{stringliteral}{'packagesOnMap'}) == \textcolor{stringliteral}{'undefined'}) \{
-619         $.cookie(\textcolor{stringliteral}{'packagesMonitored'}, \textcolor{stringliteral}{'[]'});
-620     \}
-621     \textcolor{keywordflow}{if} (typeof $.cookie(\textcolor{stringliteral}{'packagesOnMap'}) == \textcolor{stringliteral}{'undefined'}) \{
-622         $.cookie(\textcolor{stringliteral}{'packagesOnMap'}, \textcolor{stringliteral}{'[]'});
-623     \}
-624     console.log(\textcolor{stringliteral}{"packagesMonitored: "} +$.cookie(\textcolor{stringliteral}{"packagesMonitored"}) );
-625     \hyperlink{main_8js_a5e2369539a560e1d5630d99699250ca4}{writePackages}(JSON.parse($.cookie(\textcolor{stringliteral}{"packagesMonitored"})), JSON.parse($.cookie(\textcolor{stringliteral}{"
+628                         \{
+629     \textcolor{keywordflow}{if} (typeof $.cookie(\textcolor{stringliteral}{'packagesOnMap'}) == \textcolor{stringliteral}{'undefined'}) \{
+630         $.cookie(\textcolor{stringliteral}{'packagesMonitored'}, \textcolor{stringliteral}{'[]'});
+631     \}
+632     \textcolor{keywordflow}{if} (typeof $.cookie(\textcolor{stringliteral}{'packagesOnMap'}) == \textcolor{stringliteral}{'undefined'}) \{
+633         $.cookie(\textcolor{stringliteral}{'packagesOnMap'}, \textcolor{stringliteral}{'[]'});
+634     \}
+635     console.log(\textcolor{stringliteral}{"packagesMonitored: "} +$.cookie(\textcolor{stringliteral}{"packagesMonitored"}) );
+636     \hyperlink{main_8js_a5e2369539a560e1d5630d99699250ca4}{writePackages}(JSON.parse($.cookie(\textcolor{stringliteral}{"packagesMonitored"})), JSON.parse($.cookie(\textcolor{stringliteral}{"
       packagesOnMap"})));
-626 \}
+637 \}
 \end{DoxyCode}
 \index{main.\+js@{main.\+js}!location\+Callback@{location\+Callback}}
 \index{location\+Callback@{location\+Callback}!main.\+js@{main.\+js}}
@@ -589,35 +598,35 @@ Callback function for set\+Location\+Name. It calls itself in a few seconds if t
 
 
 
-Definition at line 499 of file main.\+js.
+Definition at line 510 of file main.\+js.
 
 
 \begin{DoxyCode}
-499                                       \{
-500     \textcolor{keywordflow}{return} \textcolor{keyword}{function} (results, status) \{
-501         \textcolor{keywordflow}{if} (status !== google.maps.GeocoderStatus.OK) \{
-502             \textcolor{comment}{// console.log("status: " + status + " id: " + id);}
-503             \textcolor{keywordflow}{if} (status == \textcolor{stringliteral}{"OVER\_QUERY\_LIMIT"}) \{
-504                 \textcolor{comment}{// console.log(status);}
-505                 setTimeout(\textcolor{keyword}{function} () \{
-506                     \hyperlink{main_8js_a57d760f8a6da116945a372314d39a78c}{setLocationName}(\textcolor{keywordtype}{id}, latlng);
-507                 \}, 5000);
-508                 \textcolor{keywordflow}{return};
-509             \}
-510             \textcolor{keywordflow}{if} ($(\textcolor{keywordtype}{id}).text() == \textcolor{stringliteral}{"Loading..."}) \{
-511                 $(\hyperlink{moment_8min_8js_a46207c7091ab14788d5b3e389828eddb}{id}).text(\textcolor{stringliteral}{"No name for location."});
-512             \}
-513         \}
-514         \textcolor{comment}{// This is checking to see if the Geocoder Status is OK before proceeding}
-515         \textcolor{keywordflow}{if} (status == google.maps.GeocoderStatus.OK) \{
-516             \textcolor{comment}{// console.log(results);}
-517             var address = (results[0].formatted\_address);
-518             \textcolor{comment}{//console.log("id: " + id);}
-519             $(\hyperlink{moment_8min_8js_a46207c7091ab14788d5b3e389828eddb}{id}).text(address);
-520             \textcolor{comment}{//console.log("address: " + address);}
-521         \}
-522     \};
-523 \}
+510                                       \{
+511     \textcolor{keywordflow}{return} \textcolor{keyword}{function} (results, status) \{
+512         \textcolor{keywordflow}{if} (status !== google.maps.GeocoderStatus.OK) \{
+513             \textcolor{comment}{// console.log("status: " + status + " id: " + id);}
+514             \textcolor{keywordflow}{if} (status == \textcolor{stringliteral}{"OVER\_QUERY\_LIMIT"}) \{
+515                 \textcolor{comment}{// console.log(status);}
+516                 setTimeout(\textcolor{keyword}{function} () \{
+517                     \hyperlink{main_8js_a57d760f8a6da116945a372314d39a78c}{setLocationName}(\textcolor{keywordtype}{id}, latlng);
+518                 \}, 5000);
+519                 \textcolor{keywordflow}{return};
+520             \}
+521             \textcolor{keywordflow}{if} ($(\textcolor{keywordtype}{id}).text() == \textcolor{stringliteral}{"Loading..."}) \{
+522                 $(\hyperlink{moment_8min_8js_a46207c7091ab14788d5b3e389828eddb}{id}).text(\textcolor{stringliteral}{"No name for location."});
+523             \}
+524         \}
+525         \textcolor{comment}{// This is checking to see if the Geocoder Status is OK before proceeding}
+526         \textcolor{keywordflow}{if} (status == google.maps.GeocoderStatus.OK) \{
+527             \textcolor{comment}{// console.log(results);}
+528             var address = (results[0].formatted\_address);
+529             \textcolor{comment}{//console.log("id: " + id);}
+530             $(\hyperlink{moment_8min_8js_a46207c7091ab14788d5b3e389828eddb}{id}).text(address);
+531             \textcolor{comment}{//console.log("address: " + address);}
+532         \}
+533     \};
+534 \}
 \end{DoxyCode}
 \index{main.\+js@{main.\+js}!on@{on}}
 \index{on@{on}!main.\+js@{main.\+js}}
@@ -644,23 +653,23 @@ Creates a path for the map pin of a given hex color.
 
 
 
-Definition at line 376 of file main.\+js.
+Definition at line 381 of file main.\+js.
 
 
 \begin{DoxyCode}
-376                           \{
-377     \textcolor{keywordflow}{return} \{
-378         \textcolor{comment}{//path: 'M 0,0 C -2,-20 -10,-22 -10,-30 A 10,10 0 1,1 10,-30 C 10,-22 2,-20 0,0 z M -2,-30 a 2,2 0
+381                           \{
+382     \textcolor{keywordflow}{return} \{
+383         \textcolor{comment}{//path: 'M 0,0 C -2,-20 -10,-22 -10,-30 A 10,10 0 1,1 10,-30 C 10,-22 2,-20 0,0 z M -2,-30 a 2,2 0
        1,1 4,0 2,2 0 1,1 -4,0',}
-379         path: \textcolor{stringliteral}{'M 0,0 C -2,-20 -10,-22 -10,-30 A 10,10 0 1,1 10,-30 C 10,-22 2,-20 0,0'},
-380         fillColor: color,
-381         fillOpacity: 1,
-382         strokeColor: \textcolor{stringliteral}{'#000'},
-383         strokeWeight: 2,
-384         scale: 1,
-385         labelOrigin: \textcolor{keyword}{new} google.maps.Point(0, -30)
-386     \};
-387 \}
+384         path: \textcolor{stringliteral}{'M 0,0 C -2,-20 -10,-22 -10,-30 A 10,10 0 1,1 10,-30 C 10,-22 2,-20 0,0'},
+385         fillColor: color,
+386         fillOpacity: 1,
+387         strokeColor: \textcolor{stringliteral}{'#000'},
+388         strokeWeight: 2,
+389         scale: 1,
+390         labelOrigin: \textcolor{keyword}{new} google.maps.Point(0, -30)
+391     \};
+392 \}
 \end{DoxyCode}
 \index{main.\+js@{main.\+js}!populate\+Dropdown@{populate\+Dropdown}}
 \index{populate\+Dropdown@{populate\+Dropdown}!main.\+js@{main.\+js}}
@@ -749,17 +758,18 @@ Definition at line 151 of file main.\+js.
 151                          \{
 152     \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}.splice($.inArray(uuid, \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}), 1);
 153     $(\textcolor{stringliteral}{"#row"} + uuid).\textcolor{keyword}{remove}();
-154     \hyperlink{main_8js_a578e50528efb5c415d8a5c50dd91fd5f}{changeMapDisplay}(uuid, \textcolor{keyword}{false});
-155     \textcolor{comment}{//if(packagesOnMap.indexOf(uuid) > -1) \{}
-156     \textcolor{comment}{//    // console.log("changing display of " + uuid);}
-157     \textcolor{comment}{//    changeMapDisplay(uuid, false);}
-158     \textcolor{comment}{//\}}
-159     \hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}.splice($.inArray(uuid, \hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}), 1);
-160     \textcolor{keywordflow}{if}(!\hyperlink{main_8js_a7f2fc3f001c9d60e9f83509eb4e944d8}{adminMode}) \{
-161         $.cookie(\textcolor{stringliteral}{"packagesOnMap"}, JSON.stringify(\hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}));
-162         $.cookie(\textcolor{stringliteral}{"packagesMonitored"}, JSON.stringify(\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}));
-163     \}
-164 \}
+154     $(\textcolor{stringliteral}{"#dropdownTR"} + uuid).\textcolor{keyword}{remove}();
+155     \hyperlink{main_8js_a578e50528efb5c415d8a5c50dd91fd5f}{changeMapDisplay}(uuid, \textcolor{keyword}{false});
+156     \textcolor{comment}{//if(packagesOnMap.indexOf(uuid) > -1) \{}
+157     \textcolor{comment}{//    // console.log("changing display of " + uuid);}
+158     \textcolor{comment}{//    changeMapDisplay(uuid, false);}
+159     \textcolor{comment}{//\}}
+160     \hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}.splice($.inArray(uuid, \hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}), 1);
+161     \textcolor{keywordflow}{if}(!\hyperlink{main_8js_a7f2fc3f001c9d60e9f83509eb4e944d8}{adminMode}) \{
+162         $.cookie(\textcolor{stringliteral}{"packagesOnMap"}, JSON.stringify(\hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}));
+163         $.cookie(\textcolor{stringliteral}{"packagesMonitored"}, JSON.stringify(\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}));
+164     \}
+165 \}
 \end{DoxyCode}
 \index{main.\+js@{main.\+js}!replace\+All@{replace\+All}}
 \index{replace\+All@{replace\+All}!main.\+js@{main.\+js}}
@@ -797,20 +807,20 @@ Selects all for display on map.
 
 
 
-Definition at line 570 of file main.\+js.
+Definition at line 581 of file main.\+js.
 
 
 \begin{DoxyCode}
-570                      \{
-571     \textcolor{keywordflow}{for}(var \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} = 0; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} < \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}.length; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}++) \{
-572         \textcolor{keywordflow}{if}(\hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}.indexOf(\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[
+581                      \{
+582     \textcolor{keywordflow}{for}(var \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} = 0; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} < \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}.length; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}++) \{
+583         \textcolor{keywordflow}{if}(\hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}.indexOf(\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[
       \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]) < 0) \{
-573             \textcolor{comment}{//packagesOnMap.push(packagesMonitored[i]);}
-574             $(\textcolor{stringliteral}{"#checkbox"} + \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]).prop(\textcolor{stringliteral}{"checked"}, \textcolor{keyword}{true});
-575             \hyperlink{main_8js_a578e50528efb5c415d8a5c50dd91fd5f}{changeMapDisplay}(\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[i], \textcolor{keyword}{true});
-576         \}
-577     \}
-578 \}
+584             \textcolor{comment}{//packagesOnMap.push(packagesMonitored[i]);}
+585             $(\textcolor{stringliteral}{"#checkbox"} + \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]).prop(\textcolor{stringliteral}{"checked"}, \textcolor{keyword}{true});
+586             \hyperlink{main_8js_a578e50528efb5c415d8a5c50dd91fd5f}{changeMapDisplay}(\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[i], \textcolor{keyword}{true});
+587         \}
+588     \}
+589 \}
 \end{DoxyCode}
 \index{main.\+js@{main.\+js}!select\+Delivered@{select\+Delivered}}
 \index{select\+Delivered@{select\+Delivered}!main.\+js@{main.\+js}}
@@ -825,18 +835,18 @@ Selects all delivered packages for display on map.
 
 
 
-Definition at line 594 of file main.\+js.
+Definition at line 605 of file main.\+js.
 
 
 \begin{DoxyCode}
-594                            \{
-595     \textcolor{keywordflow}{for}(var \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} = 0; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} < \hyperlink{main_8js_a7bcbd7191893f7300ad00bd1b8908950}{delivered}.length; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}++) \{
-596         \textcolor{keywordflow}{if}(\hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}.indexOf(\hyperlink{main_8js_a7bcbd7191893f7300ad00bd1b8908950}{delivered}[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]) < 0) \{
-597             $(\textcolor{stringliteral}{"#checkbox"} + \hyperlink{main_8js_a7bcbd7191893f7300ad00bd1b8908950}{delivered}[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]).prop(\textcolor{stringliteral}{"checked"}, \textcolor{keyword}{true});
-598             \hyperlink{main_8js_a578e50528efb5c415d8a5c50dd91fd5f}{changeMapDisplay}(\hyperlink{main_8js_a7bcbd7191893f7300ad00bd1b8908950}{delivered}[i], \textcolor{keyword}{true});
-599         \}
-600     \}
-601 \}
+605                            \{
+606     \textcolor{keywordflow}{for}(var \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} = 0; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} < \hyperlink{main_8js_a7bcbd7191893f7300ad00bd1b8908950}{delivered}.length; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}++) \{
+607         \textcolor{keywordflow}{if}(\hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}.indexOf(\hyperlink{main_8js_a7bcbd7191893f7300ad00bd1b8908950}{delivered}[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]) < 0) \{
+608             $(\textcolor{stringliteral}{"#checkbox"} + \hyperlink{main_8js_a7bcbd7191893f7300ad00bd1b8908950}{delivered}[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]).prop(\textcolor{stringliteral}{"checked"}, \textcolor{keyword}{true});
+609             \hyperlink{main_8js_a578e50528efb5c415d8a5c50dd91fd5f}{changeMapDisplay}(\hyperlink{main_8js_a7bcbd7191893f7300ad00bd1b8908950}{delivered}[i], \textcolor{keyword}{true});
+610         \}
+611     \}
+612 \}
 \end{DoxyCode}
 \index{main.\+js@{main.\+js}!select\+None@{select\+None}}
 \index{select\+None@{select\+None}!main.\+js@{main.\+js}}
@@ -851,20 +861,20 @@ Unselects all packages for display on map.
 
 
 
-Definition at line 582 of file main.\+js.
+Definition at line 593 of file main.\+js.
 
 
 \begin{DoxyCode}
-582                       \{
-583     \textcolor{keywordflow}{for}(var \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} = 0; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} < \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}.length; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}++) \{
-584         \textcolor{keywordflow}{if}(\hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}.indexOf(\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[
+593                       \{
+594     \textcolor{keywordflow}{for}(var \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} = 0; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} < \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}.length; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}++) \{
+595         \textcolor{keywordflow}{if}(\hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}.indexOf(\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[
       \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]) > -1) \{
-585             $(\textcolor{stringliteral}{"#checkbox"} + \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]).prop(\textcolor{stringliteral}{"checked"}, \textcolor{keyword}{false});
-586             \hyperlink{main_8js_a578e50528efb5c415d8a5c50dd91fd5f}{changeMapDisplay}(\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[i], \textcolor{keyword}{false});
-587         \}
-588     \}
-589     \textcolor{comment}{//packagesOnMap = [];}
-590 \}
+596             $(\textcolor{stringliteral}{"#checkbox"} + \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]).prop(\textcolor{stringliteral}{"checked"}, \textcolor{keyword}{false});
+597             \hyperlink{main_8js_a578e50528efb5c415d8a5c50dd91fd5f}{changeMapDisplay}(\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[i], \textcolor{keyword}{false});
+598         \}
+599     \}
+600     \textcolor{comment}{//packagesOnMap = [];}
+601 \}
 \end{DoxyCode}
 \index{main.\+js@{main.\+js}!select\+Undelivered@{select\+Undelivered}}
 \index{select\+Undelivered@{select\+Undelivered}!main.\+js@{main.\+js}}
@@ -879,20 +889,20 @@ Selects all undelivered packages for display on map.
 
 
 
-Definition at line 605 of file main.\+js.
+Definition at line 616 of file main.\+js.
 
 
 \begin{DoxyCode}
-605                              \{
-606     \textcolor{keywordflow}{for}(var \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} = 0; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} < \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}.length; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}++) \{
-607         \textcolor{keywordflow}{if}(\hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}.indexOf(\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[
+616                              \{
+617     \textcolor{keywordflow}{for}(var \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} = 0; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} < \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}.length; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}++) \{
+618         \textcolor{keywordflow}{if}(\hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}.indexOf(\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[
       \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]) < 0 && \hyperlink{main_8js_a7bcbd7191893f7300ad00bd1b8908950}{delivered}.indexOf(\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[i]) < 0) \{
-608             \textcolor{comment}{//packagesOnMap.push(packagesMonitored[i]);}
-609             $(\textcolor{stringliteral}{"#checkbox"} + \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]).prop(\textcolor{stringliteral}{"checked"}, \textcolor{keyword}{true});
-610             \hyperlink{main_8js_a578e50528efb5c415d8a5c50dd91fd5f}{changeMapDisplay}(\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[i], \textcolor{keyword}{true});
-611         \}
-612     \}
-613 \}
+619             \textcolor{comment}{//packagesOnMap.push(packagesMonitored[i]);}
+620             $(\textcolor{stringliteral}{"#checkbox"} + \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]).prop(\textcolor{stringliteral}{"checked"}, \textcolor{keyword}{true});
+621             \hyperlink{main_8js_a578e50528efb5c415d8a5c50dd91fd5f}{changeMapDisplay}(\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[i], \textcolor{keyword}{true});
+622         \}
+623     \}
+624 \}
 \end{DoxyCode}
 \index{main.\+js@{main.\+js}!set\+Location\+Name@{set\+Location\+Name}}
 \index{set\+Location\+Name@{set\+Location\+Name}!main.\+js@{main.\+js}}
@@ -908,16 +918,16 @@ Uses reverse geocoding to get human-\/readable name for coordinates. It calls th
 
 
 
-Definition at line 529 of file main.\+js.
+Definition at line 540 of file main.\+js.
 
 
 \begin{DoxyCode}
-529                                      \{
-530     \textcolor{comment}{// console.log("lat: " + latlng.lat() + " lng: " + latlng.lng());}
-531     \textcolor{comment}{// This is making the Geocode request}
-532     var geocoder = \textcolor{keyword}{new} google.maps.Geocoder();
-533     geocoder.geocode(\{\textcolor{stringliteral}{'latLng'}: latlng\}, \hyperlink{main_8js_a09263c55674477ebb19c9655832480fa}{locationCallback}(\textcolor{keywordtype}{id}, latlng));
-534 \}
+540                                      \{
+541     \textcolor{comment}{// console.log("lat: " + latlng.lat() + " lng: " + latlng.lng());}
+542     \textcolor{comment}{// This is making the Geocode request}
+543     var geocoder = \textcolor{keyword}{new} google.maps.Geocoder();
+544     geocoder.geocode(\{\textcolor{stringliteral}{'latLng'}: latlng\}, \hyperlink{main_8js_a09263c55674477ebb19c9655832480fa}{locationCallback}(\textcolor{keywordtype}{id}, latlng));
+545 \}
 \end{DoxyCode}
 \index{main.\+js@{main.\+js}!update\+Callback@{update\+Callback}}
 \index{update\+Callback@{update\+Callback}!main.\+js@{main.\+js}}
@@ -933,29 +943,29 @@ Used to reset scope because this is called from an asynchronous function. Withou
 
 
 
-Definition at line 245 of file main.\+js.
+Definition at line 246 of file main.\+js.
 
 
 \begin{DoxyCode}
-245                                        \{
-246     \textcolor{keywordflow}{return} \textcolor{keyword}{function}(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}) \{
-247         \textcolor{keywordflow}{if}(concat) \{
-248             \hyperlink{main_8js_a1d88ce79f484d9bfb4056fa9e356bea7}{packagePositions}[\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[
+246                                        \{
+247     \textcolor{keywordflow}{return} \textcolor{keyword}{function}(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}) \{
+248         \textcolor{keywordflow}{if}(concat) \{
+249             \hyperlink{main_8js_a1d88ce79f484d9bfb4056fa9e356bea7}{packagePositions}[\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[
       \hyperlink{namespacerun_a097929f584dbbd7b464a79534332d16c}{index}]] = \hyperlink{main_8js_a1d88ce79f484d9bfb4056fa9e356bea7}{packagePositions}[packagesMonitored[\hyperlink{namespacerun_a097929f584dbbd7b464a79534332d16c}{index}]].concat(
       \hyperlink{main_8js_ad52c0cd59ea9825bd00f8a31bc4f9ad4}{convertUpdateResults}(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.results));
-249         \} \textcolor{keywordflow}{else} \{
-250             \hyperlink{main_8js_a1d88ce79f484d9bfb4056fa9e356bea7}{packagePositions}[packagesMonitored[\hyperlink{namespacerun_a097929f584dbbd7b464a79534332d16c}{index}]] = 
+250         \} \textcolor{keywordflow}{else} \{
+251             \hyperlink{main_8js_a1d88ce79f484d9bfb4056fa9e356bea7}{packagePositions}[packagesMonitored[\hyperlink{namespacerun_a097929f584dbbd7b464a79534332d16c}{index}]] = 
       \hyperlink{main_8js_ad52c0cd59ea9825bd00f8a31bc4f9ad4}{convertUpdateResults}(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.results);
-251         \}
-252         \textcolor{comment}{// console.log("i: " + index);}
-253         \textcolor{comment}{// console.log("packagesMonitored[i]: " + packagesMonitored[index]);}
-254         \textcolor{comment}{// console.log("packagePositions[^]: " + packagePositions[packagesMonitored[index]]);}
-255         \textcolor{keywordflow}{if}(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.results.length > 0) \{
-256             \hyperlink{main_8js_a57d760f8a6da116945a372314d39a78c}{setLocationName}(\textcolor{stringliteral}{"#current"} + packagesMonitored[\hyperlink{namespacerun_a097929f584dbbd7b464a79534332d16c}{index}], 
+252         \}
+253         \textcolor{comment}{// console.log("i: " + index);}
+254         \textcolor{comment}{// console.log("packagesMonitored[i]: " + packagesMonitored[index]);}
+255         \textcolor{comment}{// console.log("packagePositions[^]: " + packagePositions[packagesMonitored[index]]);}
+256         \textcolor{keywordflow}{if}(\hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}.results.length > 0) \{
+257             \hyperlink{main_8js_a57d760f8a6da116945a372314d39a78c}{setLocationName}(\textcolor{stringliteral}{"#current"} + packagesMonitored[\hyperlink{namespacerun_a097929f584dbbd7b464a79534332d16c}{index}], 
       \hyperlink{main_8js_a1d88ce79f484d9bfb4056fa9e356bea7}{packagePositions}[packagesMonitored[index]].slice(-1)[0][\textcolor{stringliteral}{'coords'}]);
-257         \}
-258     \};
-259 \}
+258         \}
+259     \};
+260 \}
 \end{DoxyCode}
 \index{main.\+js@{main.\+js}!update\+Data@{update\+Data}}
 \index{update\+Data@{update\+Data}!main.\+js@{main.\+js}}
@@ -970,47 +980,48 @@ Gets new points from server. It performs checks for delivery status, etr, and di
 
 
 
-Definition at line 299 of file main.\+js.
+Definition at line 301 of file main.\+js.
 
 
 \begin{DoxyCode}
-299                       \{
-300     \textcolor{keywordflow}{for}(var \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} = 0; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} < \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}.length; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}++) \{
-301         \textcolor{keywordflow}{if}(!(\hyperlink{main_8js_a7bcbd7191893f7300ad00bd1b8908950}{delivered}.indexOf(\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]) > -1)) \{
-302             \textcolor{keywordflow}{if} (\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[i] in \hyperlink{main_8js_a1d88ce79f484d9bfb4056fa9e356bea7}{packagePositions}) \{
-303                 $.ajax(\{
-304                     type: \textcolor{stringliteral}{'GET'},
-305                     url: $SCRIPT\_ROOT + \textcolor{stringliteral}{'/data'},
-306                     dataType: \textcolor{stringliteral}{'json'},
-307                     success: \hyperlink{main_8js_a7344efb8284f8b25da9509b0af50927b}{deliveryCheckCallback}(i, \textcolor{keyword}{true}),
-308                     \hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}: \{\textcolor{stringliteral}{"dt"}:\textcolor{stringliteral}{"isDelivered"}, \textcolor{stringliteral}{"uuid"}:\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[
+301                       \{
+302     \textcolor{keywordflow}{for}(var \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} = 0; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} < \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}.length; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}++) \{
+303         \textcolor{keywordflow}{if}(!(\hyperlink{main_8js_a7bcbd7191893f7300ad00bd1b8908950}{delivered}.indexOf(\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]) > -1)) \{
+304             \textcolor{keywordflow}{if} (\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[i] in \hyperlink{main_8js_a1d88ce79f484d9bfb4056fa9e356bea7}{packagePositions}) \{
+305                 $.ajax(\{
+306                     type: \textcolor{stringliteral}{'GET'},
+307                     url: $SCRIPT\_ROOT + \textcolor{stringliteral}{'/data'},
+308                     dataType: \textcolor{stringliteral}{'json'},
+309                     success: \hyperlink{main_8js_a7344efb8284f8b25da9509b0af50927b}{deliveryCheckCallback}(i, \textcolor{keyword}{true}),
+310                     \hyperlink{jquery_8minicolors_8min_8js_aea19536ea1b0831afd52b4c870cd8661}{data}: \{\textcolor{stringliteral}{"dt"}:\textcolor{stringliteral}{"isDelivered"}, \textcolor{stringliteral}{"uuid"}:\hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[
       \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]\},
-309                     async: \textcolor{keyword}{true}
-310                 \});
-311             \} \textcolor{keywordflow}{else} \{
-312                 $.getJSON($SCRIPT\_ROOT + \textcolor{stringliteral}{'/data'}, \{
-313                     \textcolor{stringliteral}{"dt"}: \textcolor{stringliteral}{"getNewPoints"},
-314                     \textcolor{stringliteral}{"uuid"}: \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}],
-315                     \textcolor{stringliteral}{"time"}: 0
-316                 \}, \hyperlink{main_8js_a733855036aac13a8db397970b1f54e3c}{updateCallback}(i, \textcolor{keyword}{false}));
-317             \}
-318             \textcolor{comment}{// console.log("getting etr for " + packagesMonitored[i]);}
-319             $.getJSON($SCRIPT\_ROOT + \textcolor{stringliteral}{'/data'}, \{
-320                 \textcolor{stringliteral}{"dt"}: \textcolor{stringliteral}{"getETR"},
-321                 \textcolor{stringliteral}{"uuid"}: \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]
-322             \}, \hyperlink{main_8js_af35fa17610a22ebfb17ba93a6255600b}{etrCallback}(i));
-323             $.getJSON($SCRIPT\_ROOT + \textcolor{stringliteral}{'/data'}, \{
-324                 \textcolor{stringliteral}{"dt"}: \textcolor{stringliteral}{"getDistance"},
-325                 \textcolor{stringliteral}{"uuid"}: \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]
-326             \}, \hyperlink{main_8js_ab4f120a2dc41fbbd3cd2b98990649c29}{distCallback}(i));
-327         \} \textcolor{keywordflow}{else} \{
-328             \textcolor{comment}{// console.log(packagesMonitored[i] + " is delivered");}
-329             $(\textcolor{stringliteral}{"#etr"} + \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]).text(\textcolor{stringliteral}{"Delivered"});
-330             $(\textcolor{stringliteral}{"#dist"} + \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]).text(\textcolor{stringliteral}{"0 km"});
-331         \}
-332     \}
-333     \hyperlink{main_8js_a1f5de2f863a9aa3f590f015a0d3ab621}{updateMap}();
-334 \}
+311                     async: \textcolor{keyword}{true}
+312                 \});
+313             \} \textcolor{keywordflow}{else} \{
+314                 $.getJSON($SCRIPT\_ROOT + \textcolor{stringliteral}{'/data'}, \{
+315                     \textcolor{stringliteral}{"dt"}: \textcolor{stringliteral}{"getNewPoints"},
+316                     \textcolor{stringliteral}{"uuid"}: \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}],
+317                     \textcolor{stringliteral}{"time"}: 0
+318                 \}, \hyperlink{main_8js_a733855036aac13a8db397970b1f54e3c}{updateCallback}(i, \textcolor{keyword}{false}));
+319             \}
+320             \textcolor{comment}{// console.log("getting etr for " + packagesMonitored[i]);}
+321             $.getJSON($SCRIPT\_ROOT + \textcolor{stringliteral}{'/data'}, \{
+322                 \textcolor{stringliteral}{"dt"}: \textcolor{stringliteral}{"getETR"},
+323                 \textcolor{stringliteral}{"uuid"}: \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]
+324             \}, \hyperlink{main_8js_af35fa17610a22ebfb17ba93a6255600b}{etrCallback}(i));
+325             $.getJSON($SCRIPT\_ROOT + \textcolor{stringliteral}{'/data'}, \{
+326                 \textcolor{stringliteral}{"dt"}: \textcolor{stringliteral}{"getDistance"},
+327                 \textcolor{stringliteral}{"uuid"}: \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]
+328             \}, \hyperlink{main_8js_ab4f120a2dc41fbbd3cd2b98990649c29}{distCallback}(i));
+329         \} \textcolor{keywordflow}{else} \{
+330         \textcolor{comment}{//if(delivered.indexOf(packagesMonitored[i]) > -1) \{}
+331             \textcolor{comment}{// console.log(packagesMonitored[i] + " is delivered");}
+332             $(\textcolor{stringliteral}{"#etr"} + \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]).text(\textcolor{stringliteral}{"Delivered"});
+333             $(\textcolor{stringliteral}{"#dist"} + \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored}[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]).text(\textcolor{stringliteral}{"0 km"});
+334         \}
+335     \}
+336     \hyperlink{main_8js_a1f5de2f863a9aa3f590f015a0d3ab621}{updateMap}();
+337 \}
 \end{DoxyCode}
 \index{main.\+js@{main.\+js}!update\+Map@{update\+Map}}
 \index{update\+Map@{update\+Map}!main.\+js@{main.\+js}}
@@ -1025,74 +1036,74 @@ Updates the map view with new coordinates for the line and markers.
 
 
 
-Definition at line 433 of file main.\+js.
+Definition at line 444 of file main.\+js.
 
 
 \begin{DoxyCode}
-433                      \{
-434     \textcolor{keywordflow}{for} (var \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} = 0; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} < \hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}.length; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}++) \{
-435 
-436         \textcolor{comment}{// If the Polyline does not already exist, make a new one}
-437         \textcolor{keywordflow}{if} (!(\hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}] in \hyperlink{main_8js_a4f01a6af54b3f7e164d2dbbb37e04f86}{mapLines})) \{
-438             mapLines[\hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]] = \textcolor{keyword}{new} google.maps.Polyline(\{
-439                 path: [],
-440                 geodesic: \textcolor{keyword}{true},
-441                 strokeColor: \hyperlink{main_8js_a205bb968a83c85324e6b50fecdb4b630}{colors}[packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]],
-442                 strokeOpacity: 1.0,
-443                 strokeWeight: 3
-444             \});
-445         \}
-446         mapLines[packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]].setMap(map);
-447 
-448         \textcolor{comment}{// If the destination map marker does not already exist, make a new one}
-449         \textcolor{keywordflow}{if} (!(packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}] in \hyperlink{main_8js_a2b33618c9f421e426905ee387b6c6bc5}{destinationMapMarkers})) \{
-450             destinationMapMarkers[packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]] = \textcolor{keyword}{new} google.maps.Marker(\{
-451                 position: \hyperlink{main_8js_a19e632cab94d67a54007824cff4e985b}{destinations}[packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]],
-452                 animation: null,
-453                 title: packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}] + \textcolor{stringliteral}{"'s Destination Marker"},
-454                 icon: \hyperlink{main_8js_a411811df2cac289120b37b323bb6917e}{pinSymbol}(\hyperlink{main_8js_a205bb968a83c85324e6b50fecdb4b630}{colors}[packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]]),
-455                 label: \{
-456                     text: \textcolor{charliteral}{'B'}
-457                 \}
-458             \});
-459 
-460             \textcolor{comment}{// Display an infoWindow with the UUID of the package onclick for the marker}
-461             destinationMapMarkers[packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]].addListener(\textcolor{stringliteral}{'click'}, 
+444                      \{
+445     \textcolor{keywordflow}{for} (var \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} = 0; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} < \hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}.length; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}++) \{
+446 
+447         \textcolor{comment}{// If the Polyline does not already exist, make a new one}
+448         \textcolor{keywordflow}{if} (!(\hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}] in \hyperlink{main_8js_a4f01a6af54b3f7e164d2dbbb37e04f86}{mapLines})) \{
+449             mapLines[\hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap}[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]] = \textcolor{keyword}{new} google.maps.Polyline(\{
+450                 path: [],
+451                 geodesic: \textcolor{keyword}{true},
+452                 strokeColor: \hyperlink{main_8js_a205bb968a83c85324e6b50fecdb4b630}{colors}[packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]],
+453                 strokeOpacity: 1.0,
+454                 strokeWeight: 3
+455             \});
+456         \}
+457         mapLines[packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]].setMap(map);
+458 
+459         \textcolor{comment}{// If the destination map marker does not already exist, make a new one}
+460         \textcolor{keywordflow}{if} (!(packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}] in \hyperlink{main_8js_a2b33618c9f421e426905ee387b6c6bc5}{destinationMapMarkers})) \{
+461             destinationMapMarkers[packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]] = \textcolor{keyword}{new} google.maps.Marker(\{
+462                 position: \hyperlink{main_8js_a19e632cab94d67a54007824cff4e985b}{destinations}[packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]],
+463                 animation: null,
+464                 title: packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}] + \textcolor{stringliteral}{"'s Destination Marker"},
+465                 icon: \hyperlink{main_8js_a411811df2cac289120b37b323bb6917e}{pinSymbol}(\hyperlink{main_8js_a205bb968a83c85324e6b50fecdb4b630}{colors}[packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]]),
+466                 label: \{
+467                     text: \textcolor{charliteral}{'B'}
+468                 \}
+469             \});
+470 
+471             \textcolor{comment}{// Display an infoWindow with the UUID of the package onclick for the marker}
+472             destinationMapMarkers[packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]].addListener(\textcolor{stringliteral}{'click'}, 
       \hyperlink{main_8js_a1092b60d06b3c0dccbec7d0333182918}{infoWindowCallback}(\textcolor{keyword}{true}, \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}));
-462         \}
-463         destinationMapMarkers[packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]].setMap(map);
-464 
-465         \textcolor{comment}{// If there is a starting coordinate and the origin map marker does not exist, make a new one}
-466         \textcolor{keywordflow}{if} (\hyperlink{main_8js_a1d88ce79f484d9bfb4056fa9e356bea7}{packagePositions}[packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]] != \hyperlink{jquery_8min_8js_ae21cc36bf0d65014c717a481a3f8a468}{undefined}) \{
-467             \textcolor{keywordflow}{if}(!(packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}] in \hyperlink{main_8js_a90467ae029236a37b76f3383e82bb730}{originMapMarkers})) \{
-468                 originMapMarkers[packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]] = \textcolor{keyword}{new} google.maps.Marker(\{
-469                     position: \hyperlink{main_8js_a1d88ce79f484d9bfb4056fa9e356bea7}{packagePositions}[packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]][0][\textcolor{stringliteral}{'coords'}],
-470                     animation: null,
-471                     title: packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}] + \textcolor{stringliteral}{"'s Origin Marker"},
-472                     icon: \hyperlink{main_8js_a411811df2cac289120b37b323bb6917e}{pinSymbol}(\hyperlink{main_8js_a205bb968a83c85324e6b50fecdb4b630}{colors}[packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]]),
-473                     label: \{
-474                         text: \textcolor{charliteral}{'A'}
-475                     \}
-476                 \});
-477 
-478                 \textcolor{comment}{// Display an infoWindow with the UUID of the package onclick for the marker}
-479                 originMapMarkers[packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]].addListener(\textcolor{stringliteral}{'click'}, 
+473         \}
+474         destinationMapMarkers[packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]].setMap(map);
+475 
+476         \textcolor{comment}{// If there is a starting coordinate and the origin map marker does not exist, make a new one}
+477         \textcolor{keywordflow}{if} (\hyperlink{main_8js_a1d88ce79f484d9bfb4056fa9e356bea7}{packagePositions}[packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]] != \hyperlink{jquery_8min_8js_ae21cc36bf0d65014c717a481a3f8a468}{undefined}) \{
+478             \textcolor{keywordflow}{if}(!(packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}] in \hyperlink{main_8js_a90467ae029236a37b76f3383e82bb730}{originMapMarkers})) \{
+479                 originMapMarkers[packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]] = \textcolor{keyword}{new} google.maps.Marker(\{
+480                     position: \hyperlink{main_8js_a1d88ce79f484d9bfb4056fa9e356bea7}{packagePositions}[packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]][0][\textcolor{stringliteral}{'coords'}],
+481                     animation: null,
+482                     title: packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}] + \textcolor{stringliteral}{"'s Origin Marker"},
+483                     icon: \hyperlink{main_8js_a411811df2cac289120b37b323bb6917e}{pinSymbol}(\hyperlink{main_8js_a205bb968a83c85324e6b50fecdb4b630}{colors}[packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]]),
+484                     label: \{
+485                         text: \textcolor{charliteral}{'A'}
+486                     \}
+487                 \});
+488 
+489                 \textcolor{comment}{// Display an infoWindow with the UUID of the package onclick for the marker}
+490                 originMapMarkers[packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]].addListener(\textcolor{stringliteral}{'click'}, 
       \hyperlink{main_8js_a1092b60d06b3c0dccbec7d0333182918}{infoWindowCallback}(\textcolor{keyword}{false}, \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}));
-480                 
-481             \}
-482             originMapMarkers[packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]].setMap(map);
-483 
-484             \textcolor{comment}{// Update the Polyline with new points that are not on it already (by number of points)}
-485             var currentPath = mapLines[packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]].getPath();
-486             \textcolor{keywordflow}{for} (var \hyperlink{moment_8min_8js_a5f7d9fc7ba35dc513eb3080d74d27476}{j} = currentPath.length; \hyperlink{moment_8min_8js_a5f7d9fc7ba35dc513eb3080d74d27476}{j} < \hyperlink{main_8js_a1d88ce79f484d9bfb4056fa9e356bea7}{packagePositions}[packagesOnMap[
+491                 
+492             \}
+493             originMapMarkers[packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]].setMap(map);
+494 
+495             \textcolor{comment}{// Update the Polyline with new points that are not on it already (by number of points)}
+496             var currentPath = mapLines[packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]].getPath();
+497             \textcolor{keywordflow}{for} (var \hyperlink{moment_8min_8js_a5f7d9fc7ba35dc513eb3080d74d27476}{j} = currentPath.length; \hyperlink{moment_8min_8js_a5f7d9fc7ba35dc513eb3080d74d27476}{j} < \hyperlink{main_8js_a1d88ce79f484d9bfb4056fa9e356bea7}{packagePositions}[packagesOnMap[
       \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]].length; \hyperlink{moment_8min_8js_a5f7d9fc7ba35dc513eb3080d74d27476}{j}++) \{
-487                 currentPath.push(\hyperlink{main_8js_a1d88ce79f484d9bfb4056fa9e356bea7}{packagePositions}[packagesOnMap[
+498                 currentPath.push(\hyperlink{main_8js_a1d88ce79f484d9bfb4056fa9e356bea7}{packagePositions}[packagesOnMap[
       \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]][\hyperlink{moment_8min_8js_a5f7d9fc7ba35dc513eb3080d74d27476}{j}][\textcolor{stringliteral}{'coords'}]);
-488             \}
-489             mapLines[packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]].setPath(currentPath);
-490         \}
-491     \}
-492 \}
+499             \}
+500             mapLines[packagesOnMap[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]].setPath(currentPath);
+501         \}
+502     \}
+503 \}
 \end{DoxyCode}
 \index{main.\+js@{main.\+js}!write\+Packages@{write\+Packages}}
 \index{write\+Packages@{write\+Packages}!main.\+js@{main.\+js}}
@@ -1108,19 +1119,19 @@ Sets the monitored packages list to the list it receives (for loading from cooki
 
 
 
-Definition at line 340 of file main.\+js.
+Definition at line 343 of file main.\+js.
 
 
 \begin{DoxyCode}
-340                                              \{
-341     \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored} = packageList;
-342     \hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap} = mapList;
-343     \textcolor{comment}{// console.log("mapList: " + packagesOnMap);}
-344     \textcolor{keywordflow}{for} (var \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} = 0; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} < packageList.length; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}++) \{
-345         \textcolor{comment}{// console.log("adding package " + packageList[i]);}
-346         \hyperlink{main_8js_ae99cfb389602e780ffd02f5ae2ffb62f}{addPackage}(packageList[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]);
-347     \}
-348 \}
+343                                              \{
+344     \hyperlink{main_8js_ad60881fa59f00ed3a37a380c5942a025}{packagesMonitored} = packageList;
+345     \hyperlink{main_8js_a060ddd58cd6a0136ef1759b536d933ec}{packagesOnMap} = mapList;
+346     \textcolor{comment}{// console.log("mapList: " + packagesOnMap);}
+347     \textcolor{keywordflow}{for} (var \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} = 0; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i} < packageList.length; \hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}++) \{
+348         \textcolor{comment}{// console.log("adding package " + packageList[i]);}
+349         \hyperlink{main_8js_ae99cfb389602e780ffd02f5ae2ffb62f}{addPackage}(packageList[\hyperlink{jquery_8minicolors_8min_8js_aba29173262d28394924f99eb2ed5b31b}{i}]);
+350     \}
+351 \}
 \end{DoxyCode}
 
 
@@ -1193,8 +1204,8 @@ Definition at line 35 of file main.\+js.
 {\bfseries Initial value\+:}
 \begin{DoxyCode}
 =    \textcolor{stringliteral}{'</p>'}+
-                    \textcolor{stringliteral}{'</div>'}+
-                    \textcolor{stringliteral}{'</div>'}
+                     \textcolor{stringliteral}{'</div>'}+
+                     \textcolor{stringliteral}{'</div>'}
 \end{DoxyCode}
 
 
@@ -1202,7 +1213,7 @@ Definition at line 36 of file main.\+js.
 
 \index{main.\+js@{main.\+js}!D\+E\+F\+A\+U\+L\+T\+\_\+\+D\+R\+O\+P\+D\+O\+W\+N\+\_\+\+C\+O\+N\+T\+E\+N\+TS@{D\+E\+F\+A\+U\+L\+T\+\_\+\+D\+R\+O\+P\+D\+O\+W\+N\+\_\+\+C\+O\+N\+T\+E\+N\+TS}}
 \index{D\+E\+F\+A\+U\+L\+T\+\_\+\+D\+R\+O\+P\+D\+O\+W\+N\+\_\+\+C\+O\+N\+T\+E\+N\+TS@{D\+E\+F\+A\+U\+L\+T\+\_\+\+D\+R\+O\+P\+D\+O\+W\+N\+\_\+\+C\+O\+N\+T\+E\+N\+TS}!main.\+js@{main.\+js}}
-\subsubsection[{\texorpdfstring{D\+E\+F\+A\+U\+L\+T\+\_\+\+D\+R\+O\+P\+D\+O\+W\+N\+\_\+\+C\+O\+N\+T\+E\+N\+TS}{DEFAULT_DROPDOWN_CONTENTS}}]{\setlength{\rightskip}{0pt plus 5cm}var D\+E\+F\+A\+U\+L\+T\+\_\+\+D\+R\+O\+P\+D\+O\+W\+N\+\_\+\+C\+O\+N\+T\+E\+N\+TS = \textquotesingle{}$<$tr class=\char`\"{}dropdown-\/row\char`\"{}$>$$<$td colspan=\char`\"{}7\char`\"{} {\bf id}=\char`\"{}dropdown\{U\+U\+ID\}\char`\"{}$>$$<$p$>$$<${\bf b}$>$Starting location\+: $<$/{\bf b}$>$$<$span {\bf id}=\char`\"{}start\{U\+U\+ID\}\char`\"{}$>$\{S\+T\+A\+R\+T\+L\+O\+C\+A\+T\+I\+ON\}$<$/span$>$$<$/{\bf p}$>$$<${\bf p}$>$$<${\bf b}$>$Distance Remaining\+: $<$/{\bf b}$>$$<$span {\bf id}=\char`\"{}dist\{U\+U\+ID\}\char`\"{}$>$\{D\+I\+S\+T\+A\+N\+CE\}$<$/span$>$$<$/{\bf p}$>$$<${\bf p}$>$$<${\bf b}$>$Destination\+: $<$/{\bf b}$>$$<$span {\bf id}=\char`\"{}dest\{U\+U\+ID\}\char`\"{}$>$\{D\+E\+S\+T\+L\+O\+C\+A\+T\+I\+ON\}$<$/span$>$$<$/{\bf p}$>$$<$/{\bf td}$>$$<$/tr$>$\textquotesingle{}}\hypertarget{main_8js_a0cf85ac779e39b635de940670ee868b9}{}\label{main_8js_a0cf85ac779e39b635de940670ee868b9}
+\subsubsection[{\texorpdfstring{D\+E\+F\+A\+U\+L\+T\+\_\+\+D\+R\+O\+P\+D\+O\+W\+N\+\_\+\+C\+O\+N\+T\+E\+N\+TS}{DEFAULT_DROPDOWN_CONTENTS}}]{\setlength{\rightskip}{0pt plus 5cm}var D\+E\+F\+A\+U\+L\+T\+\_\+\+D\+R\+O\+P\+D\+O\+W\+N\+\_\+\+C\+O\+N\+T\+E\+N\+TS = \textquotesingle{}$<$tr class=\char`\"{}dropdown-\/row\char`\"{} id=\char`\"{}dropdown\+TR\{U\+U\+ID\}\char`\"{}$>$$<$td colspan=\char`\"{}7\char`\"{} {\bf id}=\char`\"{}dropdown\{U\+U\+ID\}\char`\"{}$>$$<$p$>$$<${\bf b}$>$Starting location\+: $<$/{\bf b}$>$$<$span {\bf id}=\char`\"{}start\{U\+U\+ID\}\char`\"{}$>$\{S\+T\+A\+R\+T\+L\+O\+C\+A\+T\+I\+ON\}$<$/span$>$$<$/{\bf p}$>$$<${\bf p}$>$$<${\bf b}$>$Distance Remaining\+: $<$/{\bf b}$>$$<$span {\bf id}=\char`\"{}dist\{U\+U\+ID\}\char`\"{}$>$\{D\+I\+S\+T\+A\+N\+CE\}$<$/span$>$$<$/{\bf p}$>$$<${\bf p}$>$$<${\bf b}$>$Destination\+: $<$/{\bf b}$>$$<$span {\bf id}=\char`\"{}dest\{U\+U\+ID\}\char`\"{}$>$\{D\+E\+S\+T\+L\+O\+C\+A\+T\+I\+ON\}$<$/span$>$$<$/{\bf p}$>$$<$/{\bf td}$>$$<$/tr$>$\textquotesingle{}}\hypertarget{main_8js_a0cf85ac779e39b635de940670ee868b9}{}\label{main_8js_a0cf85ac779e39b635de940670ee868b9}
 
 
 The contents of the dropdown row for each package for additional data. 

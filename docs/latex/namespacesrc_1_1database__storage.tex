@@ -18,19 +18,19 @@ Clears database and creates a new one.
 
 
 
-Definition at line 176 of file database\+\_\+storage.\+py.
+Definition at line 177 of file database\+\_\+storage.\+py.
 
 
 \begin{DoxyCode}
-176 \textcolor{keyword}{def }\hyperlink{namespacesrc_1_1database__storage_ac8bfcdfbcc3f0aeb1244c86f125e89dc}{clear\_database\_and\_create\_new}():
-177     \textcolor{comment}{# command = "DROP DATABASE idt; CREATE DATABASE idt;"}
-178     command1 = \textcolor{stringliteral}{"CREATE TABLE uuids (uuid CHAR(36) PRIMARY KEY, nameString TINYBLOB, delivered ENUM('Y', 'N'
+177 \textcolor{keyword}{def }\hyperlink{namespacesrc_1_1database__storage_ac8bfcdfbcc3f0aeb1244c86f125e89dc}{clear\_database\_and\_create\_new}():
+178     \textcolor{comment}{# command = "DROP DATABASE idt; CREATE DATABASE idt;"}
+179     command1 = \textcolor{stringliteral}{"CREATE TABLE uuids (uuid CHAR(36) PRIMARY KEY, nameString TINYBLOB, delivered ENUM('Y', 'N'
       ), destLat DOUBLE(7, 4), destLon DOUBLE(7,4));"}
-179     \textcolor{comment}{# execute\_command(command)}
-180     \hyperlink{namespacesrc_1_1database__storage_a7b71f3e5bfe1e4372d048f23e8ca7ed4}{execute\_command}(command1)
-181     \textcolor{comment}{# execute\_command("USE idt")}
-182 
+180     \textcolor{comment}{# execute\_command(command)}
+181     \hyperlink{namespacesrc_1_1database__storage_a7b71f3e5bfe1e4372d048f23e8ca7ed4}{execute\_command}(command1)
+182     \textcolor{comment}{# execute\_command("USE idt")}
 183 
+184 
 \end{DoxyCode}
 \index{src\+::database\+\_\+storage@{src\+::database\+\_\+storage}!close\+\_\+database@{close\+\_\+database}}
 \index{close\+\_\+database@{close\+\_\+database}!src\+::database\+\_\+storage@{src\+::database\+\_\+storage}}
@@ -45,14 +45,14 @@ Close database connection.
 
 
 
-Definition at line 171 of file database\+\_\+storage.\+py.
+Definition at line 172 of file database\+\_\+storage.\+py.
 
 
 \begin{DoxyCode}
-171 \textcolor{keyword}{def }\hyperlink{namespacesrc_1_1database__storage_ac8226df71c58ddf9a1d4de0e89a63bc9}{close\_database}():
-172     db.close()
-173 
+172 \textcolor{keyword}{def }\hyperlink{namespacesrc_1_1database__storage_ac8226df71c58ddf9a1d4de0e89a63bc9}{close\_database}():
+173     db.close()
 174 
+175 
 \end{DoxyCode}
 \index{src\+::database\+\_\+storage@{src\+::database\+\_\+storage}!create\+\_\+table@{create\+\_\+table}}
 \index{create\+\_\+table@{create\+\_\+table}!src\+::database\+\_\+storage@{src\+::database\+\_\+storage}}
@@ -124,24 +124,24 @@ Success of command (or results if successful and results=True)
 \end{DoxyReturn}
 
 
-Definition at line 190 of file database\+\_\+storage.\+py.
+Definition at line 191 of file database\+\_\+storage.\+py.
 
 
 \begin{DoxyCode}
-190 \textcolor{keyword}{def }\hyperlink{namespacesrc_1_1database__storage_a7b71f3e5bfe1e4372d048f23e8ca7ed4}{execute\_command}(command, results=False):
-191     \textcolor{keywordflow}{try}:
-192         cursor.execute(command)
-193         \textcolor{keywordflow}{if} results:
-194             \textcolor{keywordflow}{return} cursor.fetchall()
-195         \textcolor{keywordflow}{else}:
-196             db.commit()
-197             \textcolor{keywordflow}{return} \textcolor{keyword}{True}
-198     \textcolor{keywordflow}{except}:
-199         traceback.print\_exc(file=sys.stdout)
-200         db.rollback()
-201         \textcolor{keywordflow}{return} \textcolor{keyword}{False}
-202 
+191 \textcolor{keyword}{def }\hyperlink{namespacesrc_1_1database__storage_a7b71f3e5bfe1e4372d048f23e8ca7ed4}{execute\_command}(command, results=False):
+192     \textcolor{keywordflow}{try}:
+193         cursor.execute(command)
+194         \textcolor{keywordflow}{if} results:
+195             \textcolor{keywordflow}{return} cursor.fetchall()
+196         \textcolor{keywordflow}{else}:
+197             db.commit()
+198             \textcolor{keywordflow}{return} \textcolor{keyword}{True}
+199     \textcolor{keywordflow}{except}:
+200         traceback.print\_exc(file=sys.stdout)
+201         db.rollback()
+202         \textcolor{keywordflow}{return} \textcolor{keyword}{False}
 203 
+204 
 \end{DoxyCode}
 \index{src\+::database\+\_\+storage@{src\+::database\+\_\+storage}!get\+\_\+all\+\_\+uuids@{get\+\_\+all\+\_\+uuids}}
 \index{get\+\_\+all\+\_\+uuids@{get\+\_\+all\+\_\+uuids}!src\+::database\+\_\+storage@{src\+::database\+\_\+storage}}
@@ -478,12 +478,13 @@ Definition at line 164 of file database\+\_\+storage.\+py.
 
 \begin{DoxyCode}
 164 \textcolor{keyword}{def }\hyperlink{namespacesrc_1_1database__storage_a9206e191c57218320572eeaf50ce8d70}{is\_delivered}(uuid):
-165     results = \hyperlink{namespacesrc_1_1database__storage_a7b71f3e5bfe1e4372d048f23e8ca7ed4}{execute\_command}(\textcolor{stringliteral}{"SELECT delivered FROM uuids WHERE uuid='"} + uuid + \textcolor{stringliteral}{"'"}, 
+165     \textcolor{keywordflow}{print} \textcolor{stringliteral}{"is\_delivered"}, uuid
+166     results = \hyperlink{namespacesrc_1_1database__storage_a7b71f3e5bfe1e4372d048f23e8ca7ed4}{execute\_command}(\textcolor{stringliteral}{"SELECT delivered FROM uuids WHERE uuid='"} + uuid + \textcolor{stringliteral}{"'"}, 
       results=\textcolor{keyword}{True})
-166     \textcolor{comment}{# print "delivery\_status:", results}
-167     \textcolor{keywordflow}{return} results[0] == \textcolor{stringliteral}{'Y'}
-168 
+167     \textcolor{keywordflow}{print} \textcolor{stringliteral}{"delivery\_status:"}, results
+168     \textcolor{keywordflow}{return} results[0][0] == \textcolor{stringliteral}{'Y'}
 169 
+170 
 \end{DoxyCode}
 \index{src\+::database\+\_\+storage@{src\+::database\+\_\+storage}!is\+\_\+valid\+\_\+uuid@{is\+\_\+valid\+\_\+uuid}}
 \index{is\+\_\+valid\+\_\+uuid@{is\+\_\+valid\+\_\+uuid}!src\+::database\+\_\+storage@{src\+::database\+\_\+storage}}
@@ -558,7 +559,7 @@ Opens database connection.
 
 
 
-Definition at line 208 of file database\+\_\+storage.\+py.
+Definition at line 209 of file database\+\_\+storage.\+py.
 
 \index{src\+::database\+\_\+storage@{src\+::database\+\_\+storage}!db@{db}}
 \index{db@{db}!src\+::database\+\_\+storage@{src\+::database\+\_\+storage}}
@@ -569,5 +570,5 @@ Opens database connection -\/ Host and password may change later.
 
 
 
-Definition at line 205 of file database\+\_\+storage.\+py.
+Definition at line 206 of file database\+\_\+storage.\+py.
 
