@@ -2,7 +2,7 @@ TrackIt: How to Use and Extend
 ==============================
 ###Written by People Who Code
 <i>
-Parth Oza, Kevin Shen, Jagan Prem, Cindy Chen
+Cindy Chen, Parth Oza, Jagan Prem, Kevin Shen
 </i>
 
 ##0. Abstract

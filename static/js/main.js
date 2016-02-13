@@ -2,7 +2,7 @@
 var DEFAULT_TR_CONTENTS = '<tr class="listRow" id="row{UUID}"><td><span class="glyphicon glyphicon-plus" aria-label="Expand"></span></td><td><div class="checkbox"><label><input type="checkbox" name="{UUID}" onchange="changeMapDisplay(this.name, this.checked)" id="checkbox{UUID}"></label></div><br /><div class="color-container"><input type="hidden" id="color{UUID}" value="{COLOR}"></div></td><td class="uuid" id="uuid{UUID}">{UUID}</td><td class="name" id="name{UUID}">{NAME}</td><td class="location" id="location{UUID}"><p><b>Current location: </b><span id="current{UUID}">{CURRENTLOCATION}</span></p></td><td id="etr{UUID}">{ETA}</td><td><a href="javascript:removeRow(\'{UUID}\')" class="btn btn-raised btn-danger">Stop Tracking</a></td></tr>';
 
 /// The contents of the dropdown row for each package for additional data
-var DEFAULT_DROPDOWN_CONTENTS = '<tr class="dropdown-row"><td colspan="7" id="dropdown{UUID}"><p><b>Starting location: </b><span id="start{UUID}">{STARTLOCATION}</span></p><p><b>Distance Remaining: </b><span id="dist{UUID}">{DISTANCE}</span></p><p><b>Destination: </b><span id="dest{UUID}">{DESTLOCATION}</span></p></td></tr>';
+var DEFAULT_DROPDOWN_CONTENTS = '<tr class="dropdown-row" id="dropdownTR{UUID}"><td colspan="7" id="dropdown{UUID}"><p><b>Starting location: </b><span id="start{UUID}">{STARTLOCATION}</span></p><p><b>Distance Remaining: </b><span id="dist{UUID}">{DISTANCE}</span></p><p><b>Destination: </b><span id="dest{UUID}">{DESTLOCATION}</span></p></td></tr>';
 
 
 var packagesMonitored = [];
@@ -34,8 +34,8 @@ var contentString3 =    '<br>Here since: ';
 var contentString4 =    '<br>Elevation: ';
 var contentString5 =    '<br>ETR: ';
 var contentString6 =    '</p>'+
-                    '</div>'+
-                    '</div>';
+                     '</div>'+
+                     '</div>';
 
 
 var infowindow;
@@ -151,6 +151,7 @@ function addRow(uuid, name, start, current, dest) {
 function removeRow(uuid) {
     packagesMonitored.splice($.inArray(uuid, packagesMonitored), 1);
     $("#row" + uuid).remove();
+    $("#dropdownTR" + uuid).remove();
     changeMapDisplay(uuid, false);
     //if(packagesOnMap.indexOf(uuid) > -1) {
     //    // console.log("changing display of " + uuid);
@@ -265,6 +266,7 @@ function updateCallback(index, concat) {
 //  \param concat Whether to concatenate the results to the end of the array of package positions or to make a new array
 function deliveryCheckCallback(index, concat) {
     return function(data){
+        console.log(index + " " + data.results);
         if(data.results) {
             delivered.push(packagesMonitored[index]);
         }
@@ -325,6 +327,7 @@ function updateData() {
                 "uuid": packagesMonitored[i]
             }, distCallback(i));
         } else {
+        //if(delivered.indexOf(packagesMonitored[i]) > -1) {
             // console.log(packagesMonitored[i] + " is delivered");
             $("#etr" + packagesMonitored[i]).text("Delivered");
             $("#dist" + packagesMonitored[i]).text("0 km");
@@ -554,9 +557,9 @@ function addDeliveredPackages() {
     $.getJSON($SCRIPT_ROOT + '/data', {"dt": "deliveredPackages"}, function(data) {
         // console.log(data.results);
         for(var i = 0; i < data.results.length; i++) {
-            if(delivered.indexOf(data.results[i]) < 0) {
-                delivered.push(data.results[i]);
-            }
+            //if(delivered.indexOf(data.results[i]) < 0) {
+            //    delivered.push(data.results[i]);
+            //}
             if(packagesMonitored.indexOf(data.results[i]) < 0) {
                 packagesMonitored.push(data.results[i]);
                 addPackage(data.results[i]);
@@ -682,7 +685,7 @@ $(function() {
             //target.slideUp();
             target.closest("td").parent().hide();
             //console.log("target.parent: " + target.parent().html());
-            target.closest("tr").prev().find("td:first").html('<span class="glyphicon glyphicon-plus" aria-label="Expand">');
+            target.closest("tr").prev().find("td:first").html('<br /><span class="glyphicon glyphicon-plus" aria-label="Expand">');
         } else {
             //target.closest("tr").next().show();
             //console.log("target.closest.next: " + target.closest("tr").next().html());
