@@ -1,7 +1,3 @@
-## The server file. This is based on Flask. All backend to frontend communications happen here.
-#
-
-
 import json
 import time
 from src import packop
@@ -61,19 +57,6 @@ def get_package_update(uuid):
         elevation = int(data['ele'])
         timestamp = data['time']
         coord = (float(lat), float(lon), float(elevation), parse_time(timestamp))
-
-        # if uuid in package_data:
-        #     package_data[uuid].append({
-        #         "coords": (lat, lon),
-        #         "ele": elevation,
-        #         "time": parse_time(time)
-        #         })
-        # else:
-        #     package_data[uuid] = [{
-        #         "coords": (lat, lon),
-        #         "ele": elevation,
-        #         "time": parse_time(time)
-        #         }]
         database_storage.insert_location(uuid, coord[0], coord[1], coord[2], coord[3])
         # print "uuid:", uuid, "lat:", lat, "long:", lon,
         #                "ele:", elevation, "time:", time
