@@ -46,7 +46,8 @@ The server runs by default on port 5000 at localhost. The server-side Python fil
 flask 0.10.1
 geopy 1.11.0
 MySQLdb 1.2.5
-dateutil 2.4.1
+python-dateutil 2.4.1
+gpxpy 1.0.0
 ```
 There are other dependencies that are built in with a standard Python 2.7.3 installation.
 The server will also have to have MySQL installed. The version used here is 5.7.10. 
