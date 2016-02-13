@@ -266,7 +266,7 @@ function updateCallback(index, concat) {
 //  \param concat Whether to concatenate the results to the end of the array of package positions or to make a new array
 function deliveryCheckCallback(index, concat) {
     return function(data){
-        console.log(index + " " + data.results);
+        //console.log(index + " " + data.results);
         if(data.results) {
             delivered.push(packagesMonitored[index]);
         }
@@ -354,9 +354,11 @@ function writePackages(packageList, mapList) {
 //  between the server and client - this could be done later with login tokens. As of now, the admin status is just a
 //  JavaScript variable and can be changed with a simple function call. Obviously this will change later.
 function changeAdminMode() {
-    for(var i = 0; i < packagesOnMap.length; i++) {
-        // console.log("removing row " + packagesOnMap[i]);
-        removeRow(packagesOnMap[i]);
+
+    while(packagesMonitored.length > 0) {
+        //console.log("removing row " + packagesOnMap[0]);
+        removeRow(packagesMonitored[0]);
+        console.log(packagesMonitored);
     }
     adminMode = !adminMode;
     if(!adminMode) {
@@ -398,12 +400,18 @@ function changeMapDisplay(id, checked) {
     // If package is no longer displayed
     if(!checked) {
         // Remove package from on map list
-        packagesOnMap.splice($.inArray(id, packagesOnMap), 1);
+        if(packagesOnMap.indexOf(id) > -1) {
+            packagesOnMap.splice($.inArray(id, packagesOnMap), 1);
+        }
         // Remove map line from the map
         mapLines[id].setMap(null);
         // Remove markers from map
         destinationMapMarkers[id].setMap(null);
         originMapMarkers[id].setMap(null);
+        delete destinationMapMarkers[id];
+        delete originMapMarkers[id];
+        delete mapLines[id];
+
     } else {
         // Put package on the map list
         packagesOnMap.push(id);
